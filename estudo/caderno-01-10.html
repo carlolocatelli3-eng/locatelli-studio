@@ -1,0 +1,450 @@
+<title>Caderno Locatelli 01/10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;500;600&display=swap">
+<style>
+/* Layout: editorial notebook, one reading column (~68ch) with wide tables and grids breaking out to 1080px; sticky chapter bar. */
+:root{
+  --paper:#FFFFFF; --paper2:#F7F4EF; --ink:#1A1A1A; --ink2:#5A5249; --line:#E6DDD1;
+  --sand:#D4C4B0; --earth:#8B7355; --earthInk:#FFFFFF; --deep:#0D0D0D;
+  --ok:#2F6B4A; --okSoft:#E3EFE7; --warn:#8A5A12; --warnSoft:#F6EBD6;
+  --fd:"Playfair Display",Georgia,"Times New Roman",serif;
+  --fb:"Poppins","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fm:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#15120F; --paper2:#1E1A16; --ink:#EFE9E1; --ink2:#B9AE9F; --line:#3A332B;
+  --sand:#5E5142; --earth:#C9A882; --earthInk:#15120F; --deep:#EFE9E1;
+  --ok:#8FD1AA; --okSoft:#1C3327; --warn:#E7B96A; --warnSoft:#3A2D16; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#15120F; --paper2:#1E1A16; --ink:#EFE9E1; --ink2:#B9AE9F; --line:#3A332B;
+  --sand:#5E5142; --earth:#C9A882; --earthInk:#15120F; --deep:#EFE9E1;
+  --ok:#8FD1AA; --okSoft:#1C3327; --warn:#E7B96A; --warnSoft:#3A2D16; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.65;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+.col{max-width:68ch}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.7rem,1.2rem + 2vw,2.4rem)}
+h3{font-size:1.2rem;font-weight:500}
+p{margin:0}
+a{color:var(--earth);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--earth);outline-offset:3px;border-radius:4px}
+.eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--earth);font-weight:600}
+.muted{color:var(--ink2)}
+.stack{display:flex;flex-direction:column;gap:14px}
+hr.rule{border:0;border-top:1px solid var(--line);margin:0}
+
+/* hero */
+header.hero{padding-block:56px 40px;display:grid;gap:22px}
+header.hero h1{font-size:clamp(2.3rem,1.4rem + 4.5vw,4.2rem);font-weight:500}
+header.hero h1 em{font-style:italic;color:var(--earth)}
+.lede{font-size:1.12rem;max-width:60ch;color:var(--ink2)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--ink2)}
+.meta b{color:var(--ink);font-weight:600}
+
+/* chapter bar */
+nav.chapters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-block:1px solid var(--line)}
+nav.chapters .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:thin}
+nav.chapters a{flex:0 0 auto;text-decoration:none;color:var(--ink2);font-size:.82rem;padding:6px 12px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+nav.chapters a:hover{color:var(--ink);border-color:var(--sand)}
+nav.chapters a span{font-family:var(--fm);font-size:.72rem;color:var(--earth);margin-right:6px}
+
+section.ch{padding-block:56px;display:grid;gap:26px;border-bottom:1px solid var(--line);scroll-margin-top:60px}
+.ch-head{display:grid;gap:10px}
+.ch-num{font-family:var(--fm);font-size:.8rem;color:var(--earth)}
+
+/* thesis */
+.thesis{font-family:var(--fd);font-size:clamp(1.3rem,1rem + 1.4vw,1.8rem);line-height:1.35;font-weight:500;max-width:32em}
+.thesis em{color:var(--earth)}
+
+/* grids */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid > *{min-width:0}
+.card{background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:1.08rem}
+.card p,.card li{font-size:.93rem}
+.card ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
+.tag{align-self:flex-start;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--paper);border:1px solid var(--sand);color:var(--earth)}
+.tag.star{background:var(--earth);color:var(--earthInk);border-color:var(--earth)}
+
+ol.principles{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:p}
+ol.principles li{display:grid;grid-template-columns:2.2rem 1fr;gap:12px;align-items:baseline;counter-increment:p}
+ol.principles li::before{content:counter(p);font-family:var(--fd);font-size:1.5rem;color:var(--earth);line-height:1}
+ol.principles b{font-weight:600}
+
+details.art{border-top:1px solid var(--line)}
+details.art:last-of-type{border-bottom:1px solid var(--line)}
+details.art summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 2px;align-items:baseline}
+details.art summary::-webkit-details-marker{display:none}
+details.art summary .t{font-weight:500}
+details.art summary .k{font-size:.78rem;color:var(--ink2);white-space:nowrap}
+details.art summary .k::after{content:" +";color:var(--earth)}
+details.art[open] summary .k::after{content:" −"}
+details.art .body{padding:0 2px 18px;display:grid;gap:8px;max-width:68ch}
+details.art ul{margin:0;padding-left:1.1em;display:grid;gap:4px;font-size:.94rem}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);font-weight:600;background:var(--paper2)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+
+/* formula */
+.formula{font-family:var(--fm);background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:16px;font-size:.92rem;overflow-x:auto}
+
+/* flow steps (real sequence) */
+.flow{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));counter-reset:f}
+.flow li{list-style:none;counter-increment:f;border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:4px;background:var(--paper);min-width:0}
+.flow li::before{content:counter(f,decimal-leading-zero);font-family:var(--fm);font-size:.75rem;color:var(--earth)}
+.flow li b{font-weight:600;font-size:.95rem}
+.flow li span{font-size:.86rem;color:var(--ink2)}
+.flow{padding:0;margin:0}
+
+/* timeline */
+.timeline{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.timeline li{display:grid;grid-template-columns:7.5rem 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.timeline li:last-child{border-bottom:1px solid var(--line)}
+.timeline .w{font-family:var(--fm);font-size:.82rem;color:var(--earth);padding-top:2px}
+.timeline b{font-weight:600}
+@media (max-width:520px){.timeline li{grid-template-columns:1fr;gap:4px}}
+
+/* verdict pills */
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:.78rem;font-weight:600;padding:4px 11px;border-radius:999px}
+.pill.ok{background:var(--okSoft);color:var(--ok)}
+.pill.warn{background:var(--warnSoft);color:var(--warn)}
+.pill.bad{background:var(--deep);color:var(--paper)}
+
+/* two-col read */
+.split{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.split > *{min-width:0}
+.box{border-left:3px solid var(--earth);padding:4px 0 4px 16px;display:grid;gap:8px}
+.box.alt{border-left-color:var(--sand)}
+.box ul{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:.95rem}
+
+/* prompt */
+.prompt-head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+button.copy{font-family:var(--fb);font-size:.88rem;font-weight:600;background:var(--deep);color:var(--paper);border:0;border-radius:999px;padding:10px 18px;cursor:pointer}
+button.copy:hover{background:var(--earth);color:var(--earthInk)}
+pre.prompt{white-space:pre-wrap;word-break:break-word;font-family:var(--fm);font-size:.82rem;line-height:1.55;background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:18px;max-height:460px;overflow:auto;margin:0}
+
+/* links */
+.links{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.links a{display:grid;gap:2px;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--ink);min-width:0}
+.links a:hover{border-color:var(--earth)}
+.links a small{color:var(--ink2);font-size:.8rem}
+.links a b{font-weight:600;font-size:.95rem}
+.src{font-size:.82rem;color:var(--ink2)}
+footer{padding-block:40px 60px;font-size:.85rem;color:var(--ink2)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<header class="wrap hero">
+  <p class="eyebrow">Locatelli Studio · SOL · Vera</p>
+  <h1>Caderno <em>01/10</em></h1>
+  <p class="lede">Tudo o que estudamos e construímos em 30 de setembro de 2026: os artigos da Graphed, o guia de Google Ads para pousadas, o dossiê do Cody Schneider, a leitura do painel Organismo Operador, o plano do piloto, as skills, os agentes e o prompt do site.</p>
+  <div class="meta"><span><b>11</b> artigos lidos</span><span><b>5</b> documentos no Drive</span><span><b>3</b> skills</span><span><b>4</b> agentes</span><span><b>1</b> prompt de site</span></div>
+</header>
+
+<nav class="chapters" aria-label="Capítulos">
+  <div class="wrap">
+    <a href="#tese"><span>00</span>Tese</a>
+    <a href="#estudo"><span>01</span>Estudo 01/10</a>
+    <a href="#guia"><span>02</span>Google Ads</a>
+    <a href="#cody"><span>03</span>Cody Schneider</a>
+    <a href="#painel"><span>04</span>Painel de moda</a>
+    <a href="#leitura"><span>05</span>Leitura</a>
+    <a href="#piloto"><span>06</span>Piloto pousada</a>
+    <a href="#agentes"><span>07</span>Skills e agentes</a>
+    <a href="#site"><span>08</span>Prompt do site</a>
+    <a href="#arquivos"><span>09</span>Arquivos</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section class="ch" id="tese">
+  <div class="ch-head"><span class="ch-num">00</span><h2>A tese do dia</h2></div>
+  <p class="thesis">O criativo virou a segmentação. Quem produz <em>muito, com variedade real e com direção</em>, e aprende com o que vendeu, ganha. O Locatelli Studio vende esse sistema para a moda, e a SOL testa o mesmo método com pousadas, onde a Vera já mede o resultado.</p>
+</section>
+
+<section class="ch" id="estudo">
+  <div class="ch-head">
+    <span class="ch-num">01</span>
+    <h2>Estudo 01/10: blog da Graphed</h2>
+    <p class="col muted">Onze PDFs na pasta CLAUDE NUVEM › 01:10. Dez artigos de Google Ads e SEO por nicho, uma calculadora de ROI e o texto técnico sobre dar um agente de IA a cada profissional de marketing.</p>
+  </div>
+  <h3>Os cinco princípios que se repetem</h3>
+  <ol class="principles col">
+    <li><div><b>Uma campanha por serviço ou produto</b>, cada uma com sua página. Nunca mandar o clique para a página inicial.</div></li>
+    <li><div><b>Correspondência exata ou de frase.</b> A ampla gasta com quem só pesquisa.</div></li>
+    <li><div><b>Palavras negativas desde o primeiro dia</b>, revisadas toda semana.</div></li>
+    <li><div><b>Medir a venda, não o clique.</b> Rastrear ligação e WhatsApp e devolver o valor da venda ao Google.</div></li>
+    <li><div><b>Preço e prova na primeira tela:</b> faixa de preço, avaliações, fotos reais e credenciais.</div></li>
+  </ol>
+  <div>
+    <details class="art"><summary><span class="t">Aluguel por temporada: reserva direta</span><span class="k">mais útil</span></summary><div class="body"><ul>
+      <li>Reserva de US$ 600 a 1.200 com custo de aquisição de US$ 25 a 40 dá retorno de 15 a 24 vezes.</li>
+      <li>A reserva direta evita 15 a 20% de comissão da plataforma.</li>
+      <li>Só anunciar se o site converter 2% ou mais. Mirar a cidade de origem do hóspede.</li>
+      <li>Lance manual até 30 conversões. "Reserve direto e economize 15%" vence "Casa de luxo".</li></ul></div></details>
+    <details class="art"><summary><span class="t">Sites de viagem e passagens</span><span class="k">Sol Destinos</span></summary><div class="body"><ul>
+      <li>Campanhas separadas pela margem de cada rota ou destino.</li>
+      <li>Sem nome de companhia aérea no anúncio sem autorização. Preço total com taxas.</li>
+      <li>Vender curadoria e atendimento, não preço. Atribuição de 30 a 60 dias.</li></ul></div></details>
+    <details class="art"><summary><span class="t">SEO local para empresas de telhado</span><span class="k">Perfil da Empresa</span></summary><div class="body"><ul>
+      <li>O Perfil da Empresa no Google pesa 32% no ranking local, e 60 a 90% dos contatos vêm do Maps.</li>
+      <li>O ritmo de avaliações vale mais que o total: pelo menos 4 novas por mês.</li>
+      <li>Um lead por SEO custa US$ 10 a 50, contra US$ 228 por anúncio.</li></ul></div></details>
+    <details class="art"><summary><span class="t">SEO para cirurgiões</span><span class="k">conteúdo</span></summary><div class="body"><ul>
+      <li>O paciente pesquisa o procedimento antes do médico. Uma página por procedimento.</li>
+      <li>Conteúdo educativo antes do botão de agendar.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Dentistas especialistas</span><span class="k">ticket alto</span></summary><div class="body"><ul>
+      <li>Uma campanha por procedimento. Não bloquear "financiamento".</li>
+      <li>Duas conversões: consulta e início de tratamento. Nunca desconto.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Lares de idosos</span><span class="k">urgência</span></summary><div class="body"><ul>
+      <li>Raio curto, anúncio só no horário em que alguém atende, pausar quando lotado.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Oficinas mecânicas</span><span class="k">celular</span></summary><div class="body"><ul>
+      <li>Botão de ligar, preço e prazo na primeira tela. O indicador é o custo por agendamento.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Empresas de mudança</span><span class="k">intermediários</span></summary><div class="body"><ul>
+      <li>Sites intermediários revendem o seu clique. Bloquear e proteger a própria marca.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Transporte de animais</span><span class="k">políticas</span></summary><div class="body"><ul>
+      <li>"Adoção" e "compra" no anúncio suspendem a conta. SEO e parcerias rendem mais.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Calculadora de ROI do Facebook</span><span class="k">conta</span></summary><div class="body"><ul>
+      <li>ROI = (Receita − Custo total) ÷ Custo total. Um ROAS de 3x pode dar prejuízo.</li></ul></div></details>
+    <details class="art"><summary><span class="t">Um agente de IA para cada profissional de marketing</span><span class="k">estratégico</span></summary><div class="body"><ul>
+      <li>Os fluxos do Cody no Claude Code viraram um agente por cliente sobre o Hermes.</li>
+      <li>Senhas via proxy, pasta isolada, lista de sites permitidos e Postgres.</li>
+      <li>O dinheiro está nos roteiros de quem já opera, empacotados em agente.</li></ul></div></details>
+  </div>
+</section>
+
+<section class="ch" id="guia">
+  <div class="ch-head">
+    <span class="ch-num">02</span>
+    <h2>Guia de Google Ads: pousadas e Sol Destinos</h2>
+    <p class="col muted">O estudo adaptado ao Brasil. Os valores em reais são exemplos para trocar pelos números de cada cliente.</p>
+  </div>
+  <div class="formula">CPA máximo = valor médio da reserva − custos da estadia − lucro desejado<br>Exemplo: R$ 1.200 − R$ 500 − R$ 400 = R$ 300 por reserva, no máximo</div>
+  <div class="grid">
+    <div class="card"><span class="tag">Pousadas</span><h3>Três campanhas</h3><ul><li>Busca local: "pousada em [cidade]"</li><li>Por perfil: romântica, pet, com piscina</li><li>O nome da pousada, com lance baixo</li></ul><p class="muted">Mostrar o anúncio na cidade de origem dos hóspedes. Conversão principal: WhatsApp da Vera e reserva.</p></div>
+    <div class="card"><span class="tag">Sol Destinos</span><h3>Margem por destino</h3><ul><li>Uma campanha por destino ou pacote</li><li>Topo, meio, fundo e última hora</li><li>Sem Performance Max no começo</li></ul><p class="muted">Vender curadoria, roteiro e atendimento humano. Mostrar o Cadastur.</p></div>
+    <div class="card"><span class="tag">Toda semana</span><h3>Rotina do primeiro mês</h3><ul><li>Novas palavras negativas</li><li>Pausar com 50 cliques sem conversão</li><li>+20% no lance de quem está abaixo da meta</li><li>Preço do anúncio igual ao da página</li></ul></div>
+  </div>
+</section>
+
+<section class="ch" id="cody">
+  <div class="ch-head">
+    <span class="ch-num">03</span>
+    <h2>Cody Schneider</h2>
+    <p class="col muted">Cofundador e CEO da Graphed. Veio do growth, fundou a Swell AI e a Drafthorse, e hoje vende agentes de marketing implantados em cinco dias úteis. Os números das biografias dele não foram verificados de forma independente.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Gravidade digital</h3><p>O cliente orbita a marca até comprar. Mais conteúdo, ferramentas e presença geram mais atração.</p></div>
+    <div class="card"><h3>A marca é o único fosso</h3><p>A IA iguala os produtos. O que sobra é distribuição e mídia própria.</p></div>
+    <div class="card"><h3>GTM engineering</h3><p>"Se um humano faz no computador, um agente faz." Sete ou mais agentes do Claude Code em paralelo.</p></div>
+    <div class="card"><h3>Marketing economist</h3><p>Uma pessoa que distribui tempo, dinheiro e energia da marca e mede o resultado.</p></div>
+  </div>
+  <h3>Fluxos que ele mostra</h3>
+  <div class="split">
+    <div class="box"><b>Fábrica de 100+ anúncios UGC</b><ul><li>Dores no Reddit</li><li>Roteiro no Claude</li><li>Vídeo na HeyGen, silêncios cortados, legendas</li><li>Meta Ads, com análise dos vencedores</li></ul></div>
+    <div class="box alt"><b>Mapa de lacunas dos concorrentes</b><ul><li>Ad Library inteira da categoria</li><li>Um modelo de visão descreve ângulo e promessa</li><li>O Claude acha o que ninguém diz</li><li>Anúncios nas lacunas, validados com verba</li></ul></div>
+  </div>
+  <p class="col"><b>O padrão da carreira:</b> opera, automatiza o próprio trabalho, transforma em produto, distribui com conteúdo em volume, vende primeiro como serviço e depois escala como software.</p>
+</section>
+
+<section class="ch" id="painel">
+  <div class="ch-head">
+    <span class="ch-num">04</span>
+    <h2>Painel Organismo Operador: os três pilares da moda</h2>
+    <p class="col muted">Direção aprovada em 24/09. Três preços e três velocidades para o mesmo cliente de moda, com um ativo que nasce na campanha e alimenta os outros dois pilares. Leitura feita sobre a cópia de 28/09.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Pilar</th><th>Papel</th><th>O que é</th><th>Entrada</th></tr></thead>
+    <tbody>
+      <tr><td><b>Campanha híbrida</b></td><td>Prestígio e ticket alto</td><td>Modelo real fotografada uma vez; a IA continua em novos cenários, looks e vídeos, com contrato.</td><td class="num">R$ 14.900+</td></tr>
+      <tr><td><b>Vídeo UGC</b></td><td>Volume e recorrência</td><td>Gente falando do produto, muitos ganchos, rostos e vozes em português, com ciclo que aprende.</td><td class="num">R$ 1.490</td></tr>
+      <tr><td><b>Modelo 100% IA</b></td><td>Escala e custo mínimo</td><td>Elenco próprio licenciado, catálogo com ficha pronta para busca por IA, sempre declarado.</td><td class="num">R$ 49/peça</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid">
+    <div class="card"><span class="tag">Fosso</span><h3>O que protege</h3><ul><li>Um ativo serve aos três pilares</li><li>Contratos e consentimento</li><li>Direção de moda</li><li>Entrega em 72 horas</li></ul></div>
+    <div class="card"><span class="tag">Método UGC</span><h3>Do vídeo do Cody</h3><ul><li>Voz primeiro, com som do lugar</li><li>Rosto e região como segmentação</li><li>Receita guardada por anúncio</li><li>Regra 80/20 e DNA novo</li><li>API da Meta só para subir</li></ul></div>
+    <div class="card"><span class="tag">Economia</span><h3>Custo por vídeo</h3><p>R$ 12 a 30 por vídeo final com Veo 3.1 Fast, Kling, Wan ou Hailuo, mais voz do ElevenLabs. Multiplicar por 1,5 a 2 com rascunhos.</p></div>
+  </div>
+  <h3>A escada dos agentes</h3>
+  <ol class="flow">
+    <li><b>Receitas no Claude</b><span>Agora. Skills de conceitos, portão e receita.</span></li>
+    <li><b>Uma marca parceira real</b><span>Meses 1 e 2. Ciclo fechado com números de verdade.</span></li>
+    <li><b>Automação com código</b><span>Com 3 a 5 clientes pagando. Geração e subida como rascunho.</span></li>
+    <li><b>O nível da Graphed</b><span>Fora do foco. Parceria com quem cuida da mídia.</span></li>
+  </ol>
+</section>
+
+<section class="ch" id="leitura">
+  <div class="ch-head"><span class="ch-num">05</span><h2>A minha leitura do painel</h2></div>
+  <div class="split">
+    <div class="box"><b>Forte</b><ul><li>Tese coerente: três portas, um sistema.</li><li>"Sem cliente, sem agente."</li><li>Não virar gestora de tráfego como a Graphed.</li><li>Contratos e IA declarada como diferencial.</li></ul></div>
+    <div class="box alt"><b>Atenção</b><ul><li>37 de 39 tarefas "a fazer". O gargalo é vender, não planejar.</li><li>Três preços de UGC que não batem entre si.</li><li>O Degrau 2 depende de uma marca parceira que ainda não existe.</li></ul></div>
+  </div>
+  <p class="col"><b>Decisão proposta:</b> reduzir a Fase 0 a quatro tarefas (contrato, teste de geradores de vídeo, 6 UGC de demonstração e Perfil de gosto) e vender conceitos em vez de vídeos soltos.</p>
+</section>
+
+<section class="ch" id="piloto">
+  <div class="ch-head">
+    <span class="ch-num">06</span>
+    <h2>Piloto com pousada: seis semanas</h2>
+    <p class="col muted">Na moda, o ciclo depende de uma marca abrir os números dela. Na pousada, o caminho do anúncio até o WhatsApp da Vera e até a reserva já é nosso. Quando o piloto funcionar, o sistema está pronto para a moda.</p>
+  </div>
+  <ol class="timeline">
+    <li><span class="w">Semana 1</span><div><b>Base.</b> Pousada escolhida, Perfil de gosto, fotos reais, matriz de personas e planilha de receitas.</div></li>
+    <li><span class="w">Semana 2</span><div><b>Primeiros criativos.</b> 10 conceitos com 3 variações cada, vídeo e estático. Você aprova tudo.</div></li>
+    <li><span class="w">Semanas 3–4</span><div><b>Ciclo.</b> Toda segunda: números e conversas da Vera, o que funcionou e os próximos 10 pela regra 80/20.</div></li>
+    <li><span class="w">Semana 5</span><div><b>Google Ads.</b> Campanha de pesquisa de reserva direta, comparada com a Meta.</div></li>
+    <li><span class="w">Semana 6</span><div><b>Balanço.</b> Custo por conversa e por reserva, comissão economizada e suas horas.</div></li>
+  </ol>
+  <div class="split">
+    <div class="box"><b>Regras do piloto</b><ul><li>Nada de ator de IA fingindo ser hóspede.</li><li>Nenhuma imagem mostra o que a pousada não tem.</li><li>Nada sobe sem a sua aprovação.</li><li>Cada anúncio leva um código até o WhatsApp da Vera.</li></ul></div>
+    <div class="box alt"><b>O que volta para a moda</b><ul><li>Skills testadas num cliente real</li><li>Rotina de segunda-feira funcionando</li><li>Custo real por vídeo, para fechar o preço</li><li>Um caso com números para as 30 marcas</li></ul></div>
+  </div>
+</section>
+
+<section class="ch" id="agentes">
+  <div class="ch-head">
+    <span class="ch-num">07</span>
+    <h2>Skills e agentes</h2>
+    <p class="col muted">Construídos no repositório locatelli-studio, para rodar no Claude Code. O agente propõe, o Carlo decide.</p>
+  </div>
+  <h3>O ciclo</h3>
+  <ol class="flow">
+    <li><b>Pesquisador de Dores</b><span>Frases reais, matriz de personas, mapa da Ad Library.</span></li>
+    <li><b>Roteirista de Ganchos</b><span>10 conceitos com código e receita.</span></li>
+    <li><b>Carlo escolhe</b><span>Quais produzir.</span></li>
+    <li><b>Guardião da Marca</b><span>Portão contra o real e o Perfil de gosto.</span></li>
+    <li><b>Carlo aprova</b><span>E cada decisão vira regra.</span></li>
+    <li><b>Analista de Ganchos</b><span>Toda segunda: vencedores, pausas e os próximos 10.</span></li>
+  </ol>
+  <div class="grid">
+    <div class="card"><span class="tag">Skill</span><h3>conceitos-anuncio-moda</h3><p>10 conceitos para uma peça ou coleção, com gancho, roteiro, elenco, rota de produção e receita. Já existia.</p></div>
+    <div class="card"><span class="tag star">Nova</span><h3>conceitos-anuncio-pousada</h3><p>Matriz público × situação, 10 conceitos, código por anúncio e mensagem de WhatsApp para a Vera. Só diferenciais reais.</p></div>
+    <div class="card"><span class="tag star">Nova</span><h3>portao-da-marca</h3><p>Seis conferências, veredito e calibração com o seu gosto. Vem com o modelo de Perfil de gosto.</p>
+      <div class="pills"><span class="pill ok">APROVADO</span><span class="pill warn">AJUSTAR</span><span class="pill bad">REPROVAR</span></div></div>
+  </div>
+  <p class="src">Comando semanal: <code>/ciclo-semanal &lt;cliente&gt;</code>. Arquivos de cada cliente em <code>clientes/&lt;nome&gt;/</code>, com perfil, receitas e resultados. Guia completo em <code>AGENTES.md</code>.</p>
+</section>
+
+<section class="ch" id="site">
+  <div class="ch-head">
+    <span class="ch-num">08</span>
+    <h2>Prompt do site</h2>
+    <p class="col muted">Página única do Locatelli Studio com os três pilares, na direção visual do repositório: minimalismo de luxo, Playfair Display e Poppins, branco com bege e marrom terra. Para colar numa ferramenta de criação de sites ou pedir ao Claude Code.</p>
+  </div>
+  <div class="prompt-head"><span class="eyebrow">Prompt completo</span><button class="copy" id="copyPrompt" type="button">Copiar prompt</button></div>
+  <pre class="prompt" id="promptText">Crie o site de uma página do **Locatelli Studio**, um estúdio de moda nativo em IA de São Paulo, dirigido pelo fotógrafo e diretor criativo Carlo Locatelli. O site vende **três formas de produzir imagem e vídeo de moda para a mesma marca**. O objetivo único da página é levar marcas de moda a pedir um **Teste de Ganchos** ou agendar uma conversa pelo WhatsApp.
+
+Todo o texto em português do Brasil, frases curtas, sem jargão de tecnologia. O público são donas e donos de marcas de moda, gerentes de marketing e e-commerces de moda média e premium no Brasil.
+
+### Direção visual (seguir à risca)
+- Estilo: minimalismo contemporâneo de luxo, como sites de marcas de moda de alto padrão e revistas como a Vogue. Muito espaço em branco.
+- Fundo branco (#FFFFFF), texto em cinza muito escuro (#1A1A1A), acentos em bege quente (#D4C4B0) e marrom terra (#8B7355), preto profundo (#0D0D0D) nos botões principais.
+- Tipografia: títulos em **Playfair Display** e texto em **Poppins**.
+- Layout: seções assimétricas, alternando texto e imagem à esquerda e à direita. Linhas finas em bege separando as seções.
+- Movimento: só fade-in suave ao carregar e hover discreto (bege para marrom, sublinhado animado). Nada de parallax exagerado.
+- Imagens: usar espaços reservados com proporção correta (4:5 para editorial, 9:16 para vídeo). Legenda de cada espaço dizendo que tipo de imagem entra ali, por exemplo &quot;Foto real + continuidade com IA&quot;.
+- Responsivo, com o botão de WhatsApp fixo no celular.
+
+### Seções, em ordem
+
+1. **Abertura**
+   - Título: &quot;Uma diária. Uma campanha inteira.&quot;
+   - Subtítulo: &quot;Campanha híbrida, vídeo UGC e modelo 100% IA para a sua marca de moda. Um só sistema por trás, entrega em 72 horas.&quot;
+   - Botões: &quot;Pedir um Teste de Ganchos&quot; (principal) e &quot;Falar no WhatsApp&quot; (secundário).
+   - Imagem: díptico com a foto real de uma modelo à esquerda e a mesma modelo em outro cenário criado com IA à direita, com a legenda &quot;Real | Continuidade com IA&quot;.
+
+2. **Por que agora**
+   - Três pontos curtos:
+     - &quot;Na Meta, o criativo virou a segmentação. Quem roda poucos anúncios perde alcance.&quot;
+     - &quot;Marcas globais já produzem campanhas com gêmeos digitais de modelos reais.&quot;
+     - &quot;O que um estúdio entrega em semanas agora sai em dias, com direção de moda.&quot;
+
+3. **Os três pilares**: três blocos lado a lado no computador e empilhados no celular, cada um com título, frase, para quem é e o que inclui.
+   - **Campanha híbrida**: &quot;Modelo real fotografada uma vez. A IA leva a mesma pessoa para outros cenários, looks e vídeos.&quot; Para marcas médias e premium que lançam coleção.
+   - **Vídeo UGC**: &quot;Vídeos de gente falando do produto, em volume, para testar ganchos toda semana.&quot; Para marcas que anunciam na Meta e no TikTok.
+   - **Modelo 100% IA**: &quot;Elenco próprio de modelos de IA para catálogo e e-commerce, sempre declarado como IA.&quot; Para e-commerces com muitas peças e marcas sem verba para diária.
+
+4. **Como funciona**: quatro passos em linha, porque é uma sequência real.
+   1. Perfil de gosto: a sua marca vira um manual que guia cada imagem.
+   2. Direção: Carlo define conceito, elenco e cenários.
+   3. Produção com IA: rascunho barato antes, versão final depois.
+   4. Portão da marca: cada peça é conferida contra a peça real e o seu manual antes de chegar a você.
+
+5. **Pacotes** (cartões com preço, marcados &quot;preços de lançamento&quot;):
+   - Teste de Ganchos: R$ 1.490. 5 vídeos UGC, 1 produto, 5 ganchos diferentes, formatos 9:16 e 1:1, direito de uso em anúncio, entrega em 72 horas. Destacar como &quot;comece por aqui&quot;.
+   - UGC Mensal: R$ 3.900/mês. Vídeos toda semana e relatório dos ganchos que venderam.
+   - Campanha Híbrida: a partir de R$ 14.900. 1 diária com modelo real, 20 imagens em 4 cenários criados por IA, 6 vídeos curtos, licença de continuidade de 12 meses. Cachê da modelo à parte.
+   - Continuidade Mensal: R$ 4.900/mês. Um novo drop por mês com a mesma modelo, sem nova diária.
+   - Catálogo IA: R$ 49 por peça, mínimo de 20 peças. 4 imagens por peça e ficha pronta para busca por IA.
+   - Licença de Modelo IA: R$ 2.500 + R$ 1.500/mês. Uso exclusivo por categoria.
+
+6. **Transparência e contratos**
+   - Título: &quot;IA declarada. Rosto com contrato.&quot;
+   - Texto: toda modelo real assina contrato de continuidade por IA com prazo, veto e pagamento por uso. Todo conteúdo de modelo IA é declarado como IA. A peça é sagrada: cor, estampa, caimento e logo iguais ao produto real.
+
+7. **Quem dirige**
+   - Foto de Carlo e um parágrafo curto: fotógrafo e diretor criativo de moda em São Paulo, com casting real, acervo próprio de modelos de IA e 15 territórios visuais. &quot;Gerar imagem é fácil. Dirigir é outra coisa.&quot;
+
+8. **Perguntas frequentes** (acordeão):
+   - &quot;A modelo real concorda com o uso por IA?&quot; Sim, por contrato, com prazo, veto e pagamento por uso.
+   - &quot;O público percebe que é IA?&quot; Declaramos sempre. Em catálogo e anúncios de volume, a aceitação é alta quando a peça está fiel.
+   - &quot;Quanto tempo leva?&quot; Teste de Ganchos em 72 horas. Campanha híbrida em até 5 dias após a diária.
+   - &quot;Vocês cuidam do tráfego pago?&quot; Não. Entregamos os criativos e o relatório de quais ganchos venderam para o seu gestor de tráfego.
+   - &quot;Quantas revisões?&quot; Até 2 por entrega.
+
+9. **Chamada final**
+   - Título: &quot;Teste 5 ganchos com o seu produto em 72 horas.&quot;
+   - Formulário curto: nome, marca, Instagram da marca, site, investimento mensal em anúncios (faixas) e produto que quer testar. Botão &quot;Pedir meu Teste de Ganchos&quot;.
+   - Alternativa: botão de WhatsApp com a mensagem &quot;Oi! Vim pelo site e quero um Teste de Ganchos.&quot;
+
+10. **Rodapé**: Locatelli Studio, São Paulo, Instagram, WhatsApp e e-mail, com a frase &quot;Criativos com IA declarados conforme as regras de cada plataforma&quot;.
+
+### Regras do conteúdo
+- Não inventar depoimentos, números de clientes ou logos de marcas atendidas. Deixar um espaço reservado &quot;Casos em breve&quot; até existirem casos reais.
+- Não usar nomes de marcas globais como se fossem clientes. Se forem citadas, é só como contexto de mercado.
+- Acessível: contraste bom, textos alternativos nas imagens, foco visível nos botões.
+- Carregamento rápido: imagens comprimidas, sem vídeo pesado na abertura.
+- SEO: título &quot;Locatelli Studio | Campanha híbrida, UGC e modelo IA para marcas de moda&quot; e descrição com &quot;estúdio de moda com IA em São Paulo&quot;.</pre>
+</section>
+
+<section class="ch" id="arquivos">
+  <div class="ch-head"><span class="ch-num">09</span><h2>Arquivos</h2></div>
+  <div class="links">
+    <a href="https://docs.google.com/document/d/1Eo0e9RhSk9QaXFcuqFe2eIId6DhALrJkbYCJBPWWqC4/edit" target="_blank" rel="noopener"><small>Google Docs</small><b>Estudo 01/10: Blog Graphed</b></a>
+    <a href="https://docs.google.com/document/d/1suET_IC6mDxHojtOS11rPqMLhWystyBJm6Kzgt-ecHU/edit" target="_blank" rel="noopener"><small>Google Docs</small><b>Guia Google Ads: Pousadas e Sol Destinos</b></a>
+    <a href="https://docs.google.com/document/d/1cl3Y88KUnEDE9d3OLrMxPPIIrXyEInjWgk_WpbVWDYg/edit" target="_blank" rel="noopener"><small>Google Docs</small><b>Dossiê: Cody Schneider</b></a>
+    <a href="https://docs.google.com/document/d/1nHTgJpt1FR7jQ6ZtGeFzBKCiQpU-E9FR9T8UF-1BFGU/edit" target="_blank" rel="noopener"><small>Google Docs</small><b>Plano: Piloto com pousada e ajustes da moda</b></a>
+    <a href="https://drive.google.com/drive/folders/1XJbUVKxxuAIimD8TFrc6fqqEiyxH8qj5" target="_blank" rel="noopener"><small>Google Drive</small><b>Pasta CLAUDE NUVEM</b></a>
+    <a href="https://github.com/carlolocatelli3-eng/locatelli-studio/tree/claude/affectionate-davinci-gwpjif" target="_blank" rel="noopener"><small>GitHub</small><b>Repositório: skills, agentes e prompt do site</b></a>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">Caderno montado com Claude em 30 de setembro de 2026. Números de terceiros vêm das fontes citadas nos documentos e não foram verificados de forma independente.</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyPrompt'), pre=document.getElementById('promptText');
+  btn.addEventListener('click',function(){
+    var text=pre.textContent;
+    function selectIt(){ var r=document.createRange(); r.selectNodeContents(pre); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Texto selecionado: copie com Ctrl+C'; }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ btn.textContent='Prompt copiado'; setTimeout(function(){btn.textContent='Copiar prompt';},2200); }, selectIt);
+    }catch(e){ selectIt(); }
+  });
+})();
+</script>
