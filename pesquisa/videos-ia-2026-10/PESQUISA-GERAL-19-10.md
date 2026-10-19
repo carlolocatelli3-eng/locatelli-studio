@@ -103,6 +103,67 @@ Fontes: [ArgoLink (comparação de out/2026)](https://argolink.io/en/blog/nano-b
 
 ---
 
+## 5b. Google Flow: imagem praticamente de graça no trabalho manual (pergunta do Carlo)
+
+*Correção: a primeira versão desta pesquisa só olhou o preço por API. Para o trabalho manual, que é o que o Organismo faz hoje (degrau 1), o caminho mais barato é o Flow.*
+
+> Não consegui abrir as páginas oficiais do Google deste ambiente (bloqueio de rede). O que está abaixo vem do cruzamento de várias fontes de terceiros, que às vezes se contradizem. Onde há conflito, eu digo. **Confira no próprio Flow:** o custo em créditos aparece na caixa de prompt antes de gerar.
+
+**Como funciona hoje**
+- Em **25/02/2026** o Google juntou Whisk e ImageFX dentro do **Flow** (labs.google/flow). Virou um estúdio só, de imagem e vídeo. Whisk e ImageFX avulsos saíram do ar em 30/04/2026. [TestingCatalog](https://www.testingcatalog.com/google-merges-imagefx-and-whisk-into-flow-on-labs/), [Dzinepixel](https://www.dzinepixel.com/blog/google-flow-ai-vs-nano-banana-vs-veo-3/)
+- **Toda conta Google ganha 50 créditos por dia** no Flow, com ou sem assinatura, sem acumular. [Fello AI](https://felloai.com/google-flow/), [PicassoIA](https://blog.picassoia.com/google-flow-free-credits-per-day-free-tier-and-alternatives)
+- **Imagens Nano Banana aparecem custando 0 créditos.** O que gasta crédito é o **vídeo (Veo)** e o upscale. Uma análise prática no plano Pro registrou 0 crédito por imagem Nano Banana. Um resumo do anúncio de fevereiro diz que o Google afirmou que imagens são gratuitas no Flow. [AIFreeAPI](https://www.aifreeapi.com/en/posts/nano-banana-free-use), [Reliablesoft](https://www.reliablesoft.net/how-to-use-google-flow/), [RavChat](https://www.ravchat.com/master-nano-banana-pro-google)
+- **Nano Banana Pro no Flow (conflito):**
+  - uma fonte diz que no plano grátis o padrão é **Nano Banana 2 Lite**, e o Pro é o padrão para assinantes Ultra;
+  - outras dizem que o Pro também sai a 0 crédito para assinantes;
+  - a página do Flow no Brasil menciona "uso limitado do Nano Banana Pro".
+  
+  [CostGoat](https://costgoat.com/pricing/google-flow), [Tecnoblog](https://tecnoblog.net/noticias/google-lanca-plano-mais-barato-com-ia-avancada-no-brasil-saiba-o-preco/)
+
+**Os limites que existem**
+- **Não é ilimitado.** Há limite de velocidade, com a mensagem de que você está pedindo gerações rápido demais, principalmente nos modelos de 0 crédito. No app Gemini, assinantes Pro relatam bater no limite depois de **20 a 80 imagens por dia**, abaixo das ~100 anunciadas. O Google diz que os limites "podem mudar com frequência". [Workalizer](https://workalizer.com/insights/gemini/google-ai-generation-limits-demystifying-nano-banana-pro-vs-ultra-plans/), [LaoZhang](https://blog.laozhang.ai/en/posts/nano-banana-pro-rate-limit)
+- **Resolução:** no plano grátis, a imagem sai em **1K, com upscale para 2K**. O **upscale para 4K exige plano pago**. Para e-commerce, 2K costuma bastar. Para campanha e impressão, você vai querer 4K. [LaoZhang](https://blog.laozhang.ai/en/posts/nano-banana-2-online-free.md)
+- **Marca d'água:** toda imagem leva a marca invisível **SynthID** e metadados C2PA. A **marca visível agora pode ser desligada** num botão no Gemini e no Flow, segundo reportagem de cerca de 2 meses atrás. Fontes mais antigas diziam que só o Ultra removia. [Search Engine Journal](https://www.searchenginejournal.com/google-lets-you-turn-off-visible-watermarks-in-gemini/586145/), [Google Flow Help](https://support.google.com/flow/answer/16353333?hl=en)
+- **Sem API:** o Flow é manual. Serve para os degraus 1 e 2, não para a automação do degrau 3.
+
+**Planos no Brasil**
+
+| Plano | Preço | Créditos do Flow | Observação |
+|---|---|---|---|
+| Sem assinatura | R$ 0 | 50 por dia | Imagem 1K/2K; Nano Banana Pro incerto |
+| **Google AI Plus** | **R$ 24,99/mês** | 200 por mês + 50 por dia | Sem recarga de créditos |
+| **Google AI Pro** | **R$ 96,99/mês** | 1.000 por mês + 50 por dia | 2 TB |
+| Google AI Ultra | R$ 779,90 a R$ 999,90/mês | até 25.000 por mês | Vídeo pela metade dos créditos |
+
+Fontes: [Tecnoblog (AI Plus)](https://tecnoblog.net/noticias/google-lanca-plano-mais-barato-com-ia-avancada-no-brasil-saiba-o-preco/), [Diário do Comércio (Ultra)](https://diariodocomercio.com.br/mix/assinatura-do-gemini-fica-mais-acessivel-no-brasil-apos-reducao-no-preco/), [Tecnoblog (Ultra)](https://tecnoblog.net/noticias/google-reduz-preco-de-ia-no-brasil-mas-continua-carissimo/)
+
+**Estudante universitário no Brasil:** 12 meses de **AI Plus grátis**, com ativação até 31/12/2026, só em conta pessoal. [Canaltech](https://canaltech.com.br/inteligencia-artificial/google-ai-pro-gemini-de-graca-por-1-ano-brasil/)
+
+**O ponto de atenção: uso comercial para cliente**
+- O Google **não reivindica a propriedade** do que você gera. Mas os termos de consumidor **não trazem uma permissão comercial explícita** nem **indenização** caso um terceiro reclame da imagem. [Google Generative AI Terms](https://policies.google.com/terms/generative-ai), [Note (ImageFX)](https://note.com/ai_haruki/n/n52ee7af4d6b0?hl=en)
+- Para uso empresarial, as fontes apontam **Vertex AI (Google Cloud)** como o caminho com termos de empresa. Uma fonte diz que o Flow **não vem nas edições Business do Workspace**. [AI Souken](https://www.ai-souken.com/article/nano-banana-pro-commercial-use-guide), [WebSnP](https://www.websnp.com/google-ai-pro/for-business)
+- **Não é proibido.** É uma zona sem garantia. Para entrega de cliente premium (Campanha Híbrida, Licença de Modelo), vale ler os termos atuais dentro do Flow ou passar a produção final por uma API com termos comerciais claros.
+
+**O que muda para nós**
+
+| Uso | Ferramenta indicada | Custo por imagem |
+|---|---|---|
+| Exploração, moodboard, testes de Perfil de Gosto | **Flow** | ≈ 0 (dentro do limite diário) |
+| **Amostras de prospecção para as 30 marcas** | **Flow** | ≈ 0 |
+| Portfólio e rodadas em modo estudo | **Flow** | ≈ 0 |
+| Catálogo IA em volume para cliente | Flow (se os termos servirem) **ou** API (Google em lote US$ 0,067; Kie.ai US$ 0,09) | R$ 0 a ~R$ 0,50 |
+| Entrega premium e automação do degrau 3 | API com termos comerciais (Vertex AI) ou Kie.ai | ~R$ 0,40 a 0,75 |
+
+**Conta:** com o AI Pro (R$ 96,99) e uma média realista de 40 imagens por dia, são ~1.200 imagens por mês, ≈ **R$ 0,08 por imagem**. Pela API seria ~R$ 0,50 por imagem.
+
+**Para o preço:** isso explica o mercado a **R$ 2–5 por imagem** (bloco 2). O custo de gerar caiu quase a zero para todo mundo. O preço do Catálogo IA precisa se apoiar em **direção, fidelidade da peça e exclusividade**, não no custo de produção.
+
+**Para decidir:**
+1. Você já assina algum plano Google AI? Se não, o AI Pro (R$ 96,99) se paga já na Fase 0.
+2. Usamos o Flow para tudo que é interno e prospecção, e decidimos depois de ler os termos se ele entra na entrega ao cliente?
+
+---
+
 ## 6. Regras de IA na publicidade e direito de imagem
 
 **Rotulagem de IA:**
@@ -160,7 +221,8 @@ Não existe ranking público de marcas de moda brasileiras por gasto no Meta. Pi
 | 2 | Catálogo com IA custa R$ 2–5 por imagem no mercado | Catálogo IA (R$ 12/imagem) caro para commodity | Baixar preço ou subir de categoria |
 | 3 | Meta gera criativo sozinho e liga aprimoramentos por padrão | Ameaça o volume do UGC; abre o gancho "auditoria" | Novo gancho de prospecção? |
 | 4 | API da Ad Library não cobre moda no Brasil | Tarefa da Fase 1 precisa mudar | Caminho manual |
-| 5 | Nano Banana Pro: Kie.ai US$ 0,09; Google em lote US$ 0,067 | Custo do catálogo ≈ R$ 2 por peça | Tirar do "verificar" |
+| 5 | Nano Banana Pro: Kie.ai US$ 0,09; Google em lote US$ 0,067 | Custo do catálogo ≈ R$ 2 por peça pela API | Tirar do "verificar" |
+| 5b | **No Google Flow, imagem Nano Banana custa 0 crédito** (com limite diário; Pro tem conflito entre fontes) | Exploração, amostras e portfólio a custo ≈ zero; uso comercial sem garantia explícita | Assinar AI Pro? Usar Flow na entrega? |
 | 6 | CONAR não obriga declarar IA; contrato de gêmeo digital exige 4 cláusulas | Sua regra é escolha de marca; contrato fica mais claro | Onde declarar |
 | 7 | IA declarada em campanha reduz confiança; no catálogo é aceita com fidelidade | Fortalece Pilar 1 premium e a peça sagrada | Rever "modelos por tamanho" com IA |
 | 8 | Sotaque brasileiro exige voz de origem brasileira | Reforça "criador real multiplicado" | — |
