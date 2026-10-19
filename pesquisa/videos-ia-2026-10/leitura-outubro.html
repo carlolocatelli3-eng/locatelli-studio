@@ -1,9 +1,9 @@
-<title>Seis Vídeos e o Organismo</title>
+<title>Oito Vídeos e o Organismo</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Libre+Franklin:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: same visual family as "Ciclo dos Agentes" — sidebar index on desktop, long reading column, cards only where an item is a separate object */
+/* Layout: same family as "Ciclo dos Agentes" — sidebar index on desktop, long reading column; cards only for separate objects (videos, themes) */
 :root{
   --bg:#F5F5F2; --surface:#FFFFFF; --ink:#17181C; --muted:#5E6068; --line:#DCDCD6;
   --accent:#2F5D50; --accent-soft:#E3ECE8; --code:#EEEEEA;
@@ -28,7 +28,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px}
 .side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;padding-top:44px;display:flex;flex-direction:column}
 .side p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-.side a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.side a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
 .side a:hover{color:var(--accent)}
 .n{font-family:var(--mono);font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums}
 main{min-width:0;padding-top:44px}
@@ -38,70 +38,82 @@ h1 em{font-style:italic;color:var(--accent)}
 h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1;margin:0 0 8px}
 h3{font-size:18px;font-weight:600;margin:0 0 6px;text-wrap:balance}
 .eb{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:baseline}
-.lede{max-width:64ch;color:var(--muted);margin:0 0 24px;font-size:17px}
+.lede{max-width:66ch;color:var(--muted);margin:0 0 24px;font-size:17px}
 section{padding-top:80px}
-.intro{max-width:66ch;margin:0 0 24px}
+.intro{max-width:68ch;margin:0 0 24px}
 p{margin:0 0 12px}
-ul{margin:0;padding-left:1.2em}
+ul,ol{margin:0;padding-left:1.2em}
 li{margin:3px 0}
 code{font-family:var(--mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+.source{font-size:13px;color:var(--muted);margin-top:14px}
 
-/* verdict strip */
-.verdict{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--surface);margin:8px 0 0}
+.verdict{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}
 .verdict div{padding:18px 18px 20px;border-right:1px solid var(--line);min-width:0}
 .verdict div:last-child{border-right:0}
 .verdict b{display:block;font-family:var(--display);font-size:22px;font-weight:500;line-height:1.15;margin-bottom:6px}
 .verdict span{font-size:14px;color:var(--muted);line-height:1.5}
-.source{font-size:13px;color:var(--muted);margin-top:14px}
 
-/* pillars */
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.pillar{background:var(--surface);padding:18px;min-width:0;display:flex;flex-direction:column;gap:8px}
-.pillar .role{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
-.pillar h3{font-family:var(--display);font-weight:500;font-size:24px;margin:0}
-.pillar p{font-size:14.5px;margin:0}
-.price{font-family:var(--mono);font-size:13px;border-top:1px solid var(--line);padding-top:8px;margin-top:auto;display:flex;flex-direction:column;gap:2px}
-.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:24px;max-width:900px}
-.facts div{border-top:1px solid var(--line);padding-top:8px;min-width:0}
-.facts dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.facts dd{margin:2px 0 0;font-size:15px}
+.chip{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;font-weight:500;white-space:nowrap}
+.chip.ok{background:var(--accent-soft);color:var(--accent)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.info{background:var(--info-soft);color:var(--info)}
+
+/* system */
+.sys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sys div{background:var(--surface);padding:16px;min-width:0}
+.sys .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.sys h3{font-family:var(--display);font-weight:500;font-size:22px;margin:2px 0 6px}
+.sys p{font-size:14.5px;margin:0}
+.versions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 20px}
+.versions div{border:1px solid var(--line);background:var(--surface);padding:12px 14px;min-width:0;font-size:14px}
+.versions b{display:block;font-size:15px}
+.versions .now{border-color:var(--accent);background:var(--accent-soft)}
 
 /* status */
-.status{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start;margin-top:8px}
+.status{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start;margin-top:24px}
 .bars{display:flex;flex-direction:column;gap:12px}
 .bar{display:grid;grid-template-columns:150px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:14px}
 .track{height:14px;background:var(--code);position:relative}
 .fill{position:absolute;inset:0 auto 0 0;background:var(--accent)}
 .fill.w{background:var(--warn)}
-.fill.b{background:var(--bad)}
 .bar .v{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
 .callout{border-left:3px solid var(--warn);background:var(--warn-soft);padding:16px 18px;min-width:0}
 .callout h3{color:var(--warn)}
 .callout p{font-size:15px}
 
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.theme{background:var(--surface);border:1px solid var(--line);padding:18px 20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.theme .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.theme .tn{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{font-family:var(--mono);font-size:11px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--muted);border-radius:50%}
+.dot.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.theme h3{font-size:18px;margin:0}
+.theme p{font-size:14.5px;margin:0}
+.theme .org{font-size:14px;border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
+.theme .org b{color:var(--accent)}
+
 /* videos */
-.vids{display:flex;flex-direction:column;gap:20px}
-.vid{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:96px minmax(0,1fr)}
+.vids{display:flex;flex-direction:column;gap:18px}
+.vid{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:88px minmax(0,1fr)}
 .vid .num{border-right:1px solid var(--line);padding:18px 0;display:flex;flex-direction:column;align-items:center;gap:10px}
-.vid .num b{font-family:var(--display);font-size:44px;font-weight:500;line-height:1;color:var(--accent)}
+.vid .num b{font-family:var(--display);font-size:42px;font-weight:500;line-height:1;color:var(--accent)}
 .stars{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em;writing-mode:vertical-rl;transform:rotate(180deg)}
-.vid .body{padding:18px 22px 20px;min-width:0}
-.vid .meta{font-size:13px;color:var(--muted);margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px 14px}
-.vid h3{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15;margin:0 0 4px}
-.vid .orig{font-size:13px;color:var(--muted);font-style:italic;margin:0 0 10px}
-.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:14px}
+.vid .body{padding:16px 22px 18px;min-width:0}
+.vid .meta{font-size:13px;color:var(--muted);margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.vid h3{font-family:var(--display);font-weight:500;font-size:23px;line-height:1.15;margin:0 0 2px}
+.vid .orig{font-size:13px;color:var(--muted);font-style:italic;margin:0 0 8px}
+.say{font-size:15px;max-width:74ch}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:12px}
 .cols>div{min-width:0}
 .cols h4{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
 .cols .k h4{color:var(--accent)}
 .cols .x h4{color:var(--muted)}
 .cols .s h4{color:var(--info)}
 .cols ul{font-size:14.5px}
-.chip{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;font-weight:500;white-space:nowrap}
-.chip.ok{background:var(--accent-soft);color:var(--accent)}
-.chip.warn{background:var(--warn-soft);color:var(--warn)}
-.chip.bad{background:var(--bad-soft);color:var(--bad)}
-.chip.info{background:var(--info-soft);color:var(--info)}
-.say{font-size:15px;max-width:72ch}
+.vid.gold{border-color:var(--accent)}
 
 /* tables */
 .tw{overflow-x:auto;margin:8px 0 0;border:1px solid var(--line);background:var(--surface)}
@@ -109,36 +121,44 @@ table{border-collapse:collapse;font-size:14.5px;width:100%;min-width:720px}
 th,td{border-bottom:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
 th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
 tr:last-child td{border-bottom:0}
-td.t{font-weight:600;white-space:nowrap}
-.num{font-variant-numeric:tabular-nums}
+td.t{font-weight:600}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 
-/* novelties */
-.feature{border:1px solid var(--accent);background:var(--accent-soft);padding:22px;margin-bottom:24px}
-.feature .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 4px}
-.feature h3{font-family:var(--display);font-weight:500;font-size:28px;margin:0 0 8px}
-.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:18px 0 6px;border:1px solid var(--line);background:var(--surface)}
-.flow div{padding:14px;border-right:1px solid var(--line);min-width:0;font-size:14px;line-height:1.45}
-.flow div:last-child{border-right:0}
-.flow b{display:block;font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px}
-.from{font-size:13px;color:var(--muted);margin-top:10px}
-.nov{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px}
-.nov>div{border-top:1px solid var(--line);padding-top:14px;min-width:0}
-.nov .l{font-family:var(--mono);font-size:12px;color:var(--accent)}
-.nov p{font-size:15px}
+/* research */
+.finds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px}
+.finds>div{border-top:1px solid var(--line);padding-top:14px;min-width:0}
+.finds .l{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.finds p{font-size:15px}
+.big{font-family:var(--display);font-size:34px;line-height:1;display:block;margin:4px 0 6px}
+
+/* exists vs new */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.two>div{min-width:0}
+.two ul{font-size:15px}
+.exist li::marker{color:var(--accent)}
 
 /* plan */
 .plan{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
-.step{display:grid;grid-template-columns:56px minmax(0,1fr) 150px;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line);align-items:start}
+.step{display:grid;grid-template-columns:56px minmax(0,1fr) 160px;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:start}
 .step:last-child{border-bottom:0}
-.step .i{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
-.step h3{margin:0 0 2px}
+.step .i{font-family:var(--display);font-size:28px;line-height:1;color:var(--accent)}
+.step h3{margin:0 0 2px;font-size:17px}
 .step p{margin:0;font-size:14.5px;color:var(--muted)}
 .step .r{display:flex;flex-direction:column;gap:6px;align-items:flex-start;font-size:13px;color:var(--muted)}
-.step.later .i{color:var(--muted)}
+.step.top3{background:var(--accent-soft)}
 
-/* appendix + checks */
-.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
-.two>div{min-width:0}
+.feature{border:1px solid var(--accent);background:var(--accent-soft);padding:22px;margin-bottom:24px}
+.feature .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 4px}
+.feature h3{font-family:var(--display);font-weight:500;font-size:26px;margin:0 0 8px}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:16px 0 4px;border:1px solid var(--line);background:var(--surface)}
+.flow div{padding:14px;border-right:1px solid var(--line);min-width:0;font-size:14px;line-height:1.45}
+.flow div:last-child{border-right:0}
+.flow b{display:block;font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px}
+
+.untold{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}
+.untold div{border-bottom:1px solid var(--line);padding:8px 0;font-size:15px;min-width:0}
+.untold .n{margin-right:8px}
+
 .checks{display:flex;flex-direction:column;gap:10px}
 .check{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;font-size:14.5px;border-bottom:1px solid var(--line);padding-bottom:10px}
 .ask{background:var(--surface);border:1px solid var(--line);padding:22px}
@@ -153,7 +173,7 @@ footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-si
   .status{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:720px){
-  .verdict,.pillars,.facts,.nov,.two{grid-template-columns:minmax(0,1fr)}
+  .verdict,.sys,.versions,.themes,.finds,.two,.untold{grid-template-columns:minmax(0,1fr)}
   .verdict div{border-right:0;border-bottom:1px solid var(--line)}
   .verdict div:last-child{border-bottom:0}
   .flow{grid-template-columns:minmax(0,1fr)}
@@ -174,134 +194,152 @@ footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-si
 <nav class="side" aria-label="Seções">
   <p>Nesta leitura</p>
   <a href="#veredito"><span class="n">00</span>Veredito</a>
-  <a href="#sistema"><span class="n">01</span>O seu sistema</a>
-  <a href="#situacao"><span class="n">02</span>Onde você está</a>
-  <a href="#videos"><span class="n">03</span>Os 6 vídeos</a>
-  <a href="#ja-decidido"><span class="n">04</span>Já decidido</a>
-  <a href="#novidades"><span class="n">05</span>Novidades reais</a>
-  <a href="#plano"><span class="n">06</span>Plano revisado</a>
-  <a href="#sol"><span class="n">07</span>Para o SOL</a>
-  <a href="#conferido"><span class="n">08</span>O que conferi</a>
-  <a href="#decidir"><span class="n">09</span>Para decidir</a>
+  <a href="#sistema"><span class="n">01</span>O Organismo hoje</a>
+  <a href="#temas"><span class="n">02</span>10 temas em comum</a>
+  <a href="#videos"><span class="n">03</span>Os 8 vídeos</a>
+  <a href="#pesquisas"><span class="n">04</span>Pesquisas do dia</a>
+  <a href="#divergencias"><span class="n">05</span>Divergências</a>
+  <a href="#existe"><span class="n">06</span>Já existe × novo</a>
+  <a href="#sprint"><span class="n">07</span>Para a sprint</a>
+  <a href="#soltos"><span class="n">08</span>Ainda não contado</a>
+  <a href="#estudar"><span class="n">09</span>Estudar de novo</a>
+  <a href="#conferido"><span class="n">10</span>O que conferi</a>
+  <a href="#proximos"><span class="n">11</span>Próximos passos</a>
 </nav>
 
 <main>
 
 <header id="veredito">
-  <p class="eb">Leitura de outubro · 19/10/2026 · para Carlo Locatelli</p>
-  <h1>Seis vídeos sobre IA, <em>lidos contra o Organismo Operador</em></h1>
-  <p class="lede">Assisti pela transcrição completa aos seis vídeos que você mandou e cruzei cada ideia com o seu painel, as cinco skills do ciclo e o plano de 13 semanas. Esta página mostra o que já existe, o que é novidade de verdade e o que fazer agora.</p>
+  <p class="eb">Leitura de outubro · atualizada em 19/10/2026 · para Carlo Locatelli</p>
+  <h1>Oito vídeos sobre IA e as pesquisas do dia, <em>cruzados com o Organismo Operador</em></h1>
+  <p class="lede">Li as transcrições completas dos oito vídeos e cruzei tudo com a versão atual do Organismo (a que roda no seu computador) e com as pesquisas de preço, mercado e regras feitas hoje. Esta página junta tudo: o que os vídeos dizem em comum, o que já existe no seu sistema, o que é novidade e o que estudar de novo.</p>
   <div class="verdict">
-    <div><b>A maior parte confirma o que você já decidiu.</b><span>API em vez de Freepik, personas aposentadas, amostra do produto da própria marca, nada de e-mail frio.</span></div>
-    <div><b>Três novidades de verdade.</b><span>Calibrar o Guardião com peças que você já julgou, arrumar skills e Colmeia, e ter Kie.ai no teste de motores.</span></div>
-    <div><b>O gargalo não é ferramenta.</b><span>São 38 de 40 tarefas abertas e nenhuma marca parceira. Desta pesquisa, entram no máximo 2 tarefas novas.</span></div>
+    <div><b>Seu sistema está à frente dos vídeos.</b><span>Portões humanos, nenhum vídeo pago antes do sim, recusa que vira regra, provas da Colmeia e contratos em código já existem no Organismo v2.</span></div>
+    <div><b>Três novidades valem a sprint.</b><span>Conectar o Magnific ao Claude com os créditos que você já paga, a prova do gosto do Guardião e o alerta de 7 dias do rascunho 480p.</span></div>
+    <div><b>O gargalo é vender, não produzir.</b><span>Gerar ficou quase de graça para todo mundo. O que destrava é a primeira marca parceira, e os vídeos sugerem um canal novo: as produtoras.</span></div>
   </div>
-  <p class="source">Fontes lidas: transcrições dos 6 vídeos (no idioma original), painel Organismo Operador (cópia de 06/10 e banco ao vivo, iguais), artifact Ciclo dos Agentes Locatelli (skills de 16/10) e pesquisa na web para conferir fatos.</p>
 </header>
 
 <section id="sistema">
-  <p class="eb"><span class="n">01</span>O que entendi</p>
-  <h2>Um estúdio de moda, três portas de entrada</h2>
-  <p class="intro">“Os três pilares não são três empresas. São três preços e três velocidades para o mesmo cliente de moda.” O que une os três é o ativo que nasce na campanha: o rosto, a luz, os cenários e a memória da marca.</p>
-  <div class="pillars">
-    <div class="pillar">
-      <span class="role">Pilar 1 · prestígio e ticket alto</span>
-      <h3>Campanha híbrida</h3>
-      <p>Modelo real fotografada uma vez, com contrato de continuidade. A IA leva a mesma pessoa para outros cenários, looks e vídeos.</p>
-      <div class="price"><span>Campanha Híbrida · a partir de R$ 14.900</span><span>Continuidade Mensal · R$ 4.900/mês</span></div>
-    </div>
-    <div class="pillar">
-      <span class="role">Pilar 2 · volume e recorrência</span>
-      <h3>Vídeo UGC</h3>
-      <p>Criadores reais multiplicados por IA e atores 100% IA, para testar ganchos toda semana no Meta.</p>
-      <div class="price"><span>Teste de Ganchos · R$ 1.490</span><span>UGC Mensal · R$ 3.900/mês</span></div>
-    </div>
-    <div class="pillar">
-      <span class="role">Pilar 3 · escala e custo mínimo</span>
-      <h3>Modelo 100% IA</h3>
-      <p>Elenco próprio de modelos IA, sempre declarado, para catálogo e marcas sem verba para diária.</p>
-      <div class="price"><span>Catálogo IA · R$ 49 por peça</span><span>Licença de Modelo · R$ 2.500 + 1.500/mês</span></div>
-    </div>
+  <p class="eb"><span class="n">01</span>O que estamos cruzando</p>
+  <h2>O Organismo Operador hoje</h2>
+  <p class="intro">Hoje apareceram três versões do Organismo. A análise anterior usou a antiga; esta usa a atual. Da atual eu li a estrutura e as regras; os dados (tarefas, ferramentas, campanhas) ficam no servidor do seu computador e ainda não chegaram aqui.</p>
+  <div class="versions">
+    <div><b>Primeiro arquivo enviado</b>Cópia de 06/10 com os dados embutidos. <span class="chip bad">antiga</span></div>
+    <div><b>Artifact no claude.ai</b>Banco online parado em 06/10. <span class="chip bad">antiga</span></div>
+    <div class="now"><b>Servidor no seu computador</b>localhost:8790, maestro v2. <span class="chip ok">atual</span></div>
   </div>
-  <dl class="facts">
-    <div><dt>Ciclo das skills</dt><dd>Perfil de Gosto → Pesquisador de Dores → Roteirista de Ganchos → Guardião da Marca → Analista de Ganchos → volta ao Roteirista (80/20).</dd></div>
-    <div><dt>Escada dos agentes</dt><dd>1 · receitas no Claude → 2 · uma marca parceira real → 3 · automação com código → 4 · “talvez nunca”.</dd></div>
-    <div><dt>Fosso</dt><dd>Um ativo para os três pilares, contratos e consentimento, direção de moda, entrega em 72 horas.</dd></div>
-    <div><dt>Regras da casa</dt><dd>Só se automatiza o que funcionou três vezes. O agente propõe, você decide. Sem cliente, sem agente.</dd></div>
-  </dl>
-</section>
-
-<section id="situacao">
-  <p class="eb"><span class="n">02</span>Onde você está hoje</p>
-  <h2>Muito estudado, pouco vendido</h2>
+  <div class="sys">
+    <div><span class="k">Criar · maestro v2</span><h3>Uma linha, 4 portões</h3><p>Você escreve ou fala uma linha; a Colmeia segue 8 passos e só chama você na ficha, no conceito, na peça principal e no conjunto. Nenhum vídeo pago antes do sim. A recusa vira proibição no próximo prompt.</p></div>
+    <div><span class="k">Ativos · Agente de Licenças</span><h3>Contrato em código</h3><p>Pessoa, produto ou lugar com contrato, banco de referências, registro de uso, repasse e licença com exclusividade por categoria. O código bloqueia o uso que o contrato não permite.</p></div>
+    <div><span class="k">Colmeia · provas</span><h3>Nível pela evidência</h3><p>Cada agente aparece como testado em simulação, parcial, só no papel ou prova falhando.</p></div>
+    <div><span class="k">Decidir hoje</span><h3>O que espera você</h3><p>Tarefas separadas pelo que depende de você, de mim ou da chave da API; ferramentas sem data de conferência ou sem custo em número.</p></div>
+    <div><span class="k">Virais</span><h3>Reels por situação</h3><p>Colhidos em 19/10: Black Friday, moda, rosto IA, cinema, site 3D, Sól Destinos e “vender o nosso sistema”.</p></div>
+    <div><span class="k">Os três pilares</span><h3>Uma marca, três portas</h3><p>Campanha híbrida (a partir de R$ 14.900), UGC (Teste de Ganchos R$ 1.490) e modelo 100% IA (Catálogo R$ 49 por peça).</p></div>
+  </div>
   <div class="status">
-    <div class="bars" role="list" aria-label="Contagens do painel">
+    <div class="bars" role="list" aria-label="Contagens da cópia de 06/10">
       <div class="bar" role="listitem"><span>Tarefas abertas</span><div class="track"><div class="fill w" style="width:95%"></div></div><span class="v">38/40</span></div>
       <div class="bar" role="listitem"><span>Ferramentas mapeadas</span><div class="track"><div class="fill" style="width:97.5%"></div></div><span class="v">39</span></div>
       <div class="bar" role="listitem"><span>Ideias registradas</span><div class="track"><div class="fill" style="width:70%"></div></div><span class="v">28</span></div>
-      <div class="bar" role="listitem"><span>Itens no radar</span><div class="track"><div class="fill" style="width:67.5%"></div></div><span class="v">27</span></div>
-      <div class="bar" role="listitem"><span>Estudos + 6 vídeos</span><div class="track"><div class="fill" style="width:27.5%"></div></div><span class="v">11</span></div>
-      <div class="bar" role="listitem"><span>Marcas parceiras</span><div class="track"><div class="fill b" style="width:0%"></div></div><span class="v">0</span></div>
-      <p class="source">Barras na mesma escala (40 = barra cheia). Contagens do banco ao vivo do painel em 19/10.</p>
+      <div class="bar" role="listitem"><span>Vídeos estudados</span><div class="track"><div class="fill" style="width:32.5%"></div></div><span class="v">4+8</span></div>
+      <div class="bar" role="listitem"><span>Marcas parceiras</span><div class="track"><div class="fill" style="width:0%"></div></div><span class="v">0</span></div>
+      <p class="source">Barras na mesma escala (40 = barra cheia). Números da cópia de 06/10; a versão atual pode ter mudado.</p>
     </div>
     <div class="callout">
-      <h3>O alerta do vídeo da Vercel vale para nós</h3>
-      <p>“Volume de trabalho mede velocidade, não direção. Com IA, toda ideia vira tarefa e parece progresso.”</p>
-      <p>As skills andaram (rodada 2 da Aura Alfaiataria, em modo estudo), mas o painel não registra isso, e a sua própria regra diz que sem cliente nenhum agente aprende. Esta pesquisa deve virar no máximo duas tarefas. O resto fica arquivado como estudo.</p>
+      <h3>Trajetória importa mais que velocidade</h3>
+      <p>Três vídeos dizem isso com outras palavras: conferir a direção, não o volume (Vercel); trajetória acima de velocidade (KJ); saiba pausar (Felix).</p>
+      <p>Esta leitura existe para fechar o ciclo de estudo. Daqui saem poucas tarefas, e a primeira continua sendo a marca parceira.</p>
     </div>
+  </div>
+</section>
+
+<section id="temas">
+  <p class="eb"><span class="n">02</span>Onde todos concordam</p>
+  <h2>Os 10 temas em comum</h2>
+  <p class="intro">Em ordem de quantas fontes repetem a ideia. Os círculos mostram quais vídeos (1 a 8) e se as pesquisas do dia (P) tocam no tema.</p>
+  <div class="themes">
+
+    <article class="theme"><div class="top"><span class="tn">1</span><span class="dots"><span class="dot on">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot on">5</span><span class="dot on">6</span><span class="dot on">7</span><span class="dot on">8</span><span class="dot on">P</span></span></div>
+      <h3>A execução virou commodity; o valor está no gosto, na ideia e no julgamento</h3>
+      <p>“O modelo é 20%.” “Você não faz com IA algo melhor do que você entende.” “Ideia e roteiro são o mais importante.” Catálogo com IA já custa R$ 2–5 por imagem.</p>
+      <p class="org"><b>No Organismo:</b> é o fosso “direção de moda”. Vender direção, peça fiel e contrato, nunca “imagem com IA”.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">2</span><span class="dots"><span class="dot">1</span><span class="dot">2</span><span class="dot on">3</span><span class="dot on">4</span><span class="dot on">5</span><span class="dot">6</span><span class="dot on">7</span><span class="dot on">8</span><span class="dot">P</span></span></div>
+      <h3>O humano decide nos portões; o agente propõe</h3>
+      <p>Triagem que manda o julgamento para você, tela humana de revisão, storyboard aprovado antes do vídeo pago.</p>
+      <p class="org"><b>No Organismo:</b> já existe nos 4 portões do Criar.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">3</span><span class="dots"><span class="dot">1</span><span class="dot">2</span><span class="dot on">3</span><span class="dot">4</span><span class="dot on">5</span><span class="dot on">6</span><span class="dot on">7</span><span class="dot on">8</span><span class="dot">P</span></span></div>
+      <h3>Provar antes de confiar</h3>
+      <p>Inegociável com teste, agente que tenta quebrar, juiz separado de quem criou, pedir à IA para destruir a ideia.</p>
+      <p class="org"><b>No Organismo:</b> existe em parte (provas da Colmeia). Falta a prova do gosto do Guardião.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">4</span><span class="dots"><span class="dot">1</span><span class="dot">2</span><span class="dot on">3</span><span class="dot">4</span><span class="dot">5</span><span class="dot on">6</span><span class="dot on">7</span><span class="dot on">8</span><span class="dot">P</span></span></div>
+      <h3>Clareza antes de gerar</h3>
+      <p>Plano e direção, o resultado no lugar da tarefa, 30 minutos longe do computador, pitch de um parágrafo e assets prontos.</p>
+      <p class="org"><b>No Organismo:</b> é o Portão 1. Acrescentar a pergunta “de onde vêm os dados ou as imagens?”.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">5</span><span class="dots"><span class="dot">1</span><span class="dot on">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot on">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot on">8</span><span class="dot on">P</span></span></div>
+      <h3>Barato primeiro, caro só no aprovado</h3>
+      <p>Rascunho 480p por 1/3 a 1/5 do preço, MiniMax a 10–20% do Seedance, Flow com imagem a 0 crédito, modelo trocável por tarefa.</p>
+      <p class="org"><b>No Organismo:</b> a tarefa do rascunho existe. Falta o prazo de 7 dias e o modelo certo por cena no Roteador.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">6</span><span class="dots"><span class="dot">1</span><span class="dot on">2</span><span class="dot">3</span><span class="dot on">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot on">7</span><span class="dot on">8</span><span class="dot on">P</span></span></div>
+      <h3>Um agente que comanda as outras ferramentas</h3>
+      <p>Conectores e APIs; Higgsfield e Magnific gerando de dentro do chat. O Magnific tem conexão oficial com o Claude usando os créditos do plano.</p>
+      <p class="org"><b>No Organismo:</b> pode destravar as tarefas paradas pela chave da API.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">7</span><span class="dots"><span class="dot">1</span><span class="dot on">2</span><span class="dot on">3</span><span class="dot">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot on">7</span><span class="dot">8</span><span class="dot">P</span></span></div>
+      <h3>Código para o que repete; IA só onde decide</h3>
+      <p>Trigger.dev, Zapier, a régua matemática ↔ arte do KJ.</p>
+      <p class="org"><b>No Organismo:</b> já é regra (“agente = programa + ciclo + dados”).</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">8</span><span class="dots"><span class="dot">1</span><span class="dot on">2</span><span class="dot">3</span><span class="dot on">4</span><span class="dot on">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot on">8</span><span class="dot">P</span></span></div>
+      <h3>Memória e contexto que não se perdem</h3>
+      <p>Segundo cérebro, quatro tipos de memória, o Hubinho que lembra de cada pessoa, “um projeto, uma conversa só”.</p>
+      <p class="org"><b>No Organismo:</b> as pastas de campanha e a Memória do Cliente fazem isso melhor, porque sobrevivem a sessões.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">9</span><span class="dots"><span class="dot">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot on">4</span><span class="dot">5</span><span class="dot">6</span><span class="dot">7</span><span class="dot on">8</span><span class="dot on">P</span></span></div>
+      <h3>Direitos, identidade e contrato</h3>
+      <p>Acesso mínimo por agente, clonagem só autorizada, marca de terceiros descaracterizada, trilha licenciada, contrato com prazo, finalidade, encerramento e uso póstumo.</p>
+      <p class="org"><b>No Organismo:</b> o Ativos já bloqueia em código. Faltam as 4 cláusulas e a regra de descaracterizar no Guardião.</p></article>
+
+    <article class="theme"><div class="top"><span class="tn">10</span><span class="dots"><span class="dot on">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot on">5</span><span class="dot">6</span><span class="dot on">7</span><span class="dot on">8</span><span class="dot on">P</span></span></div>
+      <h3>Vender e distribuir é o gargalo</h3>
+      <p>Amostra pronta do produto do cliente, fundador que cria conteúdo, “o que é difícil de fazer viraliza”, demanda chegando pelas produtoras.</p>
+      <p class="org"><b>No Organismo:</b> zero marcas parceiras. Dois caminhos novos: produtoras de moda e conteúdo seu difícil de fazer.</p></article>
+
   </div>
 </section>
 
 <section id="videos">
   <p class="eb"><span class="n">03</span>Vídeo a vídeo</p>
-  <h2>Os seis vídeos</h2>
-  <p class="intro">Para cada um: o que ele diz, o que fica para o Organismo e o que pode ignorar. As estrelas medem a utilidade para os seus negócios, não a qualidade do vídeo. Todos os canais vendem alguma coisa (comunidade, curso, live ou patrocínio).</p>
-
+  <h2>Os oito vídeos</h2>
+  <p class="intro">As estrelas medem a utilidade para o Organismo, não a qualidade do vídeo. Todos os canais vendem alguma coisa (comunidade, curso, live ou patrocínio).</p>
   <div class="vids">
 
-    <article class="vid">
-      <div class="num"><b>1</b><span class="stars">★★★☆☆</span></div>
+    <article class="vid gold">
+      <div class="num"><b>8</b><span class="stars">★★★★★</span></div>
       <div class="body">
-        <p class="meta"><span>Corey Ganim</span><span>24 min</span><a href="https://www.youtube.com/watch?v=wpaR6LhuZWg" target="_blank" rel="noopener">Abrir no YouTube</a></p>
-        <h3>8 ferramentas grátis do GitHub viradas em serviço</h3>
-        <p class="orig">“8 github repos that print $$$”</p>
-        <p class="say">Para cada ferramenta, uma oferta fechada com preço e um jeito de abordar o cliente <strong>entregando uma amostra do próprio serviço</strong>. A frase central: “seu cliente não liga para IA; se você falar disso, ele desliga”.</p>
+        <p class="meta"><span>Human Academy + Paulo Aguiar (Paulo.IA)</span><span>2h18 · live</span><span class="chip ok">o mais próximo do Organismo</span><span class="chip warn">campanha de Black Friday</span></p>
+        <h3>Da ideia ao projeto: produção real para marcas</h3>
+        <p class="orig">“Da ideia ao projeto · Live 1” (transcrição enviada por você)</p>
+        <p class="say">Portfólio com Havaianas, Gemini, Boticário, Vivo, Claro e Nescau, incluindo um <strong>banco de 120 imagens 100% IA</strong> com casting, figurino e locação aprovados. O método do Paulo na Fanta: <strong>assets primeiro, storyboard de 60 quadros aprovado antes do vídeo, vídeo direto dos assets</strong>. O <strong>rascunho 480p do Seedance custa 1/3 a 1/5 e vale 7 dias</strong>. Cinco demonstrações ao vivo: ângulos, folha de personagem, ensaio conectado ao chat, lip sync e troca de personagem.</p>
         <div class="cols">
           <div class="k"><h4>Fica</h4><ul>
-            <li>A oferta nº 6 (ComfyUI) é o seu Catálogo IA: “o produto mostrado exatamente como é”, a US$ 750 por produto.</li>
-            <li>Amostra grátis confirma o seu plano. Estender ao Catálogo: refazer uma foto da loja da marca on-model.</li>
+            <li>Rascunho 480p para aprovar com o cliente; 1080p só no que entrou no corte.</li>
+            <li>Folha de personagem: rosto real, corpo gerado, cabeça separada, detalhes em close, altura.</li>
+            <li>“O melhor lugar para o Nano Banana é o Flow.” MiniMax a 10–20% do Seedance.</li>
+            <li>Demanda de híbrido vem das produtoras.</li>
           </ul></div>
           <div class="x"><h4>Ignora</h4><ul>
-            <li>E-mail frio e a ferramenta de leads Treg: você já vetou prospecção em massa.</li>
-            <li>Alvarás, notas fiscais, venda de empresas.</li>
+            <li>A venda do Academy Plus.</li>
+            <li>O “ilimitado” e o Genjutsu do Higgsfield (“cheio de entrelinhas”).</li>
           </ul></div>
-          <div class="s"><h4>Vai para o SOL</h4><ul>
-            <li>“Liguei às 21h e caiu na caixa postal” vira “mandei mensagem às 22h” para pousadas.</li>
-            <li>Reativar hóspedes antigos pelo GHL.</li>
-          </ul></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="vid">
-      <div class="num"><b>2</b><span class="stars">★★★★☆</span></div>
-      <div class="body">
-        <p class="meta"><span>Nate Herk</span><span>10 min</span><span class="chip warn">patrocínio: Hostinger · sócio: Glaido</span><a href="https://www.youtube.com/watch?v=hgLI491ajG0" target="_blank" rel="noopener">Abrir no YouTube</a></p>
-        <h3>As 7 ferramentas que ele usa toda semana</h3>
-        <p class="orig">“I Tried 100+ AI Tools. These 7 Are the Best”</p>
-        <p class="say">Claude Code e Codex como “90% do dia”, <strong>OpenRouter</strong> (uma conta para 500 modelos), servidor ligado 24h, robôs de rotina, ditado por voz, <strong>Kie.ai</strong> (“o OpenRouter de imagem e vídeo”) e <strong>Trigger.dev</strong> (código agendado, sem servidor).</p>
-        <div class="cols">
-          <div class="k"><h4>Fica</h4><ul>
-            <li>Kie.ai pode fechar a tarefa aberta “Nano Banana Pro via API”, que o Higgsfield não tem.</li>
-            <li>OpenRouter: uma chave por job dá o custo real que o Agente de Margem precisa.</li>
-            <li>“Agente para decidir, código para repetir” confirma a sua regra.</li>
-          </ul></div>
-          <div class="x"><h4>Ignora</h4><ul>
-            <li>Hostinger (servidor é commodity).</li>
-            <li>Grok Bot (xAI): agentes sempre ligados, exige assinatura do X.</li>
-          </ul></div>
-          <div class="s"><h4>Vai para o SOL</h4><ul>
-            <li>OpenRouter na Vera: chave por pousada e modelo reserva quando um provedor cai.</li>
+          <div class="s"><h4>Para testar</h4><ul>
+            <li>Vídeo direto dos assets, sem imagem por cena.</li>
+            <li>UGC com áudio real do criador + folha de personagem.</li>
           </ul></div>
         </div>
       </div>
@@ -310,69 +348,14 @@ footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-si
     <article class="vid">
       <div class="num"><b>3</b><span class="stars">★★★★★</span></div>
       <div class="body">
-        <p class="meta"><span>AI LABS</span><span>14 min</span><span class="chip warn">patrocínio: Viktor</span><a href="https://www.youtube.com/watch?v=y2ifUC9_zuU" target="_blank" rel="noopener">Abrir no YouTube</a></p>
-        <h3>Os 7 hábitos do CEO da Vercel para trabalhar com agentes</h3>
+        <p class="meta"><span>AI LABS</span><span>14 min</span><a href="https://www.youtube.com/watch?v=y2ifUC9_zuU" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+        <h3>Os 7 hábitos do CEO da Vercel com agentes</h3>
         <p class="orig">“Vercel's CEO Just Unveiled The Greatest AI Coding Workflow Ever”</p>
-        <p class="say">Testar antes de adotar. Conferir a direção, não o volume. Varredura de segurança a cada entrega (<strong>DeepSec</strong>). Inegociáveis sempre acompanhados de um teste. Um agente que tenta quebrar o produto. Um agente que usa como cliente novo, proibido de ler o código. Feedback do cliente triado em minutos.</p>
+        <p class="say">Testar antes de adotar, conferir a direção e não o volume, varredura de segurança (DeepSec), inegociáveis com teste, agente destruidor, agente “primeira visita” proibido de ler o código, triagem de feedback com Gmail.</p>
         <div class="cols">
-          <div class="k"><h4>Fica</h4><ul>
-            <li>Inegociável sem teste é esquecido: base da calibração do Guardião.</li>
-            <li>O “agente destruidor” aplicado ao Guardião: peças com defeito plantado.</li>
-            <li>Conferir a direção toda semana, em 10 minutos.</li>
-          </ul></div>
-          <div class="x"><h4>Ignora por ora</h4><ul>
-            <li>DeepSec e testes de navegador: só quando houver código (degrau 3).</li>
-          </ul></div>
-          <div class="s"><h4>Vai para o SOL</h4><ul>
-            <li>Bateria “destruidor” e “primeira visita” antes de cada pousada entrar no ar.</li>
-            <li>Inegociáveis da Vera com conversa de teste.</li>
-          </ul></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="vid">
-      <div class="num"><b>4</b><span class="stars">★★☆☆☆</span></div>
-      <div class="body">
-        <p class="meta"><span>Paul James</span><span>9 min</span><span class="chip bad">curso vendido 3 vezes no vídeo</span><a href="https://www.youtube.com/watch?v=0erYZFxwaNA" target="_blank" rel="noopener">Abrir no YouTube</a></p>
-        <h3>O agente do Google com e-mail próprio</h3>
-        <p class="orig">“Google's NEW AI Agent Could REPLACE Your Automation Stack”</p>
-        <p class="say">O anúncio é real: o agente Gemini (8/10/2026) tem memória, cria as próprias skills e pode ter <strong>e-mail, agenda e Drive próprios com acesso limitado</strong>. Mas está em teste fechado, só para empresas. Os exemplos do vídeo são todos hipotéticos.</p>
-        <div class="cols">
-          <div class="k"><h4>Fica</h4><ul>
-            <li>Identidade do estúdio para receber acessos de clientes, nunca a pessoal.</li>
-            <li>Pasta do Drive como porta de entrada: é como fazer o “Catálogo que se atualiza a cada drop”.</li>
-          </ul></div>
-          <div class="x"><h4>Ignora</h4><ul>
-            <li>O curso. O próprio Gemini até chegar ao Workspace comum.</li>
-          </ul></div>
-          <div class="s"><h4>Vai para o SOL</h4><ul>
-            <li>Número e acessos próprios por pousada; onboarding com dados fictícios.</li>
-          </ul></div>
-        </div>
-      </div>
-    </article>
-
-    <article class="vid">
-      <div class="num"><b>5</b><span class="stars">★★★★☆</span></div>
-      <div class="body">
-        <p class="meta"><span>Bruno Okamoto</span><span>29 min</span><span class="chip warn">convite para live Pixel Black</span><a href="https://www.youtube.com/watch?v=TLbdfaDijbU" target="_blank" rel="noopener">Abrir no YouTube</a></p>
-        <h3>O que se fala em São Francisco, comentado para o Brasil</h3>
-        <p class="orig">“7 negócios de IA que o Vale do Silício já enxerga (e o Brasil ainda não)”</p>
-        <p class="say">Comentário da thread de Greg Isenberg. Os pontos fortes: “se sair um modelo melhor, você fica melhor ou pior?”; <strong>uma ferramenta de nicho é conectores + avaliações de quem entende + regras + humano aprovando, e o modelo é só 20%</strong>; e “a habilidade mais rara agora é gosto e saber avaliar”.</p>
-        <div class="cols">
-          <div class="k"><h4>Fica</h4><ul>
-            <li>Gosto e avaliação como ativo confirmam o seu fosso “direção de moda”.</li>
-            <li>Frase para a página da oferta: modelo melhor deixa o estúdio melhor.</li>
-            <li>Memória por cliente já existe na Colmeia.</li>
-          </ul></div>
-          <div class="x"><h4>Ignora</h4><ul>
-            <li>Venda de dados, robôs, seguro de agentes.</li>
-            <li>“Stripe comprou o OpenRouter”: não verificado.</li>
-          </ul></div>
-          <div class="s"><h4>Vai para o SOL</h4><ul>
-            <li>Vera que lembra do hóspede que volta, com cuidado de LGPD.</li>
-          </ul></div>
+          <div class="k"><h4>Fica</h4><ul><li>Inegociável sem teste é esquecido.</li><li>Defeito plantado para testar o Guardião.</li><li>“Primeira visita” para testar a página da oferta.</li></ul></div>
+          <div class="x"><h4>Ignora por ora</h4><ul><li>DeepSec: só quando houver código no degrau 3.</li></ul></div>
+          <div class="s"><h4>Para testar</h4><ul><li>Dez minutos de “direção” por semana.</li></ul></div>
         </div>
       </div>
     </article>
@@ -383,19 +366,86 @@ footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-si
         <p class="meta"><span>RoboNuggets, sobre Felix Rieseberg (Anthropic)</span><span>13 min</span><a href="https://www.youtube.com/watch?v=NarezKh3w4o" target="_blank" rel="noopener">Abrir no YouTube</a><a href="https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/" target="_blank" rel="noopener">Artigo original</a></p>
         <h3>Como ser mais ambicioso com o Claude</h3>
         <p class="orig">“Anthropic just shared how they use Claude differently”</p>
-        <p class="say"><strong>Altitude</strong>: peça o resultado, não a tarefa. <strong>Profundidade</strong>: o Claude responde 4 perguntas antes de começar e nunca julga o próprio trabalho. <strong>Amplitude</strong>: trocar substantivo por verbo e montar um time com um advogado do diabo. O artigo original tem um quarto tipo, Velocidade, que o vídeo pulou.</p>
+        <p class="say">Altitude (o resultado, não a tarefa), profundidade (4 perguntas e juiz de fora), amplitude (verbo no lugar do substantivo, time com advogado do diabo). O artigo original tem um quarto tipo, Velocidade, e termina em autoeficácia.</p>
         <div class="cols">
-          <div class="k"><h4>Fica</h4><ul>
-            <li>Juiz de fora: o Guardião roda em conversa separada de quem criou.</li>
-            <li>4 perguntas e verbo no topo do Roteirista de Ganchos.</li>
-            <li>“Fazer o trabalho do especialista, não interpretar o personagem” confirma a aposentadoria das personas.</li>
-          </ul></div>
-          <div class="x"><h4>Ignora</h4><ul>
-            <li>A skill paga deles: a versão é pública no GitHub (robonuggets/be-ambitious).</li>
-          </ul></div>
-          <div class="s"><h4>Vai para o SOL</h4><ul>
-            <li>Meta da Vera em altitude: nenhuma reserva perdida, nenhuma pergunta sem resposta em 5 minutos.</li>
-          </ul></div>
+          <div class="k"><h4>Fica</h4><ul><li>Juiz separado de quem criou.</li><li>4 perguntas e verbo no Roteirista.</li><li>“Fazer o trabalho, não interpretar o personagem” confirma a aposentadoria das personas.</li></ul></div>
+          <div class="x"><h4>Ignora</h4><ul><li>A skill paga deles: a versão é pública no GitHub.</li></ul></div>
+          <div class="s"><h4>Para estudar</h4><ul><li>O artigo original, mais completo que o vídeo.</li></ul></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vid">
+      <div class="num"><b>7</b><span class="stars">★★★★☆</span></div>
+      <div class="body">
+        <p class="meta"><span>KJ Rainey no The Calum Johnson Show</span><span>1h36</span><a href="https://www.youtube.com/watch?v=Yt_BULiimg4" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+        <h3>Aprender com o Claude e construir ferramentas pequenas</h3>
+        <p class="orig">“The Creator Who Mastered Claude”</p>
+        <p class="say">Prompt de aprendizado que ordena habilidades por importância, a régua matemática ↔ arte, 30 minutos longe do computador antes de construir e, ao vivo, uma <strong>ferramenta de pesquisa do YouTube com “outlier score”</strong> feita no Cowork com a API oficial.</p>
+        <div class="cols">
+          <div class="k"><h4>Fica</h4><ul><li>Base da nossa ferramenta de pesquisa do YouTube (API grátis, ~100 buscas por dia, funciona daqui).</li><li>Rodar o prompt de aprendizado com o objetivo “5 primeiras marcas”.</li></ul></div>
+          <div class="x"><h4>Ignora</h4><ul><li>Grok Bot (xAI): exige assinatura do X.</li><li>A parte pessoal e os patrocínios.</li></ul></div>
+          <div class="s"><h4>Para estudar</h4><ul><li>22:43–35:10, 43:01–50:14 e 1:01:18–1:29.</li></ul></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vid">
+      <div class="num"><b>5</b><span class="stars">★★★★☆</span></div>
+      <div class="body">
+        <p class="meta"><span>Bruno Okamoto</span><span>29 min</span><a href="https://www.youtube.com/watch?v=TLbdfaDijbU" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+        <h3>O que se fala em São Francisco, comentado para o Brasil</h3>
+        <p class="orig">“7 negócios de IA que o Vale do Silício já enxerga”</p>
+        <p class="say">“Se sair um modelo melhor, você fica melhor ou pior?” Ferramenta de nicho = conectores + avaliações + regras + humano; o modelo é 20%. Gosto e avaliação como habilidade rara. Memória por pessoa.</p>
+        <div class="cols">
+          <div class="k"><h4>Fica</h4><ul><li>Confirma o fosso “direção de moda”.</li><li>As receitas ligadas aos resultados são o ativo de dados.</li></ul></div>
+          <div class="x"><h4>Ignora</h4><ul><li>Venda de dados, robôs, seguro de agentes.</li><li>“Stripe comprou o OpenRouter” (não verificado).</li></ul></div>
+          <div class="s"><h4>Para estudar</h4><ul><li>9:27–12:16 e 24:55.</li></ul></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vid">
+      <div class="num"><b>2</b><span class="stars">★★★☆☆</span></div>
+      <div class="body">
+        <p class="meta"><span>Nate Herk</span><span>10 min</span><span class="chip warn">patrocínio e sociedade em 2 das 7</span><a href="https://www.youtube.com/watch?v=hgLI491ajG0" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+        <h3>As 7 ferramentas que ele usa toda semana</h3>
+        <p class="orig">“I Tried 100+ AI Tools. These 7 Are the Best”</p>
+        <p class="say">Claude Code e Codex como “sistema operacional”, OpenRouter, servidor 24h, Grok Bot, ditado por voz, Kie.ai e Trigger.dev.</p>
+        <div class="cols">
+          <div class="k"><h4>Fica</h4><ul><li>Kie.ai: Nano Banana Pro a US$ 0,09 via API.</li><li>OpenRouter: uma chave por job, custo real.</li><li>Auditar assinaturas usadas por uma função só.</li></ul></div>
+          <div class="x"><h4>Ignora</h4><ul><li>Hostinger e Grok Bot.</li></ul></div>
+          <div class="s"><h4>Depois</h4><ul><li>Trigger.dev no degrau 3.</li></ul></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vid">
+      <div class="num"><b>1</b><span class="stars">★★☆☆☆</span></div>
+      <div class="body">
+        <p class="meta"><span>Corey Ganim</span><span>24 min</span><a href="https://www.youtube.com/watch?v=wpaR6LhuZWg" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+        <h3>8 ferramentas grátis viradas em serviço</h3>
+        <p class="orig">“8 github repos that print $$$”</p>
+        <p class="say">Uma oferta por ferramenta e a abordagem com amostra pronta do produto do cliente. A oferta de imagens de produto (US$ 750 por produto) é o seu Catálogo.</p>
+        <div class="cols">
+          <div class="k"><h4>Fica</h4><ul><li>Amostra pronta (já está no plano).</li><li>Venda B2B2B: para quem revende aos próprios clientes.</li></ul></div>
+          <div class="x"><h4>Ignora</h4><ul><li>E-mail frio e raspagem (vetados).</li><li>Treg (não verificado).</li></ul></div>
+          <div class="s"><h4>Vai para o SOL</h4><ul><li>“Mensagem às 22h” para pousadas.</li></ul></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vid">
+      <div class="num"><b>4</b><span class="stars">★★☆☆☆</span></div>
+      <div class="body">
+        <p class="meta"><span>Paul James</span><span>9 min</span><span class="chip bad">curso vendido 3 vezes</span><a href="https://www.youtube.com/watch?v=0erYZFxwaNA" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+        <h3>O agente do Google com e-mail próprio</h3>
+        <p class="orig">“Google's NEW AI Agent Could REPLACE Your Automation Stack”</p>
+        <p class="say">O agente Gemini é real (8/10/2026), mas está em teste fechado para empresas. A ideia que fica é a identidade própria com acesso mínimo para cada agente.</p>
+        <div class="cols">
+          <div class="k"><h4>Fica</h4><ul><li>Identidade do estúdio para receber acessos de clientes.</li><li>Pasta do Drive como entrada do “catálogo a cada drop”.</li></ul></div>
+          <div class="x"><h4>Ignora</h4><ul><li>O curso e o próprio Gemini por enquanto.</li></ul></div>
+          <div class="s"><h4>Depois</h4><ul><li>Revisar o registro de ações na primeira semana real.</li></ul></div>
         </div>
       </div>
     </article>
@@ -403,111 +453,178 @@ footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
-<section id="ja-decidido">
-  <p class="eb"><span class="n">04</span>Antes de olhar as novidades</p>
-  <h2>O que você já tinha decidido</h2>
-  <p class="intro">Minha primeira análise foi escrita antes de eu ver o painel. Esta tabela corrige o que eu disse com base no que existe.</p>
+<section id="pesquisas">
+  <p class="eb"><span class="n">04</span>Fora dos vídeos</p>
+  <h2>O que as pesquisas do dia mostraram</h2>
+  <div class="finds">
+    <div><span class="l">Concorrência</span><h3>Já existe estúdio de moda com IA no Brasil</h3><p>O <strong>AiA</strong> (fim de 2025, Santa Catarina) atende Lança Perfume, Dimy, Kyly e o Grupo AMC Têxtil. A <strong>twime.ai</strong> já licencia gêmeos digitais de pessoas reais.</p></div>
+    <div><span class="l">Preço de mercado</span><span class="big">R$ 2–5</span><p>por imagem de catálogo com modelo virtual (Vitriny, VestiAI). O seu Catálogo IA sai a ~R$ 12 por imagem; o estúdio tradicional, R$ 56–300 por SKU. A decisão é baixar o preço ou subir de categoria.</p></div>
+    <div><span class="l">Meta Ads</span><h3>O Meta gera criativo sozinho</h3><p>Aprimoramentos automáticos ligados por padrão desde fevereiro, alguns sem prévia. Ameaça o volume do UGC e abre um gancho: auditar o que o Meta está fazendo com a peça da marca.</p></div>
+    <div><span class="l">Ad Library</span><h3>A API não cobre moda no Brasil</h3><p>Fora da Europa, só anúncios políticos. O mapa de anúncios de moda precisa ser feito navegando no site.</p></div>
+    <div><span class="l">Google Flow</span><span class="big">0 crédito</span><p>por imagem Nano Banana no Flow, com limite diário e 50 créditos grátis por dia. AI Pro a R$ 96,99. Sem API e sem garantia comercial explícita. O próprio Paulo diz que é “o melhor lugar para usar o Nano Banana”.</p></div>
+    <div><span class="l">Magnific</span><h3>Conexão oficial com o Claude</h3><p>Usa os créditos do seu plano Magnific (os ilimitados também gastam crédito por essa via). O pagamento por uso da API teria sido descontinuado. O Higgsfield também conecta, com plano pago.</p></div>
+    <div><span class="l">Regras</span><h3>O CONAR não obriga declarar IA</h3><p>O guia de 2026 proíbe testemunho e endosso simulados. Autorização de imagem genérica não basta para IA: o contrato precisa de prazo, finalidade, encerramento e uso póstumo.</p></div>
+    <div><span class="l">Consumidor</span><h3>IA declarada em campanha reduz confiança</h3><p>No catálogo, a IA é aceita se a peça for fiel. Isso fortalece a campanha híbrida como produto premium e pede cuidado com “modelos por tamanho” feitas com IA.</p></div>
+  </div>
+  <h3 style="margin-top:32px">Preço por imagem e por segundo, nos lugares que encontrei</h3>
   <div class="tw"><table>
-    <thead><tr><th>Os vídeos sugerem</th><th>No seu sistema</th><th>Situação</th></tr></thead>
+    <thead><tr><th>Modelo</th><th>Onde</th><th>Preço</th><th>Observação</th></tr></thead>
     <tbody>
-      <tr><td class="t">Trocar Freepik por API</td><td>Freepik virou Magnific e você já escolheu produção por API (Higgsfield, fal.ai). Kie.ai está no mapa como “verificar”.</td><td><span class="chip ok">já decidido</span></td></tr>
-      <tr><td class="t">Persona não melhora agente</td><td>“Personalidade de agente não melhora resultado. Olivier vira a régua.” Mas a Colmeia ainda lista Olivier “ativo” e Yumi, Léa e Marcos “renovar”.</td><td><span class="chip warn">falta fechar</span></td></tr>
-      <tr><td class="t">Abordar com amostra pronta</td><td>Plano da Fase 1: um UGC do produto da própria marca, privado e com marca d'água.</td><td><span class="chip ok">já no plano</span></td></tr>
-      <tr><td class="t">E-mail frio e raspagem</td><td>Vetado no cruzamento de 28/09: prospecção pelo seu nome, pela Ad Library e por conteúdo.</td><td><span class="chip ok">mantém o veto</span></td></tr>
-      <tr><td class="t">ComfyUI para consistência</td><td>Character Lock trocado por banco de referências por modelo (Seedance 2.5 aceita até 50 imagens).</td><td><span class="chip info">baixa prioridade</span></td></tr>
-      <tr><td class="t">Catálogo para agentes de compra</td><td>Catálogo IA já inclui “ficha da peça pronta para busca por IA”.</td><td><span class="chip ok">já no pacote</span></td></tr>
-      <tr><td class="t">Memória por cliente</td><td>Agente Memória do Cliente na Colmeia.</td><td><span class="chip ok">já previsto</span></td></tr>
-      <tr><td class="t">Gosto como diferencial</td><td>Fosso “Direção de moda: apps geram imagem; você decide o que vale a pena gerar”.</td><td><span class="chip ok">já é o fosso</span></td></tr>
-      <tr><td class="t">Vera e pousadas</td><td>“Conteúdo Mensal para Pousadas” saiu do Organismo e vai para o SOL.</td><td><span class="chip info">vai para o SOL</span></td></tr>
+      <tr><td class="t">Nano Banana (imagem)</td><td>Google Flow</td><td class="num">0 crédito</td><td>Com limite diário; Pro com fontes em conflito</td></tr>
+      <tr><td class="t">Nano Banana Pro</td><td>Google em lote</td><td class="num">US$ 0,067</td><td>Para o que não tem pressa, como catálogo</td></tr>
+      <tr><td class="t">Nano Banana Pro</td><td>Kie.ai</td><td class="num">US$ 0,09</td><td>4K a US$ 0,12; resolve a tarefa do “Nano Banana Pro via API”</td></tr>
+      <tr><td class="t">Nano Banana Pro</td><td>Google direto</td><td class="num">US$ 0,134</td><td>4K a US$ 0,24</td></tr>
+      <tr><td class="t">Nano Banana Pro</td><td>fal.ai</td><td class="num">US$ 0,15</td><td>Mais caro</td></tr>
+      <tr><td class="t">Seedance 2.5</td><td>Replicate / OpenRouter</td><td class="num">~US$ 0,10/s</td><td>Na menor resolução</td></tr>
+      <tr><td class="t">Seedance 2.5 rascunho</td><td>Higgsfield e outros</td><td class="num">1/3–1/5</td><td>Do preço do 1080p; vale 7 dias</td></tr>
+      <tr><td class="t">MiniMax Hailuo 3</td><td>hubs</td><td class="num">10–20%</td><td>Do custo do Seedance, segundo o Paulo</td></tr>
     </tbody>
   </table></div>
 </section>
 
-<section id="novidades">
-  <p class="eb"><span class="n">05</span>O que os vídeos acrescentam</p>
-  <h2>As novidades de verdade</h2>
+<section id="divergencias">
+  <p class="eb"><span class="n">05</span>Onde os vídeos discordam</p>
+  <h2>Divergências e o que decidimos</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Tema</th><th>Um lado</th><th>Outro lado</th><th>Decisão para o Organismo</th></tr></thead>
+    <tbody>
+      <tr><td class="t">Volume × artesanal</td><td>Automatizar volume (1, 2)</td><td>100 horas à mão (7); 3.000 imagens com curadoria (8)</td><td>Volume no UGC e no Catálogo; artesanal na Campanha Híbrida</td></tr>
+      <tr><td class="t">Agente com personalidade</td><td>Grok Bot e Hubinho com “personalidades” (2, 5)</td><td>Fazer o trabalho, não interpretar (6)</td><td>Agente por função (já decidido)</td></tr>
+      <tr><td class="t">Onde guardar o contexto</td><td>Tudo numa conversa (8)</td><td>Pastas e arquivos (2 e o painel)</td><td>Pastas, que sobrevivem a sessões</td></tr>
+      <tr><td class="t">Prospecção</td><td>E-mail frio e raspagem (1)</td><td>Vetado no painel</td><td>Mantém o veto; amostra pelo direct e pelo seu nome</td></tr>
+      <tr><td class="t">Plano “ilimitado”</td><td>Ótimo para testar (8)</td><td>Lento; pela conexão gasta crédito (8, P)</td><td>Ilimitado no site para explorar; conexão com crédito para produzir</td></tr>
+      <tr><td class="t">Qual IA principal</td><td>ChatGPT + Seedance (8)</td><td>Claude (6, 7)</td><td>Agnóstico; o valor fica nas skills e nas pastas</td></tr>
+      <tr><td class="t">Declarar IA</td><td>Sempre declarar (painel)</td><td>A lei não obriga; declarar reduz confiança (P)</td><td><span class="chip warn">aberto</span> Sempre no contrato; no público, decidir por pilar</td></tr>
+      <tr><td class="t">Imagem por cena antes do vídeo</td><td>Criar hoje: imagem primeiro</td><td>Só assets, direto para o vídeo (8)</td><td><span class="chip info">testar</span> numa campanha de estudo, de olho na peça sagrada</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="existe">
+  <p class="eb"><span class="n">06</span>Antes de criar tarefa</p>
+  <h2>O que já existe e o que é novo</h2>
+  <div class="two">
+    <div><h3>Já existe no Organismo · os vídeos só confirmam</h3><ul class="exist">
+      <li>Portões humanos e “nada vai para o cliente sem você”</li>
+      <li>Nenhum vídeo pago antes do sim (em código)</li>
+      <li>Recusa vira proibição no próximo prompt</li>
+      <li>Provas da Colmeia por nível de evidência</li>
+      <li>Ativos com contrato, uso e repasse em código</li>
+      <li>Triagem de ideias: agora, depois, descartar</li>
+      <li>Tarefa “rascunho antes do final”</li>
+      <li>Memória do Cliente e pastas por campanha</li>
+      <li>Amostra do produto da marca na prospecção</li>
+      <li>Agentes por função, não por persona</li>
+      <li>Ficha da peça pronta para busca por IA</li>
+    </ul></div>
+    <div><h3>Novo e concreto · candidatos à sprint</h3><ol>
+      <li>Conexão Magnific ↔ Claude como camada de produção</li>
+      <li>Prova do gosto do Guardião</li>
+      <li>Rascunho 480p com vencimento de 7 dias</li>
+      <li>Folha de personagem e folha de produto com as regras do Paulo</li>
+      <li>“De onde vêm os dados?” no Portão 1</li>
+      <li>4 perguntas, verbo e “descartar as 10 primeiras ideias” no Roteirista</li>
+      <li>Preços reais nas ferramentas (custo em número)</li>
+      <li>Contrato com as 4 cláusulas no Ativos</li>
+      <li>Produtoras de moda como canal do Pilar 1</li>
+      <li>Teste de vídeo direto dos assets</li>
+      <li>Ferramenta de pesquisa do YouTube (se substituir a pesquisa avulsa)</li>
+    </ol></div>
+  </div>
+</section>
+
+<section id="sprint">
+  <p class="eb"><span class="n">07</span>O que fazer</p>
+  <h2>Candidatos para a próxima sprint</h2>
 
   <div class="feature">
-    <p class="tag">A mais valiosa · vem dos vídeos 3, 5 e 6</p>
-    <h3>Testar o Guardião contra o seu próprio olho</h3>
-    <p>Três vídeos dizem a mesma coisa por caminhos diferentes. A Vercel: regra sem teste é esquecida. O Vale do Silício: o ativo raro é gosto mais avaliações escritas por quem entende. O Felix: nunca deixe o modelo julgar o próprio trabalho. Juntos, viram um exercício de 2 a 3 horas, sem precisar de cliente:</p>
+    <p class="tag">O que mais pode destravar · vem dos vídeos 2, 6 e 8 e da pesquisa</p>
+    <h3>Conectar o Magnific ao Claude com os créditos que você já paga</h3>
+    <p>O Decidir hoje mostra tarefas paradas pela chave da API e pelo teto de gasto. O Magnific tem conexão oficial com o Claude (web e Claude Code) e cobra dos créditos do seu plano, que no Criar entram como “créditos já pagos”.</p>
     <div class="flow">
-      <div><b>1 · Conjunto-ouro</b>20 a 30 peças que você já julgou, metade aprovada e metade recusada, com o motivo em uma linha.</div>
-      <div><b>2 · Defeitos plantados</b>5 peças com erro de propósito: cor da peça trocada, logo distorcido, dedo a mais, rosto diferente da âncora, promessa proibida.</div>
-      <div><b>3 · Juiz separado</b>Rodar o Guardião numa conversa nova, sem o contexto de quem gerou.</div>
-      <div><b>4 · Medir e corrigir</b>Quantas vezes ele concorda com você e quantos defeitos pega. Cada discordância vira regra no Perfil ou no Guardião.</div>
+      <div><b>1 · Conectar</b>Adicionar o Magnific como conector no Claude do computador e entrar com a sua conta.</div>
+      <div><b>2 · Medir</b>Gerar 10 imagens e 2 vídeos curtos e anotar quantos créditos cada um gasta.</div>
+      <div><b>3 · Registrar</b>Pôr o custo em número na aba Ferramentas, para o ciclo calcular o teto.</div>
+      <div><b>4 · Decidir</b>Se o servidor do Organismo consegue usar a conexão ou se ela fica só para o trabalho manual.</div>
     </div>
-    <p class="from">É o começo da “régua do seu gosto”, que estava na Fase 3, e um argumento de venda: “nosso portão pega X de cada 10 defeitos antes de você ver”.</p>
+    <p class="source">Atenção: pela conexão, até os modelos “ilimitados” do plano gastam crédito. A exploração barata continua no Flow ou no ilimitado do site.</p>
   </div>
 
-  <div class="nov">
-    <div><span class="l">B · vídeo 6 + seu painel</span><h3>Arrumar skills e Colmeia</h3><p><code>conceitos-anuncio-moda</code> e <code>roteirista-de-ganchos</code> estão as duas instaladas, e a antiga não lê o que os outros agentes entregam. O Claude pode escolher a errada. Desativar a antiga, aposentar Yumi, Léa e Marcos, e deixar o Olivier como a régua, não como persona.</p></div>
-    <div><span class="l">C · vídeo 2</span><h3>Kie.ai no teste de motores da Fase 0</h3><p>Pode ser a fonte de Nano Banana Pro via API que falta, e uma via mais barata para Seedance 2.5. Entra no mesmo teste que já está planejado, anotando o custo real por peça e as condições de uso comercial.</p></div>
-    <div><span class="l">D · vídeo 6</span><h3>4 perguntas e um verbo no Roteirista</h3><p>Antes dos 10 conceitos: o que um diretor de criação de ponta faria que não foi pedido, de que material bruto partiria, que métodos usaria, o que mostraria que está certo. No topo do brief, um verbo: “fazer a executiva de 38 anos se ver indo do trabalho ao jantar sem trocar de roupa”.</p></div>
-    <div><span class="l">E · vídeo 3</span><h3>Dez minutos de direção por semana</h3><p>Uma pergunta só: o que eu fiz esta semana bate com a fase atual do plano? Se a resposta for “estudei”, a semana seguinte começa pela prospecção.</p></div>
-    <div><span class="l">F · vídeos 2 e 5</span><h3>Uma conta por tipo de modelo, no degrau 3</h3><p>OpenRouter para texto (Opus, Sonnet, GPT-6 Astra, Sol, Luna) e Kie.ai ou Higgsfield para imagem e vídeo, com uma chave por job. O custo real de cada job cai direto no Agente de Margem. Só quando chegar ao degrau 3.</p></div>
-    <div><span class="l">G · vídeo 4</span><h3>Identidade do estúdio para o degrau 2</h3><p>Quando a primeira marca der acesso de leitura aos anúncios, ele vai para uma conta do Locatelli Studio, nunca para a pessoal. Primeira semana com revisão do que o agente fez.</p></div>
-  </div>
-</section>
-
-<section id="plano">
-  <p class="eb"><span class="n">06</span>O que fazer</p>
-  <h2>Plano revisado</h2>
-  <p class="intro">Só duas tarefas novas no painel. O resto amplia o que já existe.</p>
   <div class="plan">
-    <div class="step"><span class="i">1</span><div><h3>Fechar o degrau 1 de verdade</h3><p>Criar a skill Receita e registrar no painel as rodadas da Aura Alfaiataria (tarefas a01, a03, a04).</p></div><div class="r"><span class="chip info">atualiza tarefas</span><span>Horas</span></div></div>
-    <div class="step"><span class="i">2</span><div><h3>Calibrar o Guardião</h3><p>Conjunto-ouro, defeitos plantados, juiz separado, medir concordância.</p></div><div class="r"><span class="chip ok">tarefa nova</span><span>2 a 3 horas</span></div></div>
-    <div class="step"><span class="i">3</span><div><h3>Kie.ai e fal.ai nos testes da Fase 0</h3><p>Motores de UGC em português e Nano Banana Pro via API, com custo real por peça.</p></div><div class="r"><span class="chip info">amplia tarefa</span><span>Já previsto</span></div></div>
-    <div class="step"><span class="i">4</span><div><h3>Primeira marca parceira</h3><p>30 marcas da Ad Library e uma amostra privada do produto de cada uma. É o que destrava todo o resto.</p></div><div class="r"><span class="chip warn">prioridade</span><span>Semanas</span></div></div>
-    <div class="step"><span class="i">5</span><div><h3>Arrumar a Colmeia e as skills</h3><p>Aposentar personas, Olivier como régua, desativar a skill antiga de conceitos.</p></div><div class="r"><span class="chip ok">tarefa nova</span><span>30 minutos</span></div></div>
-    <div class="step"><span class="i">6</span><div><h3>4 perguntas e verbo no Roteirista</h3><p>Uma seção curta no início da skill.</p></div><div class="r"><span class="chip info">melhoria de skill</span><span>30 minutos</span></div></div>
-    <div class="step"><span class="i">7</span><div><h3>Página da oferta fala de resultado e gosto</h3><p>“Modelo melhor deixa a gente melhor”, sem vender “IA”.</p></div><div class="r"><span class="chip info">amplia tarefa</span><span>Já previsto</span></div></div>
-    <div class="step later"><span class="i">—</span><div><h3>Depois, no degrau 3</h3><p>OpenRouter e Kie.ai com chave por job, scripts para etapas fixas, DeepSec quando houver código.</p></div><div class="r"><span class="chip info">anotar</span></div></div>
+    <div class="step top3"><span class="i">1</span><div><h3>Conexão Magnific ↔ Claude</h3><p>Conectar, medir o custo real e registrar nas ferramentas.</p></div><div class="r"><span class="chip ok">top 3</span><span>1 a 2 horas</span></div></div>
+    <div class="step top3"><span class="i">2</span><div><h3>Prova do gosto do Guardião</h3><p>20 a 30 peças que você já julgou mais 5 com defeito plantado, em conversa separada; medir a concordância.</p></div><div class="r"><span class="chip ok">top 3</span><span>2 a 3 horas</span></div></div>
+    <div class="step top3"><span class="i">3</span><div><h3>Rascunho 480p com vencimento</h3><p>Aprovar em 480p, alerta de 7 dias no ciclo, 1080p só no que entrou no corte.</p></div><div class="r"><span class="chip ok">top 3</span><span>Código pequeno</span></div></div>
+    <div class="step"><span class="i">4</span><div><h3>Folhas de personagem e de produto</h3><p>Rosto real, corpo gerado, cabeça separada, detalhes em close, altura; a peça em todas as vistas com closes de etiqueta e estampa.</p></div><div class="r"><span class="chip info">amplia o Ativos</span></div></div>
+    <div class="step"><span class="i">5</span><div><h3>Ajustes no Criar e no Roteirista</h3><p>“De onde vêm os dados?” no Portão 1; 4 perguntas, verbo e descarte das 10 primeiras ideias.</p></div><div class="r"><span class="chip info">texto das skills</span><span>30 minutos</span></div></div>
+    <div class="step"><span class="i">6</span><div><h3>Preços reais e contrato com 4 cláusulas</h3><p>Custo em número nas ferramentas; prazo, finalidade, encerramento e uso póstumo no Ativos.</p></div><div class="r"><span class="chip info">dados e formulário</span></div></div>
+    <div class="step"><span class="i">7</span><div><h3>Produtoras de moda como canal</h3><p>Listar produtoras que fazem moda e oferecer o híbrido com você na direção.</p></div><div class="r"><span class="chip warn">venda</span></div></div>
+    <div class="step"><span class="i">8</span><div><h3>Testes de produção</h3><p>Vídeo direto dos assets; UGC com áudio real do criador.</p></div><div class="r"><span class="chip info">campanha de estudo</span></div></div>
+    <div class="step"><span class="i">9</span><div><h3>Ferramenta de pesquisa do YouTube</h3><p>Temas fixos, últimos 30 dias, sem Shorts, “outlier score”; você destaca e eu leio.</p></div><div class="r"><span class="chip info">depende da chave</span></div></div>
   </div>
 </section>
 
-<section id="sol">
-  <p class="eb"><span class="n">07</span>Apêndice</p>
-  <h2>O que vai para o SOL e a Vera</h2>
-  <p class="intro">Veio dos mesmos vídeos, mas pertence ao outro projeto.</p>
-  <div class="two">
-    <div><h3>Qualidade antes de cada pousada</h3><ul>
-      <li><strong>Destruidor:</strong> hóspede difícil tentando fazer a Vera inventar preço, prometer desconto, confirmar sem vaga, passar dados de outro hóspede.</li>
-      <li><strong>Primeira visita:</strong> hóspede que não sabe nada, escreve mal e mistura perguntas. Medir conversas resolvidas sem erro.</li>
-      <li><strong>Inegociáveis com teste:</strong> reclamação, emergência e reembolso vão sempre para humano.</li>
-    </ul></div>
-    <div><h3>Venda e operação</h3><ul>
-      <li><strong>Mensagem às 22h:</strong> print do tempo de resposta mais a conta das reservas perdidas.</li>
-      <li><strong>Identidade própria</strong> e acesso mínimo por pousada; onboarding com dados fictícios.</li>
-      <li><strong>OpenRouter:</strong> chave por pousada e modelo reserva.</li>
-      <li><strong>Memória por hóspede</strong>, <strong>Docling</strong> para os PDFs, <strong>reativação</strong> pelo GHL.</li>
-    </ul></div>
+<section id="soltos">
+  <p class="eb"><span class="n">08</span>Pontos soltos</p>
+  <h2>O que ainda não tinha aparecido na conversa</h2>
+  <div class="untold">
+    <div><span class="n">V1</span>Venda B2B2B: vender para quem revende aos próprios clientes. Para nós, produtoras e agências de moda.</div>
+    <div><span class="n">V2</span>“Aponte o Claude para os documentos e o time pergunta a ele, não a você.” Útil quando entrar o primeiro produtor.</div>
+    <div><span class="n">V2</span>“Comece pela ferramenta que você paga e usa uma função só.” A auditoria das assinaturas não foi feita.</div>
+    <div><span class="n">V3</span>Triagem de feedback com Gmail. O Gmail já está conectado aqui.</div>
+    <div><span class="n">V3</span>Agente “primeira visita” para testar a página da oferta como uma diretora de marketing que não te conhece.</div>
+    <div><span class="n">V4</span>Revisar o registro do que o agente fez depois da primeira execução real.</div>
+    <div><span class="n">V5</span>O ativo de dados que ninguém copia são as receitas ligadas aos resultados: a skill Receita que falta criar.</div>
+    <div><span class="n">V5</span>Agentes vão comprar pelas pessoas; a ficha da peça para busca por IA já antecipa isso.</div>
+    <div><span class="n">V6</span>Acredite que é possível, veja alguém fazer, permita-se errar. E saiba pausar.</div>
+    <div><span class="n">V7</span>“Mil horas com o Claude”; ditado pago porque o grátis troca palavras; pergunte ao Claude o que cada conector faz.</div>
+    <div><span class="n">V7</span>Skill de “embalagem de vídeo” (palavra-chave, concorrência, thumbnail, título) se você publicar no YouTube.</div>
+    <div><span class="n">V8</span>Combinar várias referências: a pose de uma, a luz de outra. Sempre “inspire-se, não copie”.</div>
+    <div><span class="n">V8</span>“There's An AI For That”: antes de construir, ver se já existe.</div>
+    <div><span class="n">V8</span>Pedir o vídeo “sem trilha” para aproveitar os efeitos sonoros; trilha licenciada em trabalho comercial.</div>
   </div>
+</section>
+
+<section id="estudar">
+  <p class="eb"><span class="n">09</span>Para não gastar tempo à toa</p>
+  <h2>O que estudar de novo e o que basta ler</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Prioridade</th><th>Vídeo</th><th>Como estudar</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td class="t">V8 · Human Academy + Paulo</td><td>Assistir inteiro, com prints de 34:28, 39:40, 52:14, 1:12, 1:24, 1:33, 1:47 e 2:13; pegar os prompts e skills do portal do aluno</td><td>Produção real de marca, o mais próximo do Organismo</td></tr>
+      <tr><td class="num">2</td><td class="t">V3 · Vercel</td><td>Assistir os 14 minutos</td><td>Método de qualidade para agentes e skills</td></tr>
+      <tr><td class="num">3</td><td class="t">V6 · Felix Rieseberg</td><td>Ler o artigo original</td><td>Método para conceitos e para o Roteirista</td></tr>
+      <tr><td class="num">4</td><td class="t">V7 · KJ Rainey</td><td>Só 22:43–35:10, 43:01–50:14 e 1:01:18–1:29</td><td>Base da ferramenta de pesquisa do YouTube</td></tr>
+      <tr><td class="num">5</td><td class="t">V5 · Bruno Okamoto</td><td>Só 9:27–12:16 e 24:55</td><td>Argumento de posicionamento</td></tr>
+      <tr><td class="num">—</td><td class="t">V1, V2 e V4</td><td>Não precisa rever; esta página basta</td><td>Pouco novo além do que já está aqui</td></tr>
+    </tbody>
+  </table></div>
 </section>
 
 <section id="conferido">
-  <p class="eb"><span class="n">08</span>Fatos</p>
+  <p class="eb"><span class="n">10</span>Fatos</p>
   <h2>O que conferi fora dos vídeos</h2>
   <div class="checks">
-    <div class="check"><span class="chip ok">confirmado</span><span><strong>DeepSec</strong> é uma ferramenta gratuita da Vercel, lançada em maio de 2026, que usa Claude ou Codex para achar falhas de segurança. A legenda do YouTube escrevia “DeepSeek”.</span></div>
-    <div class="check"><span class="chip ok">confirmado</span><span><strong>Agente Gemini</strong> anunciado em 8/10/2026, com identidade própria e acesso limitado. Em teste fechado só para empresas.</span></div>
-    <div class="check"><span class="chip ok">confirmado</span><span><strong>Artigo do Felix Rieseberg</strong> (13/10/2026) tem quatro tipos de ambição: Velocidade, Altitude, Profundidade e Amplitude. O vídeo cobriu três.</span></div>
-    <div class="check"><span class="chip warn">em parte</span><span><strong>Kie.ai</strong> existe e cobra por crédito. Fontes de terceiros dizem que fica 30 a 80% abaixo do preço oficial e que a conta é difícil de prever em volume. Conferir a página de preços.</span></div>
-    <div class="check"><span class="chip bad">não confirmado</span><span><strong>Treg</strong> (leads do vídeo 1) e “a Stripe comprou o OpenRouter” (vídeo 5). O “Grockbot” do vídeo 2 foi confirmado depois: é o Grok Bot, da xAI, em beta desde 11/08/2026.</span></div>
+    <div class="check"><span class="chip ok">confirmado</span><span><strong>Magnific</strong> tem conexão oficial com Claude, ChatGPT e Cursor, usando os créditos do plano; pela conexão, os modelos “ilimitados” também gastam crédito.</span></div>
+    <div class="check"><span class="chip ok">confirmado</span><span><strong>Higgsfield</strong> conecta ao Claude com plano pago (a partir de US$ 19/mês no anual).</span></div>
+    <div class="check"><span class="chip ok">confirmado</span><span><strong>API do YouTube</strong> grátis, ~100 buscas por dia, e responde deste ambiente na nuvem.</span></div>
+    <div class="check"><span class="chip ok">confirmado</span><span><strong>DeepSec</strong> (Vercel, maio de 2026), <strong>agente Gemini</strong> (8/10/2026), <strong>Grok Bot</strong> (xAI, beta desde 11/08/2026) e o <strong>artigo do Felix</strong> com 4 tipos de ambição.</span></div>
+    <div class="check"><span class="chip warn">em parte</span><span><strong>Kie.ai</strong> a US$ 0,09 por imagem; <strong>Google Flow</strong> com imagem a 0 crédito (o Nano Banana Pro tem fontes em conflito). Conferir na própria ferramenta.</span></div>
+    <div class="check"><span class="chip bad">não confirmado</span><span><strong>Treg</strong>, o <strong>Genjutsu</strong> do Higgsfield e “a Stripe comprou o OpenRouter”.</span></div>
   </div>
 </section>
 
-<section id="decidir">
-  <p class="eb"><span class="n">09</span>Próximo passo</p>
-  <h2>Para você decidir</h2>
+<section id="proximos">
+  <p class="eb"><span class="n">11</span>Combinado</p>
+  <h2>Próximos passos</h2>
   <div class="ask"><ol>
-    <li>Posso registrar no painel ao vivo um estudo novo com este cruzamento e as 2 tarefas novas (calibrar o Guardião, arrumar Colmeia e skills)?</li>
-    <li>As rodadas da Aura Alfaiataria já contam como teste das skills? Se sim, eu marco as tarefas do degrau 1 como feitas ou em andamento.</li>
-    <li>Quer que eu já escreva a seção das 4 perguntas e do verbo para o Roteirista de Ganchos, para você colar na skill?</li>
+    <li>Você traz a <strong>sprint</strong> atual e eu comparo com a lista da seção 07.</li>
+    <li>Vamos a fundo na <strong>ferramenta de pesquisa do YouTube</strong>; a chave da API fica para depois.</li>
+    <li>Para <strong>atualizar o Organismo</strong>, preciso dos dados do servidor do seu computador (o pedido está no README da pasta).</li>
+    <li>Quando você assistir ao vídeo 8, os <strong>prints</strong> e os prompts do portal do aluno entram aqui.</li>
   </ol></div>
 </section>
 
-<footer>Feito a partir das transcrições completas dos seis vídeos, do painel Organismo Operador e do Ciclo dos Agentes Locatelli. O documento em texto, as transcrições e as instruções para o Claude Code do computador estão no repositório locatelli-studio, branch claude/admiring-ptolemy-1b8xck, pasta pesquisa/videos-ia-2026-10.</footer>
+<footer>Feito a partir das transcrições completas dos oito vídeos, da estrutura do Organismo Operador v2, do Ciclo dos Agentes Locatelli e das pesquisas de 19/10/2026. Os documentos em texto (CRUZAMENTO-GERAL, análises por vídeo e transcrições) estão no repositório locatelli-studio, branch claude/admiring-ptolemy-1b8xck, pasta pesquisa/videos-ia-2026-10.</footer>
 
 </main>
 </div>
