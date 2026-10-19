@@ -19,6 +19,7 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 4. https://www.youtube.com/watch?v=0erYZFxwaNA — *Google's NEW AI Agent Could REPLACE Your Automation Stack* (Paul James)
 5. https://www.youtube.com/watch?v=TLbdfaDijbU — *7 negócios de IA que o Vale do Silício já enxerga* (Bruno Okamoto)
 6. https://www.youtube.com/watch?v=NarezKh3w4o — *Anthropic just shared how they use Claude differently* (RoboNuggets)
+7. https://www.youtube.com/watch?v=Yt_BULiimg4 — *The Creator Who Mastered Claude* (KJ Rainey, The Calum Johnson Show) · análise em `VIDEO-07-KJ-RAINEY.md`
 
 Leitura complementar: artigo original do Felix Rieseberg (base do vídeo 6) — https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/
 

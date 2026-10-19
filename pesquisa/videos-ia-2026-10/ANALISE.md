@@ -94,7 +94,7 @@ Ele tem uma agência de automação (diz faturar > US$1 milhão/ano). Lista o qu
 
 ### O que conferi
 - **"Key.ai" é quase certamente Kie.ai** (kie.ai): agregador de APIs de imagem/vídeo com cobrança por crédito (~US$0,005/crédito, depósito mínimo US$5), anuncia preços 30–80% abaixo do oficial. Uma comparação aponta que a cobrança por crédito é **difícil de prever em escala**. Fontes de terceiros, algumas concorrentes — confira a página de preços real. ([atlascloud](https://www.atlascloud.ai/blog/guides/best-kie-ai-alternative), [kinovi](https://kinovi.ai/blogs/kie-ai-vs-kinovi))
-- **"Grockbot":** não consegui confirmar nome nem site. Um comentarista escreve "grokbot". Não pesquisei mais a fundo — trate como desconhecido.
+- **"Grockbot" é o Grok Bot, da xAI** (confirmado depois, em 19/10): app de agentes sempre ligados, cada um com uma função, rodando num computador na nuvem com navegador, arquivos e terminal. Beta lançado em 11/08/2026, incluído nos planos pagos do X (Premium em diante). [x.ai](https://x.ai/news/introducing-grok-bot), [Paralect](https://www.paralect.com/stack/grok-bot)
 - No vídeo 5, Bruno Okamoto afirma que **"a Stripe comprou o OpenRouter"**. Não verifiquei. Confira antes de repetir.
 
 ### O que aproveitar
@@ -114,7 +114,7 @@ Ele tem uma agência de automação (diz faturar > US$1 milhão/ano). Lista o qu
 **Ditado por voz** (Glaido, Wispr Flow ou outro) — útil se você prefere falar. Ele é sócio da Glaido: compare antes.
 
 ### Ignorar
-Hostinger especificamente (VPS é commodity; útil só se você for hospedar n8n/agentes próprios). "Grockbot" até ter nome e site confirmados.
+Hostinger especificamente (VPS é commodity; útil só se você for hospedar n8n/agentes próprios). Grok Bot (xAI): exige assinatura do X e não acrescenta nada que o Claude com tarefas agendadas não faça para o Organismo hoje.
 
 ---
 
