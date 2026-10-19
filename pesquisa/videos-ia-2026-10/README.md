@@ -1,0 +1,56 @@
+# Pesquisa: 6 vídeos sobre IA aplicada a negócios (outubro/2026)
+
+Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no Claude Code do computador do Carlo**, onde estão os projetos reais.
+
+## Conteúdo
+
+| Arquivo | O que é |
+|---|---|
+| `ANALISE.md` | Análise aprofundada dos 6 vídeos: o que cada um diz, o que foi conferido, o que aproveitar por frente de negócio, síntese, plano priorizado e hipóteses a validar |
+| `transcricoes/01…06-*.md` | Descrição e transcrição completa de cada vídeo, no idioma original |
+| `ferramentas/yt_transcript.py` | Script que baixa título, descrição e transcrição de um vídeo do YouTube |
+
+## Links dos vídeos
+
+1. https://www.youtube.com/watch?v=wpaR6LhuZWg — *8 github repos that print $$$* (Corey Ganim)
+2. https://www.youtube.com/watch?v=hgLI491ajG0 — *I Tried 100+ AI Tools. These 7 Are the Best* (Nate Herk)
+3. https://www.youtube.com/watch?v=y2ifUC9_zuU — *Vercel's CEO Just Unveiled The Greatest AI Coding Workflow Ever* (AI LABS)
+4. https://www.youtube.com/watch?v=0erYZFxwaNA — *Google's NEW AI Agent Could REPLACE Your Automation Stack* (Paul James)
+5. https://www.youtube.com/watch?v=TLbdfaDijbU — *7 negócios de IA que o Vale do Silício já enxerga* (Bruno Okamoto)
+6. https://www.youtube.com/watch?v=NarezKh3w4o — *Anthropic just shared how they use Claude differently* (RoboNuggets)
+
+Leitura complementar: artigo original do Felix Rieseberg (base do vídeo 6) — https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/
+
+## Como usar no Claude Code do computador
+
+1. Copie esta pasta para o projeto principal (ou rode `git pull` na branch `claude/admiring-ptolemy-1b8xck` do repositório `locatelli-studio`).
+2. Garanta que o painel do projeto esteja rodando em `http://localhost:8790`.
+3. Cole este pedido no Claude Code:
+
+```
+Leia pesquisa/videos-ia-2026-10/ANALISE.md por inteiro (e as transcrições em
+pesquisa/videos-ia-2026-10/transcricoes/ quando precisar de detalhe).
+
+Depois, abra o painel em http://localhost:8790 (comece por #campanha.plano e
+percorra todas as seções) e leia os projetos reais deste computador para
+entender o que já existe: Locatelli Studio, Vera, operação de aluguel por temporada,
+skills e automações.
+
+Com isso:
+1. Responda cada item da seção "Hipóteses para o Claude Code do computador validar".
+2. Refaça o "Plano priorizado" com base no que existe de verdade: marque o que já
+   está feito, o que não se aplica e o que muda de prioridade, sempre dizendo o porquê.
+3. Proponha os 3 primeiros passos concretos, com os arquivos que mudariam em cada um.
+   Não altere nada antes de eu aprovar.
+```
+
+## Como baixar transcrições de novos vídeos (no computador)
+
+No computador o YouTube não está bloqueado, então o mais simples é usar o `yt-dlp`:
+
+```
+pip install yt-dlp
+yt-dlp --skip-download --write-auto-subs --sub-langs "en,pt" --sub-format vtt -o "video" URL_DO_VIDEO
+```
+
+O `ferramentas/yt_transcript.py` também funciona (`python3 yt_transcript.py ID_DO_VIDEO pasta_saida`). Ele foi escrito para contornar o bloqueio do ambiente na nuvem.
