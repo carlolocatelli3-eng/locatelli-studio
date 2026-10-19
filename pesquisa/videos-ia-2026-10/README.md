@@ -6,7 +6,8 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 
 | Arquivo | O que é |
 |---|---|
-| `ANALISE.md` | Análise aprofundada dos 6 vídeos: o que cada um diz, o que foi conferido, o que aproveitar por frente de negócio, síntese, plano priorizado e hipóteses a validar |
+| `CRUZAMENTO-ORGANISMO.md` | **Comece aqui.** Os 6 vídeos cruzados com o Organismo Operador e o Ciclo dos Agentes: o que já existe, o que muda, o que é novidade de verdade e o plano revisado |
+| `ANALISE.md` | Detalhamento vídeo a vídeo: o que cada um diz, o que foi conferido, o que aproveitar (escrito antes de conhecer o painel) |
 | `transcricoes/01…06-*.md` | Descrição e transcrição completa de cada vídeo, no idioma original |
 | `ferramentas/yt_transcript.py` | Script que baixa título, descrição e transcrição de um vídeo do YouTube |
 
@@ -28,17 +29,17 @@ Leitura complementar: artigo original do Felix Rieseberg (base do vídeo 6) — 
 3. Cole este pedido no Claude Code:
 
 ```
-Leia pesquisa/videos-ia-2026-10/ANALISE.md por inteiro (e as transcrições em
-pesquisa/videos-ia-2026-10/transcricoes/ quando precisar de detalhe).
+Leia pesquisa/videos-ia-2026-10/CRUZAMENTO-ORGANISMO.md por inteiro, depois
+ANALISE.md (e as transcrições em pesquisa/videos-ia-2026-10/transcricoes/
+quando precisar de detalhe).
 
 Depois, abra o painel em http://localhost:8790 (comece por #campanha.plano e
-percorra todas as seções) e leia os projetos reais deste computador para
-entender o que já existe: Locatelli Studio, Vera, operação de aluguel por temporada,
-skills e automações.
+percorra todas as seções) e leia os arquivos reais deste computador: a pasta HQ,
+CLIENTES/, as rodadas da Aura Alfaiataria e as skills instaladas.
 
 Com isso:
-1. Responda cada item da seção "Hipóteses para o Claude Code do computador validar".
-2. Refaça o "Plano priorizado" com base no que existe de verdade: marque o que já
+1. Responda cada item da seção 5 do CRUZAMENTO ("Para o Claude Code do computador validar").
+2. Revise o plano da seção 4 do CRUZAMENTO com o que existe de verdade: o que já
    está feito, o que não se aplica e o que muda de prioridade, sempre dizendo o porquê.
 3. Proponha os 3 primeiros passos concretos, com os arquivos que mudariam em cada um.
    Não altere nada antes de eu aprovar.

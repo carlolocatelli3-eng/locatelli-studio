@@ -1,5 +1,7 @@
 # Análise aprofundada — 6 vídeos sobre IA aplicada a negócios
 
+> **Atualização:** depois desta análise li o painel Organismo Operador e o Ciclo dos Agentes. Várias recomendações abaixo já estavam decididas ou mudaram (Freepik → Magnific/API, Vera → SOL, personas aposentadas). **Leia primeiro `CRUZAMENTO-ORGANISMO.md`**; este arquivo fica como o detalhamento vídeo a vídeo.
+
 **Para:** Carlo Locatelli · **Data:** 19/10/2026 · **Frentes analisadas:** Locatelli Studio (campanhas de moda com IA), Vera (assistente de IA para pousadas), operação de aluguel por temporada, marca pessoal do Carlo.
 
 > **Como ler isto.** Cada vídeo tem: (1) o que ele realmente diz, com números e nomes exatos; (2) o que conferi fora do vídeo e o que é duvidoso; (3) o que aproveitar, por frente de negócio; (4) o que ignorar. No final há a síntese cruzada, um plano priorizado e as **hipóteses que o Claude Code do computador precisa validar** contra os projetos reais — esta análise foi feita sem acesso a eles.
