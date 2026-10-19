@@ -6,7 +6,8 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 
 | Arquivo | O que é |
 |---|---|
-| `CRUZAMENTO-ORGANISMO.md` | **Comece aqui.** Os 6 vídeos cruzados com o Organismo Operador e o Ciclo dos Agentes: o que já existe, o que muda, o que é novidade de verdade e o plano revisado |
+| `CRUZAMENTO-GERAL.md` | **Comece aqui.** Os 8 vídeos e as pesquisas cruzados: 10 temas em comum, divergências e decisões, o que já existe no Organismo, o que é novo e o que estudar de novo |
+| `CRUZAMENTO-ORGANISMO.md` | Os 6 vídeos cruzados com o Organismo Operador e o Ciclo dos Agentes: o que já existe, o que muda, o que é novidade de verdade e o plano revisado |
 | `ANALISE.md` | Detalhamento vídeo a vídeo: o que cada um diz, o que foi conferido, o que aproveitar (escrito antes de conhecer o painel) |
 | `transcricoes/01…06-*.md` | Descrição e transcrição completa de cada vídeo, no idioma original |
 | `ferramentas/yt_transcript.py` | Script que baixa título, descrição e transcrição de um vídeo do YouTube |
