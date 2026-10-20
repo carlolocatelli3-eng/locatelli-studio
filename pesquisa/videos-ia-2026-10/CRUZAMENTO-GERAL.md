@@ -1,4 +1,4 @@
-# Cruzamento geral — 8 vídeos + pesquisas de 19/10/2026
+# Cruzamento geral — 9 vídeos + pesquisas de 19/10/2026
 
 **Para que serve:** juntar tudo o que vimos hoje num lugar só, mostrar onde os vídeos concordam, onde discordam e o que decidimos. Também define **o que vale estudar de novo** e o que é só leitura. Nada aqui exigiu pesquisa nova: é a síntese do que já foi lido e conferido.
 
@@ -13,6 +13,7 @@
 | 6 | RoboNuggets · Felix Rieseberg | Ambição: altitude, profundidade (4 perguntas, juiz de fora), amplitude (verbo) |
 | 7 | KJ Rainey · Calum Johnson | Aprender com IA, régua matemática↔arte, pesquisa no YouTube, 30 min antes de construir |
 | 8 | Human Academy + Paulo.IA · live | Produção real de marca: assets primeiro, storyboard, rascunho 480p, lip sync, efeitos |
+| 9 | Tube Guruji · equipe de agentes de redes sociais | Agente mestre + 4 agentes, computador na nuvem, rotina em segundo plano, publicar e medir com Blotato (análise em `VIDEO-09`) |
 | P | Pesquisas do dia | AiA, preço de mercado, Meta automatizando criativo, Ad Library sem Brasil, Kie.ai, Google Flow, CONAR, confiança do consumidor, Magnific e Higgsfield com conexão ao Claude |
 
 ---
@@ -148,6 +149,7 @@ Ordenados pela quantidade de fontes que repetem a ideia.
 9. **Produtoras de moda** como canal de venda do Pilar 1.
 10. **Teste: vídeo direto dos assets**, sem imagem por cena.
 11. **Radar de Vídeos do YouTube** (só se substituir a pesquisa avulsa).
+12. **Instagram do Locatelli Studio como "campanha zero" do ciclo** (vídeo 9): pesquisar, criar, aprovar, publicar (Blotato ou Postiz) e medir com o Analista de Ganchos. Gera dados reais sem cliente e vira vitrine de venda.
 
 ---
 

@@ -22,6 +22,7 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 6. https://www.youtube.com/watch?v=NarezKh3w4o — *Anthropic just shared how they use Claude differently* (RoboNuggets)
 7. https://www.youtube.com/watch?v=Yt_BULiimg4 — *The Creator Who Mastered Claude* (KJ Rainey, The Calum Johnson Show) · análise em `VIDEO-07-KJ-RAINEY.md`
 8. *Da ideia ao projeto · Live 1 · Human Academy e PAULO.IA* (transcrição enviada pelo Carlo) · análise em `VIDEO-08-HUMAN-ACADEMY-PAULO-IA.md`
+9. *Build Social Media AI Agent Team Using Claude Code & Next.js* (Tube Guruji, transcrição enviada pelo Carlo) · análise em `VIDEO-09-SOCIAL-MEDIA-AGENT-TEAM.md`
 
 Leitura complementar: artigo original do Felix Rieseberg (base do vídeo 6) — https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/
 
