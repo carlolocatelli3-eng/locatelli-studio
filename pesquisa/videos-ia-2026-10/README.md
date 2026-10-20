@@ -6,7 +6,9 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 
 | Arquivo | O que é |
 |---|---|
-| `ESTRATEGIA-CRESCIMENTO.md` | **Comece aqui.** O plano de venda e crescimento: posicionamento, preço com custo real, escada de oferta, prospecção com números, Black Friday, produtoras, campanha zero, Organismo v3, skills novas, riscos, 90 dias e métricas |
+| `DECISOES-URGENTES.md` | **Comece aqui (20/10).** As 3 decisões mais urgentes (qual case primeiro, o que vender, quanto roda sozinho), com caminhos a favor e contra, a escada de autonomia e os fluxos do Studio e do SOL etapa por etapa. Versão visual: `decisoes-urgentes.html` |
+| `RADAR-MERCADO-20-10.md` | Base factual com fontes: moda com IA, turismo e pousadas, autonomia com Claude, resumo dos documentos do SOL |
+| `ESTRATEGIA-CRESCIMENTO.md` | O plano de venda e crescimento do Studio. O plano de venda e crescimento: posicionamento, preço com custo real, escada de oferta, prospecção com números, Black Friday, produtoras, campanha zero, Organismo v3, skills novas, riscos, 90 dias e métricas |
 | `IDEIAS-NOVAS.md` | Pesquisa de 20/10: 10 ideias novas fora dos vídeos (Vitrine em Vídeo, Plano de Datas, rótulo de IA do Meta, base + taxa por vencedor, Nuvemshop, gêmeos digitais…), com notas, triagem e as decisões 8 a 13 |
 | `leitura-outubro.html` | A página visual com tudo isso junto |
 | `CRUZAMENTO-GERAL.md` | Os 8 vídeos e as pesquisas cruzados: 10 temas em comum, divergências e decisões, o que já existe no Organismo, o que é novo e o que estudar de novo |
