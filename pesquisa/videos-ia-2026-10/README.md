@@ -7,6 +7,8 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 | Arquivo | O que é |
 |---|---|
 | `ESTRATEGIA-CRESCIMENTO.md` | **Comece aqui.** O plano de venda e crescimento: posicionamento, preço com custo real, escada de oferta, prospecção com números, Black Friday, produtoras, campanha zero, Organismo v3, skills novas, riscos, 90 dias e métricas |
+| `IDEIAS-NOVAS.md` | Pesquisa de 20/10: 10 ideias novas fora dos vídeos (Vitrine em Vídeo, Plano de Datas, rótulo de IA do Meta, base + taxa por vencedor, Nuvemshop, gêmeos digitais…), com notas, triagem e as decisões 8 a 13 |
+| `leitura-outubro.html` | A página visual com tudo isso junto |
 | `CRUZAMENTO-GERAL.md` | Os 8 vídeos e as pesquisas cruzados: 10 temas em comum, divergências e decisões, o que já existe no Organismo, o que é novo e o que estudar de novo |
 | `CRUZAMENTO-ORGANISMO.md` | Os 6 vídeos cruzados com o Organismo Operador e o Ciclo dos Agentes: o que já existe, o que muda, o que é novidade de verdade e o plano revisado |
 | `ANALISE.md` | Detalhamento vídeo a vídeo: o que cada um diz, o que foi conferido, o que aproveitar (escrito antes de conhecer o painel) |
