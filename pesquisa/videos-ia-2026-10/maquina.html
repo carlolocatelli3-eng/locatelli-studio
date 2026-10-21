@@ -407,7 +407,7 @@ details.sk>summary:focus-visible{outline:2px solid var(--accent);outline-offset:
 <ol>
 <li>Receba a foto. Se não houver foto, peça.</li>
 <li>Analise a foto e escreva <strong>5 prompts em inglês</strong>, seguindo as regras abaixo.</li>
-<li>Gere no Nano Banana 2.1 (Flow, Higgsfield ou Magnific), com <strong>a foto original como referência em toda geração</strong>. Configuração usada na live: <strong>3:4, 2K, qualidade High ou Medium, 4 por vez</strong>.</li>
+<li>Gere primeiro no <strong>Flow</strong> (Nano Banana sem gastar crédito; manual, via <code>FILA-GOOGLE.md</code>, ver <code>HQ/maquina/CARTEIRA.md</code>); Higgsfield ou Magnific só se precisar de lote automático ou 4K. Nano Banana 2.1, com <strong>a foto original como referência em toda geração</strong>. Configuração usada na live: <strong>3:4, 2K, qualidade High ou Medium, 4 por vez</strong>.</li>
 <li>Passe cada resultado no Guardião antes de mostrar a qualquer cliente.</li>
 </ol>
 <h2>Instruções para escrever os 5 prompts</h2>
@@ -476,6 +476,7 @@ details.sk>summary:focus-visible{outline:2px solid var(--accent);outline-offset:
 <li><strong>Composição:</strong> painel em fundo cinza com FRENTE · TRÊS QUARTOS · PERFIL · CORPO INTEIRO (frente e costas). Na live, o painel saiu em 4800×1800.</li>
 <li><strong>Closes:</strong> uma faixa abaixo com os detalhes únicos, cada um rotulado.</li>
 </ol>
+<p>Onde gerar o corpo: primeiro no Flow (Nano Banana sem crédito), pela <code>FILA-GOOGLE.md</code>; ver <code>HQ/maquina/CARTEIRA.md</code>.</p>
 <h2>Pacote de entrega (pasta do personagem)</h2>
 <ul>
 <li><code>FOLHA.png</code> (o painel);</li>
@@ -546,6 +547,8 @@ Para roupa, acrescente: "color, print scale and placement, fabric texture, seams
 <li>Um <strong>lugar-hub</strong> (o QG do Paulo) que reúne os ativos ajuda na revelação final.</li>
 <li>Cada prancha em 3 vistas (como a maleta) para o vídeo manter o objeto.</li>
 </ul>
+<h2>Onde gerar</h2>
+<p>Vistas faltantes, props e cenários: primeiro no Flow (Nano Banana sem crédito), pela <code>FILA-GOOGLE.md</code>. Ver <code>HQ/maquina/CARTEIRA.md</code>.</p>
 <h2>Saída e portão</h2>
 <p>Pastas em <code>03-ativos/produtos-ou-lugar/</code> e <code>03-ativos/cenarios/</code>. <strong>Portão 2 (ficha):</strong> Carlo e o cliente aprovam casting, figurino, produto e locação antes do storyboard.</p>
 <p>Nível de autonomia: 1. O Guardião compara cada vista gerada com as fotos reais.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Todas as vistas e closes</h2>
@@ -598,7 +601,7 @@ FORMAT: [3:4 / 4:5 / 9:16], photographic, no text, no watermark.
 <ul>
 <li>Nano Banana 2.1 (Flow, Higgsfield ou Magnific). Na live: <strong>3:4, 2K, Medium</strong>, 4 por geração.</li>
 <li>Gere em lote (o Paulo gerou 20 prompts em paralelo) e faça a curadoria depois.</li>
-<li>Teste barato primeiro (Flow ou modo ilimitado), 2K/4K só no aprovado.</li>
+<li><strong>Grátis antes do pago</strong> (<code>HQ/maquina/CARTEIRA.md</code>): o ensaio inteiro de teste no Flow, pela <code>FILA-GOOGLE.md</code>; 2K/4K pago só no aprovado.</li>
 </ul>
 <h2>Curadoria e Guardião</h2>
 <p>Cada foto escolhida passa por: identidade igual à folha; peça igual à folha de produto; nenhum elemento da referência estética copiado (rosto, roupa, logo); lugar real intacto (SOL); rótulo de IA definido para o uso.</p>
@@ -661,6 +664,7 @@ DO NOT: change face, garment, logo, product, architecture; add text; add music.
 <p>Peça o vídeo <strong>"sem trilha"</strong> para aproveitar os efeitos sonoros na edição. Música licenciada entra na edição.</p>
 <h2>Sequência de geração (regra de custo)</h2>
 <ol>
+<li><strong>Grátis antes do pago</strong> (<code>HQ/maquina/CARTEIRA.md</code>): blockout e testes de movimento nos <strong>2 vídeos/dia do Gemini</strong>; planos simples de rascunho com os 50 créditos/dia do Flow. Tudo via <code>FILA-GOOGLE.md</code> (manual). O Seedance pago entra nos planos com pessoa, produto ou fala.</li>
 <li><strong>Rascunho 480p</strong> de todas as cenas (1/3 a 1/5 do custo). Edite o filme inteiro em rascunho (DaVinci).</li>
 <li><strong>Portão 3:</strong> cliente aprova o corte em 480p. Registre a data no <code>JOB.json</code>: <strong>o "OK" para 1080p precisa sair em até 7 dias</strong>, senão o mesmo vídeo não pode mais ser ampliado (plano B: regerar usando o 480p como referência de movimento e câmera).</li>
 <li><strong>1080p só das cenas que entraram no corte.</strong> Peça 2 ou 3 opções por cena difícil.</li>
@@ -1217,6 +1221,121 @@ RITMO: [gatilho ou agenda]
 <li><code>skills/pitch-e-roteiro</code>: a etapa F passa a usar o conselho de 6 lentes.</li>
 <li><code>skills/folha-de-produto-e-lugar</code> e o Guardião: rodar o <code>delta_e.py</code> nas áreas de cor de toda peça gerada.</li>
 <li><code>ORQUESTRADOR.md</code>: a meta de negócio fica acima das metas de operação.</li>
+</ul></div></details>
+  <details class="sk" id="doc-cart2"><summary><b>CARTEIRA.md</b><span>grátis antes do pago: Flow, Gemini e quando pagar</span></summary><div class="doc"><h1>Carteira: grátis antes do pago</h1>
+<p><strong>Regra da máquina:</strong> toda geração usa primeiro o que o Carlo já tem de graça ou já pagou. O crédito pago só entra quando o grátis não serve (qualidade, prazo, termos comerciais ou automação).</p>
+<h2>O que o Carlo tem (informado por ele em 21/10/2026; conferir se mudar)</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>O que dá</th>
+<th>Renova</th>
+<th>Automação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Google Flow</strong></td>
+<td>Imagens <strong>Nano Banana sem gastar crédito</strong> + <strong>50 créditos por dia</strong> (gastam em vídeo Veo e upscale)</td>
+<td>Todo dia, sem acumular</td>
+<td><strong>Manual</strong> (sem API)</td>
+</tr>
+<tr>
+<td><strong>Google Gemini (plano)</strong></td>
+<td><strong>2 vídeos por dia de 10 s</strong></td>
+<td>Todo dia</td>
+<td><strong>Manual</strong> (no app)</td>
+</tr>
+<tr>
+<td>Magnific (plano pago)</td>
+<td>Créditos do plano; conecta ao Claude por MCP</td>
+<td>Mensal</td>
+<td>Automatizável (MCP)</td>
+</tr>
+<tr>
+<td>Higgsfield (se assinar)</td>
+<td>Seedance, Kling, Nano Banana; MCP para o Claude</td>
+<td>Mensal</td>
+<td>Automatizável (MCP)</td>
+</tr>
+<tr>
+<td>APIs (Google em lote, Kie.ai, fal.ai)</td>
+<td>Por uso</td>
+<td>—</td>
+<td>Automatizável</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Ordem de uso por etapa</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>1º (grátis)</th>
+<th>2º (pago, se precisar)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exploração, moodboard, testes de gosto</td>
+<td>Flow · Nano Banana</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Amostras de prospecção (S3)</td>
+<td>Flow · Nano Banana</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Ângulos, fichas de pessoa e de produto, ensaio</td>
+<td>Flow · Nano Banana</td>
+<td>Magnific/Higgsfield (Pro em 4K, lote automático)</td>
+</tr>
+<tr>
+<td>Quadros do storyboard (prancha)</td>
+<td>Flow · Nano Banana</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Blockout e testes de movimento</td>
+<td><strong>Gemini · 2 vídeos/dia</strong></td>
+<td>Seedance 480p</td>
+</tr>
+<tr>
+<td>Rascunhos 480p do filme</td>
+<td>Gemini (planos simples) + Flow (créditos do dia)</td>
+<td>Seedance 480p (planos com pessoa, produto ou fala)</td>
+</tr>
+<tr>
+<td>Final 1080p (depois do Portão 3)</td>
+<td>—</td>
+<td>Seedance/Kling/MiniMax pelo hub</td>
+</tr>
+<tr>
+<td>Conteúdo próprio (Piloto 0, Diário do Organismo)</td>
+<td>Gemini + Flow</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Conta de um dia típico:</strong>
+- <strong>Imagens:</strong> de graça no Flow, dentro do limite diário.
+- <strong>Vídeos:</strong> 2 vídeos de 10 s no Gemini.
+- <strong>Créditos do Flow:</strong> 50 para vídeo ou upscale.</p>
+<p>Isso cobre o Piloto 0, as amostras e os testes de movimento <strong>sem gastar nada além dos planos</strong>.</p>
+<h2>Como a máquina usa o que é manual (Flow e Gemini não têm API)</h2>
+<ol>
+<li>O motor ou a skill escreve no projeto um arquivo <strong><code>FILA-GOOGLE.md</code></strong>, com os prompts prontos, as imagens de referência a anexar (caminho de cada arquivo), a ferramenta (Flow ou Gemini) e a configuração.</li>
+<li>Carlo (ou o Claude no Chrome, no computador dele) roda a fila. São 5 a 10 minutos por dia, e os resultados vão para a subpasta da etapa.</li>
+<li>O Guardião confere como qualquer outra geração.</li>
+<li>Itens da fila não gastam teto do <code>JOB.json</code>; ficam registrados como <code>custo: 0 (plano)</code>.</li>
+</ol>
+<p>Se a fila do dia passar dos limites (imagens, 50 créditos, 2 vídeos), o excedente fica para o dia seguinte ou sobe para o pago. <strong>A decisão é do Carlo.</strong></p>
+<h2>Atenção para entrega a cliente</h2>
+<ul>
+<li><strong>Termos comerciais:</strong> os termos do Flow e do app Gemini para uso comercial não dão garantia explícita (pesquisa de 19/10). Para trabalho interno, amostra e portfólio: livre. Para <strong>entrega final a cliente premium</strong> (Campanha Híbrida, Licença de Modelo): ler os termos atuais ou passar o final por uma API com termos comerciais claros.</li>
+<li><strong>Marca e rótulo:</strong> toda imagem do Google leva SynthID e C2PA. Isso conversa com o rótulo de IA do Meta (teste da Ideia 4).</li>
 </ul></div></details>
 </section>
 
@@ -1887,6 +2006,7 @@ skills e regras atualizadas → o próximo trabalho já sai melhor
     │   ├── ORQUESTRADOR.md         de esteira para orquestrador; modelo de meta; 6 metas
     │   ├── AMBICAO.md              altitude, profundidade, abrangência; conselho de 6 lentes
     │   ├── CICLO.md                ciclo de melhoria diária
+    │   ├── CARTEIRA.md             grátis antes do pago: Flow, Gemini, planos e quando pagar
     │   └── PILOTOS.md              3 pilotos de ponta a ponta
     ├── ferramentas/                o que é conta, não opinião
     │   ├── delta_e.py              cor real × gerada (ΔE2000)

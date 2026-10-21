@@ -16,7 +16,7 @@ Adaptado do meta-prompt "Uma foto, outros ângulos" do portal da Human (transcri
 ## Como rodar
 1. Receba a foto. Se não houver foto, peça.
 2. Analise a foto e escreva **5 prompts em inglês**, seguindo as regras abaixo.
-3. Gere no Nano Banana 2.1 (Flow, Higgsfield ou Magnific), com **a foto original como referência em toda geração**. Configuração usada na live: **3:4, 2K, qualidade High ou Medium, 4 por vez**.
+3. Gere primeiro no **Flow** (Nano Banana sem gastar crédito; manual, via `FILA-GOOGLE.md`, ver `HQ/maquina/CARTEIRA.md`); Higgsfield ou Magnific só se precisar de lote automático ou 4K. Nano Banana 2.1, com **a foto original como referência em toda geração**. Configuração usada na live: **3:4, 2K, qualidade High ou Medium, 4 por vez**.
 4. Passe cada resultado no Guardião antes de mostrar a qualquer cliente.
 
 ## Instruções para escrever os 5 prompts

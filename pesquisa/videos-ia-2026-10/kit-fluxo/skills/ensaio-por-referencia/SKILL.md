@@ -38,7 +38,7 @@ Com o **Nano Banana Pro**, acrescente "Keep the exact camera angle, height and f
 ## Como rodar
 - Nano Banana 2.1 (Flow, Higgsfield ou Magnific). Na live: **3:4, 2K, Medium**, 4 por geração.
 - Gere em lote (o Paulo gerou 20 prompts em paralelo) e faça a curadoria depois.
-- Teste barato primeiro (Flow ou modo ilimitado), 2K/4K só no aprovado.
+- **Grátis antes do pago** (`HQ/maquina/CARTEIRA.md`): o ensaio inteiro de teste no Flow, pela `FILA-GOOGLE.md`; 2K/4K pago só no aprovado.
 
 ## Curadoria e Guardião
 Cada foto escolhida passa por: identidade igual à folha; peça igual à folha de produto; nenhum elemento da referência estética copiado (rosto, roupa, logo); lugar real intacto (SOL); rótulo de IA definido para o uso.

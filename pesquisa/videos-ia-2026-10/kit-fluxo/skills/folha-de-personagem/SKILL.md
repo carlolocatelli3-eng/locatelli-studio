@@ -27,6 +27,8 @@ Regras do Paulo: **menos é mais** (não 300 poses); **cabeça separada do corpo
 3. **Composição:** painel em fundo cinza com FRENTE · TRÊS QUARTOS · PERFIL · CORPO INTEIRO (frente e costas). Na live, o painel saiu em 4800×1800.
 4. **Closes:** uma faixa abaixo com os detalhes únicos, cada um rotulado.
 
+Onde gerar o corpo: primeiro no Flow (Nano Banana sem crédito), pela `FILA-GOOGLE.md`; ver `HQ/maquina/CARTEIRA.md`.
+
 ## Pacote de entrega (pasta do personagem)
 - `FOLHA.png` (o painel);
 - `originais/` (fotos sem alteração);

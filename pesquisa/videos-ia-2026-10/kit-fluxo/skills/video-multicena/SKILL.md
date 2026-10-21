@@ -41,6 +41,7 @@ DO NOT: change face, garment, logo, product, architecture; add text; add music.
 Peça o vídeo **"sem trilha"** para aproveitar os efeitos sonoros na edição. Música licenciada entra na edição.
 
 ## Sequência de geração (regra de custo)
+0. **Grátis antes do pago** (`HQ/maquina/CARTEIRA.md`): blockout e testes de movimento nos **2 vídeos/dia do Gemini**; planos simples de rascunho com os 50 créditos/dia do Flow. Tudo via `FILA-GOOGLE.md` (manual). O Seedance pago entra nos planos com pessoa, produto ou fala.
 1. **Rascunho 480p** de todas as cenas (1/3 a 1/5 do custo). Edite o filme inteiro em rascunho (DaVinci).
 2. **Portão 3:** cliente aprova o corte em 480p. Registre a data no `JOB.json`: **o "OK" para 1080p precisa sair em até 7 dias**, senão o mesmo vídeo não pode mais ser ampliado (plano B: regerar usando o 480p como referência de movimento e câmera).
 3. **1080p só das cenas que entraram no corte.** Peça 2 ou 3 opções por cena difícil.

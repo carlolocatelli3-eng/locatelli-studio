@@ -28,6 +28,7 @@ kit-fluxo/
     │   ├── ORQUESTRADOR.md         de esteira para orquestrador; modelo de meta; 6 metas
     │   ├── AMBICAO.md              altitude, profundidade, abrangência; conselho de 6 lentes
     │   ├── CICLO.md                ciclo de melhoria diária
+    │   ├── CARTEIRA.md             grátis antes do pago: Flow, Gemini, planos e quando pagar
     │   └── PILOTOS.md              3 pilotos de ponta a ponta
     ├── ferramentas/                o que é conta, não opinião
     │   ├── delta_e.py              cor real × gerada (ΔE2000)

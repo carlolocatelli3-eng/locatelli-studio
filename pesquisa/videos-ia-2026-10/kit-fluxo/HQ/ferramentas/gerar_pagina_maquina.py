@@ -91,7 +91,7 @@ for name, etapa, desc, portao, nivel in SK:
                    f'<div class="doc">{skill}<div class="tests"><h4>Os testes desta skill</h4>{testes}</div></div></details>')
 
 docs = {}
-for key, path in [("metas","HQ/METAS.md"),("orq","HQ/maquina/ORQUESTRADOR.md"),("amb","HQ/maquina/AMBICAO.md"),("ciclo","HQ/maquina/CICLO.md"),("pil","HQ/maquina/PILOTOS.md"),("cart","HQ/modelos/cartucho/CARTUCHO.md"),("proj","HQ/modelos/projeto/LEIA-ME.md"),("brief","HQ/modelos/projeto/BRIEFING.md"),("usar","HQ/COMO-USAR.md")]:
+for key, path in [("metas","HQ/METAS.md"),("orq","HQ/maquina/ORQUESTRADOR.md"),("amb","HQ/maquina/AMBICAO.md"),("ciclo","HQ/maquina/CICLO.md"),("pil","HQ/maquina/PILOTOS.md"),("cart","HQ/modelos/cartucho/CARTUCHO.md"),("proj","HQ/modelos/projeto/LEIA-ME.md"),("brief","HQ/modelos/projeto/BRIEFING.md"),("usar","HQ/COMO-USAR.md"),("cart2","HQ/maquina/CARTEIRA.md")]:
     docs[key] = wrap_tables(md(read(f"{KIT}/{path}")))
 
 leia = read(f"{KIT}/LEIA-ME.md")
@@ -168,6 +168,7 @@ body = f"""
   {doc_panel("doc-metas","METAS.md","o arquivo que a máquina lê antes de tudo","metas")}
   {doc_panel("doc-orq","ORQUESTRADOR.md","modelo de meta e as 6 metas prontas","orq")}
   {doc_panel("doc-amb","AMBICAO.md","altitude, profundidade, abrangência","amb")}
+  {doc_panel("doc-cart2","CARTEIRA.md","grátis antes do pago: Flow, Gemini e quando pagar","cart2")}
 </section>
 
 <section id="ferramentas">

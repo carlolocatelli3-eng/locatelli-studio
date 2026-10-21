@@ -38,6 +38,9 @@ A IA pode mudar só **pessoas, clima, estação e hora do dia**, e cada mudança
 - Um **lugar-hub** (o QG do Paulo) que reúne os ativos ajuda na revelação final.
 - Cada prancha em 3 vistas (como a maleta) para o vídeo manter o objeto.
 
+## Onde gerar
+Vistas faltantes, props e cenários: primeiro no Flow (Nano Banana sem crédito), pela `FILA-GOOGLE.md`. Ver `HQ/maquina/CARTEIRA.md`.
+
 ## Saída e portão
 Pastas em `03-ativos/produtos-ou-lugar/` e `03-ativos/cenarios/`. **Portão 2 (ficha):** Carlo e o cliente aprovam casting, figurino, produto e locação antes do storyboard.
 
