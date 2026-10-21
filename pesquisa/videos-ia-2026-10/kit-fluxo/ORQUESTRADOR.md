@@ -22,6 +22,13 @@ Sem os quatro, o orquestrador vira uma esteira mais rápida que erra em volume. 
 | Analista de Ganchos | Você manda os resultados | Toda segunda lê a conta, pausa pela regra da Meta e propõe a próxima rodada |
 | Vera | Ainda não está no ar | A meta "nenhuma pergunta sem resposta em 5 min dentro da base", e o Destruidor testa toda noite |
 
+## Acima de tudo: a meta de negócio
+As metas de operação abaixo servem a uma meta de negócio que só o Carlo define. Ver `AMBICAO.md` (altitude). Sugestão:
+
+> "Até 15/12: 5 vendas no Studio, 1 pousada com 30 dias de Vera e relatório de margem recuperada, e o Piloto 0 publicado."
+
+Com ela escrita, a IA consegue dizer qual meta de operação está atrasando o resultado.
+
 ## O formato de uma meta (modelo)
 ```
 META: [o que precisa ser verdade, medível]

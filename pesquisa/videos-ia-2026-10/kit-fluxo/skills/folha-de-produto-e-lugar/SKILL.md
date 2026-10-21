@@ -19,6 +19,8 @@ Montagem: painel com as vistas e os closes rotulados. Se faltar uma vista, gere 
 Frase obrigatória em todo prompt que usar a peça:
 "Preserve the garment exactly: color, print scale and placement, fabric texture, seams, trims, buttons, labels and fit."
 
+**Verificação numérica de cor (obrigatória no Guardião):** para cada imagem gerada com a peça, rode `kit-fluxo/ferramentas/delta_e.py` comparando a mesma área do tecido na foto real e na gerada. ΔE2000 < 2 aprova; de 2 a 5, ajustar; acima de 5, reprovar. Anote o valor na `VERIFICACAO.md` (vai para o relatório do cliente como prova da peça sagrada).
+
 Joias, calçados e outros mercados: use o checklist de fidelidade do cartucho do setor (metal, pedras, fecho, escala; costura, solado).
 
 ## Folha de lugar (SOL)

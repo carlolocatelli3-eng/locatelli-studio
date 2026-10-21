@@ -28,8 +28,16 @@ Exemplo de referência (Fanta): "Paulo vive um caçador solitário... as latas s
 
 Pode citar 2 ou 3 referências que todo mundo conhece ("Constantine com The Witcher e a leveza do Pokémon"). Salve em `02-ideia/PITCH.md`.
 
-### F · Destruir a ideia (1 ou 2 vezes, não mais)
-Responda "por que isso floparia?" com no máximo 5 motivos concretos (clareza, produto escondido demais, custo de produção, risco de marca, regra da plataforma). Para cada motivo, uma correção possível. Pare depois da segunda rodada.
+### F · Destruir a ideia com o conselho de 6 lentes (1 ou 2 rodadas, não mais)
+Leia o pitch por 6 lentes, de preferência como 6 sub-agentes separados, cada um só com a sua lente. Cada lente devolve no máximo 2 motivos de fracasso e 1 correção:
+1. **Diretor de arte:** tem gosto? é difícil de copiar?
+2. **Comprador de mídia** (na SOL, **hóspede**): para o polegar em 1 s? funciona sem som? dá vontade de reservar?
+3. **Cliente final:** responde a uma dor real, nas palavras dela?
+4. **Jurídico:** rótulo de IA (CONAR), o que é mostrado vincula (CDC), rosto e dados (LGPD), contrato de imagem.
+5. **Plataforma:** o Meta vai rotular ou reprovar? Booking e Airbnb aceitam?
+6. **Financeiro:** cabe no teto do `JOB.json`? quantas gerações em 1080p?
+
+Junte tudo numa tela só para Carlo (o que bloqueia, o que ajustar, o que está bom). Pare depois da segunda rodada.
 
 ### G · Roteiros medianos (para Carlo reescrever)
 Escreva 2 versões de roteiro em tabela, no formato do Docs do Paulo:
