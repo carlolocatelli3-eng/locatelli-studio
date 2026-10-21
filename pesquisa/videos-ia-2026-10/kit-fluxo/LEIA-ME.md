@@ -20,7 +20,9 @@ kit-fluxo/
 │   ├── melhoria-diaria/            ciclo de melhoria
 │   └── novo-cartucho/              entrada em setor novo
 └── HQ/                       → vai para HQ/ do computador (juntar, não sobrescrever)
+    ├── COMO-USAR.md                os comandos do dia a dia (de qualquer computador ou da nuvem)
     ├── METAS.md                    regras, meta de negócio, metas S1–S3 e V1–V3 com nível e placar
+    ├── metas.json                  nível e teto de cada meta (o que o motor lê; só o Carlo muda)
     ├── REGRAS-GERAIS.md            regras que valem para todo setor (cresce com o ciclo)
     ├── maquina/                    como a máquina pensa
     │   ├── ORQUESTRADOR.md         de esteira para orquestrador; modelo de meta; 6 metas
@@ -30,7 +32,10 @@ kit-fluxo/
     ├── ferramentas/                o que é conta, não opinião
     │   ├── delta_e.py              cor real × gerada (ΔE2000)
     │   ├── vencedor.py             gancho venceu de verdade? (95% e 30 eventos)
-    │   └── melhoria.py             placar, regras por nível, alertas
+    │   ├── melhoria.py             placar, regras por nível, alertas
+    │   ├── motor.py                faz cada projeto andar até o próximo portão, com travas
+    │   ├── trava_portoes.py        hook: nenhuma sessão grava o final ou a entrega sem o portão
+    │   └── gerar_pagina_maquina.py refaz a página maquina.html a partir do kit
     ├── modelos/
     │   ├── projeto/                a pasta que todo projeto copia (BRIEFING, JOB.json, 8 etapas)
     │   └── cartucho/               o modelo de cartucho de setor
@@ -55,7 +60,7 @@ Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
 
 ## Testado nesta sessão
 `python3 HQ/testes/rodar.py`:
-- **Ferramentas:** 6 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas.
+- **Ferramentas:** 9 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas; o motor leva um projeto de ponta a ponta parando em cada portão e bloqueia teto, prazo de 7 dias e meta no nível 0; a trava impede gravar o final e a entrega sem portão.
 - **Skills:** as 9 estão com o formato correto e têm 44 casos de teste.
 - **Juiz:** os 44 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
 

@@ -87,3 +87,62 @@ class Melhoria(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Motor(unittest.TestCase):
+    def test_projeto_de_ponta_a_ponta_com_travas(self):
+        with tempfile.TemporaryDirectory() as t:
+            os.makedirs(os.path.join(t, "HQ")); proj = os.path.join(t, "CLIENTES", "c", "p")
+            os.makedirs(proj)
+            json.dump({"metas": {"S1": {"nivel": 1, "teto_por_execucao_usd": 1}}}, open(os.path.join(t, "HQ", "metas.json"), "w"))
+            json.dump({"id": "p", "cliente": "c", "cartucho": "x", "meta": "S1", "status": "pendente",
+                       "custos": {"teto_reais": 100, "gasto_reais": 0}, "portoes": {}}, open(os.path.join(proj, "JOB.json"), "w"))
+            fake = os.path.join(t, "fake"); open(fake, "w").write('#!/bin/sh\necho \'{"total_cost_usd": 1.0}\'\n'); os.chmod(fake, 0o755)
+            env = dict(os.environ, MAQUINA_RAIZ=t, MAQUINA_CLAUDE=fake, MAQUINA_HOJE="2026-10-21")
+            m = lambda *a, **kw: subprocess.run([sys.executable, "-I", os.path.join(FERR, "motor.py"), *a],
+                                                capture_output=True, text=True, env=dict(env, **kw))
+            self.assertEqual(m("rodar", "c/p", "--executar").returncode, 0)
+            self.assertEqual(m("rodar", "c/p", "--executar").returncode, 0)
+            r = m("rodar", "c/p", "--executar")
+            self.assertEqual(r.returncode, 2); self.assertIn("PORTÃO 1", r.stdout)
+            m("decidir", "c/p", "--portao", "1", "--veredito", "recusado", "--motivo", "fraco", "--tags", "tom")
+            job = json.load(open(os.path.join(proj, "JOB.json")))
+            self.assertEqual(job["status"], "pesquisa")
+            self.assertEqual(job["decisoes"][-1]["tags"], ["tom"])
+            # teto: R$ 11 gastos + até R$ 5,5 por execução; com teto de R$ 12 deve bloquear
+            job["custos"]["teto_reais"] = 12; json.dump(job, open(os.path.join(proj, "JOB.json"), "w"))
+            r = m("rodar", "c/p", "--executar")
+            self.assertEqual(r.returncode, 2); self.assertIn("teto do projeto", r.stdout)
+            # prazo do 480p vencido bloqueia o final
+            job.update({"status": "portao3", "custos": {"teto_reais": 1000, "gasto_reais": 0},
+                        "portoes": {"3_corte_480p": {"aprovado": True, "prazo_1080p": "2026-10-20"}}})
+            json.dump(job, open(os.path.join(proj, "JOB.json"), "w"))
+            r = m("rodar", "c/p", "--executar")
+            self.assertEqual(r.returncode, 2); self.assertIn("venceu", r.stdout)
+
+    def test_nivel_zero_nao_roda(self):
+        with tempfile.TemporaryDirectory() as t:
+            os.makedirs(os.path.join(t, "HQ")); proj = os.path.join(t, "CLIENTES", "c", "p"); os.makedirs(proj)
+            json.dump({"metas": {"V1": {"nivel": 0, "teto_por_execucao_usd": 1}}}, open(os.path.join(t, "HQ", "metas.json"), "w"))
+            json.dump({"id": "p", "meta": "V1", "status": "pendente", "custos": {}, "portoes": {}}, open(os.path.join(proj, "JOB.json"), "w"))
+            r = subprocess.run([sys.executable, "-I", os.path.join(FERR, "motor.py"), "rodar", "c/p", "--executar"],
+                               capture_output=True, text=True, env=dict(os.environ, MAQUINA_RAIZ=t))
+            self.assertEqual(r.returncode, 2); self.assertIn("nível 0", r.stdout)
+
+
+class TravaPortoes(unittest.TestCase):
+    def test_bloqueia_final_sem_portao_e_libera_com(self):
+        with tempfile.TemporaryDirectory() as t:
+            proj = os.path.join(t, "CLIENTES", "c", "p"); os.makedirs(proj)
+            def job(portoes): json.dump({"portoes": portoes}, open(os.path.join(proj, "JOB.json"), "w"))
+            def tenta(pasta):
+                return subprocess.run([sys.executable, "-I", os.path.join(FERR, "trava_portoes.py")],
+                                      input=json.dumps({"tool_input": {"file_path": os.path.join(proj, pasta, "a.mp4")}}),
+                                      capture_output=True, text=True, env=dict(os.environ, MAQUINA_HOJE="2026-10-21")).returncode
+            job({})
+            self.assertEqual(tenta("06-final"), 2)
+            self.assertEqual(tenta("07-entrega"), 2)
+            self.assertEqual(tenta("05-rascunho-480p"), 0)
+            job({"3_corte_480p": {"aprovado": True, "prazo_1080p": "2026-10-25"}, "4_conjunto": {"aprovado": True}})
+            self.assertEqual(tenta("06-final"), 0)
+            self.assertEqual(tenta("07-entrega"), 0)

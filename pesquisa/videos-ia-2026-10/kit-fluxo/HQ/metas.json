@@ -1,0 +1,11 @@
+{
+  "_leia": "Parâmetros que o motor lê. A explicação humana fica em METAS.md. Só o Carlo muda nível e teto.",
+  "metas": {
+    "S1": {"nome": "Toda campanha aprovada chega ao Portão 3 sozinha", "nivel": 1, "teto_por_execucao_usd": 3, "para_em": ["portao1", "portao2", "portao3"]},
+    "S2": {"nome": "Sempre 3 ganchos vencedores rodando em cada cliente", "nivel": 0, "teto_por_execucao_usd": 2, "para_em": ["portao4"]},
+    "S3": {"nome": "25 amostras prontas toda segunda", "nivel": 1, "teto_por_execucao_usd": 5, "para_em": ["envio"]},
+    "V1": {"nome": "Nenhuma pergunta de hóspede sem resposta em 5 minutos", "nivel": 0, "teto_por_execucao_usd": 1, "para_em": []},
+    "V2": {"nome": "Relatório de R$ recuperados todo dia 1", "nivel": 0, "teto_por_execucao_usd": 1, "para_em": []},
+    "V3": {"nome": "Todo pedido de viagem com prancha em 24 h", "nivel": 0, "teto_por_execucao_usd": 2, "para_em": ["envio"]}
+  }
+}

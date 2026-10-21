@@ -1,6 +1,6 @@
 # METAS · lido pelo Claude Code no começo de toda sessão e de toda rotina
 
-> Copiar para `HQ/METAS.md` no computador. Só o Carlo muda este arquivo.
+> Copiar para `HQ/METAS.md` no computador. Só o Carlo muda este arquivo. Os números que o motor lê (nível e teto de cada meta) ficam em `HQ/metas.json`; mudou aqui, mude lá também.
 
 ## Regras de sempre
 1. Antes de qualquer trabalho, ler esta página e o `JOB.json` do projeto.

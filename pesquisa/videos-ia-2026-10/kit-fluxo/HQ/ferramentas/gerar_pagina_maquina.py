@@ -91,7 +91,7 @@ for name, etapa, desc, portao, nivel in SK:
                    f'<div class="doc">{skill}<div class="tests"><h4>Os testes desta skill</h4>{testes}</div></div></details>')
 
 docs = {}
-for key, path in [("metas","HQ/METAS.md"),("orq","HQ/maquina/ORQUESTRADOR.md"),("amb","HQ/maquina/AMBICAO.md"),("ciclo","HQ/maquina/CICLO.md"),("pil","HQ/maquina/PILOTOS.md"),("cart","HQ/modelos/cartucho/CARTUCHO.md"),("proj","HQ/modelos/projeto/LEIA-ME.md"),("brief","HQ/modelos/projeto/BRIEFING.md")]:
+for key, path in [("metas","HQ/METAS.md"),("orq","HQ/maquina/ORQUESTRADOR.md"),("amb","HQ/maquina/AMBICAO.md"),("ciclo","HQ/maquina/CICLO.md"),("pil","HQ/maquina/PILOTOS.md"),("cart","HQ/modelos/cartucho/CARTUCHO.md"),("proj","HQ/modelos/projeto/LEIA-ME.md"),("brief","HQ/modelos/projeto/BRIEFING.md"),("usar","HQ/COMO-USAR.md")]:
     docs[key] = wrap_tables(md(read(f"{KIT}/{path}")))
 
 leia = read(f"{KIT}/LEIA-ME.md")
@@ -113,6 +113,7 @@ body = f"""
   <a href="#melhoria"><span class="n">05</span>Como ela melhora</a>
   <a href="#setores"><span class="n">06</span>Qualquer setor</a>
   <a href="#testes"><span class="n">07</span>Testes</a>
+  <a href="#usar"><span class="n">↗</span>Como usar</a>
   <a href="#organizacao"><span class="n">08</span>Organização</a>
   <a href="#organismo"><span class="n">09</span>Fusão com o Organismo</a>
   <a href="#falta"><span class="n">10</span>O que falta</a>
@@ -184,6 +185,11 @@ variante : 18/800 = 2.25%
 chance de a variante ser melhor: 93.4%
 ganho provável: +75% (90% entre -5% e +234%)
 VEREDITO: CEDO DEMAIS (menos de 30 eventos num dos lados)</div></div>
+    <div><span class="l">motor.py · Orquestrador</span><h3>O projeto anda sozinho até o portão</h3><p>Um comando faz a próxima etapa com teto de gasto e para em cada portão. Você responde com um comando de decisão, que libera ou devolve a etapa e alimenta o ciclo de melhoria.</p>
+      <div class="out">OK: Rascunhos 480p e corte (L) · custo US$ 0.80
+PAROU no PORTÃO 3 · corte em 480p: aguardando o Carlo
+NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
+    <div><span class="l">trava_portoes.py · Dentro do Claude Code</span><h3>Ninguém grava o final sem o seu sim</h3><p>Qualquer sessão que tente gravar na pasta do final ou da entrega sem o portão aprovado é bloqueada na hora.</p></div>
     <div><span class="l">melhoria.py · Ciclo</span><h3>O placar e as regras</h3><p>Lê todas as suas decisões em todos os projetos, calcula o placar de cada meta, agrupa as correções em regras e avisa de gasto alto e de rascunho perto de vencer.</p></div>
     <div><span class="l">Conselho de 6 lentes · Abrangência</span><h3>Seis olhares ao mesmo tempo</h3><p>Diretor de arte, mídia, cliente final, jurídico, plataforma e financeiro leem a ideia antes do Portão 1 e as peças no Guardião. Você recebe tudo numa tela.</p></div>
   </div>
@@ -224,10 +230,17 @@ VEREDITO: CEDO DEMAIS (menos de 30 eventos num dos lados)</div></div>
   <p class="eb"><span class="n">07</span>Nada piora sem você saber</p>
   <h2>Testes</h2>
   <div class="finds">
-    <div><span class="l">Ferramentas</span><span class="big">6 de 6</span><p>A cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
+    <div><span class="l">Ferramentas</span><span class="big">9 de 9</span><p>O motor leva um projeto de ponta a ponta e respeita todas as travas; a cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
     <div><span class="l">Skills</span><span class="big">44 casos</span><p>Nas 9 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
   </div>
   <p class="source">Comando único: <code>python3 HQ/testes/rodar.py</code>. Os casos que precisam de IA rodam no computador, cada um julgado por um juiz separado. Uma melhoria só chega até você se nenhum teste que passava começar a falhar.</p>
+</section>
+
+<section id="usar">
+  <p class="eb"><span class="n">↗</span>De qualquer lugar</p>
+  <h2>Como usar no dia a dia</h2>
+  <p class="intro">A máquina mora no repositório, não num computador: funciona no notebook, no computador ou numa sessão na nuvem. Só precisa de Python.</p>
+  {doc_panel("doc-usar","COMO-USAR.md","os comandos do dia a dia","usar")}
 </section>
 
 <section id="organizacao">
@@ -250,9 +263,9 @@ VEREDITO: CEDO DEMAIS (menos de 30 eventos num dos lados)</div></div>
   <div class="plan">
     <div class="step"><span class="i">1</span><div><h3>Ciclo de melhoria diária</h3><p>Script, skill, regras por nível, modelo de cartucho.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
     <div class="step"><span class="i">2</span><div><h3>Testes de cada skill</h3><p>44 casos e as ferramentas testadas.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
-    <div class="step"><span class="i">3</span><div><h3>Motor das metas</h3><p>Lê METAS e JOB.json, chama o Claude com teto de gasto e para sozinho nos portões.</p></div><div class="r"><span class="chip warn">próximo</span></div></div>
-    <div class="step"><span class="i">4</span><div><h3>Portões em código</h3><p>Travas reais: sem 1080p antes do OK, sem passar do teto, sem publicar sem “aprovado”.</p></div><div class="r"><span class="chip info">a fazer</span></div></div>
-    <div class="step"><span class="i">5</span><div><h3>Calibragem do juiz</h3><p>Você marca 50 peças e a máquina mede quanto o Guardião concorda com você.</p></div><div class="r"><span class="chip info">a fazer</span></div></div>
+    <div class="step"><span class="i">3</span><div><h3>Motor das metas</h3><p>Leva cada projeto até o próximo portão com teto de gasto, registra custo e decisões. Testado de ponta a ponta.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
+    <div class="step"><span class="i">4</span><div><h3>Portões em código</h3><p>No motor e como trava dentro do Claude Code: sem final sem Portão 3, sem passar do prazo de 7 dias, sem passar do teto, sem entrega sem Portão 4.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
+    <div class="step"><span class="i">5</span><div><h3>Calibragem do juiz</h3><p>Você marca 50 peças e a máquina mede quanto o Guardião concorda com você.</p></div><div class="r"><span class="chip warn">próximo</span></div></div>
     <div class="step"><span class="i">6</span><div><h3>Pacote de passagem</h3><p>Um arquivo com o pedido pronto para o Claude do computador cruzar tudo com o Organismo.</p></div><div class="r"><span class="chip info">por último</span></div></div>
   </div>
 </section>
