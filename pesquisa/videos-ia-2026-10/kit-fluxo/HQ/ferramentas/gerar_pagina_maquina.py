@@ -2,7 +2,7 @@
 """Gera pesquisa/videos-ia-2026-10/maquina.html a partir dos arquivos reais do kit. Requer: pip install markdown.
 No computador, ajuste BASE para a pasta onde o kit estiver."""
 import os, re, html, markdown, json
-BASE = "/home/user/locatelli-studio/pesquisa/videos-ia-2026-10"
+BASE = os.environ.get("MAQUINA_BASE") or os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 KIT = BASE + "/kit-fluxo"
 md = lambda t: markdown.markdown(t, extensions=["tables", "fenced_code"])
 
@@ -69,6 +69,8 @@ SK = [
  ("video-multicena","K–M","Escreve o prompt de vídeo a partir das fichas e do áudio real, gera rascunhos baratos em 480p, controla o prazo de 7 dias e só faz 1080p do que entrou no corte.","Portão 3","2"),
  ("vfx-sobre-video-real","Efeitos","Sobre um vídeo real gravado, dirige um efeito (trocar ambiente, transformar personagem, mudar clima) preservando pessoa, câmera e áudio.","Portão 3","1"),
  ("melhoria-diaria","Ciclo","Todo dia lê seus sim, corrige e não; atualiza o placar; transforma correções em regras no nível certo; propõe até 2 melhorias testadas.","Decidir hoje","regras 2 · skills 1"),
+ ("storyboard-desenhado","K","Gera a prancha desenhada (não realista) a partir do roteiro e dos ativos, com lente, movimento e duração por quadro, e um animatic grátis no HyperFrames. É a aprovação mais barata do fluxo.","Portão 3 (antes do vídeo)","2"),
+ ("prospector-e-funil","Venda","Leva a máquina até o dinheiro: amostra sem pessoa real, mensagem com a oferta travada, follow-ups do dia 4 e 10, proposta com controle por escrito e, no sinal pago, a pasta do projeto. Você sempre envia.","Seu envio","1"),
  ("novo-cartucho","Setor novo","Faz a máquina entrar em qualquer setor que dependa de imagem: pesquisa e preenche o que é sagrado, o que é proibido, as dores, a métrica e os testes.","Seu sim antes do uso","1"),
 ]
 
@@ -91,7 +93,7 @@ for name, etapa, desc, portao, nivel in SK:
                    f'<div class="doc">{skill}<div class="tests"><h4>Os testes desta skill</h4>{testes}</div></div></details>')
 
 docs = {}
-for key, path in [("metas","HQ/METAS.md"),("orq","HQ/maquina/ORQUESTRADOR.md"),("amb","HQ/maquina/AMBICAO.md"),("ciclo","HQ/maquina/CICLO.md"),("pil","HQ/maquina/PILOTOS.md"),("cart","HQ/modelos/cartucho/CARTUCHO.md"),("proj","HQ/modelos/projeto/LEIA-ME.md"),("brief","HQ/modelos/projeto/BRIEFING.md"),("usar","HQ/COMO-USAR.md"),("cart2","HQ/maquina/CARTEIRA.md"),("espec","ESPECIFICACAO.md")]:
+for key, path in [("metas","HQ/METAS.md"),("orq","HQ/maquina/ORQUESTRADOR.md"),("amb","HQ/maquina/AMBICAO.md"),("ciclo","HQ/maquina/CICLO.md"),("pil","HQ/maquina/PILOTOS.md"),("cart","HQ/modelos/cartucho/CARTUCHO.md"),("proj","HQ/modelos/projeto/LEIA-ME.md"),("brief","HQ/modelos/projeto/BRIEFING.md"),("usar","HQ/COMO-USAR.md"),("cart2","HQ/maquina/CARTEIRA.md"),("espec","ESPECIFICACAO.md"),("decab","HQ/DECISOES-ABERTAS.md"),("forn","HQ/maquina/FORNECEDORES.md"),("qa","HQ/maquina/QA-ARTEFATOS.md"),("biblia","HQ/modelos/marca/BIBLIA-VISUAL.md"),("contr","HQ/modelos/contrato/CESSAO-IMAGEM-VOZ.md")]:
     docs[key] = wrap_tables(md(read(f"{KIT}/{path}")))
 
 leia = read(f"{KIT}/LEIA-ME.md")
@@ -107,7 +109,7 @@ body = f"""
   <p>A máquina</p>
   <a href="#topo"><span class="n">00</span>O que é</a>
   <a href="#trabalho"><span class="n">01</span>Um trabalho, do início ao fim</a>
-  <a href="#skills"><span class="n">02</span>As 9 skills</a>
+  <a href="#skills"><span class="n">02</span>As 11 skills</a>
   <a href="#metas"><span class="n">03</span>Metas e autonomia</a>
   <a href="#ferramentas"><span class="n">04</span>Ferramentas de conta</a>
   <a href="#melhoria"><span class="n">05</span>Como ela melhora</a>
@@ -148,8 +150,8 @@ body = f"""
 
 <section id="skills">
   <p class="eb"><span class="n">02</span>Tudo o que a máquina sabe fazer</p>
-  <h2>As 9 skills</h2>
-  <p class="intro">Sete de produção, que vieram do método do estúdio Human (vídeo 8) somado às suas regras, e duas que fazem a máquina crescer. Abaixo dos cartões, cada skill está por inteiro, com os testes que ela precisa passar.</p>
+  <h2>As 11 skills</h2>
+  <p class="intro">Oito de produção (do método do estúdio Human, do vídeo 8, somado às suas regras e à auditoria), uma de venda e duas que fazem a máquina crescer. Abaixo dos cartões, cada skill está por inteiro, com os testes que ela precisa passar.</p>
   <div class="cards">{''.join(cards)}</div>
   {''.join(details)}
 </section>
@@ -221,6 +223,8 @@ NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
   <p class="eb"><span class="n">06</span>Um núcleo, qualquer mercado</p>
   <h2>Qualquer setor que dependa de imagem</h2>
   <p class="intro">O núcleo não muda. O que é de cada setor mora num cartucho, criado pela skill <code>novo-cartucho</code> quando um setor novo aparece: o que é sagrado na imagem e como conferir, o que não se pode dizer, onde estão as dores, a métrica de dinheiro e os testes.</p>
+  {doc_panel("doc-biblia","Bíblia visual da marca","câmera, cor, LUT, som, texto, zonas seguras, ritmo","biblia")}
+  {doc_panel("doc-qa","QA-ARTEFATOS.md","o checklist do Guardião além da cor","qa")}
   {doc_panel("doc-cart","Modelo de cartucho","o que todo setor preenche","cart")}
   {doc_panel("doc-proj","Modelo de projeto","a pasta que todo trabalho copia","proj")}
   {doc_panel("doc-brief","BRIEFING.md","o pedido, com métrica e portões","brief")}
@@ -231,8 +235,8 @@ NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
   <p class="eb"><span class="n">07</span>Nada piora sem você saber</p>
   <h2>Testes</h2>
   <div class="finds">
-    <div><span class="l">Ferramentas</span><span class="big">9 de 9</span><p>O motor leva um projeto de ponta a ponta e respeita todas as travas; a cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
-    <div><span class="l">Skills</span><span class="big">48 casos</span><p>Nas 9 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
+    <div><span class="l">Ferramentas</span><span class="big">10 de 10</span><p>O motor leva um projeto de ponta a ponta e respeita todas as travas; a cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
+    <div><span class="l">Skills</span><span class="big">60 casos</span><p>Nas 11 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
   </div>
   <p class="source">Comando único: <code>python3 HQ/testes/rodar.py</code>. Os casos que precisam de IA rodam no computador, cada um julgado por um juiz separado. Uma melhoria só chega até você se nenhum teste que passava começar a falhar.</p>
 </section>
@@ -255,6 +259,9 @@ NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
   <p class="eb"><span class="n">09</span>Um único organismo</p>
   <h2>Fusão com o Organismo Operador</h2>
   <p class="intro">No computador, o Claude compara antes de copiar. Onde a máquina repete algo que o Organismo já tem, as duas partes viram uma só.</p>
+  {doc_panel("doc-decab","DECISOES-ABERTAS.md","tudo o que só você decide, com recomendação","decab")}
+  {doc_panel("doc-forn","FORNECEDORES.md","o que pode ir para cada ferramenta","forn")}
+  {doc_panel("doc-contr","Termo de cessão de imagem e voz","rascunho para revisar com advogado","contr")}
   {doc_panel("doc-espec","ESPECIFICACAO.md","leia primeiro: o que é, o que não é, como integrar e o registro de tudo o que entrou","espec")}
   <div class="doc" style="padding:0;border:0">{integ}</div>
 </section>

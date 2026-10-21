@@ -8,7 +8,8 @@ description: Monta a folha de personagem (character sheet) de uma pessoa real a 
 "Uma referência visual organizada da pessoa, para reutilizar em tudo que vem depois." A folha **define quem aparece**.
 
 ## Antes de começar (obrigatório)
-- **Contrato e consentimento** registrados no Ativos: finalidade, prazo, encerramento, repasse por uso. Sem isso, não monte a folha.
+- **Termo assinado** a partir de `HQ/modelos/contrato/CESSAO-IMAGEM-VOZ.md` (finalidade, prazo, encerramento, uso póstumo, revogação, repasse, fornecedores e países), registrado no Ativos. Sem isso, não monte a folha.
+- **Só adultos.** Menor de 18: nenhuma folha sem decisão escrita do Carlo, os dois responsáveis e revisão jurídica.
 - Dado biométrico é sensível pela LGPD: as fotos ficam só na pasta do personagem, nunca em serviço que treina com os dados.
 
 ## Captura (checklist da diária)
@@ -16,6 +17,8 @@ Peça à pessoa, em luz uniforme e fundo neutro:
 - rosto **de frente**, **três quartos** e **perfil**;
 - **corpo inteiro** de frente e **de costas** (se não houver, a costa é gerada e isso precisa estar autorizado e anotado);
 - **close de cada detalhe único**: tatuagem, pinta, cicatriz, óculos, joia, relógio;
+- **casting além do rosto** (na FICHA): postura, modo de andar, mãos (anéis, unhas), 3 expressões-assinatura, sorriso sim/não, altura **relativa** a outros personagens;
+- **look por cena** (`LOOK-<cena>.md`): o figurino peça por peça e como é usado (manga, gola, botão), cabelo, maquiagem, unhas, em que mão vai cada acessório. A continuidade disso vira item do QA;
 - **altura** em centímetros (anotar no arquivo; sem isso a IA inventa alturas).
 
 Regras do Paulo: **menos é mais** (não 300 poses); **cabeça separada do corpo** na folha; detalhes únicos em close separado e **citados no prompt**.
@@ -27,13 +30,13 @@ Regras do Paulo: **menos é mais** (não 300 poses); **cabeça separada do corpo
 3. **Composição:** painel em fundo cinza com FRENTE · TRÊS QUARTOS · PERFIL · CORPO INTEIRO (frente e costas). Na live, o painel saiu em 4800×1800.
 4. **Closes:** uma faixa abaixo com os detalhes únicos, cada um rotulado.
 
-Onde gerar o corpo: primeiro no Flow (Nano Banana sem crédito), pela `FILA-GOOGLE.md`; ver `HQ/maquina/CARTEIRA.md`.
+Onde gerar o corpo: **só em ferramenta com "biometria = sim" em `HQ/maquina/FORNECEDORES.md`** (termos lidos, não treina com os dados, prazo de apagamento, transferência autorizada no termo). Até lá, o Flow e o Gemini de conta pessoal servem só para pessoa **gerada**, produto e lugar, **nunca para rosto real**.
 
 ## Pacote de entrega (pasta do personagem)
 - `FOLHA.png` (o painel);
 - `originais/` (fotos sem alteração);
 - `PROMPT.md` (os prompts usados);
-- `FICHA.md`: nome, altura, detalhes únicos, figurino de referência, **o que foi gerado e o que é real**, contrato e validade;
+- `FICHA.md`: nome, altura, detalhes únicos, figurino de referência, **o que foi gerado e o que é real**, o termo assinado, a **validade** e a **data de apagamento** (no fim do prazo ou na revogação: apagar originais, folha e envios aos fornecedores em até 15 dias e registrar em `decisoes`);
 - `VERIFICACAO.md`: o Guardião compara folha × fotos originais (rosto, tom de pele, tatuagens, proporções) e marca aprovado ou refazer.
 
 ## Duas regras do Playbook que valem em toda geração
@@ -43,7 +46,7 @@ Onde gerar o corpo: primeiro no Flow (Nano Banana sem crédito), pela `FILA-GOOG
 ## Uso depois
 Em todo ensaio e vídeo, a folha entra como **Image 1, referência única de identidade e figurino, prioridade absoluta**.
 
-## Studio × SOL
+## Exemplos por negócio (Studio, SOL; vale o mesmo para qualquer setor)
 - **Studio:** modelos do acervo e criadores de UGC. A folha é o ativo que vira licença (Ativos calcula repasse por uso).
 - **SOL:** anfitrião, equipe ou hóspede real, sempre com autorização escrita. **Nunca** criar uma pessoa fictícia apresentada como hóspede real.
 

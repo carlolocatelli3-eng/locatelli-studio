@@ -6,8 +6,8 @@ Bloqueia (código de saída 2) qualquer gravação em:
   CLIENTES/<cliente>/<projeto>/07-entrega/  sem o Portão 4 aprovado
 
 Instalação no computador (.claude/settings.json do projeto):
-  {"hooks": {"PreToolUse": [{"matcher": "Write|Edit|MultiEdit",
-     "hooks": [{"type": "command", "command": "python3 HQ/ferramentas/trava_portoes.py"}]}]}}
+  {"hooks": {"PreToolUse": [{"matcher": "Write|Edit|MultiEdit|Bash",
+     "hooks": [{"type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR\"/HQ/ferramentas/trava_portoes.py"}]}]}}
 """
 import datetime as dt, json, os, re, sys
 
@@ -17,11 +17,16 @@ def main():
         dados = json.load(sys.stdin)
     except json.JSONDecodeError:
         sys.exit(0)
-    caminho = (dados.get("tool_input") or {}).get("file_path") or ""
-    m = re.search(r"(.*CLIENTES[/\\][^/\\]+[/\\][^/\\]+)[/\\](06-final|07-entrega)[/\\]", caminho)
+    entrada = dados.get("tool_input") or {}
+    # Write/Edit trazem file_path; Bash (cp, curl, ffmpeg) traz o destino dentro de command
+    caminho = entrada.get("file_path") or entrada.get("command") or ""
+    if "file_path" in entrada:
+        caminho = os.path.normpath(caminho)
+    prefixo = r"(.*CLIENTES" if "file_path" in entrada else r"([^\s'\"]*CLIENTES"  # caminho pode ter espaço; comando não
+    m = re.search(prefixo + r"[/\\][^/\\]+[/\\][^/\\]+)[/\\](06-final|07-entrega)[/\\]", caminho, re.I)
     if not m:
         sys.exit(0)
-    pasta, etapa = m.group(1), m.group(2)
+    pasta, etapa = m.group(1), m.group(2).lower()
     try:
         job = json.load(open(os.path.join(pasta, "JOB.json"), encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
@@ -33,7 +38,9 @@ def main():
         p3 = portoes.get("3_corte_480p", {})
         if not p3.get("aprovado"):
             print("Trava: o final 1080p só pode ser gravado depois do Portão 3 aprovado pelo Carlo.", file=sys.stderr); sys.exit(2)
-        if p3.get("prazo_1080p") and hoje > p3["prazo_1080p"]:
+        if not p3.get("prazo_1080p"):
+            print("Trava: Portão 3 sem prazo_1080p registrado (use motor.py enviou-480 ou decidir).", file=sys.stderr); sys.exit(2)
+        if hoje > p3["prazo_1080p"]:
             print(f"Trava: o prazo de 7 dias do rascunho venceu em {p3['prazo_1080p']}.", file=sys.stderr); sys.exit(2)
     if etapa == "07-entrega" and not portoes.get("4_conjunto", {}).get("aprovado"):
         print("Trava: a entrega só pode ser gravada depois do Portão 4 aprovado pelo Carlo.", file=sys.stderr); sys.exit(2)

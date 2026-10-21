@@ -13,6 +13,9 @@ Na live: folha de personagem + **áudio gravado no celular** + prompt → Seedan
 - áudio real (se houver fala): **gravado na mesma situação da cena** (andando, sentado, ao ar livre), porque a voz muda;
 - `04-prancha/` com o storyboard aprovado e o roteiro com `[ATIVO: ...]`.
 
+## Voz
+Áudio só da própria pessoa da folha, com cláusula de voz no termo. **Proibido clonar voz** (TTS) sem cláusula específica, e proibido pôr na boca da pessoa fala que ela não gravou ou não aprovou por escrito. Voz sintética realista em anúncio leva rótulo de IA.
+
 ## Blockout antes do rascunho (movimento e câmera)
 Antes de gerar, defina o **blockout**: como a câmera e a pessoa se movem em cada plano. Três fontes, da mais barata para a mais precisa:
 1. **Descrição** no próprio prompt (plano simples).
@@ -56,10 +59,16 @@ Peça o vídeo **"sem trilha"** para aproveitar os efeitos sonoros na edição. 
 
 Custo de referência na live: cerca de **80 créditos** do Higgsfield por geração de Seedance 2.5 em 1080p.
 
+## Finalização e QA
+- Ler a bíblia visual da marca (`HQ/marcas/<marca>/BIBLIA-VISUAL.md`, modelo em `HQ/modelos/marca/`): câmera, lente, roteiro de cor e luz, LUT, grão, som, zonas seguras, ritmo.
+- **Bloco anti-"cara de IA"** e **checklist de artefatos** em `HQ/maquina/QA-ARTEFATOS.md`, em todo plano.
+- **Ao misturar modelos:** o mesmo tratamento de cor de base, o mesmo grão, e o último frame de um plano como primeiro do seguinte. QA específico de objetos recorrentes (carro, produto).
+- **Plano B, se o prazo do rascunho vencer:** reenviar o 480p com "Use this video as the base for all movement and camera control".
+
 ## Montagem no HyperFrames
 Depois dos clipes, a montagem sai no HyperFrames (HTML → MP4, render local, custo zero): legenda, marca, preço, chamada, as 5 versões de gancho trocando só a abertura, e os formatos 9:16, 4:5 e 1:1. A montagem de rascunho pode ir ao Portão 3 junto com o corte 480p; o render final só usa clipes 1080p aprovados. Texto na tela passa pela lista negra do cartucho do setor.
 
-## Studio × SOL
+## Exemplos por negócio (Studio, SOL; vale o mesmo para qualquer setor)
 - **Studio:** a peça sagrada aparece inteira no plano de revelação; o Guardião confere quadro a quadro os planos com a peça. UGC: áudio real do criador licenciado.
 - **SOL:** o vídeo parte de fotos ou vídeos **reais** da pousada; a IA mexe em pessoas, clima, estação e câmera. Último plano: o lugar inteiro + chamada para o WhatsApp da Vera com o código do anúncio.
 

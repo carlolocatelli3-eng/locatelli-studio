@@ -20,7 +20,7 @@ O `ORQUESTRADOR.md` já troca tarefas por metas de operação (S1–S3, V1–V3)
 |---|---|---|
 | Tarefa | "Faça 5 vídeos de gancho" | (esteira; evitar) |
 | Meta de operação | "Sempre 3 ganchos vencedores rodando em cada cliente" | Carlo, uma vez |
-| **Meta de negócio** | "5 clientes pagando no Studio e 1 pousada com relatório de R$ até 15/12" | Carlo |
+| **Meta de negócio** | "5 vendas no Studio e 1 pousada com relatório de R$ até 15/12" | Carlo |
 
 Com a meta de negócio escrita, a IA consegue dizer **qual meta de operação está atrasando o resultado**. Por exemplo: "faltam amostras: a S3 entregou 12 de 25 nesta semana". O "Decidir hoje" passa a mostrar a distância até a meta, não uma lista de tarefas.
 

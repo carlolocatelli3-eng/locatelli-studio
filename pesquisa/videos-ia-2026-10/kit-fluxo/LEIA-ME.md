@@ -17,7 +17,9 @@ kit-fluxo/
 │   ├── folha-de-personagem/        etapa H
 │   ├── folha-de-produto-e-lugar/   etapas I–J
 │   ├── ensaio-por-referencia/      ensaio
-│   ├── video-multicena/            etapas K–M
+│   ├── storyboard-desenhado/       etapa K (prancha)
+│   ├── video-multicena/            etapas L–M
+│   ├── prospector-e-funil/         amostra → mensagem → proposta → projeto
 │   ├── vfx-sobre-video-real/       efeitos
 │   ├── melhoria-diaria/            ciclo de melhoria
 │   └── novo-cartucho/              entrada em setor novo
@@ -26,12 +28,16 @@ kit-fluxo/
     ├── METAS.md                    regras, meta de negócio, metas S1–S3 e V1–V3 com nível e placar
     ├── metas.json                  nível e teto de cada meta (o que o motor lê; só o Carlo muda)
     ├── REGRAS-GERAIS.md            regras que valem para todo setor (cresce com o ciclo)
+    ├── DECISOES-ABERTAS.md         tudo o que só o Carlo decide, com recomendação
+    ├── PLACAR.json · melhoria/     gerados pelo ciclo de melhoria
     ├── maquina/                    como a máquina pensa
     │   ├── ORQUESTRADOR.md         de esteira para orquestrador; modelo de meta; 6 metas
     │   ├── AMBICAO.md              altitude, profundidade, abrangência; conselho de 6 lentes
     │   ├── CICLO.md                ciclo de melhoria diária
     │   ├── CARTEIRA.md             grátis antes do pago: Flow, Gemini, planos e quando pagar
-    │   └── PILOTOS.md              3 pilotos de ponta a ponta
+    │   ├── PILOTOS.md              3 pilotos de ponta a ponta
+    │   ├── FORNECEDORES.md         o que pode ir para cada ferramenta (biometria, uso comercial)
+    │   └── QA-ARTEFATOS.md         checklist do Guardião além da cor + bloco anti-"cara de IA"
     ├── ferramentas/                o que é conta, não opinião
     │   ├── delta_e.py              cor real × gerada (ΔE2000)
     │   ├── vencedor.py             gancho venceu de verdade? (95% e 30 eventos)
@@ -41,18 +47,22 @@ kit-fluxo/
     │   └── gerar_pagina_maquina.py refaz a página maquina.html a partir do kit
     ├── modelos/
     │   ├── projeto/                a pasta que todo projeto copia (BRIEFING, JOB.json, 8 etapas)
-    │   └── cartucho/               o modelo de cartucho de setor
+    │   ├── cartucho/               o modelo de cartucho de setor
+    │   ├── marca/                  bíblia visual por marca (câmera, cor, LUT, som, texto, zonas seguras)
+    │   ├── contrato/               rascunho do termo de cessão de imagem e voz (revisar com advogado)
+    │   └── vendas/                 VENDAS.json (funil) e PROPOSTA.md
     ├── cartuchos/                  um por setor, criado pela skill novo-cartucho
     └── testes/
         ├── rodar.py                roda tudo; nada muda se falhar
         ├── unit/                   testes das ferramentas
-        └── PLANO-JUIZ.md           os 48 casos que precisam de IA (gerado pelo rodar.py)
+        └── PLANO-JUIZ.md           os 60 casos que precisam de IA (gerado pelo rodar.py)
 ```
 
 Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
 - `FLUXO-A-Z.md` e `fluxo-a-z.html`: o fluxo etapa por etapa.
 - `transcricoes/08-prints-lote1..3.md`: os prompts originais do vídeo 8.
-- A estratégia e as pesquisas: `DECISOES-URGENTES`, `METODO-UNIVERSAL`, `RADAR-MERCADO`, `ESTRATEGIA-CRESCIMENTO`.
+- A estratégia e as pesquisas: `DECISOES-URGENTES`, `METODO-UNIVERSAL`, `VARIACOES-DIRECAO`, `RADAR-MERCADO`, `ESTRATEGIA-CRESCIMENTO`.
+- A auditoria de 21/10: `AUDITORIA.md`.
 
 ## Os 5 princípios que não mudam
 1. **O humano cria e decide.** Ideia, roteiro bom, os 4 portões e o olho final.
@@ -63,9 +73,9 @@ Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
 
 ## Testado nesta sessão
 `python3 HQ/testes/rodar.py`:
-- **Ferramentas:** 9 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas; o motor leva um projeto de ponta a ponta parando em cada portão e bloqueia teto, prazo de 7 dias e meta no nível 0; a trava impede gravar o final e a entrega sem portão.
-- **Skills:** as 9 estão com o formato correto e têm 48 casos de teste.
-- **Juiz:** os 48 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
+- **Ferramentas:** 10 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas; o motor leva um projeto de ponta a ponta parando em cada portão e bloqueia teto, prazo de 7 dias e meta no nível 0; a trava impede gravar o final e a entrega sem portão.
+- **Skills:** as 11 estão com o formato correto e têm 60 casos de teste.
+- **Juiz:** os 60 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
 
 ## O que a máquina é em relação ao que já roda
 O Carlo já roda o fluxo de A a Z sozinho no **Astra** e no **Claude Code**, com o Criar maestro v2 do painel. Esta máquina **não substitui** esse fluxo: ela é a **camada de melhoria**. Traz:

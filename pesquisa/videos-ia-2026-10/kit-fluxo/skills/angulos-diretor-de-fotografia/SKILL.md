@@ -5,11 +5,11 @@ description: A partir de uma única foto (de celular, do site da marca ou da pou
 
 # Ângulos de diretor de fotografia (Fluxo 1 de 5 do vídeo 8)
 
-Adaptado do meta-prompt "Uma foto, outros ângulos" do portal da Human (transcrição literal em `transcricoes/08-prints-lote1.md`).
+Adaptado do meta-prompt "Uma foto, outros ângulos" do portal da Human (transcrição literal em `pesquisa/videos-ia-2026-10/transcricoes/08-prints-lote1.md`).
 
 ## Quando usar
 - **Catálogo:** uma foto boa da peça vira 4 ou 5 vistas diferentes.
-- **Amostra de prospecção:** pegar uma foto do site ou do Instagram da marca e mostrar o que dá para fazer.
+- **Amostra de prospecção:** a partir de foto do site da marca, **só com produto ou lugar, sem pessoa real** (se a foto tiver modelo, troque por pessoa gerada). Uso interno e privado; nunca publicar nem apresentar como campanha sem autorização da marca (direito do fotógrafo e da modelo).
 - **Campanha:** mais planos a partir de uma foto aprovada.
 - **SOL:** novos pontos de vista de uma foto **real** da pousada, sem mudar nada do lugar.
 

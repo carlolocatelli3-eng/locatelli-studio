@@ -18,18 +18,24 @@ Vamos trazer para cá a máquina que construí numa sessão na nuvem.
 
 2. LER, NESTA ORDEM
    - pesquisa/videos-ia-2026-10/kit-fluxo/ESPECIFICACAO.md  (leia primeiro)
+   - pesquisa/videos-ia-2026-10/AUDITORIA.md                 (o que foi corrigido e o que falta)
+   - pesquisa/videos-ia-2026-10/kit-fluxo/HQ/DECISOES-ABERTAS.md
    - pesquisa/videos-ia-2026-10/kit-fluxo/LEIA-ME.md         (mapa)
    - as skills em kit-fluxo/skills/ e os documentos em kit-fluxo/HQ/maquina/
    - pesquisa/videos-ia-2026-10/FLUXO-A-Z.md e CRUZAMENTO-PLAYBOOK.md
 
 3. TESTAR
+   Antes: pip3 install numpy pillow markdown
    Rode: python3 pesquisa/videos-ia-2026-10/kit-fluxo/HQ/testes/rodar.py
    e me diga o resultado.
 
 4. INVENTÁRIO DO QUE JÁ EXISTE AQUI
    O Organismo e o painel (localhost:8790), o Criar maestro com os 8 processos,
    as skills instaladas em ~/.claude/skills, as pastas HQ e de clientes,
-   o HyperFrames.
+   o HyperFrames. Inclua também a branch claude/affectionate-davinci-gwpjif
+   ("Caderno A a Z", portão da marca, skills de conceito de anúncio) para não
+   duplicar. Confira a skill vera-pousadas contra a regra C-08 ("não anunciar
+   que é IA, nunca negar") e responda a §5 do CRUZAMENTO-ORGANISMO.md.
 
 5. TABELA DE SOBREPOSIÇÃO
    Para cada uma das 13 melhorias da ESPECIFICACAO.md (seção 3), diga:

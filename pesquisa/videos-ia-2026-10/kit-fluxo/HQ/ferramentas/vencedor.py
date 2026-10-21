@@ -19,6 +19,9 @@ def main():
     p.add_argument("--minimo", type=int, default=30, help="eventos mínimos em cada lado (padrão 30)")
     a = p.parse_args()
     (ec, nc), (ev, nv) = a.controle, a.variante
+    for nome, e, n in (("controle", ec, nc), ("variante", ev, nv)):
+        if n <= 0 or e < 0 or e > n:
+            p.error(f"--{nome}: precisa 0 <= EVENTOS <= TOTAL e TOTAL > 0 (recebi {e} {n})")
     rng = np.random.default_rng(7)
     sc = rng.beta(1 + ec, 1 + nc - ec, 200_000)
     sv = rng.beta(1 + ev, 1 + nv - ev, 200_000)

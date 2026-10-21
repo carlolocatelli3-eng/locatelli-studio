@@ -3,6 +3,7 @@
   "cliente": "nome-do-cliente",
   "negocio": "studio | sol | outro",
   "cartucho": "nome-do-setor",
+  "meta": "S1",
   "status": "pendente",
   "status_possiveis": [
     "pendente",
@@ -54,6 +55,22 @@
     "gasto_reais": 0,
     "lancamentos": []
   },
+  "financeiro": {
+    "preco_vendido_reais": 0,
+    "sinal_pago_reais": 0,
+    "bonus_vencedor_reais": 0,
+    "horas_carlo": [
+      {
+        "data": "",
+        "etapa": "",
+        "minutos": 0
+      }
+    ],
+    "custo_geracao_reais": 0,
+    "custo_planos_rateado_reais": 0,
+    "margem_reais": null,
+    "reais_por_hora": null
+  },
   "guardiao": {
     "aprovados": 0,
     "refeitos": 0,
@@ -81,5 +98,6 @@
       "cor"
     ],
     "motivo": "o que estava errado, em uma frase"
-  }
+  },
+  "_leia": "Obrigatório antes de rodar: cliente, cartucho, meta e custos.teto_reais (sem teto o motor não roda)."
 }

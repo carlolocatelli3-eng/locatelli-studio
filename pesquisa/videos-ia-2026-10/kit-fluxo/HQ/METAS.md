@@ -1,6 +1,6 @@
 # METAS · lido pelo Claude Code no começo de toda sessão e de toda rotina
 
-> Copiar para `HQ/METAS.md` no computador. Só o Carlo muda este arquivo. Os números que o motor lê (nível e teto de cada meta) ficam em `HQ/metas.json`; mudou aqui, mude lá também.
+> Copiar para `HQ/METAS.md` no computador. Só o Carlo muda este arquivo. Os números que as travas (motor ou maestro) leem (nível e teto de cada meta) ficam em `HQ/metas.json`; mudou aqui, mude lá também.
 
 ## Regras de sempre
 1. Antes de qualquer trabalho, ler esta página e o `JOB.json` do projeto.
@@ -11,8 +11,20 @@
 6. Exceções vão para o "Decidir hoje" do painel, com motivo e ação sugerida. Nenhum outro canal.
 7. Nunca sozinho, em nenhum nível: rosto de pessoa real fora de folha aprovada, gastar verba de mídia, primeira mensagem para cliente novo, preço ou disponibilidade fora da tabela.
 
-## Meta de negócio (só o Carlo define)
+## Meta de negócio (só o Carlo define) · [PROPOSTA, aguarda o Carlo]
 Até 15/12/2026: 5 vendas no Studio, 1 pousada com 30 dias de Vera e relatório de margem recuperada, Piloto 0 publicado.
+*A auditoria de 21/10 mostrou que, como está, isso dá 1–2 vendas na Black Friday; as outras dependem de uma oferta de Natal/verão e de definir o que conta como "venda". Ver `HQ/DECISOES-ABERTAS.md`.*
+
+### S0 · Funil até o dinheiro · [PROPOSTA, aguarda o Carlo]
+- **Nível:** 1 · **Dono:** Carlo · **Ritmo:** toda sexta, uma linha no "Decidir hoje"
+- **Feito quando** (o que vale é o `HQ/VENDAS.json`):
+  - 31/10: oferta travada em `HQ/OFERTA.md` + 25 amostras **enviadas**;
+  - 07/11: 50 enviadas, ≥ 8 conversas, ≥ 3 propostas;
+  - 10/11: ≥ 1 sinal pago na Black Friday;
+  - 20/11: oferta de Natal/verão no ar;
+  - 15/12: as vendas da meta de negócio, pagas.
+- **Skill:** `prospector-e-funil`.
+- **Chama o Carlo:** semana com menos de 20 envios, ou conversa parada há mais de 3 dias.
 
 ## Metas de operação
 
@@ -28,7 +40,7 @@ Até 15/12/2026: 5 vendas no Studio, 1 pousada com 30 dias de Vera e relatório 
 - **Feito quando:** ≥ 3 anúncios "VENCEDOR" pelo `vencedor.py` em cada cliente.
 - **Placar:** —
 
-### S3 · 25 amostras prontas toda segunda às 8 h
+### S3 · 25 amostras prontas toda segunda às 8 h · [quantidade em PROPOSTA, aguarda o Carlo]
 - **Nível atual:** 1 · **Envio sempre manual.**
 - **Feito quando:** 25 amostras aprovadas pelo Guardião, com mensagem rascunhada, na fila de envio.
 - **Placar:** aprovações seguidas: 0 · concordância do juiz: —

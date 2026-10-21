@@ -5,7 +5,7 @@
 - os portões do Criar no Organismo;
 - a escada de autonomia da `DECISOES-URGENTES.md`.
 
-> **Status (21/10):** completo com os **73 prints** enviados pelo Carlo. As transcrições estão em `transcricoes/08-prints-lote1..3.md`, com os prompts literais. **O kit para usar no computador** (7 skills, modelo de pasta de projeto e 3 pilotos) está em `kit-fluxo/`.
+> **Status (21/10):** completo com os **73 prints** enviados pelo Carlo. As transcrições estão em `transcricoes/08-prints-lote1..3.md`, com os prompts literais. **O kit para usar no computador** (11 skills, modelo de pasta de projeto e 3 pilotos) está em `kit-fluxo/`.
 
 ## O fluxo original do estúdio Human (slide de 44:49)
 | # | Etapa | Quem faz | No nosso Fluxo A–Z |
@@ -54,7 +54,7 @@
 
 ---
 
-## O fluxo em 5 fases e 16 etapas
+## O fluxo em 5 fases e 18 etapas
 
 ### Fase 1 · Entender (A–C)
 | Etapa | O que acontece | Studio (campanha de moda) | SOL Destinos (vídeo de destino ou de pousada) | Autonomia |
@@ -68,7 +68,7 @@
 |---|---|---|---|---|
 | **D · 10 ideias descartadas** | Pedir 10 ideias à IA e **jogar todas fora** | Roteirista de Ganchos gera as óbvias; elas viram a lista do que **não** fazer | O mesmo: "praia, pôr do sol, casal" vão para o lixo | 3 |
 | **E · Pitch de 1 parágrafo** | A ideia humana em um parágrafo, com referências que todo mundo conhece | Ex.: "a mesma blusa do café da manhã ao jantar, em 3 cidades" | Ex.: "um ano na pousada em 60 segundos, uma foto por mês na mesma janela" (o hyperlapse do caso Messi aplicado ao lugar) | 0 (é você) |
-| **F · Destruir a ideia** | "Por que isso floparia?", 1 ou 2 vezes, não mais | O Guardião lê o pitch | O mesmo | 2 |
+| **F · Destruir a ideia** | "Por que isso floparia?", 1 ou 2 vezes, não mais | Conselho de 6 lentes (skill pitch-e-roteiro) | O mesmo | 2 |
 | **G · Roteiro** | A IA escreve versões medianas e **você escreve o bom** | Roteiro + 5 ganchos | Roteiro + gancho para o anúncio do Carnaval | 1 |
 | **🚦 Portão 1** | **O cliente aprova o pitch e o roteiro** | Portão "conceito" do Criar | Dono da pousada ou Eliete | — |
 
@@ -141,4 +141,4 @@ O que falta: a **página 2 de 2** do prompt de VFX e o texto completo dos prompt
 3. **Alerta de 7 dias** do rascunho 480p, no mesmo modelo dos vencimentos do Ativos.
 4. **Teste "vídeo direto dos ativos"** numa campanha de estudo: corta a etapa de imagem por cena, se a peça sagrada aguentar.
 5. **O cartucho "hotelaria"** recebe a regra: o lugar é sempre real; IA só em pessoas, clima e estação.
-6. **O fluxo da agência** (orçamento por prancha antes da cotação) entra como fluxo V6 do SOL.
+6. **O fluxo da agência** (orçamento por prancha antes da cotação) entra como meta V3 do SOL.

@@ -8,7 +8,11 @@ cp -R HQ/modelos/projeto CLIENTES/<cliente>/<AAAA-MM>-<projeto>
 ```
 Preencha o `BRIEFING.md` e, no `JOB.json`: cliente, cartucho (setor), meta (ex.: S1) e teto em reais. Setor novo? Peça ao Claude: "use a skill novo-cartucho para <setor>".
 
-## O motor (faz o projeto andar até o próximo portão)
+## Antes de tudo
+`pip3 install numpy pillow markdown` (cor, vencedor, testes e página). Na nuvem, crie `CLIENTES/` dentro de `kit-fluxo/` antes de copiar o modelo de projeto.
+
+## O motor (travas e registro; complementa o Criar maestro)
+> O executor do dia a dia é o Criar maestro. O motor cobre o que o maestro não tiver: prazo de 7 dias do 480p, teto por projeto e registro de `decisoes`.
 | Comando | O que faz |
 |---|---|
 | `python3 HQ/ferramentas/motor.py status` | Onde está cada projeto e o que o trava |

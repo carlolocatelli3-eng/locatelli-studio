@@ -207,7 +207,9 @@ O dinheiro perdido aparece de três formas:
 
 ---
 
-## 4. A fábrica de mercados: como abrir um mercado novo em 14 dias
+## 4. A fábrica de mercados
+
+> **Formato final do cartucho:** um arquivo só, `kit-fluxo/HQ/modelos/cartucho/CARTUCHO.md` (seções 1–7). A lista de 8 arquivos abaixo foi o rascunho.: como abrir um mercado novo em 14 dias
 
 **Arquitetura:** o núcleo é o mesmo (skills, fluxos, escada de autonomia, `JOB.json`, fila de exceções). Cada mercado é **uma pasta de cartucho**:
 

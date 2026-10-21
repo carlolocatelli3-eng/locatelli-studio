@@ -1,0 +1,18 @@
+{
+  "_leia": "Uma linha por marca. Copiar para HQ/VENDAS.json. Estágios: amostra_pronta, enviada, d4, d10, conversa, proposta, sinal_pago, onboarding, perdida, descartada.",
+  "funil": [
+    {
+      "marca": "exemplo",
+      "contato": "@perfil ou e-mail",
+      "canal": "direct | e-mail | whatsapp",
+      "cartucho": "nome-do-setor",
+      "oferta": "id da oferta em HQ/OFERTA.md",
+      "estagio": "amostra_pronta",
+      "datas": {"amostra": "", "enviada": "", "d4": "", "d10": "", "conversa": "", "proposta": "", "sinal_pago": ""},
+      "valor_proposto_reais": 0,
+      "valor_pago_reais": 0,
+      "motivo_perda": "",
+      "job_id": ""
+    }
+  ]
+}

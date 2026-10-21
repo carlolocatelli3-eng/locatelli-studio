@@ -17,8 +17,9 @@ O nome do setor e, se houver, o primeiro cliente.
    - **Fontes de dores reais:** onde os clientes desse setor falam (avaliações, comentários, reclamações, perguntas).
    - **Métrica de dinheiro:** para criativo (o que o Analista lê) e para conversa (a fórmula de R$ recuperados).
    - **Ataques típicos:** 5 a 10 casos que a máquina precisa acertar sempre.
-3. Transforme os ataques típicos em arquivos de teste (`testes/caso-01.md` …), no formato: entrada, o que deve acontecer, o que reprova.
+3. Transforme os ataques típicos em arquivos de teste (`testes/CASOS.md`, mesmo formato das skills: **Entrada**, **Deve**, **Reprova se**).
 4. Marque **[fraco]** todo número de fonte única ou de fornecedor.
+   Saúde, estética e suplementos: **proibido** gerar resultado, corpo ou pele de "antes e depois" (CFM 2.336/2023, ANVISA); revisão jurídica antes do sim.
 5. Entregue a Carlo um resumo de 10 linhas: o que é sagrado, o que é proibido, a métrica, os 3 maiores riscos. **O cartucho só é usado com cliente depois do sim do Carlo** (setor com dado sensível ou regra de conselho pede revisão antes).
 
 ## Regra de ouro

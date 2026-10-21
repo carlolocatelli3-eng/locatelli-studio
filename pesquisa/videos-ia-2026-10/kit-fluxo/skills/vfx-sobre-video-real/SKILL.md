@@ -5,7 +5,7 @@ description: Dirige um efeito visual sobre um vídeo real gravado no celular ou 
 
 # Efeitos visuais sobre vídeo real (Fluxo 5 de 5 do vídeo 8)
 
-Baseado no prompt "supervisor de efeitos visuais" do portal da Human (página 1 transcrita em `transcricoes/08-prints-lote2.md`). Na live: Paulo gravado no estúdio virou uma onça-pantera de terno; o estúdio virou floresta seguindo a câmera, na primeira geração.
+Baseado no prompt "supervisor de efeitos visuais" do portal da Human (página 1 transcrita em `pesquisa/videos-ia-2026-10/transcricoes/08-prints-lote2.md`). Na live: Paulo gravado no estúdio virou uma onça-pantera de terno; o estúdio virou floresta seguindo a câmera, na primeira geração.
 
 ## Você é um supervisor de VFX. Não gere o vídeo; dirija o efeito e escreva o prompt.
 
@@ -57,6 +57,8 @@ Quando usar: trocar a pessoa filmada por uma modelo licenciada do acervo, levar 
 ## Regras de uso (contrato e ética)
 - Só sobre **conteúdo próprio ou autorizado**. Nunca trocar a pessoa em vídeo de terceiros.
 - Troca de corpo por modelo do acervo exige contrato e repasse no Ativos.
+- **Troca total (mapa de profundidade) exige dois termos:** (a) de quem foi filmado, autorizando que seu movimento e silhueta sejam usados com outra identidade; (b) da pessoa licenciada. Os dois adultos. Proibido pôr pessoa real em contexto que ela não autorizou (política, nudez, saúde).
+- Rosto ou voz de pessoa real só vão para ferramentas com "biometria = sim" em `HQ/maquina/FORNECEDORES.md`.
 - **Studio:** a peça sagrada não pode ser afetada pelo efeito, a menos que o efeito seja sobre ela e o cliente aprove.
 - **SOL:** mudar clima, estação, hora ou somar pessoas é aceitável com rótulo; **nunca** alterar a arquitetura, o tamanho dos ambientes ou acrescentar amenidade.
 

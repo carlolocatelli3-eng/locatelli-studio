@@ -13,7 +13,10 @@ A máquina é a mesma para o Claude Code e para o Astra. As skills são arquivos
 - Passar de um portão (1 pitch e roteiro · 2 ficha · 3 corte 480p · 4 conjunto) sem a aprovação do Carlo registrada no `JOB.json`.
 - Gerar o final 1080p sem o Portão 3, ou depois do prazo de 7 dias.
 - Passar do teto do projeto.
-- Usar rosto de pessoa real sem contrato e consentimento registrados.
+- Usar rosto ou voz de pessoa real sem o termo assinado (`HQ/modelos/contrato/`), ou enviá-los a ferramenta sem "biometria = sim" em `HQ/maquina/FORNECEDORES.md`.
+- Gerar, trocar ou fazer folha de menor de 18 anos.
+- Clonar voz ou pôr na boca de alguém fala que a pessoa não gravou.
+- Remover rótulo, C2PA ou marca d'água de IA.
 - Publicar, enviar mensagem ou gastar verba de mídia.
 
 ## Depois de cada etapa

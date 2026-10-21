@@ -90,6 +90,8 @@ def travas(job, teto_exec):
     if st == "portao3":
         if not p3.get("aprovado"):
             motivos.append("final 1080p bloqueado: Portão 3 sem aprovação")
+        elif not p3.get("prazo_1080p"):
+            motivos.append("final 1080p bloqueado: sem prazo_1080p (rode enviou-480 com a data do rascunho)")
         elif p3.get("prazo_1080p") and hoje() > p3["prazo_1080p"]:
             motivos.append(f"final 1080p bloqueado: prazo de 7 dias venceu em {p3['prazo_1080p']} (regerar usando o 480p como referência)")
     if st == "portao4" and not job.get("portoes", {}).get("4_conjunto", {}).get("aprovado"):
@@ -97,7 +99,9 @@ def travas(job, teto_exec):
     c = job.get("custos", {})
     teto, gasto = c.get("teto_reais") or 0, c.get("gasto_reais") or 0
     cambio = float(os.environ.get("MAQUINA_CAMBIO", "5.5"))
-    if teto and gasto + teto_exec * cambio > teto:
+    if not teto:
+        motivos.append("projeto sem teto: preencha custos.teto_reais no JOB.json")
+    elif gasto + teto_exec * cambio > teto:
         motivos.append(f"teto do projeto: gasto R$ {gasto:.0f} + até R$ {teto_exec * cambio:.0f} desta execução passa de R$ {teto:.0f}")
     return motivos
 
@@ -117,17 +121,22 @@ def cmd_status(_):
     if not os.path.isdir(base):
         print("Nenhuma pasta CLIENTES/ na raiz", raiz()); return
     for cli in sorted(os.listdir(base)):
+        if not os.path.isdir(os.path.join(base, cli)):
+            continue
         for proj in sorted(os.listdir(os.path.join(base, cli))):
             pth = os.path.join(cli, proj)
             if not os.path.exists(job_path(pth)):
                 continue
-            job = ler(pth)
+            try:
+                job = ler(pth)
+            except (OSError, ValueError) as err:
+                print(f"{pth:40s} JOB.json ilegível: {err}"); continue
             m = metas().get(job.get("meta", "S1"), {})
             e = etapa(job)
-            prox = e[1] if e else job.get("status")
+            prox = e[1] if e else str(job.get("status"))
             t = travas(job, m.get("teto_por_execucao_usd", 3))
             sinal = "PARADO · " + t[0] if t else "pode rodar"
-            print(f"{pth:40s} {job.get('status', 'pendente'):12s} → {prox:55s} [{sinal}]")
+            print(f"{pth:40s} {str(job.get('status') or 'pendente'):12s} → {prox:55s} [{sinal}]")
 
 
 def cmd_proximo(a):
@@ -143,7 +152,9 @@ def cmd_proximo(a):
 
 def cmd_rodar(a):
     job = ler(a.projeto)
-    meta_id = job.get("meta", "S1")
+    meta_id = job.get("meta")
+    if not meta_id:
+        print("NÃO RODOU: JOB.json sem o campo \"meta\" (ex.: S1, V3)."); sys.exit(2)
     m = metas().get(meta_id, {})
     teto_exec = m.get("teto_por_execucao_usd", 3)
     t = travas(job, teto_exec)
@@ -153,24 +164,29 @@ def cmd_rodar(a):
         print(f"NÃO RODOU: a meta {meta_id} está no nível {m.get('nivel', 0)} (manual). Só o Carlo sobe o nível em HQ/metas.json."); sys.exit(2)
     e = etapa(job)
     cmd = [os.environ.get("MAQUINA_CLAUDE", "claude"), "-p", prompt_para(a.projeto, job, e),
-           "--max-budget-usd", str(teto_exec), "--output-format", "json"]
+           "--max-budget-usd", str(teto_exec), "--output-format", "json",
+           "--permission-mode", os.environ.get("MAQUINA_PERMISSAO", "acceptEdits")]
     if not a.executar:
         print("Comando (use --executar para rodar):\n" + " ".join(shlex.quote(x) for x in cmd)); return
     r = subprocess.run(cmd, cwd=raiz(), capture_output=True, text=True)
-    custo_usd = 0.0
+    custo_usd, saida = 0.0, {}
     try:
-        custo_usd = float(json.loads(r.stdout).get("total_cost_usd", 0))
-    except (ValueError, AttributeError):
-        pass
+        saida = json.loads(r.stdout)
+        custo_usd = float(saida.get("total_cost_usd") or 0)
+    except (ValueError, TypeError, AttributeError):
+        saida = {}
+    ok = r.returncode == 0 and not saida.get("is_error") and not saida.get("permission_denials")
+    job = ler(a.projeto)  # o claude -p pode ter atualizado o JOB.json: não sobrescrever
     cambio = float(os.environ.get("MAQUINA_CAMBIO", "5.5"))
     c = job.setdefault("custos", {"teto_reais": 0, "gasto_reais": 0, "lancamentos": []})
     c["gasto_reais"] = round((c.get("gasto_reais") or 0) + custo_usd * cambio, 2)
     c.setdefault("lancamentos", []).append({"data": hoje(), "etapa": e[0], "usd": custo_usd, "reais": round(custo_usd * cambio, 2)})
-    if r.returncode == 0:
+    if ok:
         job["status"] = e[3]
         print(f"OK: {e[1]} · custo US$ {custo_usd:.2f} · novo status: {job['status']}")
     else:
-        job.setdefault("excecoes_para_carlo", []).append({"data": hoje(), "etapa": e[0], "erro": (r.stderr or r.stdout)[-500:]})
+        job.setdefault("excecoes_para_carlo", []).append({"data": hoje(), "etapa": e[0], "erro": (r.stderr or r.stdout)[-500:],
+                                                          "negadas": [d.get("tool_name") for d in saida.get("permission_denials") or []]})
         print(f"FALHOU na etapa {e[1]}; registrado em excecoes_para_carlo")
     gravar(a.projeto, job)
     nxt = etapa(job)
@@ -182,10 +198,14 @@ def cmd_decidir(a):
     job = ler(a.projeto)
     chave = NUM_PORTAO[a.portao]
     p = job.setdefault("portoes", {}).setdefault(chave, {})
-    aprovado = a.veredito == "aprovado"
+    aprovado = a.veredito == "aprovado"  # "corrigido" devolve a etapa (ver DECISOES-ABERTAS: Carlo pode mudar)
+    if job.get("status") not in PORTAO_DE or PORTAO_DE[job["status"]] != chave:
+        print(f"NÃO REGISTROU: o projeto está em '{job.get('status')}', não no Portão {a.portao}."); sys.exit(2)
     p.update({"aprovado": aprovado, "por": "Carlo", "data": hoje()})
+    if aprovado and chave == "3_corte_480p" and not p.get("prazo_1080p"):
+        p["prazo_1080p"] = (dt.date.fromisoformat(hoje()) + dt.timedelta(days=7)).isoformat()
     job.setdefault("decisoes", []).append({
-        "data": hoje(), "meta": job.get("meta", "S1"), "etapa": f"portao{a.portao}", "item": a.item or "",
+        "data": hoje(), "quando": dt.datetime.now().isoformat(timespec="seconds"), "meta": job.get("meta", "S1"), "etapa": f"portao{a.portao}", "item": a.item or "",
         "veredito_carlo": a.veredito, "veredito_juiz": a.juiz, "grave": a.grave,
         "tags": [t for t in (a.tags or "").split(",") if t], "motivo": a.motivo or ""})
     if aprovado and job.get("status") in PORTAO_DE and PORTAO_DE[job["status"]] == chave:

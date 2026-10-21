@@ -42,10 +42,11 @@ RITMO: [gatilho ou agenda]
 ```
 
 ## Seis metas prontas
+> **Texto oficial das metas: `HQ/METAS.md`** (nível, teto, placar). Equivalência com os fluxos da `DECISOES-URGENTES.md`: S3 ≈ E1; S2 ≈ E3; V1 = V1; V2 (relatório de margem) = V3 antigo; V3 (prancha de viagem) = V6 antigo.
 
 ### Locatelli Studio
 **S1 · "Toda campanha aprovada chega ao Portão 3 sem eu empurrar"**
-- **Acesso:** a pasta do projeto (BRIEFING, `03-ativos`), as 7 skills, as conexões do Magnific, do Higgsfield e do Flow.
+- **Acesso:** a pasta do projeto (BRIEFING, `03-ativos`), as 9 skills (11 depois da auditoria), as conexões do Magnific, do Higgsfield e do Flow.
 - **Teste:** prancha + rascunho 480p de todas as cenas, Guardião aprovado em 100% dos quadros com a peça, custo dentro do teto do `JOB.json`.
 - **Sozinho:** gerar ângulos, ensaios, prancha e rascunhos; refazer o que o Guardião reprovar uma vez.
 - **Nunca sozinho:** 1080p, rosto de pessoa real fora da folha aprovada, gastar além do teto.

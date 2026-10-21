@@ -85,9 +85,6 @@ class Melhoria(unittest.TestCase):
             self.assertEqual(placar["ultima_execucao"] if "ultima_execucao" in placar else "ok", "ok")
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class Motor(unittest.TestCase):
     def test_projeto_de_ponta_a_ponta_com_travas(self):
@@ -124,7 +121,7 @@ class Motor(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             os.makedirs(os.path.join(t, "HQ")); proj = os.path.join(t, "CLIENTES", "c", "p"); os.makedirs(proj)
             json.dump({"metas": {"V1": {"nivel": 0, "teto_por_execucao_usd": 1}}}, open(os.path.join(t, "HQ", "metas.json"), "w"))
-            json.dump({"id": "p", "meta": "V1", "status": "pendente", "custos": {}, "portoes": {}}, open(os.path.join(proj, "JOB.json"), "w"))
+            json.dump({"id": "p", "meta": "V1", "status": "pendente", "custos": {"teto_reais": 100}, "portoes": {}}, open(os.path.join(proj, "JOB.json"), "w"))
             r = subprocess.run([sys.executable, "-I", os.path.join(FERR, "motor.py"), "rodar", "c/p", "--executar"],
                                capture_output=True, text=True, env=dict(os.environ, MAQUINA_RAIZ=t))
             self.assertEqual(r.returncode, 2); self.assertIn("nível 0", r.stdout)
@@ -146,3 +143,21 @@ class TravaPortoes(unittest.TestCase):
             job({"3_corte_480p": {"aprovado": True, "prazo_1080p": "2026-10-25"}, "4_conjunto": {"aprovado": True}})
             self.assertEqual(tenta("06-final"), 0)
             self.assertEqual(tenta("07-entrega"), 0)
+
+
+
+class TravaBash(unittest.TestCase):
+    def test_bloqueia_copia_por_bash_para_o_final(self):
+        with tempfile.TemporaryDirectory() as t:
+            proj = os.path.join(t, "CLIENTES", "c", "p"); os.makedirs(proj)
+            json.dump({"portoes": {}}, open(os.path.join(proj, "JOB.json"), "w"))
+            cmd = f"cp /tmp/x.mp4 {os.path.join(proj, '06-final', 'x.mp4')}"
+            r = subprocess.run([sys.executable, "-I", os.path.join(FERR, "trava_portoes.py")],
+                               input=json.dumps({"tool_input": {"command": cmd}}), capture_output=True, text=True)
+            self.assertEqual(r.returncode, 2)
+            r = subprocess.run([sys.executable, "-I", os.path.join(FERR, "trava_portoes.py")],
+                               input=json.dumps({"tool_input": {"command": "ls -la"}}), capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0)
+
+if __name__ == "__main__":
+    unittest.main()

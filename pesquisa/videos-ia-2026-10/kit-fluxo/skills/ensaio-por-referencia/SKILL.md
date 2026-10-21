@@ -40,10 +40,24 @@ Com o **Nano Banana Pro**, acrescente "Keep the exact camera angle, height and f
 - Gere em lote (o Paulo gerou 20 prompts em paralelo) e faça a curadoria depois.
 - **Grátis antes do pago** (`HQ/maquina/CARTEIRA.md`): o ensaio inteiro de teste no Flow, pela `FILA-GOOGLE.md`; 2K/4K pago só no aprovado.
 
+## Iterar depois do 1º lote
+Uma mudança por rodada:
+- **Recreate:** variação do mesmo prompt.
+- **Reference:** a imagem aprovada vira nova âncora (style frame).
+- **Turn to video:** só sobre um frame aprovado.
+
+Aplicar o bloco anti-"cara de IA" e o checklist de `HQ/maquina/QA-ARTEFATOS.md`. Ler a bíblia visual da marca, se existir.
+
+## Referências: inspirar, não copiar
+Registre o link de cada referência em `01-pesquisa/REFERENCIAS.md`, com o que se tira dela (pose, luz, textura, cor). No Guardião: se alguém reconhece a campanha de origem, refazer.
+
+## Em anúncio de venda
+Pelo menos uma imagem **real** do produto no conjunto, e o caimento gerado conferido com a foto real vestida (CDC: a imagem vincula a oferta).
+
 ## Curadoria e Guardião
 Cada foto escolhida passa por: identidade igual à folha; peça igual à folha de produto; nenhum elemento da referência estética copiado (rosto, roupa, logo); lugar real intacto (SOL); rótulo de IA definido para o uso.
 
-## Studio × SOL
+## Exemplos por negócio (Studio, SOL; vale o mesmo para qualquer setor)
 - **Studio:** Catálogo Assinado, campanha, posts da campanha zero ("um ensaio, três usos").
 - **SOL:** a pessoa real autorizada na pousada real, para Instagram e anúncio. Nunca para fotos de OTA se a pessoa ou o clima forem gerados sem rótulo.
 

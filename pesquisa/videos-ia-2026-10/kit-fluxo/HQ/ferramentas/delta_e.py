@@ -16,11 +16,18 @@ from PIL import Image
 
 
 def crop(path, box):
-    im = Image.open(path).convert("RGB")
+    im = Image.open(path).convert("RGBA")
     if box:
         x, y, w, h = (int(v) for v in box.split(","))
+        if w <= 0 or h <= 0 or x < 0 or y < 0 or x + w > im.width or y + h > im.height:
+            sys.exit(f"caixa {box} fora da imagem {path} ({im.width}x{im.height})")
         im = im.crop((x, y, x + w, y + h))
-    return np.asarray(im, dtype=np.float64) / 255.0
+    arr = np.asarray(im, dtype=np.float64) / 255.0
+    px = arr.reshape(-1, 4)
+    px = px[px[:, 3] > 0.5][:, :3]  # ignora fundo transparente de recortes
+    if not len(px):
+        sys.exit(f"nenhum pixel opaco na área de {path}")
+    return px
 
 
 def srgb_to_lab(rgb):

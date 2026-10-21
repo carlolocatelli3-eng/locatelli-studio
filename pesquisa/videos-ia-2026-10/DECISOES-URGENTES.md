@@ -194,7 +194,7 @@ Os agentes geram, aprovam e publicam sozinhos.
 | Nível | Como roda | Você faz | Para subir de nível |
 |---|---|---|---|
 | **0 · Manual** | Você pede, o Claude faz | Tudo | O fluxo repetiu 3 vezes com o mesmo formato |
-| **1 · Rascunho + aprovação** | Roda sozinho por agenda ou gatilho e para numa fila de aprovação | Aprova ou recusa (a recusa vira regra) | 10 aprovações seguidas sem correção **e** o juiz concordando com você em ≥ 90% de 50 casos rotulados |
+| **1 · Rascunho + aprovação** | Roda sozinho por agenda ou gatilho e para numa fila de aprovação | Aprova ou recusa (a recusa vira regra) | 10 aprovações seguidas sem correção **e** o juiz concordando com você em ≥ 90% dos últimos 20 casos (calibração inicial com 50 peças) |
 | **2 · Automático com amostragem** | Segue sozinho; 20% das saídas vão à sua fila por sorteio; tudo com nota baixa do juiz também vai | Revisa a amostra e as exceções | 4 semanas sem erro grave na amostra |
 | **3 · Automático com auditoria** | Segue sozinho; resumo diário; auditoria semanal | Lê o resumo; responde exceções | — (desce de nível no primeiro erro grave) |
 

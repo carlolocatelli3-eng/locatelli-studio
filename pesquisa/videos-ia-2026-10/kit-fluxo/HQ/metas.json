@@ -1,6 +1,15 @@
 {
-  "_leia": "Parâmetros que o motor lê. A explicação humana fica em METAS.md. Só o Carlo muda nível e teto.",
+  "_leia": "Parâmetros que o motor lê. A explicação humana fica em METAS.md. Só o Carlo muda nível e teto. Teto por execução em US$ (o motor converte com MAQUINA_CAMBIO, padrão 5,5); teto do projeto em R$ no JOB.json.",
   "metas": {
+    "S0": {
+      "nome": "Funil até o dinheiro [PROPOSTA]",
+      "nivel": 1,
+      "teto_por_execucao_usd": 1,
+      "para_em": [
+        "envio",
+        "proposta"
+      ]
+    },
     "S1": {
       "nome": "Toda campanha aprovada chega ao Portão 3 sozinha",
       "nivel": 1,

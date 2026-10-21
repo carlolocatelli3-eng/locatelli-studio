@@ -25,13 +25,14 @@ O que **nunca** pode sair diferente do real numa imagem ou vídeo gerado. Cada i
 - **CONAR / CDC / LGPD** aplicados ao setor:
 - **Regras das plataformas** onde o setor anuncia:
 - **Lista negra de palavras e promessas:**
+- **Rótulo de IA padrão:** legenda "Imagem criada com IA" (ou "#ConteúdoGeradoPorIA") + o rótulo nativo da plataforma ligado (Meta "AI info", TikTok "AI-generated"). Influenciador virtual ou avatar: dizer que é virtual na bio e no post. **Nunca** remover C2PA ou marca d'água.
 
 ## 4. De onde vêm as dores reais dos clientes
 (avaliações, comentários, reclamações, perguntas que chegam por mensagem, buscas)
 
 ## 5. A métrica de dinheiro
-- **Studio (criativo → venda):** a métrica que o Analista lê.
-- **Vera (conversa → receita):** a fórmula de "R$ recuperados".
+- **Criativo → venda:** a métrica que o Analista lê.
+- **Conversa → receita:** a fórmula de "R$ recuperados".
 
 ## 6. Ataques típicos (testes do Destruidor e do Guardião)
 Casos que a máquina precisa acertar sempre neste setor. Viram arquivos em `testes/`.

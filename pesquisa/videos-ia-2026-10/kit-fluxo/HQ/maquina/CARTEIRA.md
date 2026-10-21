@@ -17,7 +17,8 @@
 |---|---|---|
 | Exploração, moodboard, testes de gosto | Flow · Nano Banana | — |
 | Amostras de prospecção (S3) | Flow · Nano Banana | — |
-| Ângulos, fichas de pessoa e de produto, ensaio | Flow · Nano Banana | Magnific/Higgsfield (Pro em 4K, lote automático) |
+| Ângulos, fichas de produto e lugar, ensaio com pessoa **gerada** | Flow · Nano Banana | Magnific/Higgsfield (Pro em 4K, lote automático) |
+| Qualquer coisa com **rosto ou voz de pessoa real** | — (nunca Flow/Gemini pessoal) | Só ferramenta com "biometria = sim" em `FORNECEDORES.md` |
 | Quadros do storyboard (prancha) | Flow · Nano Banana | — |
 | Blockout e testes de movimento | **Gemini · 2 vídeos/dia** | Seedance 480p |
 | Rascunhos 480p do filme | Gemini (planos simples) + Flow (créditos do dia) | Seedance 480p (planos com pessoa, produto ou fala) |
@@ -41,5 +42,7 @@ Isso cobre o Piloto 0, as amostras e os testes de movimento **sem gastar nada al
 Se a fila do dia passar dos limites (imagens, 50 créditos, 2 vídeos), o excedente fica para o dia seguinte ou sobe para o pago. **A decisão é do Carlo.**
 
 ## Atenção para entrega a cliente
+- **Trava:** o Portão 4 não aprova peça final que veio de ferramenta sem "uso comercial = sim" em `HQ/maquina/FORNECEDORES.md`.
+- **Créditos da Black Friday:** decidir até 11/11 se compra pacote anual/grande de Magnific ou hub (decisão do Carlo, ver `HQ/DECISOES-ABERTAS.md`).
 - **Termos comerciais:** os termos do Flow e do app Gemini para uso comercial não dão garantia explícita (pesquisa de 19/10). Para trabalho interno, amostra e portfólio: livre. Para **entrega final a cliente premium** (Campanha Híbrida, Licença de Modelo): ler os termos atuais ou passar o final por uma API com termos comerciais claros.
 - **Marca e rótulo:** toda imagem do Google leva SynthID e C2PA. Isso conversa com o rótulo de IA do Meta (teste da Ideia 4).

@@ -40,7 +40,7 @@ def aprovado_pelo_carlo(d):
 
 def placar_da_meta(decisoes):
     """todas as decisões da mesma meta, de todos os projetos e setores."""
-    decisoes = sorted(decisoes, key=lambda d: d.get("data", ""))
+    decisoes = sorted(decisoes, key=lambda d: (d.get("data") or "", d.get("quando") or ""))
     seq = 0
     for d in decisoes:
         if d.get("veredito_carlo") in ("aprovado", "corrigido", "recusado"):
@@ -91,7 +91,7 @@ def main():
         for d in sorted(job.get("decisoes", []), key=lambda x: x.get("data", "")):
             d = dict(d, cliente=cliente, cartucho=cartucho, projeto=job.get("id", caminho))
             por_meta[d.get("meta", "sem-meta")].append(d)
-            if d.get("data", "") > desde:
+            if (d.get("data") or "") >= desde:
                 novas.append(d)
                 if d.get("veredito_carlo") in ("corrigido", "recusado"):
                     for tag in d.get("tags") or ["sem-tag"]:

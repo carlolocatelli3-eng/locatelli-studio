@@ -33,7 +33,7 @@ A IA pode mudar só **pessoas, clima, estação e hora do dia**, e cada mudança
 "This is a real lodging property. Do not add, remove, enlarge or improve any room, furniture, view, pool, amenity or architectural element."
 
 ## Props e cenários de campanha (Studio, campanhas híbridas)
-- Objetos inspirados em marcas reais devem ser **descaracterizados e livres de direito** (como o carro do Paulo: "inspirado num Porsche 911 Rally, mas descaracterizado").
+- Objetos inspirados em marcas reais devem ser **descaracterizados**: sem logo, sem nome, sem grade, farol ou detalhe característico, e com a silhueta alterada em pelo menos 2 elementos (como o carro do Paulo). Em dúvida, não usar em anúncio pago (trade dress).
 - **Um cenário por cena principal, com exterior e interior**, derivado da paleta da coleção.
 - Um **lugar-hub** (o QG do Paulo) que reúne os ativos ajuda na revelação final.
 - Cada prancha em 3 vistas (como a maleta) para o vídeo manter o objeto.
