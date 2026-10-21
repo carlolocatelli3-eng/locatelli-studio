@@ -9,7 +9,7 @@ description: Cria o cartucho de qualquer setor que dependa de imagem (saúde, be
 O nome do setor e, se houver, o primeiro cliente.
 
 ## Passos
-1. Copie `cartuchos/_modelo/` para `cartuchos/<setor>/`.
+1. Copie `HQ/modelos/cartucho/` para `HQ/cartuchos/<setor>/`.
 2. **Pesquise** (com fontes e data em cada número) e preencha as seções 1 a 6 do `CARTUCHO.md`:
    - **Setor em uma tela:** onde a imagem decide a compra, ticket, datas, intermediários.
    - **O que é sagrado:** o que nunca pode sair diferente do real na imagem (produto, cor, texto, forma, lugar, pessoa, resultado). Para cada item, **como conferir** — de preferência com ferramenta que devolve número.

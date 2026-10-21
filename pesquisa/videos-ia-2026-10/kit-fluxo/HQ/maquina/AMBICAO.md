@@ -30,7 +30,7 @@ Com a meta de negócio escrita, a IA consegue dizer **qual meta de operação es
 
 ## 2. Profundidade: ferramentas de verdade, não só opinião
 
-O artigo diz: em tarefa importante, **nunca deixe o modelo julgar o próprio trabalho**. O ideal é uma ferramenta que o modelo chama e que devolve um número. Por isso o kit ganhou duas, testadas em `kit-fluxo/ferramentas/`.
+O artigo diz: em tarefa importante, **nunca deixe o modelo julgar o próprio trabalho**. O ideal é uma ferramenta que o modelo chama e que devolve um número. Por isso o kit ganhou duas, testadas em `HQ/ferramentas/`.
 
 ### `delta_e.py`: o Guardião mede a cor da peça
 - Compara a mesma área do tecido na foto real e na imagem gerada, pela fórmula de diferença de cor usada na indústria (ΔE2000, conferida contra os valores de referência da norma).
@@ -88,7 +88,7 @@ Fazer mais rápido não diferencia ninguém em 2026. Neste sistema, a velocidade
 ---
 
 ## O que mudou no kit
-- `ferramentas/delta_e.py` e `ferramentas/vencedor.py`, testados.
+- `HQ/ferramentas/delta_e.py` e `HQ/ferramentas/vencedor.py`, testados.
 - `skills/pitch-e-roteiro`: a etapa F passa a usar o conselho de 6 lentes.
 - `skills/folha-de-produto-e-lugar` e o Guardião: rodar o `delta_e.py` nas áreas de cor de toda peça gerada.
 - `ORQUESTRADOR.md`: a meta de negócio fica acima das metas de operação.

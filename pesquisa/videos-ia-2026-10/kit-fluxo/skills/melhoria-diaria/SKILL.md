@@ -5,12 +5,12 @@ description: Roda o ciclo de melhoria da máquina — lê todas as aprovações,
 
 # Melhoria diária (o que faz o dia 30 ser melhor que o dia 1)
 
-A máquina é geral: serve a qualquer negócio que dependa de imagem. Nada aqui é de um setor específico; o que é específico mora no cartucho do setor (`cartuchos/<setor>/CARTUCHO.md`).
+A máquina é geral: serve a qualquer negócio que dependa de imagem. Nada aqui é de um setor específico; o que é específico mora no cartucho do setor (`HQ/cartuchos/<setor>/CARTUCHO.md`).
 
 ## Passo 1 · A conta (determinística)
 Rode:
 ```
-python3 kit-fluxo/melhoria/melhoria.py --clientes CLIENTES --hq HQ
+python3 HQ/ferramentas/melhoria.py --clientes CLIENTES --hq HQ
 ```
 Ele lê o campo `decisoes` de todos os `JOB.json`, atualiza `HQ/PLACAR.json` e escreve `HQ/melhoria/MELHORIA-<data>.md` com:
 - o placar de cada meta (aprovação de primeira, sequência, concordância juiz × Carlo, erros graves, se pode subir de nível);
@@ -22,7 +22,7 @@ Não refaça essas contas de cabeça: use o que o script calculou.
 ## Passo 2 · Regras no lugar certo
 Para cada regra candidata do relatório, escreva **uma frase de regra verificável** (o que fazer ou não fazer, e como conferir) no arquivo do nível sugerido:
 - **Cliente:** `CLIENTES/<cliente>/REGRAS.md` — só aquele cliente.
-- **Setor:** seção 7 de `cartuchos/<setor>/CARTUCHO.md` — vale para todo cliente do setor (apareceu em 3 clientes do mesmo setor).
+- **Setor:** seção 7 de `HQ/cartuchos/<setor>/CARTUCHO.md` — vale para todo cliente do setor (apareceu em 3 clientes do mesmo setor).
 - **Geral:** `HQ/REGRAS-GERAIS.md` — vale para todo setor (apareceu em 3 setores).
 
 Regra boa: "Comparar a cor da embalagem com a foto real pelo `delta_e.py` antes de mostrar ao cliente." Regra ruim: "Ter mais cuidado com cor."

@@ -1,6 +1,6 @@
 # BRIEFING · [nome do projeto]
 
-> Copie a pasta `modelo-projeto/` para `CLIENTES/[cliente]/[AAAA-MM]-[projeto]/` e preencha. Este arquivo é a etapa A do Fluxo A–Z.
+> Copie a pasta `HQ/modelos/projeto/` para `CLIENTES/[cliente]/[AAAA-MM]-[projeto]/` e preencha. Este arquivo é a etapa A do Fluxo A–Z.
 
 ## Quem
 - **Negócio:** Locatelli Studio / SOL Destinos

@@ -24,7 +24,7 @@ skills e regras atualizadas → o próximo trabalho já sai melhor
 | Nível | Quando | Onde fica |
 |---|---|---|
 | Cliente | O erro apareceu num cliente | `CLIENTES/<cliente>/REGRAS.md` |
-| Setor | Apareceu em 3 clientes do mesmo setor | `cartuchos/<setor>/CARTUCHO.md`, seção 7 |
+| Setor | Apareceu em 3 clientes do mesmo setor | `HQ/cartuchos/<setor>/CARTUCHO.md`, seção 7 |
 | Geral | Apareceu em 3 setores | `HQ/REGRAS-GERAIS.md` |
 
 É assim que um erro corrigido num cliente protege o setor inteiro, e um erro visto em três setores protege a máquina toda.
