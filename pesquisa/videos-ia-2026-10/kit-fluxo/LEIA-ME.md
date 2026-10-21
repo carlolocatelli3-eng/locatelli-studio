@@ -7,6 +7,7 @@ Feito a partir da transcrição e dos **73 prints** do vídeo 8 (Human Academy e
 |---|---|
 | `skills/` | 7 skills prontas para o Claude Code do computador |
 | `modelo-projeto/` | A pasta que todo projeto copia: BRIEFING, JOB.json e as 8 subpastas das etapas |
+| `ORQUESTRADOR.md` | De esteira para orquestrador: o modelo de meta (com teste, acesso, limites e quando chamar o Carlo) e 6 metas prontas, 3 do Studio e 3 da SOL |
 | `PILOTOS.md` | 3 pilotos de ponta a ponta: você como primeiro case, Pacote BF, Carnaval da pousada |
 | `../FLUXO-A-Z.md` e `../fluxo-a-z.html` | O fluxo completo, etapa por etapa, lado a lado Studio × SOL |
 | `../transcricoes/08-prints-lote1..3.md` | O que cada print mostra, com os prompts transcritos |
