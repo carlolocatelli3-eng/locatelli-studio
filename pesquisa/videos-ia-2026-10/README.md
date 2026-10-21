@@ -7,6 +7,7 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 | Arquivo | O que é |
 |---|---|
 | `DECISOES-URGENTES.md` | **Comece aqui (20/10).** As 3 decisões mais urgentes (qual case primeiro, o que vender, quanto roda sozinho), com caminhos a favor e contra, a escada de autonomia e os fluxos do Studio e do SOL etapa por etapa. Versão visual: `decisoes-urgentes.html` |
+| `PASSAGEM.md` | **Para levar ao Claude Code do computador:** o pedido pronto para colar (baixar do GitHub, ler, testar, inventário, tabela de sobreposição, sem alterar nada antes do sim) |
 | `CRUZAMENTO-PLAYBOOK.md` | O Playbook do Diretor de Arte IA (NotebookLM, 15 páginas) cruzado página por página com a máquina: o que já temos, o que eles tinham (mapa de profundidade, blockout, rosto separado, escolha de modelo) e o que entrou nas skills |
 | `maquina.html` | **Guia visual da máquina:** as 9 skills por inteiro com testes, metas, autonomia, ferramentas, ciclo de melhoria, organização e fusão com o Organismo |
 | `kit-fluxo/` | **A máquina, pronta para o computador:** 9 skills com testes, HQ (metas, ferramentas, modelos, ciclo de melhoria, testes). Mapa e plano de integração com o Organismo v2 em `kit-fluxo/LEIA-ME.md` |
