@@ -1,0 +1,27 @@
+{
+  "id": "AAAA-MM-cliente-projeto",
+  "negocio": "studio | sol",
+  "cartucho": "moda",
+  "status": "pendente",
+  "status_possiveis": ["pendente", "pesquisa", "ideia", "portao1", "ativos", "portao2", "prancha", "rascunho480", "portao3", "final", "guardiao", "portao4", "entregue", "no_ar", "lido"],
+  "portoes": {
+    "1_pitch_roteiro": {"aprovado": false, "por": null, "data": null},
+    "2_ficha": {"aprovado": false, "por": null, "data": null},
+    "3_corte_480p": {"aprovado": false, "por": null, "data": null, "prazo_1080p": null},
+    "4_conjunto": {"aprovado": false, "por": null, "data": null}
+  },
+  "ativos": {
+    "personagens": [],
+    "produtos_ou_lugar": [],
+    "cenarios": []
+  },
+  "custos": {
+    "teto_reais": 0,
+    "gasto_reais": 0,
+    "lancamentos": []
+  },
+  "guardiao": {"aprovados": 0, "refeitos": 0, "bloqueados": 0, "notas": []},
+  "recusas_viram_regra": [],
+  "resultado": {"metrica": null, "controle": null, "valor": null, "vencedores": []},
+  "excecoes_para_carlo": []
+}

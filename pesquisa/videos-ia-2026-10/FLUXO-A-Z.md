@@ -5,7 +5,40 @@
 - os portões do Criar no Organismo;
 - a escada de autonomia da `DECISOES-URGENTES.md`.
 
-> **Status:** esta é a versão montada a partir da transcrição. **Os prints das telas do vídeo vão completar as etapas marcadas com 📷** (prompts exatos, a skill da folha de personagem, as telas das ferramentas). Cada print entra na etapa certa.
+> **Status (21/10):** completo com os **73 prints** enviados pelo Carlo. As transcrições estão em `transcricoes/08-prints-lote1..3.md`, com os prompts literais. **O kit para usar no computador** (7 skills, modelo de pasta de projeto e 3 pilotos) está em `kit-fluxo/`.
+
+## O fluxo original do estúdio Human (slide de 44:49)
+| # | Etapa | Quem faz | No nosso Fluxo A–Z |
+|---|---|---|---|
+| 1 | Briefing + Creative Session | Humano | A–C |
+| 2 | Ideia + Direção criativa ("O Caçador de ~~Monstros~~ Latas") | Humano | D–E |
+| 3 | Roteiros medíocres | IA | G (versões medianas) |
+| 4 | Roteiro bom | Humano | G (Carlo reescreve) + Portão 1 |
+| 5 | Criação de personagem & props | IA | H–I + Portão 2 |
+| 6 | Criação dos cenários | IA | J |
+| 7 | Storyboard | IA | K |
+| 8 | Gerar prompts + vídeos | IA | L–M |
+| 9 | Select e re-runs | Humano | Portão 3 |
+| 10 | Edição, som e cor | Humano | N |
+| 11 | Thumb | IA | P |
+
+**O que acrescentamos ao fluxo deles:**
+- a métrica de sucesso já no pedido (A);
+- a "verdade do lugar" (C);
+- a destruição da ideia (F);
+- o Guardião separado (O);
+- os quatro portões com o cliente;
+- a leitura do resultado e a skill Receita (Q–R);
+- a escada de autonomia.
+
+**Os 5 fluxos práticos da live, que viraram skills:**
+1. Variação de ângulos (FOTO + PROMPT) → `angulos-diretor-de-fotografia`
+2. Character sheet (FOTOS + SKILL) → `folha-de-personagem`
+3. Ensaio fotográfico (CHARACTER SHEET + REFERÊNCIA + PROMPT) → `ensaio-por-referencia`
+4. A pessoa falando em outros lugares (CHARACTER SHEET + ÁUDIO + PROMPT, Seedance 2.5) → `video-multicena`
+5. Efeitos visuais sobre vídeo real (VÍDEO GRAVADO + PROMPT, Seedance 2.5 Edit) → `vfx-sobre-video-real`
+
+**Como eles operam:** tudo é comandado de dentro do app Codex, com plugins do Higgsfield, do Magnific e do DaVinci Resolve. A pessoa diz em linguagem simples ("use o seedance 2.5 pra gerar o video, upando os assets e prompt junto", "1080, 9:16", "pode gerar 3 opcs") e o agente sobe os arquivos, gera, entrega o rascunho 480p e depois religa os brutos no editor. **O equivalente no seu sistema é o Claude Code com as conexões do Magnific e do Higgsfield.**
 
 ---
 
@@ -85,9 +118,9 @@ A lógica "ideia humana → protótipo barato → aprovação → só então o c
 
 ---
 
-## 📷 Os prints que completam este fluxo
+## 📷 Prints pedidos (todos recebidos em 21/10; ver `transcricoes/08-prints-lote1..3.md`)
 
-Os horários abaixo são da transcrição e podem variar alguns minutos no vídeo. Para cada um, um print da tela com o prompt ou o resultado:
+O que falta: a **página 2 de 2** do prompt de VFX e o texto completo dos prompts que ficaram atrás de "See all". Os dois estão no portal do aluno da Human.
 
 | # | Trecho | O que capturar | Entra na etapa |
 |---|---|---|---|
