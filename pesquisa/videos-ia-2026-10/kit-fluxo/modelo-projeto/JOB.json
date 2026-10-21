@@ -1,14 +1,48 @@
 {
   "id": "AAAA-MM-cliente-projeto",
-  "negocio": "studio | sol",
-  "cartucho": "moda",
+  "cliente": "nome-do-cliente",
+  "negocio": "studio | sol | outro",
+  "cartucho": "nome-do-setor",
   "status": "pendente",
-  "status_possiveis": ["pendente", "pesquisa", "ideia", "portao1", "ativos", "portao2", "prancha", "rascunho480", "portao3", "final", "guardiao", "portao4", "entregue", "no_ar", "lido"],
+  "status_possiveis": [
+    "pendente",
+    "pesquisa",
+    "ideia",
+    "portao1",
+    "ativos",
+    "portao2",
+    "prancha",
+    "rascunho480",
+    "portao3",
+    "final",
+    "guardiao",
+    "portao4",
+    "entregue",
+    "no_ar",
+    "lido"
+  ],
   "portoes": {
-    "1_pitch_roteiro": {"aprovado": false, "por": null, "data": null},
-    "2_ficha": {"aprovado": false, "por": null, "data": null},
-    "3_corte_480p": {"aprovado": false, "por": null, "data": null, "prazo_1080p": null},
-    "4_conjunto": {"aprovado": false, "por": null, "data": null}
+    "1_pitch_roteiro": {
+      "aprovado": false,
+      "por": null,
+      "data": null
+    },
+    "2_ficha": {
+      "aprovado": false,
+      "por": null,
+      "data": null
+    },
+    "3_corte_480p": {
+      "aprovado": false,
+      "por": null,
+      "data": null,
+      "prazo_1080p": null
+    },
+    "4_conjunto": {
+      "aprovado": false,
+      "por": null,
+      "data": null
+    }
   },
   "ativos": {
     "personagens": [],
@@ -20,8 +54,32 @@
     "gasto_reais": 0,
     "lancamentos": []
   },
-  "guardiao": {"aprovados": 0, "refeitos": 0, "bloqueados": 0, "notas": []},
+  "guardiao": {
+    "aprovados": 0,
+    "refeitos": 0,
+    "bloqueados": 0,
+    "notas": []
+  },
   "recusas_viram_regra": [],
-  "resultado": {"metrica": null, "controle": null, "valor": null, "vencedores": []},
-  "excecoes_para_carlo": []
+  "resultado": {
+    "metrica": null,
+    "controle": null,
+    "valor": null,
+    "vencedores": []
+  },
+  "excecoes_para_carlo": [],
+  "decisoes": [],
+  "decisoes_exemplo_de_linha": {
+    "data": "AAAA-MM-DD",
+    "meta": "S1",
+    "etapa": "I",
+    "item": "03-ativos/produto/vista-02.jpg",
+    "veredito_carlo": "aprovado | corrigido | recusado",
+    "veredito_juiz": "aprovado | reprovado",
+    "grave": false,
+    "tags": [
+      "cor"
+    ],
+    "motivo": "o que estava errado, em uma frase"
+  }
 }

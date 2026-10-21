@@ -5,8 +5,10 @@ Feito a partir da transcrição e dos **73 prints** do vídeo 8 (Human Academy e
 ## O que tem aqui
 | Item | Para quê |
 |---|---|
-| `skills/` | 7 skills prontas para o Claude Code do computador |
+| `skills/` | 9 skills: as 7 de produção + `melhoria-diaria` e `novo-cartucho` |
 | `modelo-projeto/` | A pasta que todo projeto copia: BRIEFING, JOB.json e as 8 subpastas das etapas |
+| `melhoria/` | **Ciclo de melhoria diária:** `melhoria.py` (placar, regras por nível cliente → setor → geral, alertas; testado) e `CICLO.md` |
+| `cartuchos/_modelo/` | Modelo de cartucho para qualquer setor que dependa de imagem (o que é sagrado, o que é proibido, dores, métrica, testes) |
 | `METAS.md` | O arquivo pronto para copiar em `HQ/METAS.md`: regras, meta de negócio, metas S1–S3 com nível e placar |
 | `ORQUESTRADOR.md` | De esteira para orquestrador: o modelo de meta (com teste, acesso, limites e quando chamar o Carlo) e 6 metas prontas, 3 do Studio e 3 da SOL |
 | `AMBICAO.md` | Os 4 eixos da ambição (altitude, profundidade, abrangência, velocidade) aplicados ao sistema: meta de negócio, ferramentas numéricas e conselho de 6 lentes |
