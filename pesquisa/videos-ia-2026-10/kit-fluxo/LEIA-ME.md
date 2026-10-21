@@ -9,6 +9,7 @@ Construída na nuvem em 20 e 21/10/2026 para ser levada ao computador e fundida 
 ```
 kit-fluxo/
 ├── LEIA-ME.md                ← este mapa
+├── AGENTS.md                 ← as mesmas regras para o Astra (Codex/ChatGPT)
 ├── skills/                   → vai para ~/.claude/skills/
 │   ├── pitch-e-roteiro/            etapas D–G   (cada skill tem SKILL.md + testes/CASOS.md)
 │   ├── angulos-diretor-de-fotografia/  etapa I e amostras
@@ -65,12 +66,23 @@ Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
 - **Skills:** as 9 estão com o formato correto e têm 48 casos de teste.
 - **Juiz:** os 48 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
 
+## O que a máquina é em relação ao que já roda
+O Carlo já roda o fluxo de A a Z sozinho no **Astra** e no **Claude Code**, com o Criar maestro v2 do painel. Esta máquina **não substitui** esse fluxo: ela é a **camada de melhoria**. Traz:
+- **rosto consistente:** folha com rosto real e corpo gerado, rosto separado em toda geração, fundo removido, mapa de profundidade para trocar sem perder o rosto;
+- **novas possibilidades** do estudo da Human: ângulos, ensaio por referência, vídeo multicena com áudio real, efeitos sobre vídeo real, blockout;
+- **medida:** cor e vencedor em número;
+- **aprendizado:** decisões viram regras, com placar e níveis de autonomia;
+- **qualquer setor:** cartuchos;
+- **grátis antes do pago:** Flow e Gemini;
+- **testes**, para nenhuma melhoria piorar o que já funciona.
+
 ## Antes de instalar: cruzar com o Organismo v2
 O Claude do computador deve **comparar antes de copiar**. Partes que provavelmente se sobrepõem ao que já existe:
 
 | Na máquina | No Organismo v2 (provável) | Decidir |
 |---|---|---|
-| Fluxo A–Z e 4 portões | Criar maestro v2 (8 passos, 4 portões) | Unir: o Criar é o motor, o A–Z é o mapa |
+| Fluxo A–Z e 4 portões | Criar maestro v2 (8 passos; portões ficha, conceito, peça principal, conjunto; "nenhum vídeo pago antes do sim"; recusa vira proibição) | **O maestro continua sendo o executor.** O A–Z é o mapa detalhado; as skills novas entram nos passos dele |
+| `motor.py` e `trava_portoes.py` | O próprio maestro e o `/api/criar` do painel | **Não duplicar:** se o maestro já anda sozinho e para nos portões, ele fica. Do motor, aproveitar só o que faltar: o prazo de 7 dias do 480p, o teto por projeto e o registro de `decisoes` com tags (que alimenta o ciclo de melhoria) |
 | `pitch-e-roteiro` | Roteirista de Ganchos e `conceitos-anuncio-moda` | Manter uma: o pitch vira etapa antes do Roteirista |
 | Guardião com `delta_e.py` | Guardião da Marca (skill) | Acrescentar a ferramenta à skill existente |
 | `vencedor.py` | Analista de Ganchos | Acrescentar a ferramenta à skill existente |
