@@ -56,6 +56,9 @@ Peça o vídeo **"sem trilha"** para aproveitar os efeitos sonoros na edição. 
 
 Custo de referência na live: cerca de **80 créditos** do Higgsfield por geração de Seedance 2.5 em 1080p.
 
+## Montagem no HyperFrames
+Depois dos clipes, a montagem sai no HyperFrames (HTML → MP4, render local, custo zero): legenda, marca, preço, chamada, as 5 versões de gancho trocando só a abertura, e os formatos 9:16, 4:5 e 1:1. A montagem de rascunho pode ir ao Portão 3 junto com o corte 480p; o render final só usa clipes 1080p aprovados. Texto na tela passa pela lista negra do cartucho do setor.
+
 ## Studio × SOL
 - **Studio:** a peça sagrada aparece inteira no plano de revelação; o Guardião confere quadro a quadro os planos com a peça. UGC: áudio real do criador licenciado.
 - **SOL:** o vídeo parte de fotos ou vídeos **reais** da pousada; a IA mexe em pessoas, clima, estação e câmera. Último plano: o lugar inteiro + chamada para o WhatsApp da Vera com o código do anúncio.

@@ -3,6 +3,7 @@
 A máquina é a mesma para o Claude Code e para o Astra. As skills são arquivos de texto comuns: qualquer agente lê e segue.
 
 ## Antes de qualquer trabalho
+0. Leia `ESPECIFICACAO.md`: esta máquina é uma camada de melhoria sobre o Criar maestro, não um substituto.
 1. Leia `HQ/METAS.md`, `HQ/REGRAS-GERAIS.md` e, se existir, `HQ/cartuchos/<setor>/CARTUCHO.md` e `CLIENTES/<cliente>/REGRAS.md`.
 2. Leia o `JOB.json` e o `BRIEFING.md` do projeto. O `JOB.json` diz em que etapa o projeto está.
 3. Use a skill da etapa, em `skills/<nome>/SKILL.md`, como instrução. "Usar esta skill" = ler o arquivo e seguir.

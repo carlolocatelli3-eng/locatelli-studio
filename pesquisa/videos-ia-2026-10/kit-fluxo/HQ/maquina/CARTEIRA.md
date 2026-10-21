@@ -10,6 +10,7 @@
 | Magnific (plano pago) | Créditos do plano; conecta ao Claude por MCP | Mensal | Automatizável (MCP) |
 | Higgsfield (se assinar) | Seedance, Kling, Nano Banana; MCP para o Claude | Mensal | Automatizável (MCP) |
 | APIs (Google em lote, Kie.ai, fal.ai) | Por uso | — | Automatizável |
+| **HyperFrames** (no computador) | Montagem em HTML → MP4: legendas, cards, preço, versões de gancho, formatos | Ilimitado (render local) | Automatizável (o Claude escreve e renderiza) |
 
 ## Ordem de uso por etapa
 | Etapa | 1º (grátis) | 2º (pago, se precisar) |
@@ -21,6 +22,7 @@
 | Blockout e testes de movimento | **Gemini · 2 vídeos/dia** | Seedance 480p |
 | Rascunhos 480p do filme | Gemini (planos simples) + Flow (créditos do dia) | Seedance 480p (planos com pessoa, produto ou fala) |
 | Final 1080p (depois do Portão 3) | — | Seedance/Kling/MiniMax pelo hub |
+| Montagem, legendas, versões de gancho, formatos, vitrine por peça, thumbs | **HyperFrames (render local)** | — |
 | Conteúdo próprio (Piloto 0, Diário do Organismo) | Gemini + Flow | — |
 
 **Conta de um dia típico:**

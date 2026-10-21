@@ -677,6 +677,8 @@ DO NOT: change face, garment, logo, product, architecture; add text; add music.
 | Nano Banana 2.1 | Composição com texto e layout | Custo intermediário |
 | Nano Banana Pro | Editorial hiper-realista | <strong>Muda o ângulo de câmera por conta própria</strong>: trave a câmera no prompt |</p>
 <p>Custo de referência na live: cerca de <strong>80 créditos</strong> do Higgsfield por geração de Seedance 2.5 em 1080p.</p>
+<h2>Montagem no HyperFrames</h2>
+<p>Depois dos clipes, a montagem sai no HyperFrames (HTML → MP4, render local, custo zero): legenda, marca, preço, chamada, as 5 versões de gancho trocando só a abertura, e os formatos 9:16, 4:5 e 1:1. A montagem de rascunho pode ir ao Portão 3 junto com o corte 480p; o render final só usa clipes 1080p aprovados. Texto na tela passa pela lista negra do cartucho do setor.</p>
 <h2>Studio × SOL</h2>
 <ul>
 <li><strong>Studio:</strong> a peça sagrada aparece inteira no plano de revelação; o Guardião confere quadro a quadro os planos com a peça. UGC: áudio real do criador licenciado.</li>
@@ -1265,6 +1267,12 @@ RITMO: [gatilho ou agenda]
 <td>—</td>
 <td>Automatizável</td>
 </tr>
+<tr>
+<td><strong>HyperFrames</strong> (no computador)</td>
+<td>Montagem em HTML → MP4: legendas, cards, preço, versões de gancho, formatos</td>
+<td>Ilimitado (render local)</td>
+<td>Automatizável (o Claude escreve e renderiza)</td>
+</tr>
 </tbody>
 </table></div>
 <h2>Ordem de uso por etapa</h2>
@@ -1311,6 +1319,11 @@ RITMO: [gatilho ou agenda]
 <td>Final 1080p (depois do Portão 3)</td>
 <td>—</td>
 <td>Seedance/Kling/MiniMax pelo hub</td>
+</tr>
+<tr>
+<td>Montagem, legendas, versões de gancho, formatos, vitrine por peça, thumbs</td>
+<td><strong>HyperFrames (render local)</strong></td>
+<td>—</td>
 </tr>
 <tr>
 <td>Conteúdo próprio (Piloto 0, Diário do Organismo)</td>
@@ -1986,7 +1999,9 @@ skills e regras atualizadas → o próximo trabalho já sai melhor
   <h2>Organização</h2>
   <p class="intro">O kit já está organizado como vai ficar no seu computador: <code>skills/</code> vai para a pasta de skills do Claude Code e <code>HQ/</code> se junta ao HQ que você já tem.</p>
   <pre class="tree">kit-fluxo/
+├── ESPECIFICACAO.md          ← LEIA PRIMEIRO: o que é, o que não é, como integrar, registro de entradas
 ├── LEIA-ME.md                ← este mapa
+├── AGENTS.md                 ← as mesmas regras para o Astra (Codex/ChatGPT)
 ├── skills/                   → vai para ~/.claude/skills/
 │   ├── pitch-e-roteiro/            etapas D–G   (cada skill tem SKILL.md + testes/CASOS.md)
 │   ├── angulos-diretor-de-fotografia/  etapa I e amostras
@@ -2030,6 +2045,231 @@ skills e regras atualizadas → o próximo trabalho já sai melhor
   <p class="eb"><span class="n">09</span>Um único organismo</p>
   <h2>Fusão com o Organismo Operador</h2>
   <p class="intro">No computador, o Claude compara antes de copiar. Onde a máquina repete algo que o Organismo já tem, as duas partes viram uma só.</p>
+  <details class="sk" id="doc-espec"><summary><b>ESPECIFICACAO.md</b><span>leia primeiro: o que é, o que não é, como integrar e o registro de tudo o que entrou</span></summary><div class="doc"><h1>ESPECIFICAÇÃO · leia primeiro (para o Claude Code do computador do Carlo)</h1>
+<blockquote>
+<p>Este arquivo diz <strong>o que é</strong> esta máquina, <strong>o que ela não é</strong> e <strong>como ela entra</strong> no que já roda. Toda vez que algo novo for acrescentado, ele é registrado no fim deste arquivo (seção 8).</p>
+</blockquote>
+<h2>1. O que já roda (não mexer sem necessidade)</h2>
+<ul>
+<li><strong>O Claude Code é o orquestrador principal</strong> do Carlo. O Astra (Codex/ChatGPT) é secundário e lê as mesmas regras pelo <code>AGENTS.md</code>.</li>
+<li><strong>O Criar maestro v2</strong> roda os <strong>8 processos sozinho</strong>; o Carlo só aprova. Ele tem:</li>
+<li>4 portões: ficha, conceito, peça principal e conjunto;</li>
+<li>a regra "nenhum vídeo pago antes do sim";</li>
+<li>a recusa que vira proibição;</li>
+<li>uma pasta por campanha (BRIEFING, PRODUTO, PESQUISA, CONCEITOS, CENAS, REVISÃO).</li>
+<li><strong>Painel do Organismo</strong> (localhost:8790): Decidir hoje, Colmeia (provas), Ativos (contratos, repasse, banco de referências), Virais, Triagem.</li>
+<li><strong>HyperFrames</strong> (HeyGen, código aberto) está instalado: o Claude escreve o vídeo em HTML (CSS, GSAP, Three.js) e renderiza em MP4 localmente.</li>
+<li><strong>Skills que já existem:</strong> Perfil de Gosto, Pesquisador de Dores, Roteirista de Ganchos, Guardião da Marca, Analista de Ganchos (e outras).</li>
+</ul>
+<h2>2. O que esta máquina é</h2>
+<p><strong>Uma camada de melhoria sobre o processo que já roda. Não é um sistema novo para substituir o Criar.</strong></p>
+<p>O objetivo é que o Carlo aprove menos, e que o que chega para aprovação venha melhor. O humano cria e dá o olho final; a máquina executa, mede e aprende.</p>
+<h2>3. As melhorias (o que cada uma faz e onde entra)</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Melhoria</th>
+<th>Onde entra no que já existe</th>
+<th>Arquivo</th>
+<th>Situação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Rosto consistente:</strong> folha com rosto real e corpo gerado, rosto separado em toda geração, fundo removido, altura e detalhes únicos</td>
+<td>Portão "ficha" do Criar e Ativos</td>
+<td><code>skills/folha-de-personagem</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Produto e lugar fiéis</strong>, com a cor medida em número (ΔE2000)</td>
+<td>Guardião da Marca</td>
+<td><code>skills/folha-de-produto-e-lugar</code>, <code>HQ/ferramentas/delta_e.py</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Ideia mais forte:</strong> 10 ideias óbvias descartadas, pitch em 1 parágrafo, conselho de 6 lentes, roteiro em tabela</td>
+<td>Antes do portão "conceito"; Roteirista de Ganchos</td>
+<td><code>skills/pitch-e-roteiro</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Novas possibilidades do estudo da Human:</strong> ângulos a partir de uma foto, ensaio por referência, vídeo multicena com áudio real, efeitos sobre vídeo real</td>
+<td>Processos de geração do Criar</td>
+<td>4 skills</td>
+<td>prontas</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Mapa de profundidade e blockout:</strong> troca total de pessoa ou cenário mantendo o movimento real</td>
+<td>Vídeo e efeitos</td>
+<td><code>skills/vfx-sobre-video-real</code>, <code>skills/video-multicena</code></td>
+<td><strong>a testar</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Vencedor com número</strong> (95% de chance e 30 eventos)</td>
+<td>Analista de Ganchos</td>
+<td><code>HQ/ferramentas/vencedor.py</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Aprendizado:</strong> cada aprovação, correção e recusa vira regra (cliente → setor → geral); placar por processo; até 2 melhorias de skill testadas por dia</td>
+<td>Hoje só a recusa vira proibição</td>
+<td><code>skills/melhoria-diaria</code>, <code>HQ/ferramentas/melhoria.py</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Aprovar menos:</strong> escada de autonomia 0–3 por processo, subida só com placar</td>
+<td>Os 8 processos (hoje todos no nível 1)</td>
+<td><code>HQ/METAS.md</code>, <code>HQ/metas.json</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Qualquer setor:</strong> cartuchos</td>
+<td>Perfil de Gosto (marca) convive com cartucho (setor)</td>
+<td><code>skills/novo-cartucho</code>, <code>HQ/modelos/cartucho</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Grátis antes do pago:</strong> Flow, Gemini e HyperFrames primeiro</td>
+<td>Roteador e Agente de Margem</td>
+<td><code>HQ/maquina/CARTEIRA.md</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Travas em código:</strong> prazo de 7 dias do 480p, teto por projeto, nada em <code>06-final</code>/<code>07-entrega</code> sem portão</td>
+<td>Complementa o "nenhum vídeo pago antes do sim"</td>
+<td><code>HQ/ferramentas/motor.py</code>, <code>trava_portoes.py</code></td>
+<td>pronta; <strong>usar só o que o maestro não tiver</strong></td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Testes:</strong> nada muda se <code>python3 HQ/testes/rodar.py</code> falhar</td>
+<td>Novo</td>
+<td><code>HQ/testes/</code></td>
+<td>pronta</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>HyperFrames na montagem:</strong> legendas, cards de produto e preço, versões de gancho, formatos 9:16, 4:5 e 1:1, vitrine em vídeo por peça, thumbs</td>
+<td>Depois do Portão 3 (final) e para rascunhos de montagem</td>
+<td>seção 5 abaixo</td>
+<td><strong>a ligar</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2>4. Não negociáveis (valem em tudo)</h2>
+<ol>
+<li>Os portões e o olho final são do Carlo.</li>
+<li>Nenhum vídeo pago antes do sim; nenhum 1080p sem o Portão 3 dentro de 7 dias.</li>
+<li>Rosto de pessoa real só com contrato e consentimento registrados (Ativos).</li>
+<li>Lugar real e produto real nunca são "melhorados" pela IA.</li>
+<li>Nunca publicar, enviar mensagem ou gastar verba de mídia sozinho.</li>
+<li>Nada duplicado. Se já existe no Organismo, o que é novo vira parte do que existe.</li>
+<li>Toda mudança passa nos testes e no sim do Carlo.</li>
+</ol>
+<h2>5. HyperFrames na máquina</h2>
+<ul>
+<li><strong>Para que serve aqui:</strong> a montagem que hoje é manual e repetitiva.</li>
+<li>juntar os clipes gerados com legenda, marca, preço e chamada;</li>
+<li>fazer as <strong>5 versões de gancho</strong> do Teste de Ganchos trocando só a abertura;</li>
+<li>exportar <strong>todos os formatos</strong>;</li>
+<li>montar a <strong>Vitrine em Vídeo por peça</strong> a partir de um modelo HTML (foto/clipe + nome + preço + chamada);</li>
+<li>gerar thumbs e cards de anúncio.</li>
+<li><strong>Por que é forte:</strong> o render é local (custo zero, entra na carteira como "grátis") e determinístico. O mesmo HTML com outro texto gera a variação sem nova geração de IA.</li>
+<li><strong>Regras:</strong></li>
+<li>montagem de rascunho pode ir ao Portão 3 junto com o corte 480p;</li>
+<li>o render final usa só clipes 1080p aprovados;</li>
+<li>todo texto na tela passa pela lista negra do cartucho do setor e pelo rótulo de IA quando houver pessoa gerada.</li>
+<li><strong>A fazer no computador:</strong></li>
+<li>criar <code>HQ/modelos/hyperframes/</code>, com 3 modelos (gancho UGC 9:16, vitrine de produto, card de anúncio);</li>
+<li>criar um caso de teste por modelo.</li>
+</ul>
+<h2>6. Como integrar (ordem obrigatória)</h2>
+<ol>
+<li>Ler este arquivo, o <code>LEIA-ME.md</code> (mapa) e as skills.</li>
+<li>Fazer o <strong>inventário</strong> do que existe no computador: os 8 processos do maestro, as skills, o painel, o HyperFrames.</li>
+<li>Montar a <strong>tabela de sobreposição</strong>: para cada melhoria da seção 3, onde ela entra e o que já existe parecido.</li>
+<li><strong>Mostrar ao Carlo antes de mudar qualquer coisa.</strong></li>
+<li>Primeira mudança (a mais importante): fazer os 8 processos <strong>registrarem cada aprovação, correção e recusa</strong> em <code>decisoes</code> (data, processo, veredito, motivo, tags). Sem isso, o placar e o aprendizado não funcionam.</li>
+<li>Depois, uma melhoria por vez, com teste e o sim do Carlo.</li>
+</ol>
+<h2>7. Pendências conhecidas</h2>
+<ul>
+<li>Calibrar o juiz: Carlo marca 50 peças; medir a concordância do Guardião.</li>
+<li>Testar o mapa de profundidade, o Nano Banana Pro com trava de câmera e o rosto separado (ver <code>../CRUZAMENTO-PLAYBOOK.md</code>).</li>
+<li>Página 2 do prompt de VFX da Human (portal do aluno).</li>
+<li>Confirmar os termos de uso comercial do Flow e do Gemini para entrega a cliente.</li>
+</ul>
+<h2>8. Registro de entradas (tudo o que entrou na máquina, e de onde veio)</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>O que entrou</th>
+<th>De onde veio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>19–20/10</td>
+<td>Estratégia, ideias novas, decisões urgentes, método universal</td>
+<td>Os 9 vídeos e cerca de 300 buscas de pesquisa</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>Fluxo A–Z e 7 skills de produção</td>
+<td>Vídeo 8 (Human Academy × Paulo Aguiar) e os 73 prints</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>Orquestrador (metas em vez de tarefas)</td>
+<td>Imagem "De Esteira para Orquestrador"</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>Ambição: meta de negócio, ferramentas numéricas, 6 lentes</td>
+<td>Imagem "A Anatomia da Ambição" (artigo do Felix Rieseberg)</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>Ciclo de melhoria, cartuchos, testes, motor, travas</td>
+<td>Construção nesta sessão</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>Mapa de profundidade, blockout, rosto separado, escolha de modelo</td>
+<td>PDF "O Playbook do Diretor de Arte IA" (NotebookLM)</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>Carteira (Flow e Gemini primeiro)</td>
+<td>Planos do Carlo</td>
+</tr>
+<tr>
+<td>21/10</td>
+<td>HyperFrames na montagem</td>
+<td>Ferramenta já instalada no computador do Carlo</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Para acrescentar algo novo:</strong>
+1. Cruzar com o que já existe.
+2. Colocar no lugar certo (skill, ferramenta, cartucho ou documento da máquina).
+3. Criar o teste.
+4. Registrar uma linha nesta tabela.
+5. Rodar <code>HQ/testes/rodar.py</code>.</p></div></details>
   <div class="doc" style="padding:0;border:0"><p>O Claude do computador deve <strong>comparar antes de copiar</strong>. Partes que provavelmente se sobrepõem ao que já existe:</p>
 <div class="tblwrap"><table>
 <thead>
@@ -2042,8 +2282,13 @@ skills e regras atualizadas → o próximo trabalho já sai melhor
 <tbody>
 <tr>
 <td>Fluxo A–Z e 4 portões</td>
-<td>Criar maestro v2 (8 passos, 4 portões)</td>
-<td>Unir: o Criar é o motor, o A–Z é o mapa</td>
+<td>Criar maestro v2 (8 passos; portões ficha, conceito, peça principal, conjunto; "nenhum vídeo pago antes do sim"; recusa vira proibição)</td>
+<td><strong>O maestro continua sendo o executor.</strong> O A–Z é o mapa detalhado; as skills novas entram nos passos dele</td>
+</tr>
+<tr>
+<td><code>motor.py</code> e <code>trava_portoes.py</code></td>
+<td>O próprio maestro e o <code>/api/criar</code> do painel</td>
+<td><strong>Não duplicar:</strong> se o maestro já anda sozinho e para nos portões, ele fica. Do motor, aproveitar só o que faltar: o prazo de 7 dias do 480p, o teto por projeto e o registro de <code>decisoes</code> com tags (que alimenta o ciclo de melhoria)</td>
 </tr>
 <tr>
 <td><code>pitch-e-roteiro</code></td>

@@ -8,6 +8,7 @@ Construída na nuvem em 20 e 21/10/2026 para ser levada ao computador e fundida 
 
 ```
 kit-fluxo/
+├── ESPECIFICACAO.md          ← LEIA PRIMEIRO: o que é, o que não é, como integrar, registro de entradas
 ├── LEIA-ME.md                ← este mapa
 ├── AGENTS.md                 ← as mesmas regras para o Astra (Codex/ChatGPT)
 ├── skills/                   → vai para ~/.claude/skills/
