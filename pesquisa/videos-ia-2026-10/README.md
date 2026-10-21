@@ -7,6 +7,7 @@ Pacote preparado numa sessão do Claude Code na nuvem para ser continuado **no C
 | Arquivo | O que é |
 |---|---|
 | `DECISOES-URGENTES.md` | **Comece aqui (20/10).** As 3 decisões mais urgentes (qual case primeiro, o que vender, quanto roda sozinho), com caminhos a favor e contra, a escada de autonomia e os fluxos do Studio e do SOL etapa por etapa. Versão visual: `decisoes-urgentes.html` |
+| `FLUXO-A-Z.md` | Fluxo do pedido ao resultado (método do vídeo 8 + portões do Criar), lado a lado para Studio e SOL Destinos, com a lista de prints que faltam. Versão visual: `fluxo-a-z.html` |
 | `METODO-UNIVERSAL.md` | Dois motores para qualquer mercado: 5 variações da Vera (Festa, Studio, Clínica, Imóvel, Loja), 5 mercados paralelos do Studio, arquitetura de cartuchos e roteiro de 14 dias. Versão visual: `metodo-universal.html` |
 | `VARIACOES-DIRECAO.md` | Cinco variações da direção recomendada (risco zero, um ativo para dois negócios, construir em público, rede antes de cliente, dados como produto), com comparação e combinação sugerida |
 | `RADAR-MERCADO-20-10.md` | Base factual com fontes: moda com IA, turismo e pousadas, autonomia com Claude, resumo dos documentos do SOL |

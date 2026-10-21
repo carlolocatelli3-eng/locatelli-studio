@@ -1,0 +1,375 @@
+<title>Fluxo de A a Z</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Libre+Franklin:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: same family as "Ciclo dos Agentes" — sidebar index on desktop, long reading column; cards only for separate objects (videos, themes) */
+:root{
+  --bg:#F5F5F2; --surface:#FFFFFF; --ink:#17181C; --muted:#5E6068; --line:#DCDCD6;
+  --accent:#2F5D50; --accent-soft:#E3ECE8; --code:#EEEEEA;
+  --warn:#7A5A12; --warn-soft:#F3EAD3; --bad:#8A2F2A; --bad-soft:#F4E1DF; --info:#2E4A72; --info-soft:#E1E8F2;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Libre Franklin","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141518; --surface:#1C1D21; --ink:#ECECE8; --muted:#A3A5AC; --line:#2F3036;
+  --accent:#8CC2AF; --accent-soft:#1F2E29; --code:#24252A;
+  --warn:#E3C27A; --warn-soft:#3A3220; --bad:#E89A92; --bad-soft:#3A2321; --info:#9DB8E0; --info-soft:#1F2836; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141518; --surface:#1C1D21; --ink:#ECECE8; --muted:#A3A5AC; --line:#2F3036;
+  --accent:#8CC2AF; --accent-soft:#1F2E29; --code:#24252A;
+  --warn:#E3C27A; --warn-soft:#3A3220; --bad:#E89A92; --bad-soft:#3A2321; --info:#9DB8E0; --info-soft:#1F2836; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;padding-top:44px;display:flex;flex-direction:column}
+.side p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.side a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
+.side a:hover{color:var(--accent)}
+.n{font-family:var(--mono);font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums}
+main{min-width:0;padding-top:44px}
+h1,h2{font-family:var(--display);font-weight:500;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(36px,5.4vw,60px);line-height:1.04;margin:0 0 16px}
+h1 em{font-style:italic;color:var(--accent)}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1;margin:0 0 8px}
+h3{font-size:18px;font-weight:600;margin:0 0 6px;text-wrap:balance}
+.eb{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:baseline}
+.lede{max-width:66ch;color:var(--muted);margin:0 0 24px;font-size:17px}
+section{padding-top:80px}
+.intro{max-width:68ch;margin:0 0 24px}
+p{margin:0 0 12px}
+ul,ol{margin:0;padding-left:1.2em}
+li{margin:3px 0}
+code{font-family:var(--mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+.source{font-size:13px;color:var(--muted);margin-top:14px}
+
+.verdict{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}
+.verdict div{padding:18px 18px 20px;border-right:1px solid var(--line);min-width:0}
+.verdict div:last-child{border-right:0}
+.verdict b{display:block;font-family:var(--display);font-size:22px;font-weight:500;line-height:1.15;margin-bottom:6px}
+.verdict span{font-size:14px;color:var(--muted);line-height:1.5}
+
+.chip{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;font-weight:500;white-space:nowrap}
+.chip.ok{background:var(--accent-soft);color:var(--accent)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.info{background:var(--info-soft);color:var(--info)}
+
+/* system */
+.sys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sys div{background:var(--surface);padding:16px;min-width:0}
+.sys .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.sys h3{font-family:var(--display);font-weight:500;font-size:22px;margin:2px 0 6px}
+.sys p{font-size:14.5px;margin:0}
+.versions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 20px}
+.versions div{border:1px solid var(--line);background:var(--surface);padding:12px 14px;min-width:0;font-size:14px}
+.versions b{display:block;font-size:15px}
+.versions .now{border-color:var(--accent);background:var(--accent-soft)}
+
+/* status */
+.status{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start;margin-top:24px}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:14px}
+.track{height:14px;background:var(--code);position:relative}
+.fill{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.fill.w{background:var(--warn)}
+.bar .v{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.callout{border-left:3px solid var(--warn);background:var(--warn-soft);padding:16px 18px;min-width:0}
+.callout h3{color:var(--warn)}
+.callout p{font-size:15px}
+
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.theme{background:var(--surface);border:1px solid var(--line);padding:18px 20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.theme .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.theme .tn{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{font-family:var(--mono);font-size:11px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--muted);border-radius:50%}
+.dot.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.theme h3{font-size:18px;margin:0}
+.theme p{font-size:14.5px;margin:0}
+.theme .org{font-size:14px;border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
+.theme .org b{color:var(--accent)}
+
+/* videos */
+.vids{display:flex;flex-direction:column;gap:18px}
+.vid{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:88px minmax(0,1fr)}
+.vid .num{border-right:1px solid var(--line);padding:18px 0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.vid .num b{font-family:var(--display);font-size:42px;font-weight:500;line-height:1;color:var(--accent)}
+.stars{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em;writing-mode:vertical-rl;transform:rotate(180deg)}
+.vid .body{padding:16px 22px 18px;min-width:0}
+.vid .meta{font-size:13px;color:var(--muted);margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.vid h3{font-family:var(--display);font-weight:500;font-size:23px;line-height:1.15;margin:0 0 2px}
+.vid .orig{font-size:13px;color:var(--muted);font-style:italic;margin:0 0 8px}
+.say{font-size:15px;max-width:74ch}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:12px}
+.cols>div{min-width:0}
+.cols h4{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.cols .k h4{color:var(--accent)}
+.cols .x h4{color:var(--muted)}
+.cols .s h4{color:var(--info)}
+.cols ul{font-size:14.5px}
+.vid.gold{border-color:var(--accent)}
+
+/* tables */
+.tw{overflow-x:auto;margin:8px 0 0;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;font-size:14.5px;width:100%;min-width:720px}
+th,td{border-bottom:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.t{font-weight:600}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* research */
+.finds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px}
+.finds>div{border-top:1px solid var(--line);padding-top:14px;min-width:0}
+.finds .l{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.finds p{font-size:15px}
+.big{font-family:var(--display);font-size:34px;line-height:1;display:block;margin:4px 0 6px}
+
+/* exists vs new */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.two>div{min-width:0}
+.two ul{font-size:15px}
+.exist li::marker{color:var(--accent)}
+
+/* plan */
+.plan{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.step{display:grid;grid-template-columns:56px minmax(0,1fr) 160px;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:start}
+.step:last-child{border-bottom:0}
+.step .i{font-family:var(--display);font-size:28px;line-height:1;color:var(--accent)}
+.step h3{margin:0 0 2px;font-size:17px}
+.step p{margin:0;font-size:14.5px;color:var(--muted)}
+.step .r{display:flex;flex-direction:column;gap:6px;align-items:flex-start;font-size:13px;color:var(--muted)}
+.step.top3{background:var(--accent-soft)}
+
+.feature{border:1px solid var(--accent);background:var(--accent-soft);padding:22px;margin-bottom:24px}
+.feature .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 4px}
+.feature h3{font-family:var(--display);font-weight:500;font-size:26px;margin:0 0 8px}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:16px 0 4px;border:1px solid var(--line);background:var(--surface)}
+.flow div{padding:14px;border-right:1px solid var(--line);min-width:0;font-size:14px;line-height:1.45}
+.flow div:last-child{border-right:0}
+.flow b{display:block;font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px}
+
+.untold{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}
+.untold div{border-bottom:1px solid var(--line);padding:8px 0;font-size:15px;min-width:0}
+.untold .n{margin-right:8px}
+
+.checks{display:flex;flex-direction:column;gap:10px}
+.check{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;font-size:14.5px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.ask{background:var(--surface);border:1px solid var(--line);padding:22px}
+.ask ol{padding-left:1.2em;margin:0}
+.ask li{margin:6px 0}
+footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);max-width:76ch}
+
+@media (max-width:960px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  .side{display:none}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .status{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .verdict,.sys,.versions,.themes,.finds,.two,.untold{grid-template-columns:minmax(0,1fr)}
+  .verdict div{border-right:0;border-bottom:1px solid var(--line)}
+  .verdict div:last-child{border-bottom:0}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .flow div{border-right:0;border-bottom:1px solid var(--line)}
+  .flow div:last-child{border-bottom:0}
+  .vid{grid-template-columns:minmax(0,1fr)}
+  .vid .num{flex-direction:row;justify-content:flex-start;padding:12px 18px;border-right:0;border-bottom:1px solid var(--line)}
+  .stars{writing-mode:horizontal-tb;transform:none}
+  .step{grid-template-columns:40px minmax(0,1fr)}
+  .step .r{grid-column:2;flex-direction:row;flex-wrap:wrap}
+  .bar{grid-template-columns:110px minmax(0,1fr) 40px}
+  .check{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+/* Decision pages: each path is a row; the recommended one carries the accent */
+.paths{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface);margin-top:12px}
+.path{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:20px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.path:last-child{border-bottom:0}
+.path.rec{background:var(--accent-soft)}
+.path .k{min-width:0}
+.path .k b{display:block;font-family:var(--display);font-size:22px;font-weight:500;line-height:1.1}
+.path .k span{font-size:13px;color:var(--muted)}
+.path .pro,.path .con{min-width:0;font-size:14.5px;line-height:1.5}
+.path .pro::before,.path .con::before{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.path .pro::before{content:"A favor";color:var(--accent)}
+.path .con::before{content:"Contra";color:var(--bad)}
+.why{font-size:15px;max-width:70ch;border-left:3px solid var(--line);padding-left:14px;color:var(--muted);margin:0 0 8px}
+.rec-box{border:1px solid var(--accent);padding:16px 18px;margin-top:16px;background:var(--surface)}
+.rec-box .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.rec-box p:last-child{margin:0}
+.lvl td:first-child{font-family:var(--mono);color:var(--accent);white-space:nowrap}
+.tw table{font-size:14px}
+.subh{margin-top:36px}
+@media (max-width:820px){
+  .path{grid-template-columns:minmax(0,1fr);gap:8px}
+}
+/* A–Z flow: phases as numbered bands, each step a row with Studio and SOL side by side */
+.phase{margin-top:40px}
+.phase h3.ph{font-family:var(--display);font-weight:500;font-size:28px;margin:0 0 12px;display:flex;gap:12px;align-items:baseline}
+.phase h3.ph span{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em}
+.az{border:1px solid var(--line);background:var(--surface)}
+.az .row{display:grid;grid-template-columns:52px minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr) 70px;border-bottom:1px solid var(--line)}
+.az .row:last-child{border-bottom:0}
+.az .row>div{padding:12px 14px;min-width:0;font-size:14px;line-height:1.5}
+.az .row>div+div{border-left:1px solid var(--line)}
+.az .hd>div{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg);padding-block:8px}
+.az .l{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+.az .what b{display:block;font-size:15px;margin-bottom:2px}
+.az .lvl{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.az .gate{background:var(--warn-soft)}
+.az .gate .l{color:var(--warn);font-size:22px}
+.az .cam{color:var(--info);font-size:12px;font-family:var(--mono)}
+@media (max-width:900px){
+  .az .row{grid-template-columns:44px minmax(0,1fr)}
+  .az .row>div+div{border-left:0}
+  .az .row>div:nth-child(n+3){grid-column:2;border-top:1px dashed var(--line)}
+  .az .hd{display:none}
+  .az .row>div:nth-child(3)::before{content:"Studio · ";font-family:var(--mono);font-size:11px;color:var(--accent)}
+  .az .row>div:nth-child(4)::before{content:"SOL · ";font-family:var(--mono);font-size:11px;color:var(--accent)}
+  .az .row>div:nth-child(5)::before{content:"Nível ";font-family:var(--mono);font-size:11px}
+}
+</style>
+
+<div class="wrap">
+<nav class="side" aria-label="Seções">
+  <p>Nesta página</p>
+  <a href="#topo"><span class="n">00</span>O fluxo</a>
+  <a href="#principios"><span class="n">7</span>Princípios</a>
+  <a href="#etapas"><span class="n">A–R</span>As etapas</a>
+  <a href="#viagem"><span class="n">SOL</span>Vender uma viagem</a>
+  <a href="#prints"><span class="n">📷</span>Prints que faltam</a>
+  <a href="#organismo"><span class="n">+</span>O que muda</a>
+</nav>
+
+<main>
+
+<header id="topo">
+  <p class="eb">21/10/2026 · do vídeo 8 (Human Academy e Paulo Aguiar) · para Carlo Locatelli</p>
+  <h1>Fluxo de A a Z, <em>do pedido ao resultado</em></h1>
+  <p class="lede">O método do estúdio Human, que entrega para Coca-Cola, Boticário e Havaianas, juntado aos portões do seu Criar e à escada de autonomia. Um fluxo só, em 5 fases e 18 etapas, com cada etapa adaptada lado a lado para o Locatelli Studio e para a SOL Destinos. As etapas com 📷 vão ficar completas com os prints das telas do vídeo.</p>
+  <div class="verdict">
+    <div><b>Humano na ideia, IA na execução.</b><span>“A execução está virando commodity. A parte humana da ideia e do roteiro fica mais importante.”</span></div>
+    <div><b>Protótipo barato antes do caro.</b><span>Storyboard desenhado, rascunho em 480p a 1/3 do custo, e só o que entrou no corte vira 1080p.</span></div>
+    <div><b>O cliente aprova no barato.</b><span>Quatro portões. Nenhum vídeo pago antes do sim, e o sim do 480p precisa sair em 7 dias.</span></div>
+  </div>
+</header>
+
+<section id="principios">
+  <p class="eb"><span class="n">7</span>Valem para qualquer trabalho</p>
+  <h2>Os princípios por trás do fluxo</h2>
+  <div class="plan">
+    <div class="step"><span class="i">1</span><div><h3>O humano faz a ideia</h3><p>Descartar as 10 primeiras ideias da IA: são as que todo mundo vai fazer.</p></div><div class="r"><span class="chip ok">seu fosso</span></div></div>
+    <div class="step"><span class="i">2</span><div><h3>Ativos antes de cenas</h3><p>Personagem, produto e cenário prontos e aprovados antes de qualquer cena.</p></div><div class="r"><span class="chip info">folhas</span></div></div>
+    <div class="step"><span class="i">3</span><div><h3>Protótipo barato antes do caro</h3><p>Storyboard, depois rascunho 480p, depois 1080p.</p></div><div class="r"><span class="chip info">1/3 a 1/5 do custo</span></div></div>
+    <div class="step"><span class="i">4</span><div><h3>Aprovar no barato</h3><p>“Imagina o cliente não gostar da jaqueta depois: teria que refazer todos os vídeos.”</p></div><div class="r"><span class="chip warn">4 portões</span></div></div>
+    <div class="step"><span class="i">5</span><div><h3>Só o que entrou no corte vira caro</h3><p>O filme inteiro é editado em rascunho; só as cenas usadas vão para 1080p.</p></div><div class="r"><span class="chip ok">corta gasto</span></div></div>
+    <div class="step"><span class="i">6</span><div><h3>Um contexto por projeto</h3><p>O Paulo usa uma conversa com todo o histórico; no Organismo, uma pasta por campanha.</p></div><div class="r"><span class="chip ok">já existe</span></div></div>
+    <div class="step"><span class="i">7</span><div><h3>Quem gera não julga</h3><p>Controle de qualidade separado, com critérios escritos.</p></div><div class="r"><span class="chip ok">Guardião</span></div></div>
+  </div>
+</section>
+
+<section id="etapas">
+  <p class="eb"><span class="n">A–R</span>Lado a lado</p>
+  <h2>As etapas, para o Studio e para a SOL</h2>
+  <p class="intro">O número à direita é o nível de autonomia: 0 é manual, 1 é rascunho com o seu sim, 2 é automático com amostragem e 3 é automático com auditoria. Os portões 🚦 são sempre humanos.</p>
+<div class="phase"><h3 class="ph"><span>FASE 1</span>Entender</h3><div class="az">
+<div class="row hd"><div></div><div>Etapa</div><div>Studio</div><div>SOL Destinos</div><div>Nível</div></div>
+<div class="row"><div class="l">A</div><div class="what"><b>Pedido</b>Objetivo, público, prazo, verba e métrica de sucesso. </div><div>BRIEFING.md: peça, coleção, onde roda, meta de CTR ou venda.</div><div>Destino ou pousada, temporada (Carnaval), canal, meta de reservas diretas.</div><div class="lvl">0</div></div>
+<div class="row"><div class="l">B</div><div class="what"><b>Pesquisa</b>A IA pesquisa fontes oficiais e frases reais de clientes. </div><div>Pesquisador de Dores + ficha técnica da peça.</div><div>O que a casa declara no site (Roteiro Sol), avaliações, perguntas do WhatsApp.</div><div class="lvl">2</div></div>
+<div class="row"><div class="l">C</div><div class="what"><b>Perfil</b>O gosto da marca por escrito. </div><div>Perfil de Gosto.</div><div>Verdade do lugar: lista do que existe fisicamente. A IA nunca inventa amenidade.</div><div class="lvl">1</div></div>
+</div></div>
+<div class="phase"><h3 class="ph"><span>FASE 2</span>Ideia</h3><div class="az">
+<div class="row hd"><div></div><div>Etapa</div><div>Studio</div><div>SOL Destinos</div><div>Nível</div></div>
+<div class="row"><div class="l">D</div><div class="what"><b>10 ideias descartadas</b>Pedir 10 ideias à IA e jogar todas fora: são as que todo mundo vai fazer. </div><div>As óbvias viram a lista do que não fazer.</div><div>“Praia, pôr do sol, casal” vão para o lixo.</div><div class="lvl">3</div></div>
+<div class="row"><div class="l">E</div><div class="what"><b>Pitch de 1 parágrafo</b>A ideia humana, com referências que todo mundo conhece. <span class="cam">📷 1</span></div><div>“A mesma blusa do café ao jantar, em 3 cidades.”</div><div>“Um ano na pousada em 60 segundos, uma foto por mês na mesma janela.”</div><div class="lvl">0</div></div>
+<div class="row"><div class="l">F</div><div class="what"><b>Destruir a ideia</b>“Por que isso floparia?” Uma ou duas vezes, não mais. </div><div>O Guardião lê o pitch.</div><div>O mesmo.</div><div class="lvl">2</div></div>
+<div class="row"><div class="l">G</div><div class="what"><b>Roteiro</b>A IA escreve versões medianas; você escreve o bom. </div><div>Roteiro + 5 ganchos.</div><div>Roteiro + gancho do anúncio de Carnaval.</div><div class="lvl">1</div></div>
+<div class="row gate"><div class="l">🚦</div><div class="what"><b>Portão 1</b>O cliente aprova pitch e roteiro. </div><div>Portão “conceito” do Criar.</div><div>Dono da pousada ou Eliete.</div><div class="lvl">—</div></div>
+</div></div>
+<div class="phase"><h3 class="ph"><span>FASE 3</span>Ativos</h3><div class="az">
+<div class="row hd"><div></div><div>Etapa</div><div>Studio</div><div>SOL Destinos</div><div>Nível</div></div>
+<div class="row"><div class="l">H</div><div class="what"><b>Folha de personagem</b>Rosto real, corpo gerado. Sem 300 poses, cabeça separada, close de cada detalhe único, altura anotada. <span class="cam">📷 3 · 8</span></div><div>Modelo do acervo, com contrato e repasse.</div><div>Hóspede ou anfitrião real com autorização. Nunca gerar o imóvel.</div><div class="lvl">1</div></div>
+<div class="row"><div class="l">I</div><div class="what"><b>Folha de produto ou de lugar</b>Todas as vistas e closes. <span class="cam">📷 2 · 3</span></div><div>Frente, costas, lateral, etiqueta, estampa, aviamento, tecido.</div><div>Foto real de cada ambiente, de dia e à noite. IA só em pessoas, clima e estação.</div><div class="lvl">1</div></div>
+<div class="row"><div class="l">J</div><div class="what"><b>Cenários e objetos</b>Cenário derivado da paleta; objetos “livres de direito”. <span class="cam">📷 1</span></div><div>Cenário a partir da cor da coleção.</div><div>Cenário real + continuidade (verão, chuva, Carnaval).</div><div class="lvl">2</div></div>
+<div class="row gate"><div class="l">🚦</div><div class="what"><b>Portão 2</b>Ficha aprovada: casting, figurino, locação. </div><div>Portão “ficha” do Criar.</div><div>Dono aprova fotos e pessoas.</div><div class="lvl">—</div></div>
+</div></div>
+<div class="phase"><h3 class="ph"><span>FASE 4</span>Protótipo e produção</h3><div class="az">
+<div class="row hd"><div></div><div>Etapa</div><div>Studio</div><div>SOL Destinos</div><div>Nível</div></div>
+<div class="row"><div class="l">K</div><div class="what"><b>Storyboard desenhado</b>Quadros desenhados, não realistas, com a pasta de ativos. <span class="cam">📷 1</span></div><div>Prancha do Criar.</div><div>Prancha com as fotos reais nos quadros.</div><div class="lvl">2</div></div>
+<div class="row"><div class="l">L</div><div class="what"><b>Rascunho 480p</b>O filme inteiro em draft (1/3 a 1/5 do custo), direto dos ativos, e editado em rascunho. <span class="cam">📷 4–7</span></div><div>Seedance draft; testar vídeo direto dos ativos.</div><div>Seedance ou Kling sobre as fotos reais.</div><div class="lvl">2</div></div>
+<div class="row gate"><div class="l">🚦</div><div class="what"><b>Portão 3</b>O cliente aprova em 480p. O OK precisa sair em até 7 dias. <span class="cam">📷 5</span></div><div>Nenhum vídeo pago antes do sim + alerta de 7 dias.</div><div>O mesmo.</div><div class="lvl">—</div></div>
+<div class="row"><div class="l">M</div><div class="what"><b>Final só do corte</b>1080p apenas das cenas usadas, com modelos misturados por cena. </div><div>Seedance no difícil, Kling na transição, MiniMax no simples.</div><div>O mesmo.</div><div class="lvl">2</div></div>
+<div class="row"><div class="l">N</div><div class="what"><b>Som</b>Vídeo “sem trilha” para aproveitar os efeitos; música licenciada. </div><div>Trilha licenciada.</div><div>Som real do lugar (mar, café, passarinho) + trilha licenciada.</div><div class="lvl">1</div></div>
+</div></div>
+<div class="phase"><h3 class="ph"><span>FASE 5</span>Controle, entrega e resultado</h3><div class="az">
+<div class="row hd"><div></div><div>Etapa</div><div>Studio</div><div>SOL Destinos</div><div>Nível</div></div>
+<div class="row"><div class="l">O</div><div class="what"><b>Guardião</b>Juiz separado: fidelidade e conformidade. </div><div>Peça igual à real; rótulo de IA; sem alegação proibida.</div><div>Imóvel igual ao real (CDC, regras do Airbnb e da Booking); rótulo nas pessoas geradas.</div><div class="lvl">2</div></div>
+<div class="row gate"><div class="l">🚦</div><div class="what"><b>Portão 4</b>Conjunto aprovado. </div><div>Portão “conjunto” do Criar.</div><div>Dono aprova.</div><div class="lvl">—</div></div>
+<div class="row"><div class="l">P</div><div class="what"><b>Entrega e desdobramento</b>Todos os formatos, banco de imagens, cortes. </div><div>Campanha, UGC e catálogo do mesmo ensaio.</div><div>Reels, anúncio, fotos para Booking e Google, Roteiro Sol.</div><div class="lvl">2</div></div>
+<div class="row"><div class="l">Q</div><div class="what"><b>No ar e leitura</b>Anúncio sobe pausado; leitura semanal. </div><div>CTR, custo por venda, regra 80/20.</div><div>Código do anúncio → conversa na Vera → reserva direta → R$ de comissão evitada.</div><div class="lvl">3</div></div>
+<div class="row"><div class="l">R</div><div class="what"><b>Aprender</b>O que venceu vira receita; o que foi recusado vira regra. </div><div>Skill Receita.</div><div>Receita do destino: que ângulo traz reserva em cada temporada.</div><div class="lvl">3</div></div>
+</div></div>
+</section>
+
+<section id="viagem">
+  <p class="eb"><span class="n">SOL</span>Agência</p>
+  <h2>O mesmo fluxo para vender uma viagem</h2>
+  <p class="intro">A lógica “ideia humana, protótipo barato, aprovação, só então o caro” serve para o orçamento de viagem. A Eliete deixa de cotar viagens que o cliente não vai fechar.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Etapa</th><th>Na agência</th></tr></thead>
+    <tbody>
+      <tr><td class="t">A · Pedido</td><td>O que o viajante quer, datas, orçamento, quem vai.</td></tr>
+      <tr><td class="t">B · Pesquisa</td><td>O que cada pousada ou passeio declara, com fonte e data (Roteiro Sol).</td></tr>
+      <tr><td class="t">D–E · Ideia</td><td>Descartar o roteiro óbvio; uma ideia em 1 parágrafo: “4 dias na Serra sem carro, com café colonial e um jantar de vinícola”.</td></tr>
+      <tr><td class="t">K · Protótipo</td><td>Prancha visual do roteiro, dia a dia, com fotos reais dos lugares.</td></tr>
+      <tr><td class="t">🚦 Aprovação</td><td>O viajante aprova a prancha antes da cotação com fornecedores. É o “480p” da viagem.</td></tr>
+      <tr><td class="t">M · Produção</td><td>Cotação e reserva só do que foi aprovado.</td></tr>
+      <tr><td class="t">Q–R · Resultado</td><td>Depois da viagem, fotos e depoimento autorizados viram conteúdo e prova.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="source">A IA monta o rascunho da prancha (nível 1); a Eliete revisa e envia. Entra como fluxo V6 do SOL.</p>
+</section>
+
+<section id="prints">
+  <p class="eb"><span class="n">📷</span>Para completar</p>
+  <h2>Os prints que faltam</h2>
+  <p class="intro">Horários aproximados, a partir da transcrição. Um print por item, com o prompt ou o resultado na tela, enviado aqui na conversa.</p>
+  <div class="tw"><table>
+    <thead><tr><th>#</th><th>Trecho</th><th>O que capturar</th><th>Etapa</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>~0:35–0:48 · caso Fanta</td><td>O pitch de 1 parágrafo, a pasta de ativos e o storyboard de 60 quadros</td><td>E, J, K</td></tr>
+      <tr><td class="num">2</td><td>~1:01–1:10 · ângulos de uma foto de celular</td><td>O prompt “diretor de fotografia experimental” inteiro e as 5 imagens</td><td>I</td></tr>
+      <tr><td class="num">3</td><td>~1:10–1:25 · folha de personagem</td><td>A tela da skill (o que ela pede), a folha gerada e a folha de produto</td><td>H, I</td></tr>
+      <tr><td class="num">4</td><td>~1:25–1:40 · Higgsfield e Magnific no chat</td><td>A tela de conexão e o pedido do ensaio com 5 referências</td><td>L</td></tr>
+      <tr><td class="num">5</td><td>~1:40–1:44 · rascunho 480p</td><td>A tela do Seedance com o draft e o prazo de 7 dias</td><td>L, Portão 3</td></tr>
+      <tr><td class="num">6</td><td>~1:45–1:55 · lip sync</td><td>O prompt e as configurações (Seedance 2.5, 1080p, 9:16)</td><td>L</td></tr>
+      <tr><td class="num">7</td><td>~2:00–2:15 · efeitos sobre vídeo real</td><td>Os prompts de troca de pessoa e do estúdio que vira floresta</td><td>L</td></tr>
+      <tr><td class="num">8</td><td>Portal do aluno</td><td>As skills e os prompts, sobretudo a da folha de personagem</td><td>H, I, L</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="organismo">
+  <p class="eb"><span class="n">+</span>No sistema</p>
+  <h2>O que muda no Organismo</h2>
+  <div class="ask"><ol>
+    <li>O Criar ganha a etapa D (10 ideias descartadas) e a F (destruir a ideia) antes do Portão 1.</li>
+    <li>Checklist de captura da etapa H na diária: frente, perfil, corpo inteiro, costas, closes e altura.</li>
+    <li>Alerta de 7 dias do rascunho 480p, igual aos vencimentos do Ativos.</li>
+    <li>Teste do vídeo direto dos ativos numa campanha de estudo: corta a imagem por cena, se a peça sagrada aguentar.</li>
+    <li>Cartucho de hotelaria: o lugar é sempre real; IA só em pessoas, clima e estação.</li>
+    <li>O orçamento por prancha antes da cotação entra como fluxo V6 do SOL.</li>
+  </ol></div>
+</section>
+
+<footer>Montado a partir da transcrição completa do vídeo 8 (Da ideia ao projeto, Live 1, Human Academy e PAULO.IA), dos portões do Criar no Organismo v2 e da escada de autonomia. Texto completo em FLUXO-A-Z.md, no repositório locatelli-studio, branch claude/admiring-ptolemy-1b8xck, pasta pesquisa/videos-ia-2026-10.</footer>
+
+</main>
+</div>
