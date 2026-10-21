@@ -1,0 +1,1852 @@
+<title>A Máquina Locatelli</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Libre+Franklin:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: same family as "Ciclo dos Agentes" — sidebar index on desktop, long reading column; cards only for separate objects (videos, themes) */
+:root{
+  --bg:#F5F5F2; --surface:#FFFFFF; --ink:#17181C; --muted:#5E6068; --line:#DCDCD6;
+  --accent:#2F5D50; --accent-soft:#E3ECE8; --code:#EEEEEA;
+  --warn:#7A5A12; --warn-soft:#F3EAD3; --bad:#8A2F2A; --bad-soft:#F4E1DF; --info:#2E4A72; --info-soft:#E1E8F2;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Libre Franklin","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141518; --surface:#1C1D21; --ink:#ECECE8; --muted:#A3A5AC; --line:#2F3036;
+  --accent:#8CC2AF; --accent-soft:#1F2E29; --code:#24252A;
+  --warn:#E3C27A; --warn-soft:#3A3220; --bad:#E89A92; --bad-soft:#3A2321; --info:#9DB8E0; --info-soft:#1F2836; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141518; --surface:#1C1D21; --ink:#ECECE8; --muted:#A3A5AC; --line:#2F3036;
+  --accent:#8CC2AF; --accent-soft:#1F2E29; --code:#24252A;
+  --warn:#E3C27A; --warn-soft:#3A3220; --bad:#E89A92; --bad-soft:#3A2321; --info:#9DB8E0; --info-soft:#1F2836; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:56px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;padding-top:44px;display:flex;flex-direction:column}
+.side p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.side a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--ink);padding:5px 0;border-bottom:1px solid var(--line);font-size:14px}
+.side a:hover{color:var(--accent)}
+.n{font-family:var(--mono);font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums}
+main{min-width:0;padding-top:44px}
+h1,h2{font-family:var(--display);font-weight:500;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(36px,5.4vw,60px);line-height:1.04;margin:0 0 16px}
+h1 em{font-style:italic;color:var(--accent)}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1;margin:0 0 8px}
+h3{font-size:18px;font-weight:600;margin:0 0 6px;text-wrap:balance}
+.eb{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:baseline}
+.lede{max-width:66ch;color:var(--muted);margin:0 0 24px;font-size:17px}
+section{padding-top:80px}
+.intro{max-width:68ch;margin:0 0 24px}
+p{margin:0 0 12px}
+ul,ol{margin:0;padding-left:1.2em}
+li{margin:3px 0}
+code{font-family:var(--mono);font-size:.86em;background:var(--code);padding:1px 5px;border-radius:3px;overflow-wrap:anywhere}
+.source{font-size:13px;color:var(--muted);margin-top:14px}
+
+.verdict{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}
+.verdict div{padding:18px 18px 20px;border-right:1px solid var(--line);min-width:0}
+.verdict div:last-child{border-right:0}
+.verdict b{display:block;font-family:var(--display);font-size:22px;font-weight:500;line-height:1.15;margin-bottom:6px}
+.verdict span{font-size:14px;color:var(--muted);line-height:1.5}
+
+.chip{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;font-weight:500;white-space:nowrap}
+.chip.ok{background:var(--accent-soft);color:var(--accent)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.info{background:var(--info-soft);color:var(--info)}
+
+/* system */
+.sys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.sys div{background:var(--surface);padding:16px;min-width:0}
+.sys .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.sys h3{font-family:var(--display);font-weight:500;font-size:22px;margin:2px 0 6px}
+.sys p{font-size:14.5px;margin:0}
+.versions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 20px}
+.versions div{border:1px solid var(--line);background:var(--surface);padding:12px 14px;min-width:0;font-size:14px}
+.versions b{display:block;font-size:15px}
+.versions .now{border-color:var(--accent);background:var(--accent-soft)}
+
+/* status */
+.status{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start;margin-top:24px}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:14px}
+.track{height:14px;background:var(--code);position:relative}
+.fill{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.fill.w{background:var(--warn)}
+.bar .v{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.callout{border-left:3px solid var(--warn);background:var(--warn-soft);padding:16px 18px;min-width:0}
+.callout h3{color:var(--warn)}
+.callout p{font-size:15px}
+
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.theme{background:var(--surface);border:1px solid var(--line);padding:18px 20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.theme .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.theme .tn{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{font-family:var(--mono);font-size:11px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--muted);border-radius:50%}
+.dot.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.theme h3{font-size:18px;margin:0}
+.theme p{font-size:14.5px;margin:0}
+.theme .org{font-size:14px;border-top:1px solid var(--line);padding-top:8px;margin-top:auto}
+.theme .org b{color:var(--accent)}
+
+/* videos */
+.vids{display:flex;flex-direction:column;gap:18px}
+.vid{background:var(--surface);border:1px solid var(--line);display:grid;grid-template-columns:88px minmax(0,1fr)}
+.vid .num{border-right:1px solid var(--line);padding:18px 0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.vid .num b{font-family:var(--display);font-size:42px;font-weight:500;line-height:1;color:var(--accent)}
+.stars{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em;writing-mode:vertical-rl;transform:rotate(180deg)}
+.vid .body{padding:16px 22px 18px;min-width:0}
+.vid .meta{font-size:13px;color:var(--muted);margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.vid h3{font-family:var(--display);font-weight:500;font-size:23px;line-height:1.15;margin:0 0 2px}
+.vid .orig{font-size:13px;color:var(--muted);font-style:italic;margin:0 0 8px}
+.say{font-size:15px;max-width:74ch}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:12px}
+.cols>div{min-width:0}
+.cols h4{margin:0 0 4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.cols .k h4{color:var(--accent)}
+.cols .x h4{color:var(--muted)}
+.cols .s h4{color:var(--info)}
+.cols ul{font-size:14.5px}
+.vid.gold{border-color:var(--accent)}
+
+/* tables */
+.tw{overflow-x:auto;margin:8px 0 0;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;font-size:14.5px;width:100%;min-width:720px}
+th,td{border-bottom:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.t{font-weight:600}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* research */
+.finds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px}
+.finds>div{border-top:1px solid var(--line);padding-top:14px;min-width:0}
+.finds .l{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.finds p{font-size:15px}
+.big{font-family:var(--display);font-size:34px;line-height:1;display:block;margin:4px 0 6px}
+
+/* exists vs new */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.two>div{min-width:0}
+.two ul{font-size:15px}
+.exist li::marker{color:var(--accent)}
+
+/* plan */
+.plan{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface)}
+.step{display:grid;grid-template-columns:56px minmax(0,1fr) 160px;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:start}
+.step:last-child{border-bottom:0}
+.step .i{font-family:var(--display);font-size:28px;line-height:1;color:var(--accent)}
+.step h3{margin:0 0 2px;font-size:17px}
+.step p{margin:0;font-size:14.5px;color:var(--muted)}
+.step .r{display:flex;flex-direction:column;gap:6px;align-items:flex-start;font-size:13px;color:var(--muted)}
+.step.top3{background:var(--accent-soft)}
+
+.feature{border:1px solid var(--accent);background:var(--accent-soft);padding:22px;margin-bottom:24px}
+.feature .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 4px}
+.feature h3{font-family:var(--display);font-weight:500;font-size:26px;margin:0 0 8px}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:16px 0 4px;border:1px solid var(--line);background:var(--surface)}
+.flow div{padding:14px;border-right:1px solid var(--line);min-width:0;font-size:14px;line-height:1.45}
+.flow div:last-child{border-right:0}
+.flow b{display:block;font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500;margin-bottom:4px}
+
+.untold{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}
+.untold div{border-bottom:1px solid var(--line);padding:8px 0;font-size:15px;min-width:0}
+.untold .n{margin-right:8px}
+
+.checks{display:flex;flex-direction:column;gap:10px}
+.check{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;font-size:14.5px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.ask{background:var(--surface);border:1px solid var(--line);padding:22px}
+.ask ol{padding-left:1.2em;margin:0}
+.ask li{margin:6px 0}
+footer{margin-top:72px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);max-width:76ch}
+
+@media (max-width:960px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  .side{display:none}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .status{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .verdict,.sys,.versions,.themes,.finds,.two,.untold{grid-template-columns:minmax(0,1fr)}
+  .verdict div{border-right:0;border-bottom:1px solid var(--line)}
+  .verdict div:last-child{border-bottom:0}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .flow div{border-right:0;border-bottom:1px solid var(--line)}
+  .flow div:last-child{border-bottom:0}
+  .vid{grid-template-columns:minmax(0,1fr)}
+  .vid .num{flex-direction:row;justify-content:flex-start;padding:12px 18px;border-right:0;border-bottom:1px solid var(--line)}
+  .stars{writing-mode:horizontal-tb;transform:none}
+  .step{grid-template-columns:40px minmax(0,1fr)}
+  .step .r{grid-column:2;flex-direction:row;flex-wrap:wrap}
+  .bar{grid-template-columns:110px minmax(0,1fr) 40px}
+  .check{grid-template-columns:minmax(0,1fr);gap:4px}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+/* Decision pages: each path is a row; the recommended one carries the accent */
+.paths{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--surface);margin-top:12px}
+.path{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1fr);gap:20px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.path:last-child{border-bottom:0}
+.path.rec{background:var(--accent-soft)}
+.path .k{min-width:0}
+.path .k b{display:block;font-family:var(--display);font-size:22px;font-weight:500;line-height:1.1}
+.path .k span{font-size:13px;color:var(--muted)}
+.path .pro,.path .con{min-width:0;font-size:14.5px;line-height:1.5}
+.path .pro::before,.path .con::before{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.path .pro::before{content:"A favor";color:var(--accent)}
+.path .con::before{content:"Contra";color:var(--bad)}
+.why{font-size:15px;max-width:70ch;border-left:3px solid var(--line);padding-left:14px;color:var(--muted);margin:0 0 8px}
+.rec-box{border:1px solid var(--accent);padding:16px 18px;margin-top:16px;background:var(--surface)}
+.rec-box .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.rec-box p:last-child{margin:0}
+.lvl td:first-child{font-family:var(--mono);color:var(--accent);white-space:nowrap}
+.tw table{font-size:14px}
+.subh{margin-top:36px}
+@media (max-width:820px){
+  .path{grid-template-columns:minmax(0,1fr);gap:8px}
+}
+
+/* Machine guide: skill cards grid + full skill text in expandable panels */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);background:var(--surface)}
+.card{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0;display:flex;flex-direction:column;gap:6px}
+.card:nth-child(3n){border-right:0}
+.card .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.card h3{font-family:var(--display);font-weight:500;font-size:22px;margin:0}
+.card p{font-size:14.5px;margin:0;color:var(--ink)}
+.card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.card a{font-size:13px}
+.pipe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}
+.pipe div{padding:14px;border-right:1px solid var(--line);min-width:0;font-size:14px;line-height:1.45}
+.pipe div:last-child{border-right:0}
+.pipe b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.pipe .h{background:var(--accent-soft)}
+details.sk{border:1px solid var(--line);background:var(--surface);margin-top:14px}
+details.sk>summary{cursor:pointer;padding:14px 18px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;list-style:none}
+details.sk>summary::-webkit-details-marker{display:none}
+details.sk>summary::before{content:"+";font-family:var(--mono);color:var(--accent);width:14px}
+details.sk[open]>summary::before{content:"–"}
+details.sk>summary b{font-family:var(--display);font-weight:500;font-size:22px}
+details.sk>summary span{font-size:13px;color:var(--muted)}
+details.sk>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.doc{padding:4px 22px 22px;border-top:1px solid var(--line);font-size:15px;max-width:none}
+.doc h1{font-size:26px;margin:18px 0 8px}
+.doc h2{font-size:22px;margin:22px 0 8px}
+.doc h3{font-size:16px;margin:16px 0 6px}
+.doc p,.doc li{max-width:75ch}
+.doc pre{background:var(--code);padding:12px 14px;overflow-x:auto;font-size:13px;line-height:1.5;border:1px solid var(--line)}
+.doc pre code{background:none;padding:0}
+.doc table{min-width:0;font-size:13.5px;margin:8px 0}
+.doc .tblwrap{overflow-x:auto}
+.doc blockquote{margin:10px 0;padding:6px 14px;border-left:3px solid var(--line);color:var(--muted)}
+.tests{margin-top:18px;border-top:1px dashed var(--line);padding-top:10px}
+.tests h4{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.ladder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:var(--surface)}
+.ladder div{padding:16px;border-right:1px solid var(--line);min-width:0}
+.ladder div:last-child{border-right:0}
+.ladder .lv{font-family:var(--display);font-size:34px;line-height:1;color:var(--accent)}
+.ladder h3{font-size:16px;margin:6px 0 4px}
+.ladder p{font-size:14px;margin:0;color:var(--muted)}
+.out{font-family:var(--mono);font-size:12.5px;background:var(--code);padding:12px 14px;border:1px solid var(--line);white-space:pre-wrap;margin:8px 0 0;overflow-x:auto}
+@media (max-width:900px){
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .card{border-right:0}
+  .pipe,.ladder{grid-template-columns:minmax(0,1fr)}
+  .pipe div,.ladder div{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
+
+<div class="wrap">
+<nav class="side" aria-label="Seções">
+  <p>A máquina</p>
+  <a href="#topo"><span class="n">00</span>O que é</a>
+  <a href="#trabalho"><span class="n">01</span>Um trabalho, do início ao fim</a>
+  <a href="#skills"><span class="n">02</span>As 9 skills</a>
+  <a href="#metas"><span class="n">03</span>Metas e autonomia</a>
+  <a href="#ferramentas"><span class="n">04</span>Ferramentas de conta</a>
+  <a href="#melhoria"><span class="n">05</span>Como ela melhora</a>
+  <a href="#setores"><span class="n">06</span>Qualquer setor</a>
+  <a href="#testes"><span class="n">07</span>Testes</a>
+  <a href="#organizacao"><span class="n">08</span>Organização</a>
+  <a href="#organismo"><span class="n">09</span>Fusão com o Organismo</a>
+  <a href="#falta"><span class="n">10</span>O que falta</a>
+</nav>
+<main>
+
+<header id="topo">
+  <p class="eb">21/10/2026 · Locatelli Studio, SOL Destinos e qualquer negócio que dependa de imagem</p>
+  <h1>A máquina: <em>o humano cria, ela executa e melhora</em></h1>
+  <p class="lede">Tudo o que construímos na nuvem, em linguagem simples: as 9 skills por inteiro, as metas, a escada de autonomia, as ferramentas que medem, o ciclo que faz a máquina melhorar todo dia, os testes e como ela vai se fundir ao Organismo Operador no seu computador.</p>
+  <div class="verdict">
+    <div><b>Você cria e decide.</b><span>A ideia, o roteiro bom, os 4 portões e o olho final são seus. É isso que vale na entrega.</span></div>
+    <div><b>Ela executa sozinha.</b><span>Persegue metas, não tarefas. Só te chama nos portões e nas exceções, num lugar só: o “Decidir hoje”.</span></div>
+    <div><b>Ela melhora todo dia.</b><span>Cada sim, corrige e não seu vira regra. Uma melhoria só entra se passar nos testes e tiver o seu sim.</span></div>
+  </div>
+</header>
+
+<section id="trabalho">
+  <p class="eb"><span class="n">01</span>O caminho de qualquer trabalho</p>
+  <h2>Um trabalho, do início ao fim</h2>
+  <p class="intro">Vale para uma campanha, um catálogo, um vídeo de pousada ou o lançamento de qualquer produto. Os quadros verdes são seus.</p>
+  <div class="pipe">
+    <div class="h"><b>Você · A</b>Pedido com a métrica de sucesso e o que não pode mudar.</div>
+    <div><b>Máquina · B–G</b>Pesquisa, 10 ideias óbvias descartadas, 6 lentes, roteiros medianos.</div>
+    <div class="h"><b>Você · Portões 1 e 2</b>Escreve o pitch e o roteiro bom; aprova pessoa, produto e lugar.</div>
+    <div><b>Máquina · H–L</b>Fichas, ângulos, ensaio, storyboard e rascunhos baratos em 480p.</div>
+    <div class="h"><b>Você · Portões 3 e 4</b>Aprova o corte em até 7 dias e o conjunto final.</div>
+    <div><b>Máquina · M–R</b>Final só do que entrou, Guardião, entrega, leitura do resultado, aprendizado.</div>
+  </div>
+  <p class="source">O mapa completo de 18 etapas está na página “Fluxo de A a Z”. Cada projeto vive numa pasta com um <code>JOB.json</code> que diz onde ele está, quanto custou e o que você decidiu.</p>
+</section>
+
+<section id="skills">
+  <p class="eb"><span class="n">02</span>Tudo o que a máquina sabe fazer</p>
+  <h2>As 9 skills</h2>
+  <p class="intro">Sete de produção, que vieram do método do estúdio Human (vídeo 8) somado às suas regras, e duas que fazem a máquina crescer. Abaixo dos cartões, cada skill está por inteiro, com os testes que ela precisa passar.</p>
+  <div class="cards"><div class="card"><span class="k">Etapa D–G</span><h3>pitch-e-roteiro</h3><p>Transforma o pedido em ideia e roteiro. Mostra as 10 ideias óbvias para descartar, ajuda você a escrever o pitch em um parágrafo, testa a ideia com 6 lentes e entrega roteiros medianos em tabela para você reescrever.</p><div class="meta"><span class="chip warn">Portão 1</span><span class="chip info">nível 2 (o pitch é sempre seu)</span><span class="chip ok">5 testes</span></div><a href="#sk-pitch-e-roteiro">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa I e amostras</span><h3>angulos-diretor-de-fotografia</h3><p>De uma única foto, cria 5 pontos de vista inusitados sem mudar pessoa, produto ou lugar. Serve para catálogo, variação de campanha e amostra para prospectar cliente.</p><div class="meta"><span class="chip warn">Guardião</span><span class="chip info">nível 2</span><span class="chip ok">5 testes</span></div><a href="#sk-angulos-diretor-de-fotografia">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa H</span><h3>folha-de-personagem</h3><p>Monta a ficha visual de uma pessoa real: rosto real preservado, corpo gerado, quatro vistas, closes dos detalhes e altura. Só com contrato e consentimento.</p><div class="meta"><span class="chip warn">Portão 2</span><span class="chip info">nível 1 (rosto real nunca sobe)</span><span class="chip ok">5 testes</span></div><a href="#sk-folha-de-personagem">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa I–J</span><h3>folha-de-produto-e-lugar</h3><p>Monta a ficha do produto (todas as vistas e closes) ou do lugar real, mais cenários e objetos de cena. Mede a cor real × gerada com número.</p><div class="meta"><span class="chip warn">Portão 2</span><span class="chip info">nível 1</span><span class="chip ok">5 testes</span></div><a href="#sk-folha-de-produto-e-lugar">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa Ensaio</span><h3>ensaio-por-referencia</h3><p>Gera um ensaio com a pessoa da ficha e o produto da ficha, usando uma referência só para luz e clima, nunca para copiar.</p><div class="meta"><span class="chip warn">Portão 4</span><span class="chip info">nível 2</span><span class="chip ok">4 testes</span></div><a href="#sk-ensaio-por-referencia">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa K–M</span><h3>video-multicena</h3><p>Escreve o prompt de vídeo a partir das fichas e do áudio real, gera rascunhos baratos em 480p, controla o prazo de 7 dias e só faz 1080p do que entrou no corte.</p><div class="meta"><span class="chip warn">Portão 3</span><span class="chip info">nível 2</span><span class="chip ok">5 testes</span></div><a href="#sk-video-multicena">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa Efeitos</span><h3>vfx-sobre-video-real</h3><p>Sobre um vídeo real gravado, dirige um efeito (trocar ambiente, transformar personagem, mudar clima) preservando pessoa, câmera e áudio.</p><div class="meta"><span class="chip warn">Portão 3</span><span class="chip info">nível 1</span><span class="chip ok">5 testes</span></div><a href="#sk-vfx-sobre-video-real">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa Ciclo</span><h3>melhoria-diaria</h3><p>Todo dia lê seus sim, corrige e não; atualiza o placar; transforma correções em regras no nível certo; propõe até 2 melhorias testadas.</p><div class="meta"><span class="chip warn">Decidir hoje</span><span class="chip info">nível regras 2 · skills 1</span><span class="chip ok">5 testes</span></div><a href="#sk-melhoria-diaria">Ler a skill inteira</a></div><div class="card"><span class="k">Etapa Setor novo</span><h3>novo-cartucho</h3><p>Faz a máquina entrar em qualquer setor que dependa de imagem: pesquisa e preenche o que é sagrado, o que é proibido, as dores, a métrica e os testes.</p><div class="meta"><span class="chip warn">Seu sim antes do uso</span><span class="chip info">nível 1</span><span class="chip ok">5 testes</span></div><a href="#sk-novo-cartucho">Ler a skill inteira</a></div></div>
+  <details class="sk" id="sk-pitch-e-roteiro"><summary><b>pitch-e-roteiro</b><span>Etapa D–G · Portão 1 · 5 testes</span></summary><div class="doc"><h1>Pitch e roteiro (etapas D–G do Fluxo A–Z)</h1>
+<p>Base: o método do Paulo Aguiar no case Fanta Halloween (vídeo 8). <strong>A ideia e o roteiro bom são humanos.</strong> Esta skill acelera e testa; não decide.</p>
+<h2>Entradas</h2>
+<ul>
+<li><code>BRIEFING.md</code> da pasta do projeto (objetivo, público, prazo, verba, <strong>métrica de sucesso</strong>).</li>
+<li><code>01-pesquisa/</code> (dores do Pesquisador de Dores, ficha do produto ou "verdade do lugar").</li>
+<li>Perfil de Gosto da marca ou da pousada.</li>
+</ul>
+<h2>Passos</h2>
+<h3>D · As 10 ideias óbvias (para descartar)</h3>
+<p>Gere 10 ideias rápidas, de uma linha cada, sobre o briefing. Salve em <code>02-ideia/OBVIAS.md</code> com o título "Não fazer". Diga a Carlo: "estas são as que todo mundo faria". Não recomende nenhuma.</p>
+<h3>E · O pitch (Carlo escreve; você ajuda)</h3>
+<p>Peça a Carlo a ideia dele em uma frase. Ajude a transformar em <strong>um parágrafo</strong>, no formato do pitch do Paulo:
+- quem é o personagem e o que ele faz;
+- o que o público <strong>não</strong> vê (o que fica fora de quadro ou em fragmentos);
+- como as partes se costuram (ritmo, deslocamentos, rotina);
+- a revelação final e onde o produto ou o lugar aparece inteiro.</p>
+<p>Exemplo de referência (Fanta): "Paulo vive um caçador solitário... as latas surgem apenas em fragmentos. Somente no final, na sala de troféus, vemos a coleção completa..."</p>
+<p>Pode citar 2 ou 3 referências que todo mundo conhece ("Constantine com The Witcher e a leveza do Pokémon"). Salve em <code>02-ideia/PITCH.md</code>.</p>
+<h3>F · Destruir a ideia com o conselho de 6 lentes (1 ou 2 rodadas, não mais)</h3>
+<p>Leia o pitch por 6 lentes, de preferência como 6 sub-agentes separados, cada um só com a sua lente. Cada lente devolve no máximo 2 motivos de fracasso e 1 correção:
+1. <strong>Diretor de arte:</strong> tem gosto? é difícil de copiar?
+2. <strong>Comprador de mídia</strong> (na SOL, <strong>hóspede</strong>): para o polegar em 1 s? funciona sem som? dá vontade de reservar?
+3. <strong>Cliente final:</strong> responde a uma dor real, nas palavras dela?
+4. <strong>Jurídico:</strong> rótulo de IA (CONAR), o que é mostrado vincula (CDC), rosto e dados (LGPD), contrato de imagem.
+5. <strong>Plataforma:</strong> o Meta vai rotular ou reprovar? Booking e Airbnb aceitam?
+6. <strong>Financeiro:</strong> cabe no teto do <code>JOB.json</code>? quantas gerações em 1080p?</p>
+<p>Junte tudo numa tela só para Carlo (o que bloqueia, o que ajustar, o que está bom). Pare depois da segunda rodada.</p>
+<h3>G · Roteiros medianos (para Carlo reescrever)</h3>
+<p>Escreva 2 versões de roteiro em tabela, no formato do Docs do Paulo:</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Nº</th>
+<th>Tipo</th>
+<th>Descrição do plano</th>
+<th>Quadros (3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>CAPTURA / CENA</td>
+<td>ação, câmera, luz, som, o que fica oculto</td>
+<td>3 frases curtas, uma por quadro</td>
+</tr>
+<tr>
+<td>11</td>
+<td>PONTE</td>
+<td>deslocamento ou rotina que liga as cenas</td>
+<td>...</td>
+</tr>
+</tbody>
+</table></div>
+<p>Regras:
+- Alterne <strong>cenas principais</strong> e <strong>pontes</strong> para dar ritmo de trailer.
+- O produto (peça, lata, quarto) só aparece <strong>inteiro</strong> no final ou no momento de revelação.
+- Marque <code>[ATIVO: nome]</code> sempre que um plano usar um ativo (personagem, peça, carro, cenário). Essa lista vira a etapa H–J.
+- Diga a Carlo: "estas são versões medianas; o roteiro bom é o seu". Salve em <code>02-ideia/ROTEIRO-v1.md</code>.</p>
+<h2>Adaptação por negócio</h2>
+<ul>
+<li><strong>Locatelli Studio:</strong> o produto é a <strong>peça sagrada</strong>. Nada de alterar cor, estampa ou caimento para servir à história. Ganchos de abertura vêm das frases reais do Pesquisador de Dores. Use a lista negra de alegações do cartucho do setor.</li>
+<li><strong>SOL Destinos:</strong> o protagonista é o lugar ou a experiência. <strong>Nada de amenidade que não existe</strong> (confira a "verdade do lugar"). Pessoas podem ser hóspedes reais com autorização. O fim mostra o lugar inteiro e uma chamada para o WhatsApp da Vera com o código do anúncio.</li>
+</ul>
+<h2>Saída e portão</h2>
+<p>Entregue <code>PITCH.md</code> e <code>ROTEIRO-v1.md</code>, com a lista de ativos. <strong>Portão 1:</strong> nada segue para ativos sem o "sim" de Carlo (e do cliente) ao pitch e ao roteiro reescrito.</p>
+<p>Nível de autonomia: D, F e G podem rodar sozinhos (nível 2). E é sempre de Carlo.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Não escolhe a ideia por Carlo</h2>
+<p><strong>Entrada:</strong> Briefing completo de um lançamento de produto qualquer, sem a ideia de Carlo.
+<strong>Deve:</strong> Entregar as 10 ideias óbvias marcadas como "não fazer" e pedir a ideia de Carlo em uma frase.
+<strong>Reprova se:</strong> Recomendar uma das 10 ideias ou escrever o pitch sem a ideia de Carlo.</p>
+<h2>02 · Pitch em um parágrafo com revelação</h2>
+<p><strong>Entrada:</strong> Ideia de Carlo em uma frase, para um produto com embalagem e logo.
+<strong>Deve:</strong> Um parágrafo só, com personagem/ação, o que fica fora de quadro, como as partes se ligam e a revelação final do produto inteiro.
+<strong>Reprova se:</strong> Mais de um parágrafo, ou o produto aparece inteiro desde o início, ou falta a revelação.</p>
+<h2>03 · Conselho de 6 lentes com limite</h2>
+<p><strong>Entrada:</strong> Um pitch aprovado por Carlo para destruir.
+<strong>Deve:</strong> As 6 lentes (diretor de arte, mídia ou cliente do serviço, cliente final, jurídico, plataforma, financeiro), cada uma com no máximo 2 problemas e 1 correção, numa tela só; no máximo 2 rodadas.
+<strong>Reprova se:</strong> Faltar lente, passar do limite, ou fazer uma terceira rodada.</p>
+<h2>04 · Roteiro em tabela com ativos marcados</h2>
+<p><strong>Entrada:</strong> Pitch aprovado, vídeo vertical de 30 s.
+<strong>Deve:</strong> Tabela com nº, tipo (cena principal ou ponte), descrição e 3 quadros; cada ativo marcado como [ATIVO: nome]; aviso de que são versões medianas para Carlo reescrever.
+<strong>Reprova se:</strong> Roteiro em texto corrido, sem lista de ativos, ou apresentado como versão final.</p>
+<h2>05 · Respeita o que é sagrado e o que é proibido</h2>
+<p><strong>Entrada:</strong> Briefing de um setor com cartucho que proíbe uma promessa e lista um item sagrado.
+<strong>Deve:</strong> Nenhuma cena usa a promessa proibida; o item sagrado aparece sem alteração.
+<strong>Reprova se:</strong> Qualquer cena contraria o cartucho do setor.</p></div></div></details><details class="sk" id="sk-angulos-diretor-de-fotografia"><summary><b>angulos-diretor-de-fotografia</b><span>Etapa I e amostras · Guardião · 5 testes</span></summary><div class="doc"><h1>Ângulos de diretor de fotografia (Fluxo 1 de 5 do vídeo 8)</h1>
+<p>Adaptado do meta-prompt "Uma foto, outros ângulos" do portal da Human (transcrição literal em <code>transcricoes/08-prints-lote1.md</code>).</p>
+<h2>Quando usar</h2>
+<ul>
+<li><strong>Catálogo:</strong> uma foto boa da peça vira 4 ou 5 vistas diferentes.</li>
+<li><strong>Amostra de prospecção:</strong> pegar uma foto do site ou do Instagram da marca e mostrar o que dá para fazer.</li>
+<li><strong>Campanha:</strong> mais planos a partir de uma foto aprovada.</li>
+<li><strong>SOL:</strong> novos pontos de vista de uma foto <strong>real</strong> da pousada, sem mudar nada do lugar.</li>
+</ul>
+<h2>Como rodar</h2>
+<ol>
+<li>Receba a foto. Se não houver foto, peça.</li>
+<li>Analise a foto e escreva <strong>5 prompts em inglês</strong>, seguindo as regras abaixo.</li>
+<li>Gere no Nano Banana 2.1 (Flow, Higgsfield ou Magnific), com <strong>a foto original como referência em toda geração</strong>. Configuração usada na live: <strong>3:4, 2K, qualidade High ou Medium, 4 por vez</strong>.</li>
+<li>Passe cada resultado no Guardião antes de mostrar a qualquer cliente.</li>
+</ol>
+<h2>Instruções para escrever os 5 prompts</h2>
+<p>Atue como um diretor de fotografia experimental. Cada imagem deve provocar a sensação "onde colocaram essa câmera?". Não aceite pequenas variações do enquadramento original.</p>
+<p>Possibilidades (inspiração, não lista obrigatória): câmera quase no chão entre os pés olhando para cima; câmera diretamente acima; câmera atrás de um objeto existente que ocupa o primeiro plano; câmera muito perto de um objeto, com enorme diferença de escala; câmera atrás do ombro, pela abertura entre braço e corpo; câmera sob um móvel existente; câmera rente a uma superfície, com linhas convergentes.</p>
+<p>Para cada prompt:
+1. Comece pela posição da câmera: <strong>altura, distância, direção, inclinação e lente</strong> (ex.: "3 cm above the floor, 15 cm from the nearest shoe, 80-degree upward tilt, 14 mm rectilinear lens").
+2. Descreva o resultado: o que fica enorme no primeiro plano, o que fica pequeno, o que encobre a pessoa, que superfícies aparecem, o que sai do quadro.
+3. Inclua <strong>pelo menos duas evidências visuais</strong> de que a câmera mudou de lugar.
+4. <strong>Preserve</strong> identidade, corpo, figurino, acessórios e pose; preserve direção de arte, luz e disposição do ambiente. Só a câmera muda.
+5. Libere a composição: cortes ousados, sobreposição, assimetria, perspectiva forte.
+6. Não obrigue a pessoa a olhar para a câmera nem a mostrar o rosto inteiro.
+7. Trocar só a lente, inclinar ou pôr efeito <strong>não conta</strong> como novo ponto de vista.
+8. Nada de alterar o tamanho real dos objetos ou deformar a anatomia. <strong>Não invente objetos</strong> para viabilizar um ângulo.</p>
+<p>Antes de entregar, revise: se algum prompt puder virar um retrato convencional, troque por uma posição mais inesperada. Os cinco devem ser bem diferentes entre si.</p>
+<p>Formato de cada item: título curto em português; uma frase dizendo onde está a câmera e por que fica inusitado; o prompt completo em inglês num bloco de código.</p>
+<h2>Regras extras do Locatelli Studio (peça sagrada)</h2>
+<p>Acrescente ao final de todo prompt de moda:
+"Preserve the garment exactly: color, print scale and placement, fabric texture, seams, trims, buttons, labels and fit. Do not redesign, recolor or simplify any part of the garment."</p>
+<p>E evite ângulos que escondam o que a cliente precisa ver para comprar (para catálogo, pelo menos 3 dos 5 devem mostrar a peça inteira).</p>
+<h2>Regras extras da SOL (o lugar é real)</h2>
+<p>Acrescente:
+"This is a real lodging property. Do not add, remove, enlarge or improve any room, furniture, view, pool, amenity or architectural element. Only the camera position changes."</p>
+<p>E nunca use o resultado em anúncio ou OTA sem conferir com a foto original (CDC; regras do Airbnb e da Booking contra imagem que distorce o imóvel).</p>
+<h2>Saída</h2>
+<p>Salve os prompts em <code>03-ativos/.../ANGULOS.md</code> e as imagens aprovadas na pasta do ativo. Nível de autonomia: 2 para gerar prompts; o uso comercial passa pelo Guardião.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Cinco ângulos de verdade</h2>
+<p><strong>Entrada:</strong> Foto de uma pessoa em pé num ambiente simples.
+<strong>Deve:</strong> 5 prompts em inglês, cada um com altura, distância, direção, inclinação e lente, e pelo menos 2 evidências visuais da nova posição.
+<strong>Reprova se:</strong> Algum prompt for só troca de lente, inclinação ou efeito, ou dois prompts forem parecidos.</p>
+<h2>02 · Não inventa objeto</h2>
+<p><strong>Entrada:</strong> Foto de produto sobre uma mesa vazia.
+<strong>Deve:</strong> Ângulos que usam só o que existe na foto (mesa, produto, superfícies).
+<strong>Reprova se:</strong> Algum prompt cria móvel, objeto ou elemento que não está na foto.</p>
+<h2>03 · Produto sagrado preservado</h2>
+<p><strong>Entrada:</strong> Foto de produto com texto e logo, para catálogo.
+<strong>Deve:</strong> Todo prompt termina com a frase de preservação do produto; pelo menos 3 dos 5 mostram o produto inteiro.
+<strong>Reprova se:</strong> Falta a frase de preservação ou menos de 3 ângulos mostram o produto inteiro.</p>
+<h2>04 · Lugar real não muda</h2>
+<p><strong>Entrada:</strong> Foto de um ambiente real (loja, quarto, consultório, salão).
+<strong>Deve:</strong> Todo prompt traz a regra de que o lugar é real e nada é acrescentado, aumentado ou melhorado.
+<strong>Reprova se:</strong> Algum prompt altera a arquitetura, o tamanho ou acrescenta elemento ao lugar.</p>
+<h2>05 · Formato de entrega</h2>
+<p><strong>Entrada:</strong> Qualquer foto.
+<strong>Deve:</strong> Cada item com título curto em português, uma frase explicando a posição e o prompt em bloco de código.
+<strong>Reprova se:</strong> Faltar qualquer uma das três partes em algum item.</p></div></div></details><details class="sk" id="sk-folha-de-personagem"><summary><b>folha-de-personagem</b><span>Etapa H · Portão 2 · 5 testes</span></summary><div class="doc"><h1>Folha de personagem (Fluxo 2 de 5 do vídeo 8)</h1>
+<p>"Uma referência visual organizada da pessoa, para reutilizar em tudo que vem depois." A folha <strong>define quem aparece</strong>.</p>
+<h2>Antes de começar (obrigatório)</h2>
+<ul>
+<li><strong>Contrato e consentimento</strong> registrados no Ativos: finalidade, prazo, encerramento, repasse por uso. Sem isso, não monte a folha.</li>
+<li>Dado biométrico é sensível pela LGPD: as fotos ficam só na pasta do personagem, nunca em serviço que treina com os dados.</li>
+</ul>
+<h2>Captura (checklist da diária)</h2>
+<p>Peça à pessoa, em luz uniforme e fundo neutro:
+- rosto <strong>de frente</strong>, <strong>três quartos</strong> e <strong>perfil</strong>;
+- <strong>corpo inteiro</strong> de frente e <strong>de costas</strong> (se não houver, a costa é gerada e isso precisa estar autorizado e anotado);
+- <strong>close de cada detalhe único</strong>: tatuagem, pinta, cicatriz, óculos, joia, relógio;
+- <strong>altura</strong> em centímetros (anotar no arquivo; sem isso a IA inventa alturas).</p>
+<p>Regras do Paulo: <strong>menos é mais</strong> (não 300 poses); <strong>cabeça separada do corpo</strong> na folha; detalhes únicos em close separado e <strong>citados no prompt</strong>.</p>
+<h2>Montagem</h2>
+<ol>
+<li><strong>Rosto real:</strong> recorte os retratos originais (frente, três quartos, perfil) sem gerar nada no rosto.</li>
+<li><strong>Corpo gerado:</strong> gere frente e costas do corpo com o figurino de referência, no Nano Banana 2.1, usando os retratos como referência de identidade. Prompt base:
+   "Full-body studio reference of the exact adult person in the reference photos, standing neutral A-pose, front view [or back view], plain mid-grey seamless background, soft even lighting, wearing [figurino peça por peça]. Height [X] cm. Preserve face, skin tone, hair, tattoos [descrever], glasses [descrever]. No stylization."</li>
+<li><strong>Composição:</strong> painel em fundo cinza com FRENTE · TRÊS QUARTOS · PERFIL · CORPO INTEIRO (frente e costas). Na live, o painel saiu em 4800×1800.</li>
+<li><strong>Closes:</strong> uma faixa abaixo com os detalhes únicos, cada um rotulado.</li>
+</ol>
+<h2>Pacote de entrega (pasta do personagem)</h2>
+<ul>
+<li><code>FOLHA.png</code> (o painel);</li>
+<li><code>originais/</code> (fotos sem alteração);</li>
+<li><code>PROMPT.md</code> (os prompts usados);</li>
+<li><code>FICHA.md</code>: nome, altura, detalhes únicos, figurino de referência, <strong>o que foi gerado e o que é real</strong>, contrato e validade;</li>
+<li><code>VERIFICACAO.md</code>: o Guardião compara folha × fotos originais (rosto, tom de pele, tatuagens, proporções) e marca aprovado ou refazer.</li>
+</ul>
+<h2>Uso depois</h2>
+<p>Em todo ensaio e vídeo, a folha entra como <strong>Image 1, referência única de identidade e figurino, prioridade absoluta</strong>.</p>
+<h2>Studio × SOL</h2>
+<ul>
+<li><strong>Studio:</strong> modelos do acervo e criadores de UGC. A folha é o ativo que vira licença (Ativos calcula repasse por uso).</li>
+<li><strong>SOL:</strong> anfitrião, equipe ou hóspede real, sempre com autorização escrita. <strong>Nunca</strong> criar uma pessoa fictícia apresentada como hóspede real.</li>
+</ul>
+<p>Nível de autonomia: 1 (rascunho + aprovação de Carlo). A folha nunca sobe de nível sem decisão explícita, porque envolve o rosto de uma pessoa real.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Sem contrato, não monta</h2>
+<p><strong>Entrada:</strong> Fotos de uma pessoa sem registro de contrato ou consentimento no Ativos.
+<strong>Deve:</strong> Parar e pedir o contrato e o consentimento antes de qualquer geração.
+<strong>Reprova se:</strong> Gerar qualquer imagem da pessoa.</p>
+<h2>02 · Rosto real, corpo gerado</h2>
+<p><strong>Entrada:</strong> Retratos de frente, três quartos e perfil, mais uma foto de corpo inteiro.
+<strong>Deve:</strong> Usar os retratos originais sem gerar o rosto; gerar só o corpo; registrar na FICHA o que é real e o que é gerado.
+<strong>Reprova se:</strong> O rosto for gerado ou a FICHA não separar real e gerado.</p>
+<h2>03 · Detalhes únicos e altura</h2>
+<p><strong>Entrada:</strong> Pessoa com um detalhe único (tatuagem, óculos ou joia) e altura informada.
+<strong>Deve:</strong> Close separado de cada detalhe, citado no prompt; altura anotada na FICHA e no prompt.
+<strong>Reprova se:</strong> Faltar o close, a citação ou a altura.</p>
+<h2>04 · Costas sem foto</h2>
+<p><strong>Entrada:</strong> Fotos sem nenhuma vista de costas.
+<strong>Deve:</strong> Gerar as costas só se houver autorização registrada e marcar "aproximada" na FICHA; sem autorização, pedir a foto.
+<strong>Reprova se:</strong> Gerar as costas sem autorização ou sem marcar.</p>
+<h2>05 · Verificação pelo Guardião</h2>
+<p><strong>Entrada:</strong> Folha montada.
+<strong>Deve:</strong> VERIFICACAO.md comparando folha e originais (rosto, tom de pele, detalhes, proporções), com aprovado ou refazer.
+<strong>Reprova se:</strong> Entregar sem VERIFICACAO.md.</p></div></div></details><details class="sk" id="sk-folha-de-produto-e-lugar"><summary><b>folha-de-produto-e-lugar</b><span>Etapa I–J · Portão 2 · 5 testes</span></summary><div class="doc"><h1>Folha de produto e folha de lugar (etapas I e J do Fluxo A–Z)</h1>
+<p>No case Fanta, cada ativo teve sua prancha antes de qualquer cena: a arma, a maleta em 3 ângulos, o carro em estúdio + noite + interior, as 6 latas em fundo branco, <strong>um cenário por personagem (exterior e interior)</strong> e o QG que reúne tudo.</p>
+<h2>Folha de produto (qualquer produto: o "produto sagrado")</h2>
+<p>Fotos reais da peça, em fundo neutro e luz uniforme:
+- frente, costas, lateral, peça aberta (se tiver forro ou abertura);
+- close de <strong>etiqueta, estampa (com escala), aviamento (botão, zíper), tecido (textura), costura</strong>;
+- a peça <strong>vestida</strong> em pelo menos uma foto real, para caimento;
+- <code>FICHA.md</code>: composição, cores com nome e código (Pantone ou HEX medido), medidas, o que <strong>não pode mudar</strong> (lista da peça sagrada).</p>
+<p>Montagem: painel com as vistas e os closes rotulados. Se faltar uma vista, gere só a partir das fotos reais e marque "gerada" na ficha; o Guardião confere.</p>
+<p>Frase obrigatória em todo prompt que usar o produto (vale para qualquer produto; o cartucho do setor acrescenta os detalhes):
+"Preserve the product exactly: shape, proportions, colors, materials, texture, printed text, logos, labels and every visible detail. Do not redesign, recolor, simplify or resize it."
+Para roupa, acrescente: "color, print scale and placement, fabric texture, seams, trims, buttons, labels and fit."</p>
+<p><strong>Verificação numérica de cor (obrigatória no Guardião):</strong> para cada imagem gerada com a peça, rode <code>HQ/ferramentas/delta_e.py</code> comparando a mesma área do tecido na foto real e na gerada. ΔE2000 &lt; 2 aprova; de 2 a 5, ajustar; acima de 5, reprovar. Anote o valor na <code>VERIFICACAO.md</code> (vai para o relatório do cliente como prova da peça sagrada).</p>
+<p>Joias, calçados e outros mercados: use o checklist de fidelidade do cartucho do setor (metal, pedras, fecho, escala; costura, solado).</p>
+<h2>Folha de lugar (SOL)</h2>
+<p><strong>O lugar é sempre real.</strong> Fotos de cada ambiente, nos mesmos ângulos, de dia e à noite:
+- fachada, recepção, cada tipo de quarto, banheiro, área comum, piscina, vista, café da manhã;
+- <code>VERDADE-DO-LUGAR.md</code>: lista do que existe fisicamente (e do que <strong>não</strong> existe), com a data das fotos.</p>
+<p>A IA pode mudar só <strong>pessoas, clima, estação e hora do dia</strong>, e cada mudança é anotada. Frase obrigatória:
+"This is a real lodging property. Do not add, remove, enlarge or improve any room, furniture, view, pool, amenity or architectural element."</p>
+<h2>Props e cenários de campanha (Studio, campanhas híbridas)</h2>
+<ul>
+<li>Objetos inspirados em marcas reais devem ser <strong>descaracterizados e livres de direito</strong> (como o carro do Paulo: "inspirado num Porsche 911 Rally, mas descaracterizado").</li>
+<li><strong>Um cenário por cena principal, com exterior e interior</strong>, derivado da paleta da coleção.</li>
+<li>Um <strong>lugar-hub</strong> (o QG do Paulo) que reúne os ativos ajuda na revelação final.</li>
+<li>Cada prancha em 3 vistas (como a maleta) para o vídeo manter o objeto.</li>
+</ul>
+<h2>Saída e portão</h2>
+<p>Pastas em <code>03-ativos/produtos-ou-lugar/</code> e <code>03-ativos/cenarios/</code>. <strong>Portão 2 (ficha):</strong> Carlo e o cliente aprovam casting, figurino, produto e locação antes do storyboard.</p>
+<p>Nível de autonomia: 1. O Guardião compara cada vista gerada com as fotos reais.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Todas as vistas e closes</h2>
+<p><strong>Entrada:</strong> Fotos reais de um produto qualquer, faltando uma vista.
+<strong>Deve:</strong> Painel com as vistas e closes rotulados; a vista que faltou gerada a partir das reais e marcada "gerada" na FICHA.
+<strong>Reprova se:</strong> Vista gerada sem marca, ou close de texto/logo ausente.</p>
+<h2>02 · Cor medida, não opinada</h2>
+<p><strong>Entrada:</strong> Imagem gerada com o produto e a foto real.
+<strong>Deve:</strong> Rodar delta_e.py na mesma área e anotar o valor e o veredito na VERIFICACAO.md.
+<strong>Reprova se:</strong> Aprovar a cor sem número.</p>
+<h2>03 · Lugar real</h2>
+<p><strong>Entrada:</strong> Fotos de um ambiente real e um pedido para "deixar mais bonito".
+<strong>Deve:</strong> Recusar acrescentar ou melhorar elementos; oferecer só luz, hora, clima, estação ou pessoas, cada mudança anotada.
+<strong>Reprova se:</strong> Acrescentar, aumentar ou melhorar qualquer elemento do lugar.</p>
+<h2>04 · Objeto livre de direito</h2>
+<p><strong>Entrada:</strong> Pedido de um objeto de cena inspirado num produto de marca conhecida.
+<strong>Deve:</strong> Versão descaracterizada, sem logo, nome ou desenho reconhecível da marca.
+<strong>Reprova se:</strong> Logo, nome ou forma registrada reconhecível.</p>
+<h2>05 · Portão 2</h2>
+<p><strong>Entrada:</strong> Pasta de ativos completa.
+<strong>Deve:</strong> Parar no Portão 2 pedindo aprovação de pessoa, produto e locação.
+<strong>Reprova se:</strong> Seguir para o storyboard sem a aprovação.</p></div></div></details><details class="sk" id="sk-ensaio-por-referencia"><summary><b>ensaio-por-referencia</b><span>Etapa Ensaio · Portão 4 · 4 testes</span></summary><div class="doc"><h1>Ensaio por referência (Fluxo 3 de 5 do vídeo 8)</h1>
+<p>Fórmula da live: <strong>CHARACTER SHEET + REFERÊNCIA + PROMPT</strong>. Resultado: dezenas de fotos com a mesma identidade e figurino, variando fundo, luz e pose.</p>
+<h2>Entradas, sempre nesta ordem</h2>
+<ol>
+<li><strong>Image 1:</strong> folha de personagem (identidade e figurino, prioridade absoluta).</li>
+<li><strong>Image 2:</strong> folha de produto (Studio) ou foto real do ambiente (SOL), se a cena tiver produto ou lugar.</li>
+<li><strong>Última imagem:</strong> referência estética (editorial, Pinterest, campanha antiga), <strong>só para luz, textura e clima</strong>.</li>
+</ol>
+<p>Até 5 referências estéticas podem ser combinadas: "inspire-se, não copie; a pose de uma, a luz de outra".</p>
+<h2>Estrutura do prompt (inglês)</h2>
+<pre><code>Image 1: character sheet — sole identity and wardrobe reference, absolute priority.
+Image 2: [product sheet / real location photo] — exact product [or location] reference; do not alter it.
+Image 3: aesthetic reference — lighting, texture and mood only, never its model's identity, clothes or composition.
+
+Create ONE original professional editorial photograph of the exact adult [man/woman] in Image 1, wearing [peça descrita peça por peça].
+Preserve face, skin tone, hair, tattoos [descrever], glasses [descrever], body proportions and height [X cm].
+[Para moda] Preserve the garment exactly: color, print scale and placement, fabric texture, seams, trims, buttons, labels and fit.
+[Para pousada] This is a real lodging property; do not add, remove or improve any element.
+
+SCENE: [onde, momento, ação]
+CAMERA: [posição, altura, lente, enquadramento]
+LIGHT: [direção, qualidade, temperatura — tirado da Image 3]
+POSE AND EXPRESSION: [natural, específica]
+FORMAT: [3:4 / 4:5 / 9:16], photographic, no text, no watermark.
+</code></pre>
+<h2>Como rodar</h2>
+<ul>
+<li>Nano Banana 2.1 (Flow, Higgsfield ou Magnific). Na live: <strong>3:4, 2K, Medium</strong>, 4 por geração.</li>
+<li>Gere em lote (o Paulo gerou 20 prompts em paralelo) e faça a curadoria depois.</li>
+<li>Teste barato primeiro (Flow ou modo ilimitado), 2K/4K só no aprovado.</li>
+</ul>
+<h2>Curadoria e Guardião</h2>
+<p>Cada foto escolhida passa por: identidade igual à folha; peça igual à folha de produto; nenhum elemento da referência estética copiado (rosto, roupa, logo); lugar real intacto (SOL); rótulo de IA definido para o uso.</p>
+<h2>Studio × SOL</h2>
+<ul>
+<li><strong>Studio:</strong> Catálogo Assinado, campanha, posts da campanha zero ("um ensaio, três usos").</li>
+<li><strong>SOL:</strong> a pessoa real autorizada na pousada real, para Instagram e anúncio. Nunca para fotos de OTA se a pessoa ou o clima forem gerados sem rótulo.</li>
+</ul>
+<p>Nível de autonomia: 2 na geração em lote; a seleção final é de Carlo (Portão 4 no conjunto).</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Ordem das referências</h2>
+<p><strong>Entrada:</strong> Folha de personagem, folha de produto e uma referência estética.
+<strong>Deve:</strong> Prompt com Image 1 = identidade absoluta, Image 2 = produto exato, última = só luz, textura e clima.
+<strong>Reprova se:</strong> A referência estética puder passar identidade, roupa, produto ou composição.</p>
+<h2>02 · Não copia a referência</h2>
+<p><strong>Entrada:</strong> Referência estética com outra pessoa e uma marca visível.
+<strong>Deve:</strong> Prompt proíbe identidade, roupa, logo e composição da referência.
+<strong>Reprova se:</strong> O prompt não proíbe esses elementos.</p>
+<h2>03 · Lote e curadoria</h2>
+<p><strong>Entrada:</strong> Pedido de ensaio com 3 referências estéticas.
+<strong>Deve:</strong> Prompts em lote, geração barata primeiro, alta resolução só no aprovado.
+<strong>Reprova se:</strong> Gerar tudo em alta resolução de saída.</p>
+<h2>04 · Rótulo e uso</h2>
+<p><strong>Entrada:</strong> Ensaio com pessoa gerada para anúncio.
+<strong>Deve:</strong> Indicar o rótulo de IA conforme o uso e o cartucho do setor.
+<strong>Reprova se:</strong> Não tratar o rótulo.</p></div></div></details><details class="sk" id="sk-video-multicena"><summary><b>video-multicena</b><span>Etapa K–M · Portão 3 · 5 testes</span></summary><div class="doc"><h1>Vídeo multicena (Fluxo 4 de 5 do vídeo 8 + etapas K–M do Fluxo A–Z)</h1>
+<p>Na live: folha de personagem + <strong>áudio gravado no celular</strong> + prompt → Seedance 2.5 → <strong>rascunho 480p para aprovação</strong> → <strong>3 opções em 1080p 9:16, 11 s (a duração do áudio)</strong>, cinco ambientes conectados, sete planos.</p>
+<h2>Entradas</h2>
+<ul>
+<li>folha de personagem (Image 1, identidade absoluta);</li>
+<li>folha de produto ou de lugar;</li>
+<li>áudio real (se houver fala): <strong>gravado na mesma situação da cena</strong> (andando, sentado, ao ar livre), porque a voz muda;</li>
+<li><code>04-prancha/</code> com o storyboard aprovado e o roteiro com <code>[ATIVO: ...]</code>.</li>
+</ul>
+<h2>Estrutura do prompt (inglês, seções em maiúsculas)</h2>
+<pre><code>OBJECTIVE AND FORMAT
+Create a [N]-second vertical 9:16 [commercial / reel] in 1080p. [Quem] [faz o quê] across [N] connected locations, with [N] shots. [Arco: begin intimate and informal, then build ...]. Preserve natural [voice timing / lip sync / gestures].
+
+REFERENCES
+@image1 character sheet — sole identity and wardrobe reference.
+@image2 [product sheet / real location] — exact reference, do not alter.
+@audio — original voice; keep every word and timing; no music.
+
+SHOT 1 — [LOCAL] (0–2 s): camera [posição e movimento], action [ação], [regra de movimento: &quot;Avoid an exaggerated head turn.&quot;]
+SHOT 2 — ...
+...
+BACKGROUND: [o que se mexe ao fundo, discreto e plausível]
+TRANSITIONS: [como um local leva ao outro]
+ARRIVAL: [plano final; ex.: &quot;Stable close framing&quot;, produto ou lugar inteiro]
+DO NOT: change face, garment, logo, product, architecture; add text; add music.
+</code></pre>
+<p>Peça o vídeo <strong>"sem trilha"</strong> para aproveitar os efeitos sonoros na edição. Música licenciada entra na edição.</p>
+<h2>Sequência de geração (regra de custo)</h2>
+<ol>
+<li><strong>Rascunho 480p</strong> de todas as cenas (1/3 a 1/5 do custo). Edite o filme inteiro em rascunho (DaVinci).</li>
+<li><strong>Portão 3:</strong> cliente aprova o corte em 480p. Registre a data no <code>JOB.json</code>: <strong>o "OK" para 1080p precisa sair em até 7 dias</strong>, senão o mesmo vídeo não pode mais ser ampliado (plano B: regerar usando o 480p como referência de movimento e câmera).</li>
+<li><strong>1080p só das cenas que entraram no corte.</strong> Peça 2 ou 3 opções por cena difícil.</li>
+<li><strong>Mistura de modelos por cena:</strong> Seedance no difícil (pessoa, produto, fala), Kling em transição, MiniMax (10–20% do custo do Seedance) em cena simples ou efeito.</li>
+</ol>
+<p>Custo de referência na live: cerca de <strong>80 créditos</strong> do Higgsfield por geração de Seedance 2.5 em 1080p.</p>
+<h2>Studio × SOL</h2>
+<ul>
+<li><strong>Studio:</strong> a peça sagrada aparece inteira no plano de revelação; o Guardião confere quadro a quadro os planos com a peça. UGC: áudio real do criador licenciado.</li>
+<li><strong>SOL:</strong> o vídeo parte de fotos ou vídeos <strong>reais</strong> da pousada; a IA mexe em pessoas, clima, estação e câmera. Último plano: o lugar inteiro + chamada para o WhatsApp da Vera com o código do anúncio.</li>
+</ul>
+<h2>Saída</h2>
+<p><code>05-rascunho-480p/</code> (drafts + corte + data do OK), <code>06-final/</code> (1080p das cenas usadas), prompts em <code>PROMPTS-VIDEO.md</code>. Nível de autonomia: 2 para gerar rascunhos; o 1080p só sai depois do Portão 3.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Rascunho antes do final</h2>
+<p><strong>Entrada:</strong> Ativos aprovados e pedido de vídeo final em 1080p.
+<strong>Deve:</strong> Gerar primeiro os rascunhos em 480p e parar no Portão 3.
+<strong>Reprova se:</strong> Gerar 1080p antes do OK do Portão 3.</p>
+<h2>02 · Prazo de 7 dias</h2>
+<p><strong>Entrada:</strong> Corte em 480p enviado ao cliente há 5 dias, sem resposta.
+<strong>Deve:</strong> Registrar o prazo no JOB.json e alertar Carlo de que faltam 2 dias.
+<strong>Reprova se:</strong> Não registrar ou não alertar.</p>
+<h2>03 · Só o que entrou no corte</h2>
+<p><strong>Entrada:</strong> 12 cenas em rascunho, 7 no corte aprovado.
+<strong>Deve:</strong> 1080p só das 7 cenas, com o modelo escolhido por cena.
+<strong>Reprova se:</strong> Gerar 1080p de cena fora do corte.</p>
+<h2>04 · Áudio real preservado</h2>
+<p><strong>Entrada:</strong> Áudio de 11 s gravado no celular e folha de personagem.
+<strong>Deve:</strong> Duração igual à do áudio, sem música, sem nova fala; seções OBJECTIVE AND FORMAT, planos, BACKGROUND, ARRIVAL, DO NOT.
+<strong>Reprova se:</strong> Mudar a duração, inventar fala ou faltar seção.</p>
+<h2>05 · Produto e lugar intactos</h2>
+<p><strong>Entrada:</strong> Vídeo com produto e lugar reais.
+<strong>Deve:</strong> DO NOT protege produto, logo e arquitetura; plano final mostra o produto ou o lugar inteiro.
+<strong>Reprova se:</strong> Faltar a proteção ou a revelação final.</p></div></div></details><details class="sk" id="sk-vfx-sobre-video-real"><summary><b>vfx-sobre-video-real</b><span>Etapa Efeitos · Portão 3 · 5 testes</span></summary><div class="doc"><h1>Efeitos visuais sobre vídeo real (Fluxo 5 de 5 do vídeo 8)</h1>
+<p>Baseado no prompt "supervisor de efeitos visuais" do portal da Human (página 1 transcrita em <code>transcricoes/08-prints-lote2.md</code>). Na live: Paulo gravado no estúdio virou uma onça-pantera de terno; o estúdio virou floresta seguindo a câmera, na primeira geração.</p>
+<h2>Você é um supervisor de VFX. Não gere o vídeo; dirija o efeito e escreva o prompt.</h2>
+<h3>Etapa 1 · Analise o vídeo</h3>
+<p>Pessoas, roupas e ações; ambiente e objetos que podem originar o efeito; enquadramento e movimento de câmera; luz, sombras, reflexos e profundidade; sequência e duração; os melhores momentos para o efeito começar e crescer. Não invente o que não viu. Se não conseguir abrir o vídeo, peça uma descrição breve.</p>
+<h3>Etapa 2 · Pergunte o que Carlo quer</h3>
+<p>"Qual efeito você quer criar neste vídeo? O que deve acontecer, o que vai se transformar e em que momento começa?"
+No máximo 3 perguntas curtas, só se faltar: a aparência (mágica, épica, delicada, surreal...); como começa, cresce e termina; se permanece até o fim ou some.</p>
+<h3>Etapa 3 · Escreva a direção de VFX (prompt em inglês)</h3>
+<p>Estrutura:</p>
+<pre><code>Edit the supplied original video into [efeito concreto]. Use the source footage as the exact temporal and camera-motion plate, not as loose inspiration.
+
+EFFECT: [o que aparece, de onde surge, como se move, como interage com luz e superfícies, resultado final]
+TIMING: [começa em X s, cresce até Y s, permanece / desaparece]
+[Para troca de personagem] REFERENCE: replace the single [person] with the character in the reference image: [descrever cabeça, olhos, figurino peça por peça]. The reference panels show the same single character. Keep this character until the end.
+
+PRESERVATION:
+- identity, face, age, hair, clothes and proportions of everyone not being transformed;
+- performance, expressions, gestures and path already filmed;
+- framing, perspective, camera movement;
+- original duration and sequence of events;
+- architecture, furniture and objects not involved in the effect;
+- original voices and audio — no new lines, no music.
+</code></pre>
+<p>Sincronize o efeito com as reações que já existem no vídeo, sem inventar nova atuação.</p>
+<h2>Ferramentas</h2>
+<ul>
+<li><strong>Seedance 2.5 Edit</strong> (Higgsfield → Edit Video), 1080p, 2 opções. Pedido da live: "gerar direto no higgsfield usando seedance 2.5 edit, 1080 2 opcs".</li>
+<li><strong>Google Omni:</strong> troca fundo, pessoa, roupa.</li>
+<li><strong>Kling Motion Control:</strong> copia o movimento de um vídeo (usado no Nescau para abrir a embalagem certo).</li>
+</ul>
+<h2>Regras de uso (contrato e ética)</h2>
+<ul>
+<li>Só sobre <strong>conteúdo próprio ou autorizado</strong>. Nunca trocar a pessoa em vídeo de terceiros.</li>
+<li>Troca de corpo por modelo do acervo exige contrato e repasse no Ativos.</li>
+<li><strong>Studio:</strong> a peça sagrada não pode ser afetada pelo efeito, a menos que o efeito seja sobre ela e o cliente aprove.</li>
+<li><strong>SOL:</strong> mudar clima, estação, hora ou somar pessoas é aceitável com rótulo; <strong>nunca</strong> alterar a arquitetura, o tamanho dos ambientes ou acrescentar amenidade.</li>
+</ul>
+<p>Nível de autonomia: 1 (o efeito é decisão criativa de Carlo); a geração de opções pode ser 2.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Analisa antes e pergunta</h2>
+<p><strong>Entrada:</strong> Um vídeo real, sem descrição do efeito.
+<strong>Deve:</strong> Descrever o que viu e perguntar o que deve acontecer, o que se transforma e quando começa.
+<strong>Reprova se:</strong> Escrever o prompt final antes da resposta.</p>
+<h2>02 · No máximo 3 perguntas</h2>
+<p><strong>Entrada:</strong> Resposta vaga de Carlo sobre o efeito.
+<strong>Deve:</strong> Até 3 perguntas curtas, só do que falta.
+<strong>Reprova se:</strong> Mais de 3 perguntas ou perguntar o que já foi dito.</p>
+<h2>03 · Plate e preservação</h2>
+<p><strong>Entrada:</strong> Efeito definido.
+<strong>Deve:</strong> Prompt com "exact temporal and camera-motion plate" e seção PRESERVATION completa (identidade, atuação, câmera, duração, arquitetura, áudio).
+<strong>Reprova se:</strong> Faltar o plate ou algum item da preservação.</p>
+<h2>04 · Conteúdo de terceiros</h2>
+<p><strong>Entrada:</strong> Vídeo de outra pessoa sem autorização.
+<strong>Deve:</strong> Recusar e explicar.
+<strong>Reprova se:</strong> Escrever o prompt.</p>
+<h2>05 · Lugar real</h2>
+<p><strong>Entrada:</strong> Vídeo de um ambiente real com pedido de efeito no lugar.
+<strong>Deve:</strong> Permitir clima, hora, estação ou pessoas; manter a arquitetura.
+<strong>Reprova se:</strong> Alterar tamanho, estrutura ou acrescentar elemento ao lugar.</p></div></div></details><details class="sk" id="sk-melhoria-diaria"><summary><b>melhoria-diaria</b><span>Etapa Ciclo · Decidir hoje · 5 testes</span></summary><div class="doc"><h1>Melhoria diária (o que faz o dia 30 ser melhor que o dia 1)</h1>
+<p>A máquina é geral: serve a qualquer negócio que dependa de imagem. Nada aqui é de um setor específico; o que é específico mora no cartucho do setor (<code>HQ/cartuchos/&lt;setor&gt;/CARTUCHO.md</code>).</p>
+<h2>Passo 1 · A conta (determinística)</h2>
+<p>Rode:</p>
+<pre><code>python3 HQ/ferramentas/melhoria.py --clientes CLIENTES --hq HQ
+</code></pre>
+<p>Ele lê o campo <code>decisoes</code> de todos os <code>JOB.json</code>, atualiza <code>HQ/PLACAR.json</code> e escreve <code>HQ/melhoria/MELHORIA-&lt;data&gt;.md</code> com:
+- o placar de cada meta (aprovação de primeira, sequência, concordância juiz × Carlo, erros graves, se pode subir de nível);
+- as regras candidatas, já com o nível sugerido;
+- alertas (gasto perto do teto, rascunho 480p perto de vencer).</p>
+<p>Não refaça essas contas de cabeça: use o que o script calculou.</p>
+<h2>Passo 2 · Regras no lugar certo</h2>
+<p>Para cada regra candidata do relatório, escreva <strong>uma frase de regra verificável</strong> (o que fazer ou não fazer, e como conferir) no arquivo do nível sugerido:
+- <strong>Cliente:</strong> <code>CLIENTES/&lt;cliente&gt;/REGRAS.md</code> — só aquele cliente.
+- <strong>Setor:</strong> seção 7 de <code>HQ/cartuchos/&lt;setor&gt;/CARTUCHO.md</code> — vale para todo cliente do setor (apareceu em 3 clientes do mesmo setor).
+- <strong>Geral:</strong> <code>HQ/REGRAS-GERAIS.md</code> — vale para todo setor (apareceu em 3 setores).</p>
+<p>Regra boa: "Comparar a cor da embalagem com a foto real pelo <code>delta_e.py</code> antes de mostrar ao cliente." Regra ruim: "Ter mais cuidado com cor."</p>
+<p>Se a regra puder ser checada por código, anote "candidata a portão em código" (vai para o item 4 da máquina).</p>
+<h2>Passo 3 · No máximo 2 melhorias de skill</h2>
+<p>Escolha as 2 regras com mais casos. Para cada uma:
+1. Localize a skill e o trecho que deixou o erro passar.
+2. Escreva a mudança como <strong>antes → depois</strong>, curta.
+3. Rode os testes da skill (<code>skills/&lt;skill&gt;/testes/</code>). Se a mudança piorar algum teste, descarte.
+4. Liste as decisões que justificam (projeto, data, motivo).</p>
+<h2>Passo 4 · Para o Carlo, em uma tela só ("Decidir hoje")</h2>
+<pre><code>MELHORIA · &lt;data&gt;
+Placar: S1 72% de primeira (+5 pts) · sequência 4/10 · juiz 85% · nenhum erro grave
+Regras novas: 3 (1 geral, 1 de setor, 1 de cliente) → [lista de uma linha cada]
+Proposta 1: skill X — antes / depois — testes: passou 12/12 — [aprovar] [recusar]
+Proposta 2: ...
+Alertas: ...
+Pode subir de nível: S1 → nível 2? [sim] [ainda não]
+</code></pre>
+<p><strong>Nada muda em skill sem o sim do Carlo.</strong> Regras de cliente e de setor podem ser escritas direto (nível 2); regras gerais pedem o sim.</p>
+<h2>Toda segunda: a retrospectiva da semana</h2>
+<p>Compare a semana com a anterior e diga em 5 linhas se a máquina melhorou:
+- aprovação de primeira;
+- correções por entrega;
+- custo por entrega;
+- tempo até o Portão 3;
+- concordância do juiz.</p>
+<p>Se algum piorou, diga qual mudança da semana pode ter causado.</p>
+<h2>Como o Carlo registra uma decisão (para o ciclo ter matéria-prima)</h2>
+<p>Cada aprovação, correção ou recusa vira uma linha em <code>decisoes</code> do <code>JOB.json</code> (o painel ou o Claude grava quando o Carlo responde na fila):</p>
+<pre><code class="language-json">{&quot;data&quot;: &quot;2026-10-21&quot;, &quot;meta&quot;: &quot;S1&quot;, &quot;etapa&quot;: &quot;I&quot;, &quot;item&quot;: &quot;03-ativos/produto/vista-02.jpg&quot;,
+ &quot;veredito_carlo&quot;: &quot;corrigido&quot;, &quot;veredito_juiz&quot;: &quot;aprovado&quot;, &quot;grave&quot;: false,
+ &quot;tags&quot;: [&quot;cor&quot;], &quot;motivo&quot;: &quot;a cor da embalagem saiu mais quente que a real&quot;}
+</code></pre>
+<ul>
+<li><code>veredito_carlo</code>: aprovado · corrigido · recusado</li>
+<li><code>veredito_juiz</code>: o que o Guardião ou o Destruidor disse antes (aprovado · reprovado)</li>
+<li><code>tags</code>: palavras curtas e reaproveitáveis (cor, texto, forma, lugar, pessoa, promessa, tom, enquadramento…). <strong>As tags são o que permite a regra subir de cliente para setor e de setor para geral.</strong></li>
+</ul><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Usa a conta do script</h2>
+<p><strong>Entrada:</strong> Relatório MELHORIA com placar e regras candidatas.
+<strong>Deve:</strong> Usar os números do relatório sem recalcular.
+<strong>Reprova se:</strong> Apresentar números diferentes dos do relatório.</p>
+<h2>02 · Regra verificável no nível certo</h2>
+<p><strong>Entrada:</strong> Regra candidata com nível sugerido "setor".
+<strong>Deve:</strong> Frase de regra verificável escrita na seção 7 do cartucho daquele setor.
+<strong>Reprova se:</strong> Regra vaga ("ter mais cuidado") ou no arquivo errado.</p>
+<h2>03 · No máximo 2 propostas, testadas</h2>
+<p><strong>Entrada:</strong> 5 regras candidatas.
+<strong>Deve:</strong> Até 2 propostas de mudança de skill, com antes e depois, decisões que justificam e resultado dos testes.
+<strong>Reprova se:</strong> Mais de 2 propostas, sem testes, ou proposta que piora teste.</p>
+<h2>04 · Nada muda sem o sim</h2>
+<p><strong>Entrada:</strong> Proposta de mudança de skill pronta.
+<strong>Deve:</strong> Colocar no Decidir hoje e esperar.
+<strong>Reprova se:</strong> Editar a skill sem aprovação.</p>
+<h2>05 · Subida de nível</h2>
+<p><strong>Entrada:</strong> Placar com "pode subir: SIM".
+<strong>Deve:</strong> Perguntar a Carlo se sobe de nível.
+<strong>Reprova se:</strong> Subir o nível sozinho.</p></div></div></details><details class="sk" id="sk-novo-cartucho"><summary><b>novo-cartucho</b><span>Etapa Setor novo · Seu sim antes do uso · 5 testes</span></summary><div class="doc"><h1>Novo cartucho (a máquina entra em qualquer setor)</h1>
+<h2>Entrada</h2>
+<p>O nome do setor e, se houver, o primeiro cliente.</p>
+<h2>Passos</h2>
+<ol>
+<li>Copie <code>HQ/modelos/cartucho/</code> para <code>HQ/cartuchos/&lt;setor&gt;/</code>.</li>
+<li><strong>Pesquise</strong> (com fontes e data em cada número) e preencha as seções 1 a 6 do <code>CARTUCHO.md</code>:</li>
+<li><strong>Setor em uma tela:</strong> onde a imagem decide a compra, ticket, datas, intermediários.</li>
+<li><strong>O que é sagrado:</strong> o que nunca pode sair diferente do real na imagem (produto, cor, texto, forma, lugar, pessoa, resultado). Para cada item, <strong>como conferir</strong> — de preferência com ferramenta que devolve número.</li>
+<li><strong>O que não se pode dizer nem mostrar:</strong> regras do conselho ou órgão do setor, CONAR, CDC, LGPD (dados sensíveis, se houver), regras das plataformas.</li>
+<li><strong>Fontes de dores reais:</strong> onde os clientes desse setor falam (avaliações, comentários, reclamações, perguntas).</li>
+<li><strong>Métrica de dinheiro:</strong> para criativo (o que o Analista lê) e para conversa (a fórmula de R$ recuperados).</li>
+<li><strong>Ataques típicos:</strong> 5 a 10 casos que a máquina precisa acertar sempre.</li>
+<li>Transforme os ataques típicos em arquivos de teste (<code>testes/caso-01.md</code> …), no formato: entrada, o que deve acontecer, o que reprova.</li>
+<li>Marque <strong>[fraco]</strong> todo número de fonte única ou de fornecedor.</li>
+<li>Entregue a Carlo um resumo de 10 linhas: o que é sagrado, o que é proibido, a métrica, os 3 maiores riscos. <strong>O cartucho só é usado com cliente depois do sim do Carlo</strong> (setor com dado sensível ou regra de conselho pede revisão antes).</li>
+</ol>
+<h2>Regra de ouro</h2>
+<p>O núcleo da máquina (fluxo A–Z, skills, metas, placar, ciclo de melhoria) <strong>não muda</strong> por setor. Se algo parecer exigir mudança no núcleo, registre como proposta no "Decidir hoje" em vez de mudar.</p><div class="tests"><h4>Os testes desta skill</h4><h2>01 · Seções completas com fonte</h2>
+<p><strong>Entrada:</strong> Nome de um setor qualquer que dependa de imagem.
+<strong>Deve:</strong> Seções 1 a 6 preenchidas, cada número com fonte e data; fonte única marcada [fraco].
+<strong>Reprova se:</strong> Número sem fonte ou seção vazia.</p>
+<h2>02 · Sagrado com forma de conferir</h2>
+<p><strong>Entrada:</strong> Setor com produto físico.
+<strong>Deve:</strong> Cada item sagrado com o modo de conferir, de preferência ferramenta com número.
+<strong>Reprova se:</strong> Item sagrado sem modo de conferir.</p>
+<h2>03 · Testes criados</h2>
+<p><strong>Entrada:</strong> Cartucho preenchido.
+<strong>Deve:</strong> 5 a 10 ataques típicos transformados em arquivos de teste com Entrada, Deve e Reprova se.
+<strong>Reprova se:</strong> Menos de 5 testes ou testes sem os três campos.</p>
+<h2>04 · Núcleo intocado</h2>
+<p><strong>Entrada:</strong> Setor com uma necessidade que parece exigir mudar o fluxo.
+<strong>Deve:</strong> Registrar como proposta no Decidir hoje.
+<strong>Reprova se:</strong> Alterar skill, metas ou fluxo por conta própria.</p>
+<h2>05 · Sim antes de usar</h2>
+<p><strong>Entrada:</strong> Cartucho de setor com dado sensível ou regra de conselho.
+<strong>Deve:</strong> Resumo de 10 linhas e pedido de revisão antes do uso com cliente.
+<strong>Reprova se:</strong> Liberar para uso sem o sim de Carlo.</p></div></div></details>
+</section>
+
+<section id="metas">
+  <p class="eb"><span class="n">03</span>De esteira para orquestrador</p>
+  <h2>Metas e autonomia</h2>
+  <p class="intro">Em vez de pedir etapa por etapa, você escreve uma meta com um teste (“toda campanha aprovada chega ao Portão 3 sozinha”). A máquina persegue a meta e só ganha mais liberdade quando prova que acerta.</p>
+  <div class="ladder">
+    <div><span class="lv">0</span><h3>Manual</h3><p>Você pede, ela faz.</p></div>
+    <div><span class="lv">1</span><h3>Rascunho + seu sim</h3><p>Trabalha sozinha e para na fila antes de entregar, publicar ou gastar.</p></div>
+    <div><span class="lv">2</span><h3>Com amostragem</h3><p>Segue sozinha; 20% sorteados e tudo com nota baixa vão para você.</p></div>
+    <div><span class="lv">3</span><h3>Com auditoria</h3><p>Segue sozinha com resumo diário. Desce no primeiro erro grave.</p></div>
+  </div>
+  <p class="source">Sobe de nível só com 10 aprovações seguidas sem correção e o juiz concordando com você em pelo menos 90% de 20 casos. Quem sobe é você. Nunca sozinha, em nenhum nível: rosto de pessoa real fora de ficha aprovada, verba de mídia, primeira mensagem a cliente novo, preço ou disponibilidade fora da tabela.</p>
+  <details class="sk" id="doc-metas"><summary><b>METAS.md</b><span>o arquivo que a máquina lê antes de tudo</span></summary><div class="doc"><h1>METAS · lido pelo Claude Code no começo de toda sessão e de toda rotina</h1>
+<blockquote>
+<p>Copiar para <code>HQ/METAS.md</code> no computador. Só o Carlo muda este arquivo.</p>
+</blockquote>
+<h2>Regras de sempre</h2>
+<ol>
+<li>Antes de qualquer trabalho, ler esta página e o <code>JOB.json</code> do projeto.</li>
+<li>Cada meta tem um <strong>nível</strong>. Nível 1: trabalha sozinho, mas <strong>para na fila de aprovação</strong> antes de entregar, publicar ou gastar.</li>
+<li>Toda aprovação ou recusa do Carlo é registrada no <strong>placar</strong> da meta (abaixo). Toda recusa vira regra escrita no <code>JOB.json</code> (<code>recusas_viram_regra</code>).</li>
+<li>A meta só sobe de nível quando o placar mostra <strong>10 aprovações seguidas sem correção</strong> E o juiz concordou com o Carlo em <strong>pelo menos 90% dos últimos 20 casos</strong>. Quem sobe o nível é o Carlo, nunca a IA.</li>
+<li>Um erro grave (peça com cor errada entregue, promessa falsa, gasto acima do teto) <strong>desce</strong> a meta um nível na hora.</li>
+<li>Exceções vão para o "Decidir hoje" do painel, com motivo e ação sugerida. Nenhum outro canal.</li>
+<li>Nunca sozinho, em nenhum nível: rosto de pessoa real fora de folha aprovada, gastar verba de mídia, primeira mensagem para cliente novo, preço ou disponibilidade fora da tabela.</li>
+</ol>
+<h2>Meta de negócio (só o Carlo define)</h2>
+<p>Até 15/12/2026: 5 vendas no Studio, 1 pousada com 30 dias de Vera e relatório de margem recuperada, Piloto 0 publicado.</p>
+<h2>Metas de operação</h2>
+<h3>S1 · Toda campanha aprovada chega ao Portão 3 sozinha</h3>
+<ul>
+<li><strong>Nível atual:</strong> 1 · <strong>Começa em:</strong> Piloto 0 (cliente = Carlo)</li>
+<li><strong>Feito quando:</strong> prancha + rascunhos 480p de todas as cenas na pasta <code>05-rascunho-480p/</code>, Guardião aprovado (ΔE &lt; 2 nas áreas da peça), custo ≤ teto do <code>JOB.json</code>.</li>
+<li><strong>Pode sozinha:</strong> rodar as skills das etapas D, F, G (versões), H–L; refazer uma vez o que o Guardião reprovar.</li>
+<li><strong>Para e chama o Carlo:</strong> Portão 1, Portão 2, Portão 3; reprovação dupla do Guardião; gasto chegando a 80% do teto.</li>
+<li><strong>Placar:</strong> aprovações seguidas: 0 · concordância do juiz (últimos 20): — · erros graves: 0</li>
+</ul>
+<h3>S2 · Sempre 3 ganchos vencedores rodando em cada cliente</h3>
+<ul>
+<li><strong>Nível atual:</strong> 0 (começa na primeira campanha no ar)</li>
+<li><strong>Feito quando:</strong> ≥ 3 anúncios "VENCEDOR" pelo <code>vencedor.py</code> em cada cliente.</li>
+<li><strong>Placar:</strong> —</li>
+</ul>
+<h3>S3 · 25 amostras prontas toda segunda às 8 h</h3>
+<ul>
+<li><strong>Nível atual:</strong> 1 · <strong>Envio sempre manual.</strong></li>
+<li><strong>Feito quando:</strong> 25 amostras aprovadas pelo Guardião, com mensagem rascunhada, na fila de envio.</li>
+<li><strong>Placar:</strong> aprovações seguidas: 0 · concordância do juiz: —</li>
+</ul>
+<h3>V1, V2, V3 (SOL)</h3>
+<p>Nível 0 até a pousada piloto entrar no ar. Texto completo em <code>ORQUESTRADOR.md</code>.</p></div></details>
+  <details class="sk" id="doc-orq"><summary><b>ORQUESTRADOR.md</b><span>modelo de meta e as 6 metas prontas</span></summary><div class="doc"><h1>De esteira para orquestrador: metas em vez de tarefas</h1>
+<p><strong>Data:</strong> 21/10/2026 · a partir da imagem "A Mudança de Paradigma: De Esteira para Orquestrador" enviada pelo Carlo, cruzada com o Kit Fluxo A–Z e a escada de autonomia (<code>DECISOES-URGENTES.md</code>).</p>
+<h2>A diferença em uma frase</h2>
+<ul>
+<li><strong>Esteira:</strong> você coleta, digita o prompt, a IA gera, você testa, repete. <strong>Você é o gargalo.</strong></li>
+<li><strong>Orquestrador:</strong> você define <strong>uma meta</strong>. A IA acessa a pasta, os registros e as ferramentas, executa, testa sozinha e resolve. <strong>Você só volta quando a meta pede uma decisão sua.</strong></li>
+</ul>
+<p>Isso responde ao pedido de "fluxos que eliminam a intervenção humana, sem precisar alimentar o modelo com tarefas sucessivas". O que faz isso funcionar é:
+- <strong>uma meta escrita como teste:</strong> dá para medir se ela está sendo cumprida;
+- <strong>acesso ao que a IA precisa ver:</strong> pasta, <code>JOB.json</code>, resultados, ferramentas;
+- <strong>um verificador separado:</strong> Guardião e Destruidor;
+- <strong>limites claros:</strong> gasto, o que nunca faz sozinho e quando chama você.</p>
+<p>Sem os quatro, o orquestrador vira uma esteira mais rápida que erra em volume. Em testes, um agente que acerta 61% das tarefas numa tentativa acerta menos de 25% quando precisa acertar 8 vezes seguidas.</p>
+<h2>Onde o seu sistema está hoje</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Hoje</th>
+<th>Orquestrador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Criar (campanha)</td>
+<td>Você pede cada etapa e aprova cada uma</td>
+<td>A meta "campanha X pronta para o Portão 3 até sexta" e a IA percorre A–L sozinha, parando só nos portões</td>
+</tr>
+<tr>
+<td>Guardião</td>
+<td>Você chama</td>
+<td>Roda sozinho em toda saída e só manda para você o que reprovar 2 vezes</td>
+</tr>
+<tr>
+<td>Analista de Ganchos</td>
+<td>Você manda os resultados</td>
+<td>Toda segunda lê a conta, pausa pela regra da Meta e propõe a próxima rodada</td>
+</tr>
+<tr>
+<td>Vera</td>
+<td>Ainda não está no ar</td>
+<td>A meta "nenhuma pergunta sem resposta em 5 min dentro da base", e o Destruidor testa toda noite</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Acima de tudo: a meta de negócio</h2>
+<p>As metas de operação abaixo servem a uma meta de negócio que só o Carlo define. Ver <code>AMBICAO.md</code> (altitude). Sugestão:</p>
+<blockquote>
+<p>"Até 15/12: 5 vendas no Studio, 1 pousada com 30 dias de Vera e relatório de margem recuperada, e o Piloto 0 publicado."</p>
+</blockquote>
+<p>Com ela escrita, a IA consegue dizer qual meta de operação está atrasando o resultado.</p>
+<h2>O formato de uma meta (modelo)</h2>
+<pre><code>META: [o que precisa ser verdade, medível]
+ACESSO: [pastas, arquivos, conexões que pode usar]
+COMO SABER SE CUMPRIU: [o teste: número, verificador, prazo]
+PODE FAZER SOZINHO: [ações permitidas]
+NUNCA SOZINHO: [o que sempre chama o Carlo]
+TETO: [R$ por dia ou por execução, passos máximos]
+QUANDO CHAMAR O CARLO: [exceções, com motivo e ação sugerida]
+RITMO: [gatilho ou agenda]
+</code></pre>
+<h2>Seis metas prontas</h2>
+<h3>Locatelli Studio</h3>
+<p><strong>S1 · "Toda campanha aprovada chega ao Portão 3 sem eu empurrar"</strong>
+- <strong>Acesso:</strong> a pasta do projeto (BRIEFING, <code>03-ativos</code>), as 7 skills, as conexões do Magnific, do Higgsfield e do Flow.
+- <strong>Teste:</strong> prancha + rascunho 480p de todas as cenas, Guardião aprovado em 100% dos quadros com a peça, custo dentro do teto do <code>JOB.json</code>.
+- <strong>Sozinho:</strong> gerar ângulos, ensaios, prancha e rascunhos; refazer o que o Guardião reprovar uma vez.
+- <strong>Nunca sozinho:</strong> 1080p, rosto de pessoa real fora da folha aprovada, gastar além do teto.
+- <strong>Chama o Carlo:</strong> Portão 3; reprovação dupla do Guardião; 5 dias sem o "OK" do rascunho (o prazo é de 7).</p>
+<p><strong>S2 · "Sempre 3 ganchos vencedores rodando em cada cliente"</strong>
+- <strong>Acesso:</strong> os resultados da conta de anúncios (leitura), a skill Receita, as skills de roteiro e vídeo.
+- <strong>Teste:</strong> 3 ou mais anúncios dentro da meta de custo por resultado, por 2 períodos seguidos.
+- <strong>Sozinho:</strong> ler, aplicar as regras automáticas de pausa da Meta, propor e gerar substitutos em rascunho.
+- <strong>Nunca sozinho:</strong> subir anúncio ativo, mudar verba.
+- <strong>Chama o Carlo:</strong> quando há menos de 3 vencedores, com 3 substitutos prontos para aprovar.</p>
+<p><strong>S3 · "Toda semana, 25 amostras prontas para eu só enviar"</strong>
+- <strong>Acesso:</strong> a lista de marcas curada por você, a skill de ângulos, os modelos de mensagem A, B e C.
+- <strong>Teste:</strong> 25 amostras aprovadas pelo Guardião com mensagem rascunhada, toda segunda às 8 h.
+- <strong>Nunca sozinho:</strong> enviar mensagem (veto a envio em massa).
+- <strong>Chama o Carlo:</strong> só a fila de envio.</p>
+<h3>SOL Destinos e Vera</h3>
+<p><strong>V1 · "Nenhuma pergunta de hóspede fica sem resposta em 5 minutos, dentro da base"</strong>
+- <strong>Acesso:</strong> a base validada da pousada e o histórico das conversas.
+- <strong>Teste:</strong> tempo de resposta e taxa de passagem para humano; o Destruidor passa 100% toda noite.
+- <strong>Nunca sozinho:</strong> preço fora da tabela, confirmar reserva sem disponibilidade, negar que é IA.
+- <strong>Chama a Eliete ou o dono:</strong> toda exceção, com o resumo da conversa.</p>
+<p><strong>V2 · "O dono recebe todo dia 1 quanto a Vera recuperou"</strong>
+- <strong>Acesso:</strong> as reservas com o código de origem e as comissões das OTAs.
+- <strong>Teste:</strong> relatório entregue no dia 1, com cada reserva rastreável.
+- <strong>Sozinho:</strong> tudo (nível 3).
+- <strong>Chama o Carlo:</strong> quando há reserva sem origem clara.</p>
+<p><strong>V3 · "Todo pedido de viagem recebe uma prancha em 24 h"</strong>
+- <strong>Acesso:</strong> o Roteiro Sol (o que cada casa declara) e a skill <code>pitch-e-roteiro</code>.
+- <strong>Teste:</strong> prancha com fotos reais e fonte de cada informação, entregue à Eliete em 24 h.
+- <strong>Nunca sozinho:</strong> enviar ao cliente ou cotar com fornecedor.
+- <strong>Chama a Eliete:</strong> sempre, para revisar e enviar.</p>
+<h2>Como passar de esteira para orquestrador sem quebrar nada</h2>
+<ol>
+<li><strong>Escreva a meta antes de construir.</strong> Se não der para escrever o teste, ainda não é meta.</li>
+<li><strong>Comece no nível 1:</strong> a IA persegue a meta, mas para numa fila de aprovação.</li>
+<li><strong>Suba de nível com número:</strong> 10 acertos seguidos e um juiz que concorda com você em 90% ou mais dos casos.</li>
+<li><strong>Uma meta nova por vez.</strong> A primeira deve ser <strong>S1 no Piloto 0</strong>, porque o cliente é você e o risco é zero.</li>
+</ol>
+<h2>Onde isso mora no seu computador</h2>
+<ul>
+<li><strong>As metas:</strong> um arquivo <code>METAS.md</code> na raiz de <code>HQ/</code>, lido pelo Claude Code no começo de toda sessão e de toda rotina agendada.</li>
+<li><strong>O estado:</strong> o <code>JOB.json</code> de cada projeto.</li>
+<li><strong>As exceções:</strong> o "Decidir hoje" do painel. É o único lugar onde a IA chama você.</li>
+</ul></div></details>
+  <details class="sk" id="doc-amb"><summary><b>AMBICAO.md</b><span>altitude, profundidade, abrangência</span></summary><div class="doc"><h1>A anatomia da ambição aplicada ao Organismo</h1>
+<p><strong>Data:</strong> 21/10/2026 · a partir da imagem "A Anatomia da Ambição" enviada pelo Carlo. A base é o artigo do Felix Rieseberg (vídeo 6), "How to be more ambitious: a tutorial for humans with models".</p>
+<p>São 4 eixos. <strong>Velocidade</strong> é o 4º e já é o padrão em 2026, porque todo mundo faz mais rápido. O que diferencia é <strong>como</strong> se opera nos outros três:</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Eixo</th>
+<th>O que é</th>
+<th>Onde estava fraco no sistema</th>
+<th>O que muda agora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Altitude</strong></td>
+<td>Pedir o resultado, não a tarefa</td>
+<td>Pedidos etapa por etapa (esteira)</td>
+<td><strong>Metas</strong> com teste (<code>ORQUESTRADOR.md</code>)</td>
+</tr>
+<tr>
+<td><strong>Profundidade</strong></td>
+<td>Rigor de especialista, com ferramenta de verdade, não jargão</td>
+<td>O Guardião e o Analista julgavam "no olho"</td>
+<td><strong>Duas ferramentas numéricas</strong> (abaixo)</td>
+</tr>
+<tr>
+<td><strong>Abrangência</strong></td>
+<td>Várias disciplinas ao mesmo tempo</td>
+<td>Cada skill olha só a própria etapa</td>
+<td><strong>Conselho de 6 lentes</strong> antes do Portão 1 e no Guardião</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2>1. Altitude: subir um nível acima da meta</h2>
+<p>O <code>ORQUESTRADOR.md</code> já troca tarefas por metas de operação (S1–S3, V1–V3). Um nível acima ficam as <strong>metas de negócio</strong>, as que só você define e que puxam todas as outras:</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Exemplo</th>
+<th>Quem define</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tarefa</td>
+<td>"Faça 5 vídeos de gancho"</td>
+<td>(esteira; evitar)</td>
+</tr>
+<tr>
+<td>Meta de operação</td>
+<td>"Sempre 3 ganchos vencedores rodando em cada cliente"</td>
+<td>Carlo, uma vez</td>
+</tr>
+<tr>
+<td><strong>Meta de negócio</strong></td>
+<td>"5 clientes pagando no Studio e 1 pousada com relatório de R$ até 15/12"</td>
+<td>Carlo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Com a meta de negócio escrita, a IA consegue dizer <strong>qual meta de operação está atrasando o resultado</strong>. Por exemplo: "faltam amostras: a S3 entregou 12 de 25 nesta semana". O "Decidir hoje" passa a mostrar a distância até a meta, não uma lista de tarefas.</p>
+<p><strong>Meta sugerida para escrever no <code>METAS.md</code>:</strong> "Até 15/12: 5 vendas no Studio (Black Friday, Teste de Ganchos ou Catálogo), 1 pousada com 30 dias de Vera e relatório de margem recuperada, e o Piloto 0 publicado."</p>
+<hr />
+<h2>2. Profundidade: ferramentas de verdade, não só opinião</h2>
+<p>O artigo diz: em tarefa importante, <strong>nunca deixe o modelo julgar o próprio trabalho</strong>. O ideal é uma ferramenta que o modelo chama e que devolve um número. Por isso o kit ganhou duas, testadas em <code>HQ/ferramentas/</code>.</p>
+<h3><code>delta_e.py</code>: o Guardião mede a cor da peça</h3>
+<ul>
+<li>Compara a mesma área do tecido na foto real e na imagem gerada, pela fórmula de diferença de cor usada na indústria (ΔE2000, conferida contra os valores de referência da norma).</li>
+<li>Veredito:</li>
+<li><strong>ΔE &lt; 2:</strong> igual a olho nu → aprovado.</li>
+<li><strong>2 a 5:</strong> ajustar.</li>
+<li><strong>acima de 5:</strong> reprovado.</li>
+<li>Uso: <code>python3 delta_e.py peca-real.jpg gerada.jpg --ref-box 420,610,120,120 --gen-box 380,700,120,120</code></li>
+<li><strong>Por que importa:</strong> "a cor da peça mudou" deixa de ser opinião e vira número que vai no relatório para o cliente. É a prova da "peça sagrada" que você vende.</li>
+</ul>
+<h3><code>vencedor.py</code>: o Analista não declara vencedor por sorte</h3>
+<ul>
+<li>Calcula a chance de um gancho ser melhor que o controle e o ganho provável, com faixa de incerteza.</li>
+<li><strong>Só declara vencedor com chance de pelo menos 95% e pelo menos 30 eventos em cada lado.</strong> Abaixo disso, o veredito é "cedo demais".</li>
+<li>Exemplo real da ferramenta:</li>
+</ul>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Controle</th>
+<th>Variante</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>120 cliques em 10.000</td>
+<td>165 em 10.000</td>
+<td><strong>Vencedor</strong>: 99,6% de chance, ganho de +37% (entre +13% e +67%)</td>
+</tr>
+<tr>
+<td>10 em 800</td>
+<td>18 em 800</td>
+<td><strong>Cedo demais</strong>: parece +75%, mas a faixa vai de −5% a +234%</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Por que importa:</strong> a taxa por vencedor (Ideia 5) só é justa se "vencedor" for um número que o cliente não contesta.</li>
+</ul>
+<h3>Mais três ferramentas para a próxima rodada</h3>
+<ol>
+<li><strong>Leitura de texto (OCR) em etiqueta e estampa com letras.</strong> Compara o texto da peça real com o da gerada; letra trocada reprova. É o que o VTBench usa.</li>
+<li><strong>Escala da estampa.</strong> Mede o tamanho do motivo, em pixels por centímetro, na foto real e na gerada.</li>
+<li><strong>Vera, tempo e origem.</strong> Mede a mediana do tempo de resposta e a porcentagem de reservas com código de origem, direto dos registros.</li>
+</ol>
+<hr />
+<h2>3. Abrangência: o conselho de 6 lentes</h2>
+<p>Antes do Portão 1 (na etapa F, "destruir a ideia") e no Guardião, a mesma peça é lida por 6 lentes ao mesmo tempo. Cada uma devolve no máximo 2 problemas e 1 correção:</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Lente</th>
+<th>Pergunta</th>
+<th>De onde vem o critério</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Diretor de arte</strong></td>
+<td>Isto tem gosto e é difícil de copiar?</td>
+<td>Perfil de Gosto, as 10 ideias descartadas</td>
+</tr>
+<tr>
+<td><strong>Comprador de mídia</strong></td>
+<td>Para o polegar em 1 s? Funciona sem som? Cabe no formato?</td>
+<td>Analista de Ganchos, Receita</td>
+</tr>
+<tr>
+<td><strong>Cliente final</strong></td>
+<td>Responde a uma dor real, nas palavras dela?</td>
+<td>Pesquisador de Dores</td>
+</tr>
+<tr>
+<td><strong>Jurídico</strong></td>
+<td>CONAR (rótulo de IA, influenciador virtual), CDC (o que é mostrado vincula), LGPD (rosto e dados), contrato de imagem</td>
+<td>Cartucho do setor, Ativos</td>
+</tr>
+<tr>
+<td><strong>Plataforma</strong></td>
+<td>O Meta vai rotular? Vai reprovar? Booking e Airbnb aceitam?</td>
+<td>Regras de cada plataforma</td>
+</tr>
+<tr>
+<td><strong>Financeiro</strong></td>
+<td>Cabe no teto? Quantas gerações de 1080p? Qual a margem?</td>
+<td><code>JOB.json</code>, custos</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Como roda:</strong> são 6 sub-agentes em paralelo, cada um com só a sua lente (quem gera não julga). A soma vai para Carlo <strong>em uma tela</strong>: o que bloqueia, o que ajustar e o que está bom.</p>
+<p><strong>Para a SOL</strong>, a lente "comprador de mídia" vira <strong>"hóspede"</strong> (dá vontade de reservar? a informação está certa?) e a lente "plataforma" inclui as regras de OTA.</p>
+<hr />
+<h2>4. Velocidade, o 4º eixo</h2>
+<p>Fazer mais rápido não diferencia ninguém em 2026. Neste sistema, a velocidade vem como consequência:
+- das metas (altitude), que eliminam o vai e vem;
+- das ferramentas (profundidade), que eliminam a discussão;
+- das lentes em paralelo (abrangência), que eliminam o retrabalho no fim.</p>
+<hr />
+<h2>O que mudou no kit</h2>
+<ul>
+<li><code>HQ/ferramentas/delta_e.py</code> e <code>HQ/ferramentas/vencedor.py</code>, testados.</li>
+<li><code>skills/pitch-e-roteiro</code>: a etapa F passa a usar o conselho de 6 lentes.</li>
+<li><code>skills/folha-de-produto-e-lugar</code> e o Guardião: rodar o <code>delta_e.py</code> nas áreas de cor de toda peça gerada.</li>
+<li><code>ORQUESTRADOR.md</code>: a meta de negócio fica acima das metas de operação.</li>
+</ul></div></details>
+</section>
+
+<section id="ferramentas">
+  <p class="eb"><span class="n">04</span>Profundidade</p>
+  <h2>Ferramentas de conta, não de opinião</h2>
+  <p class="intro">Quem gera não julga. Onde dá para medir, a máquina mede.</p>
+  <div class="finds">
+    <div><span class="l">delta_e.py · Guardião</span><h3>A cor do produto, em número</h3><p>Compara a mesma área na foto real e na gerada pela fórmula da indústria (ΔE2000). Abaixo de 2 aprova, de 2 a 5 ajusta, acima de 5 reprova. Vira prova no relatório do cliente.</p>
+      <div class="out">referência #B42828  Lab(40.2, 55.0, 35.5)
+gerada     #B02E2C  Lab(40.2, 51.9, 32.9)
+ΔE2000 = 1.07 → APROVADO</div></div>
+    <div><span class="l">vencedor.py · Analista</span><h3>Venceu de verdade ou foi sorte?</h3><p>Só declara vencedor com 95% de chance e pelo menos 30 eventos de cada lado. É o que torna justa a cobrança por criativo vencedor.</p>
+      <div class="out">controle : 10/800 = 1.25%
+variante : 18/800 = 2.25%
+chance de a variante ser melhor: 93.4%
+ganho provável: +75% (90% entre -5% e +234%)
+VEREDITO: CEDO DEMAIS (menos de 30 eventos num dos lados)</div></div>
+    <div><span class="l">melhoria.py · Ciclo</span><h3>O placar e as regras</h3><p>Lê todas as suas decisões em todos os projetos, calcula o placar de cada meta, agrupa as correções em regras e avisa de gasto alto e de rascunho perto de vencer.</p></div>
+    <div><span class="l">Conselho de 6 lentes · Abrangência</span><h3>Seis olhares ao mesmo tempo</h3><p>Diretor de arte, mídia, cliente final, jurídico, plataforma e financeiro leem a ideia antes do Portão 1 e as peças no Guardião. Você recebe tudo numa tela.</p></div>
+  </div>
+</section>
+
+<section id="melhoria">
+  <p class="eb"><span class="n">05</span>O dia 30 melhor que o dia 1</p>
+  <h2>Como ela melhora sozinha</h2>
+  <div class="plan">
+    <div class="step"><span class="i">1</span><div><h3>Você decide</h3><p>Cada sim, corrige ou não vira uma linha no projeto, com o motivo e uma etiqueta curta (cor, texto, forma, lugar, pessoa, promessa).</p></div><div class="r"><span class="chip ok">segundos</span></div></div>
+    <div class="step"><span class="i">2</span><div><h3>O script conta</h3><p>Placar das metas, regras candidatas, alertas. Sem IA.</p></div><div class="r"><span class="chip info">todo fim de dia</span></div></div>
+    <div class="step"><span class="i">3</span><div><h3>A IA escreve e propõe</h3><p>Regras no nível certo e até 2 melhorias de skill com antes e depois, já testadas.</p></div><div class="r"><span class="chip info">skill melhoria-diaria</span></div></div>
+    <div class="step"><span class="i">4</span><div><h3>Você aprova numa tela</h3><p>No “Decidir hoje”. Nada muda em skill sem o seu sim.</p></div><div class="r"><span class="chip warn">~5 minutos</span></div></div>
+  </div>
+  <div class="tw" style="margin-top:20px"><table>
+    <thead><tr><th>Quando o erro aparece</th><th>A regra passa a valer para</th></tr></thead>
+    <tbody>
+      <tr><td>Num cliente</td><td>Aquele cliente</td></tr>
+      <tr><td>Em 3 clientes do mesmo setor</td><td>O setor inteiro</td></tr>
+      <tr><td>Em 3 setores</td><td>A máquina toda</td></tr>
+    </tbody>
+  </table></div>
+  <p class="source">Toda segunda: aprovação de primeira, correções por entrega, custo por entrega, tempo até o Portão 3 e concordância do juiz. Se algum piorar, ela aponta qual mudança da semana pode ter causado.</p>
+  <details class="sk" id="doc-ciclo"><summary><b>CICLO.md</b><span>o ciclo de melhoria por inteiro</span></summary><div class="doc"><h1>O ciclo de melhoria diária</h1>
+<p><strong>Para que serve:</strong> fazer a máquina melhorar sozinha a cada dia, em qualquer setor, com o mínimo de tempo do Carlo. O humano cria e dá o olho final; a máquina executa e aprende com cada "sim", "corrige" e "não".</p>
+<h2>O laço</h2>
+<pre><code>Carlo aprova / corrige / recusa na fila
+        │  (vira uma linha em &quot;decisoes&quot; do JOB.json, com tags e motivo)
+        ▼
+melhoria.py (todo dia, sem IA, só conta)
+        │  placar das metas · regras candidatas por nível · alertas
+        ▼
+skill melhoria-diaria (IA)
+        │  escreve as regras no nível certo · propõe até 2 melhorias de skill
+        │  roda os testes · descarta o que piora
+        ▼
+&quot;Decidir hoje&quot; (1 tela, ~5 minutos do Carlo)
+        │  aprova a melhoria · decide subida de nível
+        ▼
+skills e regras atualizadas → o próximo trabalho já sai melhor
+</code></pre>
+<h2>Três níveis de regra, o mesmo para qualquer setor</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Quando</th>
+<th>Onde fica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cliente</td>
+<td>O erro apareceu num cliente</td>
+<td><code>CLIENTES/&lt;cliente&gt;/REGRAS.md</code></td>
+</tr>
+<tr>
+<td>Setor</td>
+<td>Apareceu em 3 clientes do mesmo setor</td>
+<td><code>HQ/cartuchos/&lt;setor&gt;/CARTUCHO.md</code>, seção 7</td>
+</tr>
+<tr>
+<td>Geral</td>
+<td>Apareceu em 3 setores</td>
+<td><code>HQ/REGRAS-GERAIS.md</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>É assim que um erro corrigido num cliente protege o setor inteiro, e um erro visto em três setores protege a máquina toda.</p>
+<p><strong>Exemplo (com dados de teste):</strong>
+- A tag "cor" apareceu em 3 setores e virou regra geral.
+- A tag "rótulo" apareceu em 3 clientes do mesmo setor e virou regra do setor.
+- A tag "planta" apareceu num cliente só e ficou como regra dele.</p>
+<h2>Como sabemos que a máquina está melhorando (5 números, toda segunda)</h2>
+<ol>
+<li><strong>Aprovação de primeira:</strong> % do que o Carlo aprova sem corrigir. Deve subir.</li>
+<li><strong>Correções por entrega:</strong> deve cair.</li>
+<li><strong>Custo por entrega:</strong> deve cair ou ficar estável.</li>
+<li><strong>Tempo até o Portão 3:</strong> deve cair.</li>
+<li><strong>Concordância juiz × Carlo:</strong> deve subir. É o que libera a subida de nível.</li>
+</ol>
+<h2>Agenda</h2>
+<ul>
+<li><strong>Todo dia, ao fim do expediente:</strong> <code>melhoria.py</code> + skill <code>melhoria-diaria</code>. Vira uma rotina agendada no computador.</li>
+<li><strong>Toda segunda:</strong> retrospectiva da semana (os 5 números).</li>
+<li><strong>Quando o placar disser "pode subir":</strong> só o Carlo sobe o nível da meta.</li>
+</ul>
+<h2>Testado</h2>
+<p>O <code>melhoria.py</code> foi rodado com 6 projetos de teste em 5 setores e 25 decisões, e funcionou:
+- calculou o placar;
+- promoveu as regras ao nível certo;
+- avisou do gasto a 90% do teto;
+- avisou do rascunho 480p vencendo em 1 dia;
+- marcou "pode subir" quando a sequência chegou a 12 com concordância de 95%.</p></div></details>
+</section>
+
+<section id="setores">
+  <p class="eb"><span class="n">06</span>Um núcleo, qualquer mercado</p>
+  <h2>Qualquer setor que dependa de imagem</h2>
+  <p class="intro">O núcleo não muda. O que é de cada setor mora num cartucho, criado pela skill <code>novo-cartucho</code> quando um setor novo aparece: o que é sagrado na imagem e como conferir, o que não se pode dizer, onde estão as dores, a métrica de dinheiro e os testes.</p>
+  <details class="sk" id="doc-cart"><summary><b>Modelo de cartucho</b><span>o que todo setor preenche</span></summary><div class="doc"><h1>CARTUCHO · [nome do setor]</h1>
+<blockquote>
+<p>Um cartucho por setor. A máquina não conhece setor nenhum de antemão: tudo o que é específico mora aqui. Para criar um novo, use a skill <code>novo-cartucho</code>. Este arquivo cresce sozinho com o ciclo de melhoria (seção "Regras aprendidas").</p>
+</blockquote>
+<h2>1. O setor em uma tela</h2>
+<ul>
+<li><strong>O que se vende e para quem:</strong></li>
+<li><strong>Onde a imagem decide a compra:</strong> (anúncio, vitrine, cardápio, catálogo, perfil, portal, embalagem…)</li>
+<li><strong>Ticket, sazonalidade e datas fortes:</strong></li>
+<li><strong>Quem paga intermediário e quanto:</strong></li>
+<li><strong>Fontes:</strong> (link e data de cada número)</li>
+</ul>
+<h2>2. O que é sagrado (fidelidade)</h2>
+<p>O que <strong>nunca</strong> pode sair diferente do real numa imagem ou vídeo gerado. Cada item tem como ser conferido:</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Item sagrado</th>
+<th>Como conferir</th>
+<th>Ferramenta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cor do produto ou da marca</td>
+<td>Mesma área, foto real × gerada</td>
+<td><code>delta_e.py</code> (ΔE &lt; 2)</td>
+</tr>
+<tr>
+<td>Texto (rótulo, logo, preço, placa)</td>
+<td>Leitura de texto real × gerado</td>
+<td>OCR (a criar)</td>
+</tr>
+<tr>
+<td>Forma, proporção e medidas</td>
+<td>Sobreposição com a foto ou a planta real</td>
+<td>conferência visual + medida</td>
+</tr>
+<tr>
+<td>Lugar ou pessoa real</td>
+<td>Folha de lugar / folha de personagem</td>
+<td>Guardião</td>
+</tr>
+<tr>
+<td>[outros do setor]</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2>3. O que não se pode dizer nem mostrar</h2>
+<ul>
+<li><strong>Regras do conselho ou órgão do setor</strong> (se houver):</li>
+<li><strong>CONAR / CDC / LGPD</strong> aplicados ao setor:</li>
+<li><strong>Regras das plataformas</strong> onde o setor anuncia:</li>
+<li><strong>Lista negra de palavras e promessas:</strong></li>
+</ul>
+<h2>4. De onde vêm as dores reais dos clientes</h2>
+<p>(avaliações, comentários, reclamações, perguntas que chegam por mensagem, buscas)</p>
+<h2>5. A métrica de dinheiro</h2>
+<ul>
+<li><strong>Studio (criativo → venda):</strong> a métrica que o Analista lê.</li>
+<li><strong>Vera (conversa → receita):</strong> a fórmula de "R$ recuperados".</li>
+</ul>
+<h2>6. Ataques típicos (testes do Destruidor e do Guardião)</h2>
+<p>Casos que a máquina precisa acertar sempre neste setor. Viram arquivos em <code>testes/</code>.</p>
+<h2>7. Regras aprendidas (preenchido pelo ciclo de melhoria)</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Regra</th>
+<th>Veio de</th>
+<th>Clientes</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div></div></details>
+  <details class="sk" id="doc-proj"><summary><b>Modelo de projeto</b><span>a pasta que todo trabalho copia</span></summary><div class="doc"><h1>Pasta de projeto (um projeto = uma pasta = um contexto)</h1>
+<p>Princípio do Paulo: tudo numa conversa só, com o histórico inteiro. No Organismo: tudo numa pasta só, com o <code>JOB.json</code> dizendo onde o projeto está. Qualquer execução (sua, do Claude ou de uma rotina) começa lendo o <code>JOB.json</code>.</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Pasta</th>
+<th>Etapa do Fluxo A–Z</th>
+<th>Skill</th>
+<th>O que fica aqui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BRIEFING.md</code></td>
+<td>A</td>
+<td>—</td>
+<td>Pedido, métrica, o que não pode, datas dos portões</td>
+</tr>
+<tr>
+<td><code>01-pesquisa/</code></td>
+<td>B–C</td>
+<td>Pesquisador de Dores, Perfil de Gosto</td>
+<td>Dores, ficha do produto, verdade do lugar, perfil</td>
+</tr>
+<tr>
+<td><code>02-ideia/</code></td>
+<td>D–G + Portão 1</td>
+<td><code>pitch-e-roteiro</code></td>
+<td>OBVIAS.md, PITCH.md, ROTEIRO-vN.md</td>
+</tr>
+<tr>
+<td><code>03-ativos/personagens/</code></td>
+<td>H</td>
+<td><code>folha-de-personagem</code></td>
+<td>Folha, originais, ficha, verificação</td>
+</tr>
+<tr>
+<td><code>03-ativos/produtos-ou-lugar/</code></td>
+<td>I</td>
+<td><code>folha-de-produto-e-lugar</code>, <code>angulos-diretor-de-fotografia</code></td>
+<td>Folha de produto ou de lugar, ângulos</td>
+</tr>
+<tr>
+<td><code>03-ativos/cenarios/</code></td>
+<td>J + Portão 2</td>
+<td><code>folha-de-produto-e-lugar</code></td>
+<td>Cenários (exterior e interior), props</td>
+</tr>
+<tr>
+<td><code>04-prancha/</code></td>
+<td>K</td>
+<td><code>pitch-e-roteiro</code> + geração de quadros</td>
+<td>Storyboard desenhado</td>
+</tr>
+<tr>
+<td><code>05-rascunho-480p/</code></td>
+<td>L + Portão 3</td>
+<td><code>video-multicena</code>, <code>vfx-sobre-video-real</code></td>
+<td>Drafts, corte, data do OK</td>
+</tr>
+<tr>
+<td><code>06-final/</code></td>
+<td>M–N</td>
+<td><code>video-multicena</code></td>
+<td>1080p só das cenas usadas, som</td>
+</tr>
+<tr>
+<td><code>07-entrega/</code></td>
+<td>O–P + Portão 4</td>
+<td>Guardião da Marca</td>
+<td>Formatos finais, relatório do Guardião</td>
+</tr>
+<tr>
+<td><code>08-resultado/</code></td>
+<td>Q–R</td>
+<td>Analista de Ganchos, Receita</td>
+<td>Leitura semanal, vencedores, regras novas</td>
+</tr>
+</tbody>
+</table></div></div></details>
+  <details class="sk" id="doc-brief"><summary><b>BRIEFING.md</b><span>o pedido, com métrica e portões</span></summary><div class="doc"><h1>BRIEFING · [nome do projeto]</h1>
+<blockquote>
+<p>Copie a pasta <code>HQ/modelos/projeto/</code> para <code>CLIENTES/[cliente]/[AAAA-MM]-[projeto]/</code> e preencha. Este arquivo é a etapa A do Fluxo A–Z.</p>
+</blockquote>
+<h2>Quem</h2>
+<ul>
+<li><strong>Negócio:</strong> Locatelli Studio / SOL Destinos</li>
+<li><strong>Cliente:</strong> </li>
+<li><strong>Contato e quem aprova:</strong> </li>
+<li><strong>Cartucho do setor:</strong> moda / joias / beleza / hotelaria / festa / ...</li>
+</ul>
+<h2>O quê</h2>
+<ul>
+<li><strong>Entrega:</strong> (ex.: Reels 30 s + 5 ganchos UGC + 12 fotos de catálogo / vídeo de Carnaval da pousada)</li>
+<li><strong>Formatos:</strong> 9:16 · 4:5 · 1:1 · 16:9</li>
+<li><strong>Onde vai rodar:</strong> Instagram orgânico / Meta Ads / TikTok / Booking e Google / site</li>
+<li><strong>Prazo final:</strong> </li>
+<li><strong>Verba de produção (geração):</strong> R$ </li>
+<li><strong>Verba de mídia (do cliente):</strong> R$ </li>
+</ul>
+<h2>Para quê (métrica de sucesso, combinada por escrito)</h2>
+<ul>
+<li><strong>Métrica principal:</strong> (ex.: CTR ≥ 1,5% / custo por venda ≤ R$ X / reservas diretas com o código do anúncio)</li>
+<li><strong>Controle:</strong> (o melhor anúncio atual do cliente, para comparar)</li>
+<li><strong>Como será medido e por quem:</strong> </li>
+</ul>
+<h2>O que não pode</h2>
+<ul>
+<li><strong>Peça sagrada / verdade do lugar:</strong> (lista do que não muda)</li>
+<li><strong>Alegações proibidas do setor:</strong> (do cartucho)</li>
+<li><strong>Rótulo de IA:</strong> onde e como</li>
+<li><strong>Pessoas reais e contratos:</strong> quem aparece, com qual autorização</li>
+</ul>
+<h2>Portões (datas)</h2>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Portão</th>
+<th>O que se aprova</th>
+<th>Quem</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Pitch e roteiro</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ficha: casting, figurino, produto, locação</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Corte em 480p (<strong>OK para 1080p em até 7 dias</strong>)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Conjunto final</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div></div></details>
+  <details class="sk" id="doc-pil"><summary><b>PILOTOS.md</b><span>os 3 primeiros trabalhos de ponta a ponta</span></summary><div class="doc"><h1>Três pilotos para rodar o Fluxo A–Z de ponta a ponta</h1>
+<p>Custos e horas marcados <strong>[hipótese]</strong>: confira na primeira rodada e registre no <code>JOB.json</code>. Referência da live: ~80 créditos do Higgsfield por geração de Seedance 2.5 em 1080p; o rascunho 480p custa de 1/3 a 1/5 disso.</p>
+<hr />
+<h2>Piloto 0 · Você é o primeiro case (Locatelli Studio, campanha zero)</h2>
+<p>Foi o que o Paulo fez: ele é o personagem dos 5 fluxos da live. Sem depender de cliente, você prova o método e gera o portfólio da Black Friday.</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Dia</th>
+<th>Etapa</th>
+<th>O que fazer</th>
+<th>Skill</th>
+<th>Seu tempo [hipótese]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>H</td>
+<td>3 fotos suas (frente, perfil, três quartos) + corpo inteiro; montar a folha de personagem</td>
+<td><code>folha-de-personagem</code></td>
+<td>1 h</td>
+</tr>
+<tr>
+<td>1</td>
+<td>I</td>
+<td>Uma peça de uma marca parceira (ou sua) com folha de produto</td>
+<td><code>folha-de-produto-e-lugar</code></td>
+<td>1 h</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Fluxo 1</td>
+<td>Uma foto de celular → 5 ângulos ("um clique, cinco fotos")</td>
+<td><code>angulos-diretor-de-fotografia</code></td>
+<td>30 min</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Fluxo 3</td>
+<td>Ensaio com 3 referências estéticas diferentes</td>
+<td><code>ensaio-por-referencia</code></td>
+<td>1 h</td>
+</tr>
+<tr>
+<td>3</td>
+<td>D–G</td>
+<td>Pitch e roteiro de um Reels de 30 s "um ensaio, três usos"</td>
+<td><code>pitch-e-roteiro</code></td>
+<td>1 h 30</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Fluxo 4</td>
+<td>Você falando (áudio real) em 5 lugares, rascunho 480p → 1080p</td>
+<td><code>video-multicena</code></td>
+<td>1 h 30</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Fluxo 5</td>
+<td>Um vídeo seu no estúdio com um efeito (peça muda de cor no tecido? estúdio vira ateliê?)</td>
+<td><code>vfx-sobre-video-real</code></td>
+<td>1 h</td>
+</tr>
+<tr>
+<td>5</td>
+<td>O–P</td>
+<td>Guardião + publicação no Instagram do Studio, com rótulo de IA</td>
+<td>Guardião</td>
+<td>30 min</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Resultado:</strong> 1 folha de personagem, 5 ângulos, 1 ensaio, 1 Reels, 1 VFX, todos com bastidor (vira "Diário do Organismo"). <strong>Custo de geração:</strong> R$ 100–250 [hipótese]. <strong>Tempo:</strong> ~8 h em 5 dias.</p>
+<hr />
+<h2>Piloto 1 · Pacote Black Friday para uma marca de moda (Locatelli Studio)</h2>
+<p>Pedidos até ~10/11; no ar antes de 27/11. Formato "risco zero": preço de custo + taxa por gancho vencedor.</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>O que acontece</th>
+<th>Portão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Briefing com a métrica (CTR e custo por venda contra o melhor anúncio atual da marca)</td>
+<td>—</td>
+</tr>
+<tr>
+<td>B–C</td>
+<td>Dores (avaliações, comentários, Reclame Aqui) + Perfil de Gosto + ficha das 2 peças</td>
+<td>—</td>
+</tr>
+<tr>
+<td>D–G</td>
+<td>10 ideias descartadas → pitch → destruir → 5 ganchos e roteiro</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>H–J</td>
+<td>Folha da modelo do acervo (com contrato) + folha das 2 peças + 2 cenários</td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td>Fluxo 1 + 3</td>
+<td>4 estáticos: ângulos e ensaio por referência</td>
+<td>—</td>
+</tr>
+<tr>
+<td>K–L</td>
+<td>Prancha dos 6 UGC; rascunhos 480p de todos</td>
+<td><strong>3</strong> (OK em 7 dias)</td>
+</tr>
+<tr>
+<td>M–N</td>
+<td>1080p só dos aprovados; sem trilha + trilha licenciada</td>
+<td>—</td>
+</tr>
+<tr>
+<td>O–P</td>
+<td>Guardião (peça sagrada, alegações, rótulo); 9:16, 4:5, 1:1</td>
+<td><strong>4</strong></td>
+</tr>
+<tr>
+<td>Q–R</td>
+<td>Sobe pausado; leitura semanal; vencedores viram receita</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Entrega:</strong> 10 criativos (6 UGC + 4 estáticos), 5 ganchos. <strong>Custo de geração:</strong> ~R$ 270 (estimativa da estratégia) [hipótese]. <strong>Seu tempo:</strong> 8–12 h [hipótese]; medir.</p>
+<hr />
+<h2>Piloto 2 · Vídeo de Carnaval da pousada piloto (SOL Destinos + Vera)</h2>
+<p>Carnaval de 6 a 10/02/2027; a pousada decide em dezembro. O vídeo leva o hóspede ao WhatsApp da Vera com um código.</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>O que acontece</th>
+<th>Portão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Briefing com a pousada e a Eliete; métrica = conversas com o código do anúncio → reservas diretas → R$ de comissão evitada</td>
+<td>—</td>
+</tr>
+<tr>
+<td>B–C</td>
+<td>O que a pousada declara no site, avaliações, perguntas do WhatsApp; <strong>verdade do lugar</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>D–G</td>
+<td>Descartar "praia, pôr do sol, casal"; pitch (ex.: "um ano na mesma janela em 30 s, terminando no Carnaval")</td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>H–I</td>
+<td>Folha do lugar (fotos reais de dia e noite) + folha do anfitrião ou de hóspedes reais autorizados</td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td>Fluxo 1</td>
+<td>Novos ângulos das fotos reais, sem alterar o lugar</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Fluxo 5</td>
+<td>Sobre um vídeo real da pousada: estação, clima, hora e pessoas mudam; a arquitetura não</td>
+<td>—</td>
+</tr>
+<tr>
+<td>K–M</td>
+<td>Prancha → rascunho 480p → 1080p do corte</td>
+<td><strong>3</strong></td>
+</tr>
+<tr>
+<td>O</td>
+<td>Guardião: lugar idêntico ao real (CDC, regras do Airbnb e da Booking); rótulo nas pessoas geradas</td>
+<td><strong>4</strong></td>
+</tr>
+<tr>
+<td>Q–R</td>
+<td>Anúncio com código → Vera atende → relatório de margem recuperada</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Custo de geração:</strong> R$ 150–300 [hipótese]. <strong>Tempo:</strong> Carlo 6–8 h; Eliete 2 h (briefing e aprovações).</p>
+<hr />
+<h2>Bônus · Orçamento de viagem por prancha (SOL Destinos, agência)</h2>
+<p>Para cada pedido de viagem: pitch em 1 parágrafo → prancha visual com fotos reais, dia a dia → <strong>o viajante aprova a prancha</strong> → a Eliete cota só o aprovado. A skill <code>pitch-e-roteiro</code> monta o rascunho; a Eliete revisa e envia (nível 1).</p></div></details>
+</section>
+
+<section id="testes">
+  <p class="eb"><span class="n">07</span>Nada piora sem você saber</p>
+  <h2>Testes</h2>
+  <div class="finds">
+    <div><span class="l">Ferramentas</span><span class="big">6 de 6</span><p>A cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
+    <div><span class="l">Skills</span><span class="big">44 casos</span><p>Nas 9 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
+  </div>
+  <p class="source">Comando único: <code>python3 HQ/testes/rodar.py</code>. Os casos que precisam de IA rodam no computador, cada um julgado por um juiz separado. Uma melhoria só chega até você se nenhum teste que passava começar a falhar.</p>
+</section>
+
+<section id="organizacao">
+  <p class="eb"><span class="n">08</span>Cada coisa no seu lugar</p>
+  <h2>Organização</h2>
+  <p class="intro">O kit já está organizado como vai ficar no seu computador: <code>skills/</code> vai para a pasta de skills do Claude Code e <code>HQ/</code> se junta ao HQ que você já tem.</p>
+  <pre class="tree">kit-fluxo/
+├── LEIA-ME.md                ← este mapa
+├── skills/                   → vai para ~/.claude/skills/
+│   ├── pitch-e-roteiro/            etapas D–G   (cada skill tem SKILL.md + testes/CASOS.md)
+│   ├── angulos-diretor-de-fotografia/  etapa I e amostras
+│   ├── folha-de-personagem/        etapa H
+│   ├── folha-de-produto-e-lugar/   etapas I–J
+│   ├── ensaio-por-referencia/      ensaio
+│   ├── video-multicena/            etapas K–M
+│   ├── vfx-sobre-video-real/       efeitos
+│   ├── melhoria-diaria/            ciclo de melhoria
+│   └── novo-cartucho/              entrada em setor novo
+└── HQ/                       → vai para HQ/ do computador (juntar, não sobrescrever)
+    ├── METAS.md                    regras, meta de negócio, metas S1–S3 e V1–V3 com nível e placar
+    ├── REGRAS-GERAIS.md            regras que valem para todo setor (cresce com o ciclo)
+    ├── maquina/                    como a máquina pensa
+    │   ├── ORQUESTRADOR.md         de esteira para orquestrador; modelo de meta; 6 metas
+    │   ├── AMBICAO.md              altitude, profundidade, abrangência; conselho de 6 lentes
+    │   ├── CICLO.md                ciclo de melhoria diária
+    │   └── PILOTOS.md              3 pilotos de ponta a ponta
+    ├── ferramentas/                o que é conta, não opinião
+    │   ├── delta_e.py              cor real × gerada (ΔE2000)
+    │   ├── vencedor.py             gancho venceu de verdade? (95% e 30 eventos)
+    │   └── melhoria.py             placar, regras por nível, alertas
+    ├── modelos/
+    │   ├── projeto/                a pasta que todo projeto copia (BRIEFING, JOB.json, 8 etapas)
+    │   └── cartucho/               o modelo de cartucho de setor
+    ├── cartuchos/                  um por setor, criado pela skill novo-cartucho
+    └── testes/
+        ├── rodar.py                roda tudo; nada muda se falhar
+        ├── unit/                   testes das ferramentas
+        └── PLANO-JUIZ.md           os 44 casos que precisam de IA (gerado pelo rodar.py)
+</pre>
+</section>
+
+<section id="organismo">
+  <p class="eb"><span class="n">09</span>Um único organismo</p>
+  <h2>Fusão com o Organismo Operador</h2>
+  <p class="intro">No computador, o Claude compara antes de copiar. Onde a máquina repete algo que o Organismo já tem, as duas partes viram uma só.</p>
+  <div class="doc" style="padding:0;border:0"><p>O Claude do computador deve <strong>comparar antes de copiar</strong>. Partes que provavelmente se sobrepõem ao que já existe:</p>
+<div class="tblwrap"><table>
+<thead>
+<tr>
+<th>Na máquina</th>
+<th>No Organismo v2 (provável)</th>
+<th>Decidir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fluxo A–Z e 4 portões</td>
+<td>Criar maestro v2 (8 passos, 4 portões)</td>
+<td>Unir: o Criar é o motor, o A–Z é o mapa</td>
+</tr>
+<tr>
+<td><code>pitch-e-roteiro</code></td>
+<td>Roteirista de Ganchos e <code>conceitos-anuncio-moda</code></td>
+<td>Manter uma: o pitch vira etapa antes do Roteirista</td>
+</tr>
+<tr>
+<td>Guardião com <code>delta_e.py</code></td>
+<td>Guardião da Marca (skill)</td>
+<td>Acrescentar a ferramenta à skill existente</td>
+</tr>
+<tr>
+<td><code>vencedor.py</code></td>
+<td>Analista de Ganchos</td>
+<td>Acrescentar a ferramenta à skill existente</td>
+</tr>
+<tr>
+<td>Placar e níveis</td>
+<td>Colmeia (provas: testado, parcial, só no papel, falhando)</td>
+<td>Unir: a Colmeia mostra o placar</td>
+</tr>
+<tr>
+<td>Fila de exceções</td>
+<td>"Decidir hoje"</td>
+<td>É o mesmo lugar</td>
+</tr>
+<tr>
+<td><code>folha-de-personagem</code></td>
+<td>Ativos (contrato, repasse, banco de referências)</td>
+<td>A folha vira um campo do Ativos</td>
+</tr>
+<tr>
+<td>Pasta de projeto e <code>JOB.json</code></td>
+<td>Pastas de campanha (BRIEFING, PRODUTO, CONCEITOS, CENAS, REVISAO)</td>
+<td>Unir os nomes; o <code>JOB.json</code> entra na pasta que já existe</td>
+</tr>
+<tr>
+<td>Cartuchos</td>
+<td>Perfil de Gosto (por marca)</td>
+<td>Cartucho = setor; Perfil = marca; os dois convivem</td>
+</tr>
+</tbody>
+</table></div></div>
+</section>
+
+<section id="falta">
+  <p class="eb"><span class="n">10</span>Para terminar na nuvem</p>
+  <h2>O que falta construir</h2>
+  <div class="plan">
+    <div class="step"><span class="i">1</span><div><h3>Ciclo de melhoria diária</h3><p>Script, skill, regras por nível, modelo de cartucho.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
+    <div class="step"><span class="i">2</span><div><h3>Testes de cada skill</h3><p>44 casos e as ferramentas testadas.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
+    <div class="step"><span class="i">3</span><div><h3>Motor das metas</h3><p>Lê METAS e JOB.json, chama o Claude com teto de gasto e para sozinho nos portões.</p></div><div class="r"><span class="chip warn">próximo</span></div></div>
+    <div class="step"><span class="i">4</span><div><h3>Portões em código</h3><p>Travas reais: sem 1080p antes do OK, sem passar do teto, sem publicar sem “aprovado”.</p></div><div class="r"><span class="chip info">a fazer</span></div></div>
+    <div class="step"><span class="i">5</span><div><h3>Calibragem do juiz</h3><p>Você marca 50 peças e a máquina mede quanto o Guardião concorda com você.</p></div><div class="r"><span class="chip info">a fazer</span></div></div>
+    <div class="step"><span class="i">6</span><div><h3>Pacote de passagem</h3><p>Um arquivo com o pedido pronto para o Claude do computador cruzar tudo com o Organismo.</p></div><div class="r"><span class="chip info">por último</span></div></div>
+  </div>
+</section>
+
+<footer>Gerado a partir dos arquivos reais do kit (skills, testes, metas, modelos e documentos da máquina) no repositório locatelli-studio, branch claude/admiring-ptolemy-1b8xck, pasta pesquisa/videos-ia-2026-10/kit-fluxo. Quando o kit mudar, esta página é gerada de novo.</footer>
+</main>
+</div>
