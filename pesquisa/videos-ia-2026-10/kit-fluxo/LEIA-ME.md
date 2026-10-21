@@ -1,49 +1,77 @@
-# Kit Fluxo A–Z (Locatelli Studio e SOL Destinos)
+# A máquina (kit para o Claude Code do computador)
 
-Feito a partir da transcrição e dos **73 prints** do vídeo 8 (Human Academy e Paulo Aguiar), cruzado com o Organismo, os portões do Criar e a escada de autonomia.
+Construída na nuvem em 20 e 21/10/2026 para ser levada ao computador e fundida ao Organismo Operador v2 num **único organismo**.
 
-## O que tem aqui
-| Item | Para quê |
-|---|---|
-| `skills/` | 9 skills: as 7 de produção + `melhoria-diaria` e `novo-cartucho` |
-| `modelo-projeto/` | A pasta que todo projeto copia: BRIEFING, JOB.json e as 8 subpastas das etapas |
-| `melhoria/` | **Ciclo de melhoria diária:** `melhoria.py` (placar, regras por nível cliente → setor → geral, alertas; testado) e `CICLO.md` |
-| `cartuchos/_modelo/` | Modelo de cartucho para qualquer setor que dependa de imagem (o que é sagrado, o que é proibido, dores, métrica, testes) |
-| `METAS.md` | O arquivo pronto para copiar em `HQ/METAS.md`: regras, meta de negócio, metas S1–S3 com nível e placar |
-| `ORQUESTRADOR.md` | De esteira para orquestrador: o modelo de meta (com teste, acesso, limites e quando chamar o Carlo) e 6 metas prontas, 3 do Studio e 3 da SOL |
-| `AMBICAO.md` | Os 4 eixos da ambição (altitude, profundidade, abrangência, velocidade) aplicados ao sistema: meta de negócio, ferramentas numéricas e conselho de 6 lentes |
-| `ferramentas/` | `delta_e.py` (Guardião mede a cor da peça, ΔE2000) e `vencedor.py` (Analista só declara vencedor com 95% de chance e 30 eventos) |
-| `PILOTOS.md` | 3 pilotos de ponta a ponta: você como primeiro case, Pacote BF, Carnaval da pousada |
-| `../FLUXO-A-Z.md` e `../fluxo-a-z.html` | O fluxo completo, etapa por etapa, lado a lado Studio × SOL |
-| `../transcricoes/08-prints-lote1..3.md` | O que cada print mostra, com os prompts transcritos |
+**A ideia:** o humano cria e dá o olho final; a máquina executa, mede e melhora um pouco a cada dia. Serve a **qualquer setor que dependa de imagem**: o núcleo é um só, e o que muda de um setor para outro mora num cartucho.
 
-## As 7 skills
-| Skill | Etapa | Origem na live |
+## Como está organizado (espelha onde cada coisa vai morar no computador)
+
+```
+kit-fluxo/
+├── LEIA-ME.md                ← este mapa
+├── skills/                   → vai para ~/.claude/skills/
+│   ├── pitch-e-roteiro/            etapas D–G   (cada skill tem SKILL.md + testes/CASOS.md)
+│   ├── angulos-diretor-de-fotografia/  etapa I e amostras
+│   ├── folha-de-personagem/        etapa H
+│   ├── folha-de-produto-e-lugar/   etapas I–J
+│   ├── ensaio-por-referencia/      ensaio
+│   ├── video-multicena/            etapas K–M
+│   ├── vfx-sobre-video-real/       efeitos
+│   ├── melhoria-diaria/            ciclo de melhoria
+│   └── novo-cartucho/              entrada em setor novo
+└── HQ/                       → vai para HQ/ do computador (juntar, não sobrescrever)
+    ├── METAS.md                    regras, meta de negócio, metas S1–S3 e V1–V3 com nível e placar
+    ├── REGRAS-GERAIS.md            regras que valem para todo setor (cresce com o ciclo)
+    ├── maquina/                    como a máquina pensa
+    │   ├── ORQUESTRADOR.md         de esteira para orquestrador; modelo de meta; 6 metas
+    │   ├── AMBICAO.md              altitude, profundidade, abrangência; conselho de 6 lentes
+    │   ├── CICLO.md                ciclo de melhoria diária
+    │   └── PILOTOS.md              3 pilotos de ponta a ponta
+    ├── ferramentas/                o que é conta, não opinião
+    │   ├── delta_e.py              cor real × gerada (ΔE2000)
+    │   ├── vencedor.py             gancho venceu de verdade? (95% e 30 eventos)
+    │   └── melhoria.py             placar, regras por nível, alertas
+    ├── modelos/
+    │   ├── projeto/                a pasta que todo projeto copia (BRIEFING, JOB.json, 8 etapas)
+    │   └── cartucho/               o modelo de cartucho de setor
+    ├── cartuchos/                  um por setor, criado pela skill novo-cartucho
+    └── testes/
+        ├── rodar.py                roda tudo; nada muda se falhar
+        ├── unit/                   testes das ferramentas
+        └── PLANO-JUIZ.md           os 44 casos que precisam de IA (gerado pelo rodar.py)
+```
+
+Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
+- `FLUXO-A-Z.md` e `fluxo-a-z.html`: o fluxo etapa por etapa.
+- `transcricoes/08-prints-lote1..3.md`: os prompts originais do vídeo 8.
+- A estratégia e as pesquisas: `DECISOES-URGENTES`, `METODO-UNIVERSAL`, `RADAR-MERCADO`, `ESTRATEGIA-CRESCIMENTO`.
+
+## Os 5 princípios que não mudam
+1. **O humano cria e decide.** Ideia, roteiro bom, os 4 portões e o olho final.
+2. **Metas, não tarefas.** A máquina persegue a meta e para nos portões e nas exceções.
+3. **Quem gera não julga.** O Guardião, o Destruidor, o conselho de 6 lentes e as ferramentas numéricas.
+4. **Autonomia se ganha com placar.** Do nível 0 ao 3, por aprovações seguidas e concordância do juiz.
+5. **Toda correção vira regra.** No nível certo (cliente, setor ou geral), e as skills só mudam com teste e com o sim do Carlo.
+
+## Testado nesta sessão
+`python3 HQ/testes/rodar.py`:
+- **Ferramentas:** 6 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas.
+- **Skills:** as 9 estão com o formato correto e têm 44 casos de teste.
+- **Juiz:** os 44 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
+
+## Antes de instalar: cruzar com o Organismo v2
+O Claude do computador deve **comparar antes de copiar**. Partes que provavelmente se sobrepõem ao que já existe:
+
+| Na máquina | No Organismo v2 (provável) | Decidir |
 |---|---|---|
-| `pitch-e-roteiro` | D–G | Case Fanta: pitch de 1 parágrafo, roteiros medíocres → roteiro bom, tabela de planos |
-| `angulos-diretor-de-fotografia` | I (e amostra) | Fluxo 1: "Uma foto, outros ângulos" |
-| `folha-de-personagem` | H | Fluxo 2: character sheet (rosto real, corpo gerado) |
-| `folha-de-produto-e-lugar` | I–J | Pranchas de ativos do case Fanta (arma, maleta, carro, latas, cenários, QG) |
-| `ensaio-por-referencia` | Ensaio | Fluxo 3: character sheet + referência + prompt |
-| `video-multicena` | K–M | Fluxo 4: character sheet + áudio + prompt; rascunho 480p; 3 opções |
-| `vfx-sobre-video-real` | Efeitos | Fluxo 5: Seedance 2.5 Edit, supervisor de VFX |
+| Fluxo A–Z e 4 portões | Criar maestro v2 (8 passos, 4 portões) | Unir: o Criar é o motor, o A–Z é o mapa |
+| `pitch-e-roteiro` | Roteirista de Ganchos e `conceitos-anuncio-moda` | Manter uma: o pitch vira etapa antes do Roteirista |
+| Guardião com `delta_e.py` | Guardião da Marca (skill) | Acrescentar a ferramenta à skill existente |
+| `vencedor.py` | Analista de Ganchos | Acrescentar a ferramenta à skill existente |
+| Placar e níveis | Colmeia (provas: testado, parcial, só no papel, falhando) | Unir: a Colmeia mostra o placar |
+| Fila de exceções | "Decidir hoje" | É o mesmo lugar |
+| `folha-de-personagem` | Ativos (contrato, repasse, banco de referências) | A folha vira um campo do Ativos |
+| Pasta de projeto e `JOB.json` | Pastas de campanha (BRIEFING, PRODUTO, CONCEITOS, CENAS, REVISAO) | Unir os nomes; o `JOB.json` entra na pasta que já existe |
+| Cartuchos | Perfil de Gosto (por marca) | Cartucho = setor; Perfil = marca; os dois convivem |
 
-## Como instalar no computador
-1. `git pull` na branch `claude/admiring-ptolemy-1b8xck`.
-2. Copie as skills:
-   ```
-   cp -R pesquisa/videos-ia-2026-10/kit-fluxo/skills/* ~/.claude/skills/
-   ```
-3. Reinicie o Claude Code. Teste com: "use a skill angulos-diretor-de-fotografia nesta foto".
-4. Para cada projeto novo:
-   ```
-   cp -R pesquisa/videos-ia-2026-10/kit-fluxo/modelo-projeto "CLIENTES/[cliente]/[AAAA-MM]-[projeto]"
-   ```
-
-## Conexões que o fluxo usa (conferir no computador)
-- **Magnific** conecta ao Claude por MCP usando os créditos do seu plano (pela conexão, até os modelos "ilimitados" gastam crédito).
-- **Higgsfield** tem MCP para o Claude (plano pago).
-- **Flow** (Google) para imagem barata no Nano Banana.
-- **DaVinci Resolve:** na live, o Codex religou os brutos no projeto; vale testar o mesmo com o Claude Code.
-
-Nenhuma chave de API ou senha entra neste repositório.
+O pedido pronto para colar no computador fica no **pacote de passagem** (último passo da construção).
