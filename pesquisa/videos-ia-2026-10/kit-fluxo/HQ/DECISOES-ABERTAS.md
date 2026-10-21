@@ -40,6 +40,7 @@ Lista única, consolidada pela auditoria de 21/10/2026. Tudo o que estava espalh
 | D4 | Canal produtoras (B2B2B): agora ou depois do portfólio? | Depois do Piloto 0 |
 | D5 | Nuvemshop (certificação de parceiro), segundo perfil de cliente (marketplace), gêmeos digitais com agências | Depois da 1ª venda; contrato de gêmeos primeiro |
 | D6 | Campanha zero no Instagram do Studio: Postiz (grátis) ou Blotato (US$ 29)? | Postiz |
+| D7 | **Gerente de conteúdo:** ligar para o Studio e a SOL agora (meta C1)? E vender como "Conteúdo Mensal" para cliente, a partir de quando e por quanto? | Ligar já para o Studio (é a prova e a distribuição); SOL junto com a pousada piloto; vender ao cliente depois do 1º case, como parte do Laboratório |
 
 ## E. Conferências que só o Carlo faz
 - Taxa de 16% do Airbnb para todos os anfitriões (fonte única).

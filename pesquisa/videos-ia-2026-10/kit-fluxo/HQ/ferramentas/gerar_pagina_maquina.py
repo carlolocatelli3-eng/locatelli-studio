@@ -71,6 +71,7 @@ SK = [
  ("melhoria-diaria","Ciclo","Todo dia lê seus sim, corrige e não; atualiza o placar; transforma correções em regras no nível certo; propõe até 2 melhorias testadas.","Decidir hoje","regras 2 · skills 1"),
  ("storyboard-desenhado","K","Gera a prancha desenhada (não realista) a partir do roteiro e dos ativos, com lente, movimento e duração por quadro, e um animatic grátis no HyperFrames. É a aprovação mais barata do fluxo.","Portão 3 (antes do vídeo)","2"),
  ("prospector-e-funil","Venda","Leva a máquina até o dinheiro: amostra sem pessoa real, mensagem com a oferta travada, follow-ups do dia 4 e 10, proposta com controle por escrito e, no sinal pago, a pasta do projeto. Você sempre envia.","Seu envio","1"),
+ ("gerente-de-conteudo","Conteúdo","Gerente de conteúdo para o Studio, a SOL e o cliente: plano por pilares, calendário com as datas do setor, reaproveita tudo o que a produção gera, embala cada peça, põe na sua fila e só agenda depois do sim. Toda sexta lê o que abriu conversa.","Seu sim antes de publicar","2 no plano · 1 na publicação"),
  ("novo-cartucho","Setor novo","Faz a máquina entrar em qualquer setor que dependa de imagem: pesquisa e preenche o que é sagrado, o que é proibido, as dores, a métrica e os testes.","Seu sim antes do uso","1"),
 ]
 
@@ -109,7 +110,7 @@ body = f"""
   <p>A máquina</p>
   <a href="#topo"><span class="n">00</span>O que é</a>
   <a href="#trabalho"><span class="n">01</span>Um trabalho, do início ao fim</a>
-  <a href="#skills"><span class="n">02</span>As 11 skills</a>
+  <a href="#skills"><span class="n">02</span>As 12 skills</a>
   <a href="#metas"><span class="n">03</span>Metas e autonomia</a>
   <a href="#ferramentas"><span class="n">04</span>Ferramentas de conta</a>
   <a href="#melhoria"><span class="n">05</span>Como ela melhora</a>
@@ -150,8 +151,8 @@ body = f"""
 
 <section id="skills">
   <p class="eb"><span class="n">02</span>Tudo o que a máquina sabe fazer</p>
-  <h2>As 11 skills</h2>
-  <p class="intro">Oito de produção (do método do estúdio Human, do vídeo 8, somado às suas regras e à auditoria), uma de venda e duas que fazem a máquina crescer. Abaixo dos cartões, cada skill está por inteiro, com os testes que ela precisa passar.</p>
+  <h2>As 12 skills</h2>
+  <p class="intro">Oito de produção (do método do estúdio Human, do vídeo 8, somado às suas regras e à auditoria), uma de venda, uma de conteúdo e duas que fazem a máquina crescer. Abaixo dos cartões, cada skill está por inteiro, com os testes que ela precisa passar.</p>
   <div class="cards">{''.join(cards)}</div>
   {''.join(details)}
 </section>
@@ -236,7 +237,7 @@ NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
   <h2>Testes</h2>
   <div class="finds">
     <div><span class="l">Ferramentas</span><span class="big">10 de 10</span><p>O motor leva um projeto de ponta a ponta e respeita todas as travas; a cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
-    <div><span class="l">Skills</span><span class="big">60 casos</span><p>Nas 11 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
+    <div><span class="l">Skills</span><span class="big">65 casos</span><p>Nas 12 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
   </div>
   <p class="source">Comando único: <code>python3 HQ/testes/rodar.py</code>. Os casos que precisam de IA rodam no computador, cada um julgado por um juiz separado. Uma melhoria só chega até você se nenhum teste que passava começar a falhar.</p>
 </section>

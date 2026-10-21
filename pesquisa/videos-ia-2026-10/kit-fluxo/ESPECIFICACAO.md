@@ -46,6 +46,7 @@ O objetivo é que o Carlo aprove menos, e que o que chega para aprovação venha
 | 16 | **Storyboard desenhado e animatic** (etapa K) | Portão "peça principal" (prancha antes do vídeo) | `skills/storyboard-desenhado` | pronta |
 | 17 | **Acabamento premium:** bíblia visual por marca, roteiro de cor, LUT, grão, som licenciado, texto, zonas seguras, ritmo, QA de artefatos | Guardião da Marca e etapa de edição | `HQ/modelos/marca/BIBLIA-VISUAL.md`, `HQ/maquina/QA-ARTEFATOS.md` | pronta |
 | 18 | **Margem por job:** preço vendido, horas do Carlo, custos, R$ por hora | Agente de Margem | bloco `financeiro` do `JOB.json` | pronta (sem cálculo automático ainda) |
+| 19 | **Gerente de conteúdo:** plano editorial por pilares, calendário com datas do setor, reaproveitamento de tudo o que a produção gera, embalagem (gancho, legenda, capa, CTA), fila de aprovação, agendamento só depois do sim, leitura semanal por conversas abertas. Para o Studio, a SOL e como produto mensal do cliente | Campanha zero, "Conteúdo Mensal para Pousadas" (painel), Inundação/Roteiro Sol (SOL), equipe de agentes do vídeo 9 | `skills/gerente-de-conteudo`, `HQ/modelos/conteudo/` | pronta |
 | 13 | **HyperFrames na montagem:** legendas, cards de produto e preço, versões de gancho, formatos 9:16, 4:5 e 1:1, vitrine em vídeo por peça, thumbs | Depois do Portão 3 (final) e para rascunhos de montagem | seção 5 abaixo | **a ligar** |
 
 ## 4. Não negociáveis (valem em tudo)
@@ -110,6 +111,7 @@ O objetivo é que o Carlo aprove menos, e que o que chega para aprovação venha
 | 21/10 | Carteira (Flow e Gemini primeiro) | Planos do Carlo |
 | 21/10 | HyperFrames na montagem | Ferramenta já instalada no computador do Carlo |
 | 21/10 | Skills `melhoria-diaria` e `novo-cartucho` (total 9) | Construção nesta sessão |
+| 21/10 | Gerente de conteúdo (total 12 skills) | Pedido do Carlo depois da auditoria |
 | 21/10 | **Auditoria com 6 lentes:** 18 erros de código corrigidos; regras jurídicas (fornecedores, termo de cessão, menores, voz, troca com dois termos); `prospector-e-funil` e meta S0 (proposta); `storyboard-desenhado`; bíblia visual, QA de artefatos; decisões abertas consolidadas (total 11 skills, 60 casos) | `../AUDITORIA.md` |
 
 **Para acrescentar algo novo:**

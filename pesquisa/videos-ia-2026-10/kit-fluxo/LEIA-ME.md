@@ -20,6 +20,7 @@ kit-fluxo/
 │   ├── storyboard-desenhado/       etapa K (prancha)
 │   ├── video-multicena/            etapas L–M
 │   ├── prospector-e-funil/         amostra → mensagem → proposta → projeto
+│   ├── gerente-de-conteudo/        plano editorial, reaproveitamento, fila, agendamento, leitura
 │   ├── vfx-sobre-video-real/       efeitos
 │   ├── melhoria-diaria/            ciclo de melhoria
 │   └── novo-cartucho/              entrada em setor novo
@@ -50,12 +51,13 @@ kit-fluxo/
     │   ├── cartucho/               o modelo de cartucho de setor
     │   ├── marca/                  bíblia visual por marca (câmera, cor, LUT, som, texto, zonas seguras)
     │   ├── contrato/               rascunho do termo de cessão de imagem e voz (revisar com advogado)
-    │   └── vendas/                 VENDAS.json (funil) e PROPOSTA.md
+    │   ├── vendas/                 VENDAS.json (funil) e PROPOSTA.md
+    │   └── conteudo/               PLANO-EDITORIAL.md e CALENDARIO.json
     ├── cartuchos/                  um por setor, criado pela skill novo-cartucho
     └── testes/
         ├── rodar.py                roda tudo; nada muda se falhar
         ├── unit/                   testes das ferramentas
-        └── PLANO-JUIZ.md           os 60 casos que precisam de IA (gerado pelo rodar.py)
+        └── PLANO-JUIZ.md           os 65 casos que precisam de IA (gerado pelo rodar.py)
 ```
 
 Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
@@ -74,8 +76,8 @@ Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
 ## Testado nesta sessão
 `python3 HQ/testes/rodar.py`:
 - **Ferramentas:** 10 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas; o motor leva um projeto de ponta a ponta parando em cada portão e bloqueia teto, prazo de 7 dias e meta no nível 0; a trava impede gravar o final e a entrega sem portão.
-- **Skills:** as 11 estão com o formato correto e têm 60 casos de teste.
-- **Juiz:** os 60 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
+- **Skills:** as 12 estão com o formato correto e têm 65 casos de teste.
+- **Juiz:** os 65 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
 
 ## O que a máquina é em relação ao que já roda
 O Carlo já roda o fluxo de A a Z sozinho no **Astra** e no **Claude Code**, com o Criar maestro v2 do painel. Esta máquina **não substitui** esse fluxo: ela é a **camada de melhoria**. Traz:

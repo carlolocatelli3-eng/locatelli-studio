@@ -1,0 +1,21 @@
+{
+  "_leia": "Uma linha por peça. Estados: ideia, embalada, guardiao, fila_aprovacao, aprovada, agendada, publicada, lida, recusada.",
+  "marca": "nome-da-marca",
+  "semana": "AAAA-Www",
+  "pecas": [
+    {
+      "id": "AAAA-Www-01",
+      "pilar": "",
+      "canal": "instagram | tiktok | linkedin | google",
+      "formato": "carrossel | reels | story | imagem",
+      "origem": "caminho do material reaproveitado (ou 'novo')",
+      "gancho": "",
+      "legenda": "",
+      "cta": "direct | whatsapp-codigo | link",
+      "rotulo_ia": true,
+      "estado": "ideia",
+      "data_publicacao": "",
+      "resultado": {"alcance": 0, "salvamentos": 0, "comentarios": 0, "conversas": 0, "cliques": 0}
+    }
+  ]
+}

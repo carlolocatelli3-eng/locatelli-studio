@@ -45,5 +45,11 @@ Até 15/12/2026: 5 vendas no Studio, 1 pousada com 30 dias de Vera e relatório 
 - **Feito quando:** 25 amostras aprovadas pelo Guardião, com mensagem rascunhada, na fila de envio.
 - **Placar:** aprovações seguidas: 0 · concordância do juiz: —
 
+### C1 · Conteúdo que abre conversa · [PROPOSTA, aguarda o Carlo]
+- **Nível atual:** 1 (publicação sempre com o sim) · **Skill:** `gerente-de-conteudo`
+- **Feito quando:** toda segunda a semana está embalada na fila (Studio e SOL); toda sexta sai a leitura; pelo menos 60% das peças vêm de material reaproveitado.
+- **Métrica que manda:** conversas abertas por semana (direct, WhatsApp com código).
+- **Placar:** aprovações seguidas: 0
+
 ### V1, V2, V3 (SOL)
 Nível 0 até a pousada piloto entrar no ar. Texto completo em `ORQUESTRADOR.md`.

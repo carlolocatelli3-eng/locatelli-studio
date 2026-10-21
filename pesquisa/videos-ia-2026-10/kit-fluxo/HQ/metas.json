@@ -55,6 +55,14 @@
       "para_em": [
         "envio"
       ]
+    },
+    "C1": {
+      "nome": "Conteúdo que abre conversa [PROPOSTA]",
+      "nivel": 1,
+      "teto_por_execucao_usd": 1,
+      "para_em": [
+        "publicacao"
+      ]
     }
   },
   "carteira": {
