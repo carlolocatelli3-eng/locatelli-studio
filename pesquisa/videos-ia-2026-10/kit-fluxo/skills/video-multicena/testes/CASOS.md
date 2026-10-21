@@ -24,3 +24,8 @@
 **Entrada:** Vídeo com produto e lugar reais.
 **Deve:** DO NOT protege produto, logo e arquitetura; plano final mostra o produto ou o lugar inteiro.
 **Reprova se:** Faltar a proteção ou a revelação final.
+
+## 06 · Blockout definido antes do rascunho
+**Entrada:** Plano com movimento de câmera complexo.
+**Deve:** Definir o blockout (descrição, vídeo de referência ou mapa de profundidade) antes de gerar o rascunho.
+**Reprova se:** Gerar o rascunho de plano complexo sem fonte de movimento definida.

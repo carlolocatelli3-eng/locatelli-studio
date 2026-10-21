@@ -43,7 +43,7 @@ kit-fluxo/
     └── testes/
         ├── rodar.py                roda tudo; nada muda se falhar
         ├── unit/                   testes das ferramentas
-        └── PLANO-JUIZ.md           os 44 casos que precisam de IA (gerado pelo rodar.py)
+        └── PLANO-JUIZ.md           os 48 casos que precisam de IA (gerado pelo rodar.py)
 ```
 
 Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
@@ -61,8 +61,8 @@ Documentos de apoio, fora do kit (pasta `pesquisa/videos-ia-2026-10/`):
 ## Testado nesta sessão
 `python3 HQ/testes/rodar.py`:
 - **Ferramentas:** 9 testes passaram. A cor bate com os pares de referência da norma CIEDE2000; o vencedor, o perdedor e o "cedo demais" saem corretos; a melhoria promove as regras de cliente para setor e para geral e emite os alertas; o motor leva um projeto de ponta a ponta parando em cada portão e bloqueia teto, prazo de 7 dias e meta no nível 0; a trava impede gravar o final e a entrega sem portão.
-- **Skills:** as 9 estão com o formato correto e têm 44 casos de teste.
-- **Juiz:** os 44 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
+- **Skills:** as 9 estão com o formato correto e têm 48 casos de teste.
+- **Juiz:** os 48 casos que precisam de IA rodam no computador, pelo `PLANO-JUIZ.md`.
 
 ## Antes de instalar: cruzar com o Organismo v2
 O Claude do computador deve **comparar antes de copiar**. Partes que provavelmente se sobrepõem ao que já existe:

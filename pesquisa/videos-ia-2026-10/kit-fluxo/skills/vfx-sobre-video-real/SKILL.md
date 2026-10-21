@@ -22,7 +22,7 @@ Estrutura:
 Edit the supplied original video into [efeito concreto]. Use the source footage as the exact temporal and camera-motion plate, not as loose inspiration.
 
 EFFECT: [o que aparece, de onde surge, como se move, como interage com luz e superfícies, resultado final]
-TIMING: [começa em X s, cresce até Y s, permanece / desaparece]
+TIMING: [começa em X s, cresce até Y s, permanece / desaparece] — ex.: "From 2 s, roots and leaves start growing, gradually transforming the environment, keeping the character intact."
 [Para troca de personagem] REFERENCE: replace the single [person] with the character in the reference image: [descrever cabeça, olhos, figurino peça por peça]. The reference panels show the same single character. Keep this character until the end.
 
 PRESERVATION:
@@ -34,6 +34,20 @@ PRESERVATION:
 - original voices and audio — no new lines, no music.
 ```
 Sincronize o efeito com as reações que já existem no vídeo, sem inventar nova atuação.
+
+## Modo mapa de profundidade (troca total de personagem ou de ambiente) · [a testar]
+Do Playbook do Diretor de Arte IA (NotebookLM sobre a live da Human). Problema: usar o vídeo original como referência "contamina" o resultado com a luz e o cenário filmados. Solução: transformar o vídeo em **mapa de profundidade** (só geometria: corpo, movimento, tecido) e usar esse mapa como guia de movimento.
+1. Gere o mapa de profundidade do vídeo real (ex.: um modelo de profundidade de vídeo num hub como o fal.ai).
+2. Entre no Seedance com: **[folha de personagem] + [imagem do ambiente] + [vídeo do mapa de profundidade]**.
+3. Prompt de movimento (inglês), além do PRESERVATION:
+```
+Attached: character sheet, environment image and a depth-map video.
+Use the depth video as motion blockout and follow its movement exactly.
+Do not use gray pixels for rendering; the depth map texture must not leak into the final image.
+Keep camera fixed in the same position as the reference.
+Focus only on the silhouette for full character replacement.
+```
+Quando usar: trocar a pessoa filmada por uma modelo licenciada do acervo, levar um movimento real para outro cenário, ou copiar a física de um tecido em movimento. Quando **não** usar: quando a luz e o cenário filmados devem ficar (aí é o modo plate, acima). Registre no `JOB.json` qual modo foi usado, para o ciclo de melhoria comparar os dois.
 
 ## Ferramentas
 - **Seedance 2.5 Edit** (Higgsfield → Edit Video), 1080p, 2 opções. Pedido da live: "gerar direto no higgsfield usando seedance 2.5 edit, 1080 2 opcs".

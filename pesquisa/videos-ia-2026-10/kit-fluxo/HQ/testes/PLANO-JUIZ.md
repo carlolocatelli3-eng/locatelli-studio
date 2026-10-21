@@ -67,6 +67,13 @@ Uma mudança de skill só vai para o Carlo se não fizer nenhum caso que passava
 **Deve:** Indicar o rótulo de IA conforme o uso e o cartucho do setor.
 **Reprova se:** Não tratar o rótulo.
 
+## ensaio-por-referencia · 05 · Trava de câmera no modelo Pro
+
+05 · Trava de câmera no modelo Pro
+**Entrada:** Ensaio final no Nano Banana Pro.
+**Deve:** Incluir a frase que trava ângulo, altura e enquadramento.
+**Reprova se:** Prompt para o Pro sem trava de câmera.
+
 ## folha-de-personagem · 01 · Sem contrato, não monta
 
 01 · Sem contrato, não monta
@@ -101,6 +108,13 @@ Uma mudança de skill só vai para o Carlo se não fizer nenhum caso que passava
 **Entrada:** Folha montada.
 **Deve:** VERIFICACAO.md comparando folha e originais (rosto, tom de pele, detalhes, proporções), com aprovado ou refazer.
 **Reprova se:** Entregar sem VERIFICACAO.md.
+
+## folha-de-personagem · 06 · Rosto separado e fundo removido
+
+06 · Rosto separado e fundo removido
+**Entrada:** Pedido de geração de cena com a pessoa da folha.
+**Deve:** Anexar a folha e um close do rosto como imagem própria; pessoa recortada sem o fundo original.
+**Reprova se:** Gerar só com a imagem de corpo inteiro ou com o fundo original da foto.
 
 ## folha-de-produto-e-lugar · 01 · Todas as vistas e closes
 
@@ -277,6 +291,13 @@ Uma mudança de skill só vai para o Carlo se não fizer nenhum caso que passava
 **Deve:** Permitir clima, hora, estação ou pessoas; manter a arquitetura.
 **Reprova se:** Alterar tamanho, estrutura ou acrescentar elemento ao lugar.
 
+## vfx-sobre-video-real · 06 · Modo certo para troca total
+
+06 · Modo certo para troca total
+**Entrada:** Vídeo real de uma pessoa e pedido para trocá-la por uma modelo licenciada num cenário totalmente novo.
+**Deve:** Propor o modo mapa de profundidade, com as 4 instruções (motion blockout, no gray pixels, camera fixed, silhouette) e registrar o modo no JOB.json.
+**Reprova se:** Usar o vídeo original como referência direta para uma troca total de cenário, ou faltar alguma das 4 instruções.
+
 ## video-multicena · 01 · Rascunho antes do final
 
 01 · Rascunho antes do final
@@ -311,3 +332,10 @@ Uma mudança de skill só vai para o Carlo se não fizer nenhum caso que passava
 **Entrada:** Vídeo com produto e lugar reais.
 **Deve:** DO NOT protege produto, logo e arquitetura; plano final mostra o produto ou o lugar inteiro.
 **Reprova se:** Faltar a proteção ou a revelação final.
+
+## video-multicena · 06 · Blockout definido antes do rascunho
+
+06 · Blockout definido antes do rascunho
+**Entrada:** Plano com movimento de câmera complexo.
+**Deve:** Definir o blockout (descrição, vídeo de referência ou mapa de profundidade) antes de gerar o rascunho.
+**Reprova se:** Gerar o rascunho de plano complexo sem fonte de movimento definida.

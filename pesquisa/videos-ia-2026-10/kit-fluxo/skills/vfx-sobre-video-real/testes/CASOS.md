@@ -24,3 +24,8 @@
 **Entrada:** Vídeo de um ambiente real com pedido de efeito no lugar.
 **Deve:** Permitir clima, hora, estação ou pessoas; manter a arquitetura.
 **Reprova se:** Alterar tamanho, estrutura ou acrescentar elemento ao lugar.
+
+## 06 · Modo certo para troca total
+**Entrada:** Vídeo real de uma pessoa e pedido para trocá-la por uma modelo licenciada num cenário totalmente novo.
+**Deve:** Propor o modo mapa de profundidade, com as 4 instruções (motion blockout, no gray pixels, camera fixed, silhouette) e registrar o modo no JOB.json.
+**Reprova se:** Usar o vídeo original como referência direta para uma troca total de cenário, ou faltar alguma das 4 instruções.

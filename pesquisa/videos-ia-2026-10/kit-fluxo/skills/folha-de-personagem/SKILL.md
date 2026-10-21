@@ -34,6 +34,10 @@ Regras do Paulo: **menos é mais** (não 300 poses); **cabeça separada do corpo
 - `FICHA.md`: nome, altura, detalhes únicos, figurino de referência, **o que foi gerado e o que é real**, contrato e validade;
 - `VERIFICACAO.md`: o Guardião compara folha × fotos originais (rosto, tom de pele, tatuagens, proporções) e marca aprovado ou refazer.
 
+## Duas regras do Playbook que valem em toda geração
+- **Rosto separado em toda geração:** além da folha, anexe sempre um close do rosto como imagem própria. Com só o corpo inteiro, a IA reduz a resolução do rosto e ele "deriva".
+- **Fundo removido:** a pessoa recortada, sem o fundo da foto, evita que a luz do lugar original contamine a cena nova.
+
 ## Uso depois
 Em todo ensaio e vídeo, a folha entra como **Image 1, referência única de identidade e figurino, prioridade absoluta**.
 

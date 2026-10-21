@@ -24,3 +24,8 @@
 **Entrada:** Folha montada.
 **Deve:** VERIFICACAO.md comparando folha e originais (rosto, tom de pele, detalhes, proporções), com aprovado ou refazer.
 **Reprova se:** Entregar sem VERIFICACAO.md.
+
+## 06 · Rosto separado e fundo removido
+**Entrada:** Pedido de geração de cena com a pessoa da folha.
+**Deve:** Anexar a folha e um close do rosto como imagem própria; pessoa recortada sem o fundo original.
+**Reprova se:** Gerar só com a imagem de corpo inteiro ou com o fundo original da foto.

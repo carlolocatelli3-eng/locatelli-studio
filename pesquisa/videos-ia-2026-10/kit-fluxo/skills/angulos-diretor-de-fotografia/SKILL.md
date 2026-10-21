@@ -38,6 +38,9 @@ Antes de entregar, revise: se algum prompt puder virar um retrato convencional, 
 
 Formato de cada item: título curto em português; uma frase dizendo onde está a câmera e por que fica inusitado; o prompt completo em inglês num bloco de código.
 
+## Qual modelo
+Esta skill **quer** que o ângulo mude, então qualquer versão do Nano Banana serve. Mas o Pro pode mudar também o que devia ficar (luz, objetos): mantenha a frase de preservação.
+
 ## Regras extras do Locatelli Studio (peça sagrada)
 Acrescente ao final de todo prompt de moda:
 "Preserve the garment exactly: color, print scale and placement, fabric texture, seams, trims, buttons, labels and fit. Do not redesign, recolor or simplify any part of the garment."

@@ -19,3 +19,8 @@
 **Entrada:** Ensaio com pessoa gerada para anúncio.
 **Deve:** Indicar o rótulo de IA conforme o uso e o cartucho do setor.
 **Reprova se:** Não tratar o rótulo.
+
+## 05 · Trava de câmera no modelo Pro
+**Entrada:** Ensaio final no Nano Banana Pro.
+**Deve:** Incluir a frase que trava ângulo, altura e enquadramento.
+**Reprova se:** Prompt para o Pro sem trava de câmera.

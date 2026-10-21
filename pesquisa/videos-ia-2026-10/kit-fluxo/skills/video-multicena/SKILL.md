@@ -13,6 +13,13 @@ Na live: folha de personagem + **áudio gravado no celular** + prompt → Seedan
 - áudio real (se houver fala): **gravado na mesma situação da cena** (andando, sentado, ao ar livre), porque a voz muda;
 - `04-prancha/` com o storyboard aprovado e o roteiro com `[ATIVO: ...]`.
 
+## Blockout antes do rascunho (movimento e câmera)
+Antes de gerar, defina o **blockout**: como a câmera e a pessoa se movem em cada plano. Três fontes, da mais barata para a mais precisa:
+1. **Descrição** no próprio prompt (plano simples).
+2. **Vídeo de referência gravado no celular** com a ação e o movimento de câmera (Kling Motion Control ou Seedance com o vídeo como referência).
+3. **Mapa de profundidade** desse vídeo, quando a luz e o cenário do celular não podem contaminar (ver `vfx-sobre-video-real`, modo mapa de profundidade).
+Movimento humano real dá a "imperfeição orgânica" que a IA pura ainda não simula.
+
 ## Estrutura do prompt (inglês, seções em maiúsculas)
 ```
 OBJECTIVE AND FORMAT
@@ -38,6 +45,13 @@ Peça o vídeo **"sem trilha"** para aproveitar os efeitos sonoros na edição. 
 2. **Portão 3:** cliente aprova o corte em 480p. Registre a data no `JOB.json`: **o "OK" para 1080p precisa sair em até 7 dias**, senão o mesmo vídeo não pode mais ser ampliado (plano B: regerar usando o 480p como referência de movimento e câmera).
 3. **1080p só das cenas que entraram no corte.** Peça 2 ou 3 opções por cena difícil.
 4. **Mistura de modelos por cena:** Seedance no difícil (pessoa, produto, fala), Kling em transição, MiniMax (10–20% do custo do Seedance) em cena simples ou efeito.
+
+**Qual modelo de imagem para os quadros e referências** (do Playbook; conferir na ferramenta, porque muda rápido):
+| Modelo | Melhor uso | Atenção |
+|---|---|---|
+| Nano Banana 2.0 | Escala e testes em massa (barato) | Confunde sobreposições de layout |
+| Nano Banana 2.1 | Composição com texto e layout | Custo intermediário |
+| Nano Banana Pro | Editorial hiper-realista | **Muda o ângulo de câmera por conta própria**: trave a câmera no prompt |
 
 Custo de referência na live: cerca de **80 créditos** do Higgsfield por geração de Seedance 2.5 em 1080p.
 

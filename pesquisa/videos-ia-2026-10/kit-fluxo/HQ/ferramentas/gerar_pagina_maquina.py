@@ -231,7 +231,7 @@ NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
   <h2>Testes</h2>
   <div class="finds">
     <div><span class="l">Ferramentas</span><span class="big">9 de 9</span><p>O motor leva um projeto de ponta a ponta e respeita todas as travas; a cor bate com os pares oficiais da norma CIEDE2000; vencedor, perdedor e “cedo demais” saem certos; a melhoria promove regras e emite alertas.</p></div>
-    <div><span class="l">Skills</span><span class="big">44 casos</span><p>Nas 9 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
+    <div><span class="l">Skills</span><span class="big">48 casos</span><p>Nas 9 skills, todos genéricos. Exemplos: sem contrato não monta a ficha de pessoa; não gera 1080p antes do OK; nada muda em skill sem o seu sim.</p></div>
   </div>
   <p class="source">Comando único: <code>python3 HQ/testes/rodar.py</code>. Os casos que precisam de IA rodam no computador, cada um julgado por um juiz separado. Uma melhoria só chega até você se nenhum teste que passava começar a falhar.</p>
 </section>
@@ -262,7 +262,7 @@ NÃO RODOU: final 1080p bloqueado: prazo de 7 dias venceu</div></div>
   <h2>O que falta construir</h2>
   <div class="plan">
     <div class="step"><span class="i">1</span><div><h3>Ciclo de melhoria diária</h3><p>Script, skill, regras por nível, modelo de cartucho.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
-    <div class="step"><span class="i">2</span><div><h3>Testes de cada skill</h3><p>44 casos e as ferramentas testadas.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
+    <div class="step"><span class="i">2</span><div><h3>Testes de cada skill</h3><p>48 casos e as ferramentas testadas.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
     <div class="step"><span class="i">3</span><div><h3>Motor das metas</h3><p>Leva cada projeto até o próximo portão com teto de gasto, registra custo e decisões. Testado de ponta a ponta.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
     <div class="step"><span class="i">4</span><div><h3>Portões em código</h3><p>No motor e como trava dentro do Claude Code: sem final sem Portão 3, sem passar do prazo de 7 dias, sem passar do teto, sem entrega sem Portão 4.</p></div><div class="r"><span class="chip ok">pronto</span></div></div>
     <div class="step"><span class="i">5</span><div><h3>Calibragem do juiz</h3><p>Você marca 50 peças e a máquina mede quanto o Guardião concorda com você.</p></div><div class="r"><span class="chip warn">próximo</span></div></div>

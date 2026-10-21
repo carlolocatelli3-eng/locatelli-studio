@@ -32,6 +32,9 @@ POSE AND EXPRESSION: [natural, específica]
 FORMAT: [3:4 / 4:5 / 9:16], photographic, no text, no watermark.
 ```
 
+## Alerta de modelo
+Com o **Nano Banana Pro**, acrescente "Keep the exact camera angle, height and framing described; do not change the camera position." Sem essa trava, ele tende a mudar o ângulo sozinho. Para testes em massa, use o modelo mais barato e deixe o Pro para os finais.
+
 ## Como rodar
 - Nano Banana 2.1 (Flow, Higgsfield ou Magnific). Na live: **3:4, 2K, Medium**, 4 por geração.
 - Gere em lote (o Paulo gerou 20 prompts em paralelo) e faça a curadoria depois.
