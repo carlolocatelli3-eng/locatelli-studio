@@ -38,7 +38,7 @@ Vamos trazer para cá a máquina que construí numa sessão na nuvem.
    que é IA, nunca negar") e responda a §5 do CRUZAMENTO-ORGANISMO.md.
 
 5. TABELA DE SOBREPOSIÇÃO
-   Para cada uma das 13 melhorias da ESPECIFICACAO.md (seção 3), diga:
+   Para cada uma das 19 melhorias da ESPECIFICACAO.md (seção 3), diga:
    onde ela entra nos 8 processos, o que já existe parecido aqui e a sua
    proposta (juntar, acrescentar ou deixar de fora), sempre com o porquê.
    Regra: nada duplicado. O maestro continua sendo o executor.
@@ -50,6 +50,31 @@ Vamos trazer para cá a máquina que construí numa sessão na nuvem.
    do kit-fluxo/HQ/modelos/projeto/JOB.json.
 
 7. Sem chaves de API nem senhas em nenhum arquivo do repositório.
+
+OBSERVAÇÕES QUE O CARLO PODE NÃO LEMBRAR (leia antes de propor)
+- Isto é uma CAMADA DE MELHORIA do que já roda (Criar maestro, 8 processos,
+  painel). Não é sistema novo. O maestro continua executor; o motor.py só
+  complementa (prazo de 7 dias do 480p, teto por projeto, registro de decisões).
+- Os portões têm duas numerações: veja a tabela de equivalência na
+  ESPECIFICACAO §1 (máquina 1-4 × Criar: conceito, ficha, peça principal, conjunto).
+- Metas marcadas [PROPOSTA] (meta de negócio até 15/12, S0, S3, C1) NÃO foram
+  aprovadas pelo Carlo. Pergunte antes de usar.
+- Rosto ou voz de pessoa real: só com termo assinado e só em ferramenta com
+  "biometria = sim" em HQ/maquina/FORNECEDORES.md (ainda vazio: Flow/Gemini
+  pessoal NÃO servem para rosto real). Nada com menores.
+- Grátis antes do pago: Flow (Nano Banana sem crédito + 50 créditos/dia),
+  Gemini (2 vídeos de 10 s/dia), HyperFrames (render local). Flow e Gemini são
+  manuais: a máquina prepara a FILA-GOOGLE.md.
+- O Claude Code é o orquestrador principal; o Astra lê as mesmas regras pelo
+  AGENTS.md. As skills funcionam nos dois.
+- Primeira mudança depois do sim: os 8 processos registrarem cada aprovação,
+  correção e recusa (formato "decisoes" do JOB.json). Sem isso não há placar
+  nem aprendizado.
+- Itens "a testar": mapa de profundidade, trava de câmera do Nano Banana Pro,
+  rosto separado. Testar no Piloto 0 (o Carlo como primeiro case).
+- Tudo o que só o Carlo decide está em HQ/DECISOES-ABERTAS.md. As mais urgentes:
+  oferta da Black Friday (pedidos até ~10/11) e pousada piloto (até 25/10).
+- Uma melhoria por vez, com teste (HQ/testes/rodar.py) e o sim do Carlo.
 ```
 
 ---
